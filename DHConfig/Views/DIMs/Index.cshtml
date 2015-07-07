@@ -1,0 +1,231 @@
+﻿@model IEnumerable<DHConfig.DIM>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DIM_TYPE_GUID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DIM_TABLE_SCHEMA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DIM_TABLE_NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DIM_LOAD_PROC_SCHEMA_RAW)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DIM_LOAD_PROC_NAME_RAW)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DIM_TABLE_CLEAN_SCHEMA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DIM_TABLE_CLEAN_NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DIM_PROC_UI_CLEAN_SCHEMA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DIM_PROC_UI_CLEAN_NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DIM_LOAD_PROC_CLEAN_SCHEMA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DIM_LOAD_PROC_CLEAN_NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DIM_VIEW_WHITELIST_SCHEMA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DIM_VIEW_WHITELIST_NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DIM_VIEW_RAW_SCHEMA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DIM_VIEW_RAW_NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DIM_VIEW_CLEAN_SCHEMA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DIM_VIEW_CLEAN_NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DIM_PROC_RAW_TABLE_CLEAN_ID_SCHEMA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DIM_PROC_RAW_TABLE_CLEAN_ID_NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DIM_FEATURE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DIM_TAXONOMY_PROC_SCHEMA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DIM_TAXONOMY_PROC_NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DIM_LOAD_PRE_PROC_SPROC_SCHEMA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DIM_LOAD_PRE_PROC_SPROC_NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DIM_LOAD_POST_PROC_SCHEMA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DIM_LOAD_POST_PROC_NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DIM_LOAD_PRE_PROC_CLEAN_SCHEMA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DIM_LOAD_PRE_PROC_CLEAN_NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DIM_LOAD_POST_PROC_CLEAN_SCHEMA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DIM_LOAD_POST_PROC_CLEAN_NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IS_STATIC)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IS_AUTO_GENERATED)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.INDX_WHERE_CLAUSE)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.CONFIG.CONFIG_DATA_PROCESS_PROC_SCHEMA)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DIM_TYPE_GUID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DIM_TABLE_SCHEMA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DIM_TABLE_NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DIM_LOAD_PROC_SCHEMA_RAW)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DIM_LOAD_PROC_NAME_RAW)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DIM_TABLE_CLEAN_SCHEMA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DIM_TABLE_CLEAN_NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DIM_PROC_UI_CLEAN_SCHEMA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DIM_PROC_UI_CLEAN_NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DIM_LOAD_PROC_CLEAN_SCHEMA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DIM_LOAD_PROC_CLEAN_NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DIM_VIEW_WHITELIST_SCHEMA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DIM_VIEW_WHITELIST_NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DIM_VIEW_RAW_SCHEMA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DIM_VIEW_RAW_NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DIM_VIEW_CLEAN_SCHEMA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DIM_VIEW_CLEAN_NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DIM_PROC_RAW_TABLE_CLEAN_ID_SCHEMA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DIM_PROC_RAW_TABLE_CLEAN_ID_NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DIM_FEATURE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DIM_TAXONOMY_PROC_SCHEMA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DIM_TAXONOMY_PROC_NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DIM_LOAD_PRE_PROC_SPROC_SCHEMA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DIM_LOAD_PRE_PROC_SPROC_NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DIM_LOAD_POST_PROC_SCHEMA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DIM_LOAD_POST_PROC_NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DIM_LOAD_PRE_PROC_CLEAN_SCHEMA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DIM_LOAD_PRE_PROC_CLEAN_NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DIM_LOAD_POST_PROC_CLEAN_SCHEMA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DIM_LOAD_POST_PROC_CLEAN_NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IS_STATIC)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IS_AUTO_GENERATED)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.INDX_WHERE_CLAUSE)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.CONFIG.CONFIG_DATA_PROCESS_PROC_SCHEMA)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

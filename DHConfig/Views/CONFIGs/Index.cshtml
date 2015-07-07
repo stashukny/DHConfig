@@ -1,0 +1,51 @@
+﻿@model IEnumerable<DHConfig.CONFIG>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CONFIG_DATA_PROCESS_PROC_SCHEMA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CONFIG_DATA_PROCESS_PROC_NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CONFIG_DATA_SYNC_PROC_SCHEMA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CONFIG_DATA_SYNC_PROC_NAME)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CONFIG_DATA_PROCESS_PROC_SCHEMA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CONFIG_DATA_PROCESS_PROC_NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CONFIG_DATA_SYNC_PROC_SCHEMA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CONFIG_DATA_SYNC_PROC_NAME)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CONFIG_COMMON_NAME }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CONFIG_COMMON_NAME }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CONFIG_COMMON_NAME })
+        </td>
+    </tr>
+}
+
+</table>

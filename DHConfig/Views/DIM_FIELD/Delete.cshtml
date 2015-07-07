@@ -1,0 +1,72 @@
+﻿@model DHConfig.DIM_FIELD
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>DIM_FIELD</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DIM_FIELD_NAME_CLEAN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DIM_FIELD_NAME_CLEAN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DIM_DATA_TYPE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DIM_DATA_TYPE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DIM_FIELD_FEATURE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DIM_FIELD_FEATURE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DERIVED_CONFIGURATION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DERIVED_CONFIGURATION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CONFIG.CONFIG_DATA_PROCESS_PROC_SCHEMA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CONFIG.CONFIG_DATA_PROCESS_PROC_SCHEMA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DIM.DIM_TABLE_SCHEMA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DIM.DIM_TABLE_SCHEMA)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

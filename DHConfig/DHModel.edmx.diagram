@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bf660e1c6f02448f8e57b394fb1e2d1f" Name="Diagram1" ZoomLevel="118">
+        <EntityTypeShape EntityType="DataHammerConfigModel.CONFIG" Width="1.5" PointX="0.75" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataHammerConfigModel.DATA_SOURCE" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataHammerConfigModel.DATA_SOURCE_FIELD" Width="1.5" PointX="5.25" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataHammerConfigModel.FACT_FIELD" Width="1.5" PointX="10.5" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataHammerConfigModel.INDX" Width="1.5" PointX="3" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataHammerConfigModel.METRIC" Width="1.5" PointX="3" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataHammerConfigModel.SUMMARY" Width="1.5" PointX="13.5" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataHammerConfigModel.INDX_FIELD" Width="1.5" PointX="3" PointY="27" IsExpanded="true" />
+        <AssociationConnector Association="DataHammerConfigModel.FK_CONFIG_DATA_SOURCE_CONFIG_COMMON_NAME" ManuallyRouted="false" />
+        <AssociationConnector Association="DataHammerConfigModel.FK_CONFIG_DATA_SOURCE_FIELD_CONFIG_COMMON_NAME" ManuallyRouted="false" />
+        <AssociationConnector Association="DataHammerConfigModel.FK_CONFIG_FACT_FIELD_CONFIG_COMMON_NAME" ManuallyRouted="false" />
+        <AssociationConnector Association="DataHammerConfigModel.FK_CONFIG_INDX_FIELD_CONFIG_COMMON_NAME" ManuallyRouted="false" />
+        <AssociationConnector Association="DataHammerConfigModel.FK_CONFIG_INDX_TABLE_CONFIG_COMMON_NAME" ManuallyRouted="false" />
+        <AssociationConnector Association="DataHammerConfigModel.FK_CONFIG_METRIC_CONFIG_COMMON_NAME" ManuallyRouted="false" />
+        <AssociationConnector Association="DataHammerConfigModel.FK_CONFIG_SUMMARY_FACT_CONFIG_COMMON_NAME" ManuallyRouted="false" />
+        <AssociationConnector Association="DataHammerConfigModel.FK_CONFIG_DATA_SOURCE_FIELD_DATA_SOURCE" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DataHammerConfigModel.BITWISE_DICTIONARY" Width="1.5" PointX="9.5" PointY="2.625" />
+        <EntityTypeShape EntityType="DataHammerConfigModel.BITWISE_DICTIONARY_VALID_VALUES" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DataHammerConfigModel.DATA_SOURCE_TYPE" Width="1.5" PointX="2.75" PointY="1" />
+        <EntityTypeShape EntityType="DataHammerConfigModel.DIM_TYPE" Width="1.5" PointX="0.75" PointY="1" />
+        <EntityTypeShape EntityType="DataHammerConfigModel.METRIC_TYPE" Width="1.5" PointX="5.75" PointY="4.75" />
+        <EntityTypeShape EntityType="DataHammerConfigModel.BATCH" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DataHammerConfigModel.BATCH_STEP" Width="1.5" PointX="10.75" PointY="6.75" />
+        <EntityTypeShape EntityType="DataHammerConfigModel.EXECUTE_SQL_HISTORY" Width="1.5" PointX="12.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DataHammerConfigModel.MODIFIED_TABLE" Width="1.5" PointX="12.75" PointY="4.75" />
+        <EntityTypeShape EntityType="DataHammerConfigModel.SERVICE_BROKER_HISTORY" Width="1.5" PointX="12.75" PointY="7.75" />
+        <EntityTypeShape EntityType="DataHammerConfigModel.USER_CHANGE" Width="1.5" PointX="14.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DataHammerConfigModel.DIM_DATE" Width="1.5" PointX="14.75" PointY="4.75" />
+        <EntityTypeShape EntityType="DataHammerConfigModel.TALLY" Width="1.5" PointX="7.75" PointY="6.75" />
+        <EntityTypeShape EntityType="DataHammerConfigModel.EXCEPTION" Width="1.5" PointX="16.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DataHammerConfigModel.IMPORT_XML" Width="1.5" PointX="16.75" PointY="4.75" />
+        <EntityTypeShape EntityType="DataHammerConfigModel.SYS_PROPERTY" Width="1.5" PointX="16.75" PointY="7.75" />
+        <AssociationConnector Association="DataHammerConfigModel.FK_CONFIG_DATA_SOURCE_TYPE_GUID" />
+        <EntityTypeShape EntityType="DataHammerConfigModel.DIM" Width="1.5" PointX="8" PointY="15.875" />
+        <AssociationConnector Association="DataHammerConfigModel.FK_CONFIG_DIM_CONFIG_COMMON_NAME" />
+        <AssociationConnector Association="DataHammerConfigModel.FK_CONFIG_DIM_CONFIG_DIM_TYPE_GUID" />
+        <EntityTypeShape EntityType="DataHammerConfigModel.DIM_FIELD" Width="1.5" PointX="10.25" PointY="18.125" />
+        <EntityTypeShape EntityType="DataHammerConfigModel.FACT" Width="1.5" PointX="8.25" PointY="8.875" />
+        <AssociationConnector Association="DataHammerConfigModel.FK_CONFIG_DIM_FIELD_CONFIG_COMMON_NAME" />
+        <AssociationConnector Association="DataHammerConfigModel.FK_CONFIG_FACT_FACT_COMMON_NAME" />
+        <AssociationConnector Association="DataHammerConfigModel.FK_CONFIG_FACT_DATA_SOURCE" />
+        <AssociationConnector Association="DataHammerConfigModel.FK_CONFIG_DIM_FIELD_DIM" />
+        <AssociationConnector Association="DataHammerConfigModel.FK_CONFIG_FACT_FIELD_FACT" />
+        <AssociationConnector Association="DataHammerConfigModel.FK_CONFIG_SUMMARY_FACT_FACT_FILED" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

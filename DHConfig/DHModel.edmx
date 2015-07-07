@@ -1,0 +1,2133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DataHammerConfigModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CONFIG">
+          <Key>
+            <PropertyRef Name="CONFIG_COMMON_NAME" />
+          </Key>
+          <Property Name="CONFIG_COMMON_NAME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CONFIG_DATA_PROCESS_PROC_SCHEMA" Type="varchar" MaxLength="50" />
+          <Property Name="CONFIG_DATA_PROCESS_PROC_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="CONFIG_DATA_SYNC_PROC_SCHEMA" Type="varchar" MaxLength="50" />
+          <Property Name="CONFIG_DATA_SYNC_PROC_NAME" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="DATA_SOURCE">
+          <Key>
+            <PropertyRef Name="CONFIG_COMMON_NAME" />
+            <PropertyRef Name="DATA_SOURCE_NAME" />
+          </Key>
+          <Property Name="CONFIG_COMMON_NAME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DATA_SOURCE_NAME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DATA_SOURCE_TYPE_GUID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DATA_SOURCE_TABLE_SCHEMA" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DATA_SOURCE_TABLE_NAME" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="DATA_SOURCE_RAW_VIEW_SCHEMA" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DATA_SOURCE_RAW_VIEW_NAME" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="DATA_SOURCE_TABLE_PROC_UPDATE_SCHEMA" Type="varchar" MaxLength="50" />
+          <Property Name="DATA_SOURCE_TABLE_PROC_UPDATE_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="DATA_SOURCE_TABLE_PROC_INSERT_SCHEMA" Type="varchar" MaxLength="50" />
+          <Property Name="DATA_SOURCE_TABLE_PROC_INSERT_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="DATA_SOURCE_TABLE_PROC_DELETE_SCHEMA" Type="varchar" MaxLength="50" />
+          <Property Name="DATA_SOURCE_TABLE_PROC_DELETE_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="DATA_SOURCE_TABLE_PROC_DDL_PARENT_SCHEMA" Type="varchar" MaxLength="50" />
+          <Property Name="DATA_SOURCE_TABLE_PROC_DDL_PARENT_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="DATA_SOURCE_RAW_UI_VIEW_SCHEMA" Type="varchar" MaxLength="50" />
+          <Property Name="DATA_SOURCE_RAW_UI_VIEW_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="DATA_SOURCE_FEATURE" Type="varchar" MaxLength="500" />
+          <Property Name="DATA_SOURCE_TEST_DATA_PROC_SCHEMA" Type="varchar" MaxLength="50" />
+          <Property Name="DATA_SOURCE_TEST_DATA_PROC_NAME" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="DATA_SOURCE_FIELD">
+          <Key>
+            <PropertyRef Name="CONFIG_COMMON_NAME" />
+            <PropertyRef Name="DATA_SOURCE_NAME" />
+            <PropertyRef Name="COLUMN_NAME" />
+          </Key>
+          <Property Name="CONFIG_COMMON_NAME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DATA_SOURCE_NAME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SOURCE_COLUMN_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="SOURCE_COLUMN_DATA_TYPE" Type="varchar" MaxLength="50" />
+          <Property Name="RAW_VIEW_COLUMN_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="RAW_VIEW_COLUMN_DATA_TYPE" Type="varchar" MaxLength="50" />
+          <Property Name="IS_DIM_HASH" Type="bit" Nullable="false" />
+          <Property Name="IS_IDENTITY" Type="bit" Nullable="false" />
+          <Property Name="DERIVED_CONFIGURATION" Type="varchar" MaxLength="800" />
+          <Property Name="COLUMN_NAME" Type="varchar" MaxLength="100" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="DATA_SOURCE_FIELD_FEATURE" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="DIM">
+          <Key>
+            <PropertyRef Name="CONFIG_COMMON_NAME" />
+            <PropertyRef Name="DIM_COMMON_NAME" />
+          </Key>
+          <Property Name="CONFIG_COMMON_NAME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DIM_TYPE_GUID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DIM_COMMON_NAME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DIM_TABLE_SCHEMA" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DIM_TABLE_NAME" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="DIM_TABLE_CLEAN_SCHEMA" Type="varchar" MaxLength="50" />
+          <Property Name="DIM_TABLE_CLEAN_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="DIM_LOAD_PROC_SCHEMA_RAW" Type="varchar" MaxLength="50" />
+          <Property Name="DIM_LOAD_PROC_NAME_RAW" Type="varchar" MaxLength="100" />
+          <Property Name="DIM_PROC_UI_CLEAN_SCHEMA" Type="varchar" MaxLength="50" />
+          <Property Name="DIM_PROC_UI_CLEAN_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="DIM_LOAD_PROC_CLEAN_SCHEMA" Type="varchar" MaxLength="50" />
+          <Property Name="DIM_LOAD_PROC_CLEAN_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="DIM_VIEW_RAW_SCHEMA" Type="varchar" MaxLength="50" />
+          <Property Name="DIM_VIEW_RAW_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="DIM_VIEW_CLEAN_SCHEMA" Type="varchar" MaxLength="50" />
+          <Property Name="DIM_VIEW_CLEAN_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="DIM_PROC_RAW_TABLE_CLEAN_ID_SCHEMA" Type="varchar" MaxLength="50" />
+          <Property Name="DIM_PROC_RAW_TABLE_CLEAN_ID_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="DIM_VIEW_WHITELIST_SCHEMA" Type="varchar" MaxLength="50" />
+          <Property Name="DIM_VIEW_WHITELIST_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="DIM_FEATURE" Type="varchar" MaxLength="500" />
+          <Property Name="DIM_TAXONOMY_PROC_SCHEMA" Type="varchar" MaxLength="50" />
+          <Property Name="DIM_TAXONOMY_PROC_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="DIM_LOAD_PRE_PROC_SPROC_SCHEMA" Type="varchar" MaxLength="50" />
+          <Property Name="DIM_LOAD_PRE_PROC_SPROC_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="DIM_LOAD_POST_PROC_SCHEMA" Type="varchar" MaxLength="50" />
+          <Property Name="DIM_LOAD_POST_PROC_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="DIM_LOAD_PRE_PROC_CLEAN_SCHEMA" Type="varchar" MaxLength="50" />
+          <Property Name="DIM_LOAD_PRE_PROC_CLEAN_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="DIM_LOAD_POST_PROC_CLEAN_SCHEMA" Type="varchar" MaxLength="50" />
+          <Property Name="DIM_LOAD_POST_PROC_CLEAN_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="IS_STATIC" Type="bit" Nullable="false" />
+          <Property Name="IS_AUTO_GENERATED" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DIM_FIELD">
+          <Key>
+            <PropertyRef Name="CONFIG_COMMON_NAME" />
+            <PropertyRef Name="DIM_COMMON_NAME" />
+            <PropertyRef Name="DIM_FIELD_NAME" />
+          </Key>
+          <Property Name="CONFIG_COMMON_NAME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DIM_COMMON_NAME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DIM_FIELD_NAME" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="DIM_FIELD_NAME_CLEAN" Type="varchar" MaxLength="106" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="DIM_DATA_TYPE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DIM_FIELD_FEATURE" Type="varchar" MaxLength="500" />
+          <Property Name="DERIVED_CONFIGURATION" Type="varchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="FACT">
+          <Key>
+            <PropertyRef Name="CONFIG_COMMON_NAME" />
+            <PropertyRef Name="FACT_COMMON_NAME" />
+          </Key>
+          <Property Name="CONFIG_COMMON_NAME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DATA_SOURCE_NAME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FACT_COMMON_NAME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FACT_TABLE_SCHEMA" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FACT_TABLE_NAME" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="FACT_FEATURE" Type="varchar" MaxLength="500" />
+          <Property Name="DISTINCT_TABLE_KEY_SCHEMA" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DISTINCT_TABLE_KEY_NAME" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="DISTINCT_TABLE_VALUE_SCHEMA" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DISTINCT_TABLE_VALUE_NAME" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="DISTINCT_VALUE_PROCEDURE_SCHEMA" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DISTINCT_VALUE_PROCEDURE_NAME" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="DISTINCT_KEY_PROCEDURE_SCHEMA" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DISTINCT_KEY_PROCEDURE_NAME" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="FACT_LOAD_PROCEDURE_SCHEMA" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FACT_LOAD_PROCEDURE_NAME" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="FACT_PRE_EXEC_SPROC_SCHEMA" Type="varchar" MaxLength="50" />
+          <Property Name="FACT_PRE_EXEC_SPROC_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="FACT_POST_EXEC_SPROC_SCHEMA" Type="varchar" MaxLength="50" />
+          <Property Name="FACT_POST_EXEC_SPROC_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="IS_AUTO_GENERATED_FACT_TABLE" Type="bit" Nullable="false" />
+          <Property Name="IS_AUTO_GENERATED_LOAD_PROCEDURE" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FACT_FIELD">
+          <Key>
+            <PropertyRef Name="CONFIG_COMMON_NAME" />
+            <PropertyRef Name="FACT_COMMON_NAME" />
+            <PropertyRef Name="FACT_FIELD_NAME" />
+          </Key>
+          <Property Name="CONFIG_COMMON_NAME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FACT_COMMON_NAME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FACT_FIELD_NAME" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="OBJECT_TYPE_NAME" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="DIM_FIELD_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="FACT_FIELD_FEATURE" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="INDX">
+          <Key>
+            <PropertyRef Name="CONFIG_COMMON_NAME" />
+            <PropertyRef Name="INDX_NAME" />
+            <PropertyRef Name="FIELD_NAME" />
+          </Key>
+          <Property Name="CONFIG_COMMON_NAME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="INDX_ORDER" Type="tinyint" Nullable="false" />
+          <Property Name="INDX_NAME" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="TABLE_SCHEMA" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TABLE_NAME" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="FIELD_NAME" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="INDX_FEATURE" Type="varchar" MaxLength="500" />
+          <Property Name="ORDINAL_POSITION" Type="tinyint" Nullable="false" />
+          <Property Name="IS_INCLUDED" Type="bit" Nullable="false" />
+          <Property Name="INDX_WHERE_CLAUSE" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DataHammerConfig.CONFIG.INDX_FIELD' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="INDX_FIELD">
+          <Key>
+            <PropertyRef Name="INDX_NAME" />
+            <PropertyRef Name="FIELD_NAME" />
+            <PropertyRef Name="ORDINAL_POSITION" />
+            <PropertyRef Name="IS_INCLUDED" />
+          </Key>
+          <Property Name="CONFIG_COMMON_NAME" Type="varchar" MaxLength="50" />
+          <Property Name="INDX_NAME" Type="int" Nullable="false" />
+          <Property Name="FIELD_NAME" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ORDINAL_POSITION" Type="tinyint" Nullable="false" />
+          <Property Name="IS_INCLUDED" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="METRIC">
+          <Key>
+            <PropertyRef Name="CONFIG_COMMON_NAME" />
+            <PropertyRef Name="METRIC_NAME" />
+          </Key>
+          <Property Name="CONFIG_COMMON_NAME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="METRIC_TYPE_GUID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="METRIC_NAME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="METRIC_OVERRIDE_DATA_TYPE" Type="varchar" MaxLength="50" />
+          <Property Name="METRIC_OVERRIDE_CALCULATION" Type="varchar" MaxLength="100" />
+          <Property Name="METRIC_OVERRIDE_ROLLUP" Type="varchar" MaxLength="100" />
+          <Property Name="METRIC_OVERRIDE_PRORATE" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="SUMMARY">
+          <Key>
+            <PropertyRef Name="CONFIG_COMMON_NAME" />
+            <PropertyRef Name="SUMMARY_COMMON_NAME" />
+          </Key>
+          <Property Name="CONFIG_COMMON_NAME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SUMMARY_COMMON_NAME" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="FACT_COMMON_NAME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SUMMARY_TABLE_SCHEMA" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SUMMARY_TABLE_NAME" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="SUMMARY_LOAD_PROC_SCHEAMA" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SUMMARY_LOAD_PROC_NAME" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SUMMARY_FIELD">
+          <Key>
+            <PropertyRef Name="CONFIG_COMMON_NAME" />
+            <PropertyRef Name="SUMMARY_COMMON_NAME" />
+            <PropertyRef Name="SUMMARY_FIELD_NAME" />
+          </Key>
+          <Property Name="CONFIG_COMMON_NAME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SUMMARY_COMMON_NAME" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="SUMMARY_FIELD_NAME" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="IS_METRIC" Type="bit" Nullable="false" />
+          <Property Name="IS_DIM" Type="bit" Nullable="false" />
+          <Property Name="SUMMARY_FIELD_DISPLAY_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="SUMMARY_FIELD_FEATURE" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DataHammerConfig.META_CORE.BITWISE_DICTIONARY' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="BITWISE_DICTIONARY">
+          <Key>
+            <PropertyRef Name="DICTIONARY_GUID" />
+            <PropertyRef Name="BITWISE_GROUP" />
+            <PropertyRef Name="BITWISE_KEY" />
+            <PropertyRef Name="BITWISE_VALUE" />
+            <PropertyRef Name="DESCR" />
+            <PropertyRef Name="CREATE_DATE_UTC" />
+            <PropertyRef Name="MODIFIED_DATE_UTC" />
+            <PropertyRef Name="MODIFIED_BY" />
+          </Key>
+          <Property Name="DICTIONARY_GUID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="BITWISE_GROUP" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="BITWISE_KEY" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="BITWISE_VALUE" Type="smallint" Nullable="false" />
+          <Property Name="DESCR" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="CREATE_DATE_UTC" Type="datetime" Nullable="false" />
+          <Property Name="MODIFIED_DATE_UTC" Type="datetime" Nullable="false" />
+          <Property Name="MODIFIED_BY" Type="varchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BITWISE_DICTIONARY_VALID_VALUES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BITWISE_GROUP" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="BITWISE_KEY_LIST" Type="varchar" MaxLength="1000" />
+          <Property Name="BITWISE_VALUE" Type="smallint" Nullable="false" />
+          <Property Name="CREATE_DATE_UTC" Type="datetime" Nullable="false" />
+          <Property Name="MODIFIED_DATE_UTC" Type="datetime" Nullable="false" />
+          <Property Name="MODIFIED_BY" Type="varchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6005: The data type 'hierarchyid' is currently not supported for the target Entity Framework version; the column 'DATA_SOURCE_TYPE_HID' in the table 'DataHammerConfig.META_CORE.DATA_SOURCE_TYPE' was excluded.-->
+        <EntityType Name="DATA_SOURCE_TYPE">
+          <Key>
+            <PropertyRef Name="DATA_SOURCE_TYPE_GUID" />
+          </Key>
+          <Property Name="DATA_SOURCE_TYPE_GUID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CREATE_DATE_UTC" Type="datetime" Nullable="false" />
+          <Property Name="MODIFIED_DATE_UTC" Type="datetime" Nullable="false" />
+          <Property Name="MODIFIED_BY" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="DATA_SOURCE_TYPE_HID_STRING" Type="nvarchar" MaxLength="4000" StoreGeneratedPattern="Computed" />
+          <Property Name="DATA_SOURCE_TYPE_HID_LEVEL" Type="smallint" StoreGeneratedPattern="Computed" />
+          <Property Name="DATA_SOURCE_TYPE_NAME" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DIM_TYPE">
+          <Key>
+            <PropertyRef Name="DIM_TYPE_GUID" />
+          </Key>
+          <Property Name="DIM_TYPE_GUID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DIM_TYPE_NAME" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="DIM_TYPE_INCLUDE_DATA_SOURCE" Type="bit" Nullable="false" />
+          <Property Name="CREATE_DATE_UTC" Type="datetime" Nullable="false" />
+          <Property Name="MODIFIED_DATE_UTC" Type="datetime" Nullable="false" />
+          <Property Name="MODIFIED_BY" Type="varchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="METRIC_TYPE">
+          <Key>
+            <PropertyRef Name="METRIC_TYPE_GUID" />
+          </Key>
+          <Property Name="METRIC_TYPE_GUID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="METRIC_TYPE_NAME" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="METRIC_DATA_TYPE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="METRIC_CALCULATION" Type="varchar" MaxLength="2000" />
+          <Property Name="METRIC_ROLLUP" Type="varchar" MaxLength="2000" />
+          <Property Name="METRIC_PRORATE" Type="varchar" MaxLength="2000" />
+          <Property Name="IS_INTERNAL_AUDIT" Type="bit" />
+          <Property Name="CREATE_DATE_UTC" Type="datetime" Nullable="false" />
+          <Property Name="MODIFIED_DATE_UTC" Type="datetime" Nullable="false" />
+          <Property Name="MODIFIED_BY" Type="varchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BATCH">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BATCH_STATE" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="BATCH_RESULT" Type="varchar" MaxLength="100" />
+          <Property Name="COMMENT" Type="varchar" MaxLength="255" />
+          <Property Name="MODIFIED_DATE_UTC" Type="datetime" />
+        </EntityType>
+        <EntityType Name="BATCH_STEP">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BATCH_ID" Type="int" Nullable="false" />
+          <Property Name="CHANGE_ACTION" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="DATA_SOURCE_TYPE_GUID" Type="uniqueidentifier" />
+          <Property Name="DATA_SOURCE_ID" Type="int" />
+          <Property Name="MODIFIED_OBJECT_NAME" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="FILEPATH" Type="varchar" MaxLength="100" />
+          <Property Name="COMMENT" Type="varchar" MaxLength="255" />
+          <Property Name="STEP_STATE" Type="varchar" MaxLength="100" />
+          <Property Name="STEP_RESULT" Type="varchar" MaxLength="100" />
+          <Property Name="ERROR_MESSAGE" Type="varchar" MaxLength="255" />
+          <Property Name="MODIFIED_COUNT" Type="int" />
+          <Property Name="MODIFIED_DATE_UTC" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DataHammerConfig.META_LOG.EXCEPTION' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="EXCEPTION">
+          <Key>
+            <PropertyRef Name="EXCEPTION_ID" />
+          </Key>
+          <Property Name="EXCEPTION_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EXCEPTION_ERROR_NUMBER" Type="int" />
+          <Property Name="EXCEPTION_ERROR_SEVERITY" Type="tinyint" />
+          <Property Name="EXCEPTION_ERROR_STATE" Type="tinyint" />
+          <Property Name="EXCEPTION_ERROR_PROCEDURE" Type="varchar" MaxLength="200" />
+          <Property Name="EXCEPTION_ERROR_LINE" Type="int" />
+          <Property Name="EXCEPTION_ERROR_MESSAGE" Type="nvarchar(max)" />
+          <Property Name="EXCEPTION_DATE_UTC" Type="datetime" />
+        </EntityType>
+        <EntityType Name="EXECUTE_SQL_HISTORY">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SQL_SCRIPT" Type="varchar(max)" />
+          <Property Name="SCRIPT_TITLE" Type="varchar" MaxLength="200" />
+          <Property Name="START_TIME_UTC" Type="datetime" Nullable="false" />
+          <Property Name="STOP_TIME_UTC" Type="datetime" Nullable="false" />
+          <Property Name="EXCEPTION" Type="varchar" MaxLength="2000" />
+          <Property Name="IS_FAILED" Type="bit" StoreGeneratedPattern="Computed" />
+          <Property Name="IS_EXECUTE" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DataHammerConfig.META_LOG.IMPORT_XML' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="IMPORT_XML">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IMPORT_XML" Type="xml" />
+          <Property Name="CREATED_DATE" Type="datetime" />
+        </EntityType>
+        <EntityType Name="MODIFIED_TABLE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MODIFIED_OBJECT_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="CHANGE_ACTION" Type="varchar" MaxLength="100" />
+          <Property Name="MODIFIED_DATE_UTC" Type="datetime" />
+          <Property Name="MODIFIED_COUNT" Type="int" />
+          <Property Name="EXECUTING_OBJECT_NAME" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="SERVICE_BROKER_HISTORY">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MESSAGE_BODY" Type="xml" Nullable="false" />
+          <Property Name="MESSAGE_TYPE_NAME" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="IS_RECEIVED" Type="bit" Nullable="false" />
+          <Property Name="IS_SENT" Type="bit" Nullable="false" />
+          <Property Name="CREATED_DATE_UTC" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USER_CHANGE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TABLE_SCHEMA" Type="varchar" MaxLength="50" />
+          <Property Name="TABLE_NAME" Type="varchar" MaxLength="50" />
+          <Property Name="DATA_CHANGE_PRE" Type="xml" />
+          <Property Name="DATA_CHANGE_POST" Type="xml" />
+          <Property Name="CREATED_DATE_UTC" Type="datetime" Nullable="false" />
+          <Property Name="MODIFIED_BY" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DIM_DATE">
+          <Key>
+            <PropertyRef Name="DATE_ID" />
+          </Key>
+          <Property Name="DATE_ID" Type="smallint" Nullable="false" />
+          <Property Name="DATE_ID_LONG" Type="int" Nullable="false" />
+          <Property Name="DATE_SHORT" Type="date" Nullable="false" />
+          <Property Name="DATE_MONTH" Type="date" />
+          <Property Name="DATE_WEEKEND_SAT" Type="date" />
+          <Property Name="DATE_WEEKEND_SUN" Type="date" />
+          <Property Name="DATE_QUARTER" Type="date" />
+          <Property Name="DATE_WEEK" Type="tinyint" />
+          <Property Name="DATE_YEAR_FORMATTED" Type="date" />
+          <Property Name="DATE_YEAR" Type="smallint" />
+          <Property Name="DATE_DAY" Type="smallint" />
+          <Property Name="FISCAL_MONTH" Type="date" />
+          <Property Name="FISCAL_YEAR" Type="date" />
+          <Property Name="FISCAL_QUARTER" Type="date" />
+          <Property Name="FISCAL_WEEK" Type="date" />
+          <Property Name="DATE_MONTH_DAY" Type="tinyint" />
+          <Property Name="DATE_WEEKDAY_NAME" Type="varchar" MaxLength="50" />
+          <Property Name="BROADCAST_MEDIA_WEEK" Type="tinyint" />
+          <Property Name="BROADCAST_MEDIA_MONTH" Type="tinyint" />
+          <Property Name="BROADCAST_MEDIA_MONTH_NAME" Type="varchar" MaxLength="50" />
+          <Property Name="BROADCAST_MEDIA_QUARTER" Type="tinyint" />
+          <Property Name="BROADCAST_MEDIA_YEAR" Type="smallint" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DataHammerConfig.UTILITY.SYS_PROPERTY' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="SYS_PROPERTY">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="ROW_KEY" />
+            <PropertyRef Name="ROW_VALUE" />
+            <PropertyRef Name="CREATED_DATE_UTC" />
+            <PropertyRef Name="MODIFIED_DATE_UTC" />
+            <PropertyRef Name="MODIFIED_BY" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ROW_KEY" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ROW_VALUE" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CREATED_DATE_UTC" Type="datetime" Nullable="false" />
+          <Property Name="MODIFIED_DATE_UTC" Type="datetime" Nullable="false" />
+          <Property Name="MODIFIED_BY" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TALLY">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DataHammerConfig.CONFIG.vDATASOURCE_WITH_DIMENSIONS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vDATASOURCE_WITH_DIMENSIONS">
+          <Key>
+            <PropertyRef Name="DATA_SOURCE_NAME" />
+            <PropertyRef Name="DIM_COMMON_NAME" />
+          </Key>
+          <Property Name="DATA_SOURCE_NAME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DIM_COMMON_NAME" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DataHammerConfig.CONFIG.vDATASOURCE_WITH_FACT_WITH_DIMENSIONAL_KEYS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vDATASOURCE_WITH_FACT_WITH_DIMENSIONAL_KEYS">
+          <Key>
+            <PropertyRef Name="FACT_COMMON_NAME" />
+            <PropertyRef Name="DATA_SOURCE_NAME" />
+            <PropertyRef Name="DIM_COMMON_NAME" />
+            <PropertyRef Name="DIM_FIELD_NAME" />
+            <PropertyRef Name="DIM_DATA_TYPE" />
+          </Key>
+          <Property Name="FACT_COMMON_NAME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DATA_SOURCE_NAME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DIM_COMMON_NAME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DIM_FIELD_NAME" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="DIM_DATA_TYPE" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DataHammerConfig.CONFIG.vINDX_DIM_STANDARD' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vINDX_DIM_STANDARD">
+          <Key>
+            <PropertyRef Name="CONFIG_COMMON_NAME" />
+            <PropertyRef Name="INDX_ORDER" />
+            <PropertyRef Name="DIM_FIELD_NAME" />
+            <PropertyRef Name="IS_INCLUDED" />
+          </Key>
+          <Property Name="CONFIG_COMMON_NAME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="INDX_ORDER" Type="int" Nullable="false" />
+          <Property Name="INDX_NAME" Type="varchar" MaxLength="162" />
+          <Property Name="DIM_TABLE_SCHEMA" Type="varchar" MaxLength="50" />
+          <Property Name="DIM_TABLE_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="DIM_FIELD_NAME" Type="varchar" MaxLength="106" Nullable="false" />
+          <Property Name="INDX_FEATURE" Type="varchar" MaxLength="18" />
+          <Property Name="ORDINAL_POSITION" Type="bigint" />
+          <Property Name="IS_INCLUDED" Type="int" Nullable="false" />
+          <Property Name="INDX_WHERE_CLAUSE" Type="varchar" MaxLength="26" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DataHammerConfig.CONFIG.vSTATIC_DIM' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vSTATIC_DIM">
+          <Key>
+            <PropertyRef Name="DIM_TYPE_GUID" />
+            <PropertyRef Name="DIM_TABLE_NAME" />
+            <PropertyRef Name="DIM_TABLE_SCHEMA" />
+            <PropertyRef Name="IS_AUTO_GENERATED" />
+            <PropertyRef Name="DIM_FEATURE" />
+            <PropertyRef Name="IS_STATIC" />
+          </Key>
+          <Property Name="DIM_TYPE_GUID" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="DIM_COMMON_NAME" Type="varchar" MaxLength="10" />
+          <Property Name="DIM_TABLE_NAME" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="DIM_TABLE_SCHEMA" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="IS_AUTO_GENERATED" Type="int" Nullable="false" />
+          <Property Name="DIM_FEATURE" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="IS_STATIC" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CONFIG_DATA_SOURCE_CONFIG_COMMON_NAME">
+          <End Role="CONFIG" Type="Self.CONFIG" Multiplicity="1" />
+          <End Role="DATA_SOURCE" Type="Self.DATA_SOURCE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONFIG">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+            </Principal>
+            <Dependent Role="DATA_SOURCE">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONFIG_DATA_SOURCE_FIELD_CONFIG_COMMON_NAME">
+          <End Role="CONFIG" Type="Self.CONFIG" Multiplicity="1" />
+          <End Role="DATA_SOURCE_FIELD" Type="Self.DATA_SOURCE_FIELD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONFIG">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+            </Principal>
+            <Dependent Role="DATA_SOURCE_FIELD">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONFIG_DATA_SOURCE_FIELD_DATA_SOURCE">
+          <End Role="DATA_SOURCE" Type="Self.DATA_SOURCE" Multiplicity="1" />
+          <End Role="DATA_SOURCE_FIELD" Type="Self.DATA_SOURCE_FIELD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DATA_SOURCE">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+              <PropertyRef Name="DATA_SOURCE_NAME" />
+            </Principal>
+            <Dependent Role="DATA_SOURCE_FIELD">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+              <PropertyRef Name="DATA_SOURCE_NAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONFIG_DATA_SOURCE_TYPE_GUID">
+          <End Role="DATA_SOURCE_TYPE" Type="Self.DATA_SOURCE_TYPE" Multiplicity="1" />
+          <End Role="DATA_SOURCE" Type="Self.DATA_SOURCE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DATA_SOURCE_TYPE">
+              <PropertyRef Name="DATA_SOURCE_TYPE_GUID" />
+            </Principal>
+            <Dependent Role="DATA_SOURCE">
+              <PropertyRef Name="DATA_SOURCE_TYPE_GUID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONFIG_DIM_CONFIG_COMMON_NAME">
+          <End Role="CONFIG" Type="Self.CONFIG" Multiplicity="1" />
+          <End Role="DIM" Type="Self.DIM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONFIG">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+            </Principal>
+            <Dependent Role="DIM">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONFIG_DIM_CONFIG_DIM_TYPE_GUID">
+          <End Role="DIM_TYPE" Type="Self.DIM_TYPE" Multiplicity="1" />
+          <End Role="DIM" Type="Self.DIM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIM_TYPE">
+              <PropertyRef Name="DIM_TYPE_GUID" />
+            </Principal>
+            <Dependent Role="DIM">
+              <PropertyRef Name="DIM_TYPE_GUID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONFIG_DIM_FIELD_CONFIG_COMMON_NAME">
+          <End Role="CONFIG" Type="Self.CONFIG" Multiplicity="1" />
+          <End Role="DIM_FIELD" Type="Self.DIM_FIELD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONFIG">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+            </Principal>
+            <Dependent Role="DIM_FIELD">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONFIG_DIM_FIELD_DIM">
+          <End Role="DIM" Type="Self.DIM" Multiplicity="1" />
+          <End Role="DIM_FIELD" Type="Self.DIM_FIELD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIM">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+              <PropertyRef Name="DIM_COMMON_NAME" />
+            </Principal>
+            <Dependent Role="DIM_FIELD">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+              <PropertyRef Name="DIM_COMMON_NAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONFIG_FACT_DATA_SOURCE">
+          <End Role="DATA_SOURCE" Type="Self.DATA_SOURCE" Multiplicity="1" />
+          <End Role="FACT" Type="Self.FACT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DATA_SOURCE">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+              <PropertyRef Name="DATA_SOURCE_NAME" />
+            </Principal>
+            <Dependent Role="FACT">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+              <PropertyRef Name="DATA_SOURCE_NAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONFIG_FACT_FACT_COMMON_NAME">
+          <End Role="CONFIG" Type="Self.CONFIG" Multiplicity="1" />
+          <End Role="FACT" Type="Self.FACT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONFIG">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+            </Principal>
+            <Dependent Role="FACT">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONFIG_FACT_FIELD_CONFIG_COMMON_NAME">
+          <End Role="CONFIG" Type="Self.CONFIG" Multiplicity="1" />
+          <End Role="FACT_FIELD" Type="Self.FACT_FIELD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONFIG">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+            </Principal>
+            <Dependent Role="FACT_FIELD">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONFIG_FACT_FIELD_FACT">
+          <End Role="FACT" Type="Self.FACT" Multiplicity="1" />
+          <End Role="FACT_FIELD" Type="Self.FACT_FIELD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FACT">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+              <PropertyRef Name="FACT_COMMON_NAME" />
+            </Principal>
+            <Dependent Role="FACT_FIELD">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+              <PropertyRef Name="FACT_COMMON_NAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONFIG_INDX_FIELD_CONFIG_COMMON_NAME">
+          <End Role="CONFIG" Type="Self.CONFIG" Multiplicity="0..1" />
+          <End Role="INDX_FIELD" Type="Self.INDX_FIELD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONFIG">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+            </Principal>
+            <Dependent Role="INDX_FIELD">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONFIG_INDX_TABLE_CONFIG_COMMON_NAME">
+          <End Role="CONFIG" Type="Self.CONFIG" Multiplicity="1" />
+          <End Role="INDX" Type="Self.INDX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONFIG">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+            </Principal>
+            <Dependent Role="INDX">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONFIG_METRIC_CONFIG_COMMON_NAME">
+          <End Role="CONFIG" Type="Self.CONFIG" Multiplicity="1" />
+          <End Role="METRIC" Type="Self.METRIC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONFIG">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+            </Principal>
+            <Dependent Role="METRIC">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONFIG_SUMMARY_FACT_CONFIG_COMMON_NAME">
+          <End Role="CONFIG" Type="Self.CONFIG" Multiplicity="1" />
+          <End Role="SUMMARY" Type="Self.SUMMARY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONFIG">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+            </Principal>
+            <Dependent Role="SUMMARY">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONFIG_SUMMARY_FACT_FACT_FILED">
+          <End Role="FACT" Type="Self.FACT" Multiplicity="1" />
+          <End Role="SUMMARY" Type="Self.SUMMARY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FACT">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+              <PropertyRef Name="FACT_COMMON_NAME" />
+            </Principal>
+            <Dependent Role="SUMMARY">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+              <PropertyRef Name="FACT_COMMON_NAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DataHammerConfigModelStoreContainer">
+          <EntitySet Name="CONFIG" EntityType="Self.CONFIG" Schema="CONFIG" store:Type="Tables" />
+          <EntitySet Name="DATA_SOURCE" EntityType="Self.DATA_SOURCE" Schema="CONFIG" store:Type="Tables" />
+          <EntitySet Name="DATA_SOURCE_FIELD" EntityType="Self.DATA_SOURCE_FIELD" Schema="CONFIG" store:Type="Tables" />
+          <EntitySet Name="DIM" EntityType="Self.DIM" Schema="CONFIG" store:Type="Tables" />
+          <EntitySet Name="DIM_FIELD" EntityType="Self.DIM_FIELD" Schema="CONFIG" store:Type="Tables" />
+          <EntitySet Name="FACT" EntityType="Self.FACT" Schema="CONFIG" store:Type="Tables" />
+          <EntitySet Name="FACT_FIELD" EntityType="Self.FACT_FIELD" Schema="CONFIG" store:Type="Tables" />
+          <EntitySet Name="INDX" EntityType="Self.INDX" Schema="CONFIG" store:Type="Tables" />
+          <EntitySet Name="METRIC" EntityType="Self.METRIC" Schema="CONFIG" store:Type="Tables" />
+          <EntitySet Name="SUMMARY" EntityType="Self.SUMMARY" Schema="CONFIG" store:Type="Tables" />
+          <EntitySet Name="SUMMARY_FIELD" EntityType="Self.SUMMARY_FIELD" Schema="CONFIG" store:Type="Tables" />
+          <EntitySet Name="BITWISE_DICTIONARY_VALID_VALUES" EntityType="Self.BITWISE_DICTIONARY_VALID_VALUES" Schema="META_CORE" store:Type="Tables" />
+          <EntitySet Name="DATA_SOURCE_TYPE" EntityType="Self.DATA_SOURCE_TYPE" Schema="META_CORE" store:Type="Tables" />
+          <EntitySet Name="DIM_TYPE" EntityType="Self.DIM_TYPE" Schema="META_CORE" store:Type="Tables" />
+          <EntitySet Name="METRIC_TYPE" EntityType="Self.METRIC_TYPE" Schema="META_CORE" store:Type="Tables" />
+          <EntitySet Name="BATCH" EntityType="Self.BATCH" Schema="META_LOG" store:Type="Tables" />
+          <EntitySet Name="BATCH_STEP" EntityType="Self.BATCH_STEP" Schema="META_LOG" store:Type="Tables" />
+          <EntitySet Name="EXECUTE_SQL_HISTORY" EntityType="Self.EXECUTE_SQL_HISTORY" Schema="META_LOG" store:Type="Tables" />
+          <EntitySet Name="MODIFIED_TABLE" EntityType="Self.MODIFIED_TABLE" Schema="META_LOG" store:Type="Tables" />
+          <EntitySet Name="SERVICE_BROKER_HISTORY" EntityType="Self.SERVICE_BROKER_HISTORY" Schema="META_LOG" store:Type="Tables" />
+          <EntitySet Name="USER_CHANGE" EntityType="Self.USER_CHANGE" Schema="META_LOG" store:Type="Tables" />
+          <EntitySet Name="DIM_DATE" EntityType="Self.DIM_DATE" Schema="UTILITY" store:Type="Tables" />
+          <EntitySet Name="TALLY" EntityType="Self.TALLY" Schema="UTILITY" store:Type="Tables" />
+          <EntitySet Name="INDX_FIELD" EntityType="Self.INDX_FIELD" store:Type="Tables" store:Schema="CONFIG">
+            <DefiningQuery>SELECT 
+    [INDX_FIELD].[CONFIG_COMMON_NAME] AS [CONFIG_COMMON_NAME], 
+    [INDX_FIELD].[INDX_NAME] AS [INDX_NAME], 
+    [INDX_FIELD].[FIELD_NAME] AS [FIELD_NAME], 
+    [INDX_FIELD].[ORDINAL_POSITION] AS [ORDINAL_POSITION], 
+    [INDX_FIELD].[IS_INCLUDED] AS [IS_INCLUDED]
+    FROM [CONFIG].[INDX_FIELD] AS [INDX_FIELD]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="BITWISE_DICTIONARY" EntityType="Self.BITWISE_DICTIONARY" store:Type="Tables" store:Schema="META_CORE">
+            <DefiningQuery>SELECT 
+    [BITWISE_DICTIONARY].[DICTIONARY_GUID] AS [DICTIONARY_GUID], 
+    [BITWISE_DICTIONARY].[BITWISE_GROUP] AS [BITWISE_GROUP], 
+    [BITWISE_DICTIONARY].[BITWISE_KEY] AS [BITWISE_KEY], 
+    [BITWISE_DICTIONARY].[BITWISE_VALUE] AS [BITWISE_VALUE], 
+    [BITWISE_DICTIONARY].[DESCR] AS [DESCR], 
+    [BITWISE_DICTIONARY].[CREATE_DATE_UTC] AS [CREATE_DATE_UTC], 
+    [BITWISE_DICTIONARY].[MODIFIED_DATE_UTC] AS [MODIFIED_DATE_UTC], 
+    [BITWISE_DICTIONARY].[MODIFIED_BY] AS [MODIFIED_BY]
+    FROM [META_CORE].[BITWISE_DICTIONARY] AS [BITWISE_DICTIONARY]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="EXCEPTION" EntityType="Self.EXCEPTION" store:Type="Tables" store:Schema="META_LOG">
+            <DefiningQuery>SELECT 
+    [EXCEPTION].[EXCEPTION_ID] AS [EXCEPTION_ID], 
+    [EXCEPTION].[EXCEPTION_ERROR_NUMBER] AS [EXCEPTION_ERROR_NUMBER], 
+    [EXCEPTION].[EXCEPTION_ERROR_SEVERITY] AS [EXCEPTION_ERROR_SEVERITY], 
+    [EXCEPTION].[EXCEPTION_ERROR_STATE] AS [EXCEPTION_ERROR_STATE], 
+    [EXCEPTION].[EXCEPTION_ERROR_PROCEDURE] AS [EXCEPTION_ERROR_PROCEDURE], 
+    [EXCEPTION].[EXCEPTION_ERROR_LINE] AS [EXCEPTION_ERROR_LINE], 
+    [EXCEPTION].[EXCEPTION_ERROR_MESSAGE] AS [EXCEPTION_ERROR_MESSAGE], 
+    [EXCEPTION].[EXCEPTION_DATE_UTC] AS [EXCEPTION_DATE_UTC]
+    FROM [META_LOG].[EXCEPTION] AS [EXCEPTION]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="IMPORT_XML" EntityType="Self.IMPORT_XML" store:Type="Tables" store:Schema="META_LOG">
+            <DefiningQuery>SELECT 
+    [IMPORT_XML].[ID] AS [ID], 
+    [IMPORT_XML].[IMPORT_XML] AS [IMPORT_XML], 
+    [IMPORT_XML].[CREATED_DATE] AS [CREATED_DATE]
+    FROM [META_LOG].[IMPORT_XML] AS [IMPORT_XML]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="SYS_PROPERTY" EntityType="Self.SYS_PROPERTY" store:Type="Tables" store:Schema="UTILITY">
+            <DefiningQuery>SELECT 
+    [SYS_PROPERTY].[ID] AS [ID], 
+    [SYS_PROPERTY].[ROW_KEY] AS [ROW_KEY], 
+    [SYS_PROPERTY].[ROW_VALUE] AS [ROW_VALUE], 
+    [SYS_PROPERTY].[CREATED_DATE_UTC] AS [CREATED_DATE_UTC], 
+    [SYS_PROPERTY].[MODIFIED_DATE_UTC] AS [MODIFIED_DATE_UTC], 
+    [SYS_PROPERTY].[MODIFIED_BY] AS [MODIFIED_BY]
+    FROM [UTILITY].[SYS_PROPERTY] AS [SYS_PROPERTY]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vDATASOURCE_WITH_DIMENSIONS" EntityType="Self.vDATASOURCE_WITH_DIMENSIONS" store:Type="Views" store:Schema="CONFIG">
+            <DefiningQuery>SELECT 
+    [vDATASOURCE_WITH_DIMENSIONS].[DATA_SOURCE_NAME] AS [DATA_SOURCE_NAME], 
+    [vDATASOURCE_WITH_DIMENSIONS].[DIM_COMMON_NAME] AS [DIM_COMMON_NAME]
+    FROM [CONFIG].[vDATASOURCE_WITH_DIMENSIONS] AS [vDATASOURCE_WITH_DIMENSIONS]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vDATASOURCE_WITH_FACT_WITH_DIMENSIONAL_KEYS" EntityType="Self.vDATASOURCE_WITH_FACT_WITH_DIMENSIONAL_KEYS" store:Type="Views" store:Schema="CONFIG">
+            <DefiningQuery>SELECT 
+    [vDATASOURCE_WITH_FACT_WITH_DIMENSIONAL_KEYS].[FACT_COMMON_NAME] AS [FACT_COMMON_NAME], 
+    [vDATASOURCE_WITH_FACT_WITH_DIMENSIONAL_KEYS].[DATA_SOURCE_NAME] AS [DATA_SOURCE_NAME], 
+    [vDATASOURCE_WITH_FACT_WITH_DIMENSIONAL_KEYS].[DIM_COMMON_NAME] AS [DIM_COMMON_NAME], 
+    [vDATASOURCE_WITH_FACT_WITH_DIMENSIONAL_KEYS].[DIM_FIELD_NAME] AS [DIM_FIELD_NAME], 
+    [vDATASOURCE_WITH_FACT_WITH_DIMENSIONAL_KEYS].[DIM_DATA_TYPE] AS [DIM_DATA_TYPE]
+    FROM [CONFIG].[vDATASOURCE_WITH_FACT_WITH_DIMENSIONAL_KEYS] AS [vDATASOURCE_WITH_FACT_WITH_DIMENSIONAL_KEYS]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vINDX_DIM_STANDARD" EntityType="Self.vINDX_DIM_STANDARD" store:Type="Views" store:Schema="CONFIG">
+            <DefiningQuery>SELECT 
+    [vINDX_DIM_STANDARD].[CONFIG_COMMON_NAME] AS [CONFIG_COMMON_NAME], 
+    [vINDX_DIM_STANDARD].[INDX_ORDER] AS [INDX_ORDER], 
+    [vINDX_DIM_STANDARD].[INDX_NAME] AS [INDX_NAME], 
+    [vINDX_DIM_STANDARD].[DIM_TABLE_SCHEMA] AS [DIM_TABLE_SCHEMA], 
+    [vINDX_DIM_STANDARD].[DIM_TABLE_NAME] AS [DIM_TABLE_NAME], 
+    [vINDX_DIM_STANDARD].[DIM_FIELD_NAME] AS [DIM_FIELD_NAME], 
+    [vINDX_DIM_STANDARD].[INDX_FEATURE] AS [INDX_FEATURE], 
+    [vINDX_DIM_STANDARD].[ORDINAL_POSITION] AS [ORDINAL_POSITION], 
+    [vINDX_DIM_STANDARD].[IS_INCLUDED] AS [IS_INCLUDED], 
+    [vINDX_DIM_STANDARD].[INDX_WHERE_CLAUSE] AS [INDX_WHERE_CLAUSE]
+    FROM [CONFIG].[vINDX_DIM_STANDARD] AS [vINDX_DIM_STANDARD]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vSTATIC_DIM" EntityType="Self.vSTATIC_DIM" store:Type="Views" store:Schema="CONFIG">
+            <DefiningQuery>SELECT 
+    [vSTATIC_DIM].[DIM_TYPE_GUID] AS [DIM_TYPE_GUID], 
+    [vSTATIC_DIM].[DIM_COMMON_NAME] AS [DIM_COMMON_NAME], 
+    [vSTATIC_DIM].[DIM_TABLE_NAME] AS [DIM_TABLE_NAME], 
+    [vSTATIC_DIM].[DIM_TABLE_SCHEMA] AS [DIM_TABLE_SCHEMA], 
+    [vSTATIC_DIM].[IS_AUTO_GENERATED] AS [IS_AUTO_GENERATED], 
+    [vSTATIC_DIM].[DIM_FEATURE] AS [DIM_FEATURE], 
+    [vSTATIC_DIM].[IS_STATIC] AS [IS_STATIC]
+    FROM [CONFIG].[vSTATIC_DIM] AS [vSTATIC_DIM]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_CONFIG_DATA_SOURCE_CONFIG_COMMON_NAME" Association="Self.FK_CONFIG_DATA_SOURCE_CONFIG_COMMON_NAME">
+            <End Role="CONFIG" EntitySet="CONFIG" />
+            <End Role="DATA_SOURCE" EntitySet="DATA_SOURCE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONFIG_DATA_SOURCE_FIELD_CONFIG_COMMON_NAME" Association="Self.FK_CONFIG_DATA_SOURCE_FIELD_CONFIG_COMMON_NAME">
+            <End Role="CONFIG" EntitySet="CONFIG" />
+            <End Role="DATA_SOURCE_FIELD" EntitySet="DATA_SOURCE_FIELD" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONFIG_DATA_SOURCE_FIELD_DATA_SOURCE" Association="Self.FK_CONFIG_DATA_SOURCE_FIELD_DATA_SOURCE">
+            <End Role="DATA_SOURCE" EntitySet="DATA_SOURCE" />
+            <End Role="DATA_SOURCE_FIELD" EntitySet="DATA_SOURCE_FIELD" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONFIG_DATA_SOURCE_TYPE_GUID" Association="Self.FK_CONFIG_DATA_SOURCE_TYPE_GUID">
+            <End Role="DATA_SOURCE_TYPE" EntitySet="DATA_SOURCE_TYPE" />
+            <End Role="DATA_SOURCE" EntitySet="DATA_SOURCE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONFIG_DIM_CONFIG_COMMON_NAME" Association="Self.FK_CONFIG_DIM_CONFIG_COMMON_NAME">
+            <End Role="CONFIG" EntitySet="CONFIG" />
+            <End Role="DIM" EntitySet="DIM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONFIG_DIM_CONFIG_DIM_TYPE_GUID" Association="Self.FK_CONFIG_DIM_CONFIG_DIM_TYPE_GUID">
+            <End Role="DIM_TYPE" EntitySet="DIM_TYPE" />
+            <End Role="DIM" EntitySet="DIM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONFIG_DIM_FIELD_CONFIG_COMMON_NAME" Association="Self.FK_CONFIG_DIM_FIELD_CONFIG_COMMON_NAME">
+            <End Role="CONFIG" EntitySet="CONFIG" />
+            <End Role="DIM_FIELD" EntitySet="DIM_FIELD" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONFIG_DIM_FIELD_DIM" Association="Self.FK_CONFIG_DIM_FIELD_DIM">
+            <End Role="DIM" EntitySet="DIM" />
+            <End Role="DIM_FIELD" EntitySet="DIM_FIELD" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONFIG_FACT_DATA_SOURCE" Association="Self.FK_CONFIG_FACT_DATA_SOURCE">
+            <End Role="DATA_SOURCE" EntitySet="DATA_SOURCE" />
+            <End Role="FACT" EntitySet="FACT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONFIG_FACT_FACT_COMMON_NAME" Association="Self.FK_CONFIG_FACT_FACT_COMMON_NAME">
+            <End Role="CONFIG" EntitySet="CONFIG" />
+            <End Role="FACT" EntitySet="FACT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONFIG_FACT_FIELD_CONFIG_COMMON_NAME" Association="Self.FK_CONFIG_FACT_FIELD_CONFIG_COMMON_NAME">
+            <End Role="CONFIG" EntitySet="CONFIG" />
+            <End Role="FACT_FIELD" EntitySet="FACT_FIELD" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONFIG_FACT_FIELD_FACT" Association="Self.FK_CONFIG_FACT_FIELD_FACT">
+            <End Role="FACT" EntitySet="FACT" />
+            <End Role="FACT_FIELD" EntitySet="FACT_FIELD" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONFIG_INDX_FIELD_CONFIG_COMMON_NAME" Association="Self.FK_CONFIG_INDX_FIELD_CONFIG_COMMON_NAME">
+            <End Role="CONFIG" EntitySet="CONFIG" />
+            <End Role="INDX_FIELD" EntitySet="INDX_FIELD" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONFIG_INDX_TABLE_CONFIG_COMMON_NAME" Association="Self.FK_CONFIG_INDX_TABLE_CONFIG_COMMON_NAME">
+            <End Role="CONFIG" EntitySet="CONFIG" />
+            <End Role="INDX" EntitySet="INDX" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONFIG_METRIC_CONFIG_COMMON_NAME" Association="Self.FK_CONFIG_METRIC_CONFIG_COMMON_NAME">
+            <End Role="CONFIG" EntitySet="CONFIG" />
+            <End Role="METRIC" EntitySet="METRIC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONFIG_SUMMARY_FACT_CONFIG_COMMON_NAME" Association="Self.FK_CONFIG_SUMMARY_FACT_CONFIG_COMMON_NAME">
+            <End Role="CONFIG" EntitySet="CONFIG" />
+            <End Role="SUMMARY" EntitySet="SUMMARY" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONFIG_SUMMARY_FACT_FACT_FILED" Association="Self.FK_CONFIG_SUMMARY_FACT_FACT_FILED">
+            <End Role="FACT" EntitySet="FACT" />
+            <End Role="SUMMARY" EntitySet="SUMMARY" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DataHammerConfigModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CONFIG">
+          <Key>
+            <PropertyRef Name="CONFIG_COMMON_NAME" />
+          </Key>
+          <Property Name="CONFIG_COMMON_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CONFIG_DATA_PROCESS_PROC_SCHEMA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CONFIG_DATA_PROCESS_PROC_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CONFIG_DATA_SYNC_PROC_SCHEMA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CONFIG_DATA_SYNC_PROC_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DATA_SOURCE" Relationship="Self.FK_CONFIG_DATA_SOURCE_CONFIG_COMMON_NAME" FromRole="CONFIG" ToRole="DATA_SOURCE" />
+          <NavigationProperty Name="DATA_SOURCE_FIELD" Relationship="Self.FK_CONFIG_DATA_SOURCE_FIELD_CONFIG_COMMON_NAME" FromRole="CONFIG" ToRole="DATA_SOURCE_FIELD" />
+          <NavigationProperty Name="FACT_FIELD" Relationship="Self.FK_CONFIG_FACT_FIELD_CONFIG_COMMON_NAME" FromRole="CONFIG" ToRole="FACT_FIELD" />
+          <NavigationProperty Name="INDX_FIELD" Relationship="Self.FK_CONFIG_INDX_FIELD_CONFIG_COMMON_NAME" FromRole="CONFIG" ToRole="INDX_FIELD" />
+          <NavigationProperty Name="INDXes" Relationship="Self.FK_CONFIG_INDX_TABLE_CONFIG_COMMON_NAME" FromRole="CONFIG" ToRole="INDX" />
+          <NavigationProperty Name="METRICs" Relationship="Self.FK_CONFIG_METRIC_CONFIG_COMMON_NAME" FromRole="CONFIG" ToRole="METRIC" />
+          <NavigationProperty Name="SUMMARies" Relationship="Self.FK_CONFIG_SUMMARY_FACT_CONFIG_COMMON_NAME" FromRole="CONFIG" ToRole="SUMMARY" />
+          <NavigationProperty Name="DIMs" Relationship="DataHammerConfigModel.FK_CONFIG_DIM_CONFIG_COMMON_NAME" FromRole="CONFIG" ToRole="DIM" />
+          <NavigationProperty Name="DIM_FIELD" Relationship="DataHammerConfigModel.FK_CONFIG_DIM_FIELD_CONFIG_COMMON_NAME" FromRole="CONFIG" ToRole="DIM_FIELD" />
+          <NavigationProperty Name="FACTs" Relationship="DataHammerConfigModel.FK_CONFIG_FACT_FACT_COMMON_NAME" FromRole="CONFIG" ToRole="FACT" />
+        </EntityType>
+        <EntityType Name="DATA_SOURCE">
+          <Key>
+            <PropertyRef Name="CONFIG_COMMON_NAME" />
+            <PropertyRef Name="DATA_SOURCE_NAME" />
+          </Key>
+          <Property Name="CONFIG_COMMON_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DATA_SOURCE_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DATA_SOURCE_TYPE_GUID" Type="Guid" Nullable="false" />
+          <Property Name="DATA_SOURCE_TABLE_SCHEMA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DATA_SOURCE_TABLE_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DATA_SOURCE_RAW_VIEW_SCHEMA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DATA_SOURCE_RAW_VIEW_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DATA_SOURCE_TABLE_PROC_UPDATE_SCHEMA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DATA_SOURCE_TABLE_PROC_UPDATE_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DATA_SOURCE_TABLE_PROC_INSERT_SCHEMA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DATA_SOURCE_TABLE_PROC_INSERT_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DATA_SOURCE_TABLE_PROC_DELETE_SCHEMA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DATA_SOURCE_TABLE_PROC_DELETE_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DATA_SOURCE_TABLE_PROC_DDL_PARENT_SCHEMA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DATA_SOURCE_TABLE_PROC_DDL_PARENT_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DATA_SOURCE_RAW_UI_VIEW_SCHEMA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DATA_SOURCE_RAW_UI_VIEW_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DATA_SOURCE_FEATURE" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DATA_SOURCE_TEST_DATA_PROC_SCHEMA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DATA_SOURCE_TEST_DATA_PROC_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CONFIG" Relationship="Self.FK_CONFIG_DATA_SOURCE_CONFIG_COMMON_NAME" FromRole="DATA_SOURCE" ToRole="CONFIG" />
+          <NavigationProperty Name="DATA_SOURCE_FIELD" Relationship="Self.FK_CONFIG_DATA_SOURCE_FIELD_DATA_SOURCE" FromRole="DATA_SOURCE" ToRole="DATA_SOURCE_FIELD" />
+          <NavigationProperty Name="DATA_SOURCE_TYPE" Relationship="DataHammerConfigModel.FK_CONFIG_DATA_SOURCE_TYPE_GUID" FromRole="DATA_SOURCE" ToRole="DATA_SOURCE_TYPE" />
+          <NavigationProperty Name="FACTs" Relationship="DataHammerConfigModel.FK_CONFIG_FACT_DATA_SOURCE" FromRole="DATA_SOURCE" ToRole="FACT" />
+        </EntityType>
+        <EntityType Name="DATA_SOURCE_FIELD">
+          <Key>
+            <PropertyRef Name="CONFIG_COMMON_NAME" />
+            <PropertyRef Name="DATA_SOURCE_NAME" />
+            <PropertyRef Name="COLUMN_NAME" />
+          </Key>
+          <Property Name="CONFIG_COMMON_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DATA_SOURCE_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SOURCE_COLUMN_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SOURCE_COLUMN_DATA_TYPE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RAW_VIEW_COLUMN_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RAW_VIEW_COLUMN_DATA_TYPE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IS_DIM_HASH" Type="Boolean" Nullable="false" />
+          <Property Name="IS_IDENTITY" Type="Boolean" Nullable="false" />
+          <Property Name="DERIVED_CONFIGURATION" Type="String" MaxLength="800" FixedLength="false" Unicode="false" />
+          <Property Name="COLUMN_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="DATA_SOURCE_FIELD_FEATURE" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CONFIG" Relationship="Self.FK_CONFIG_DATA_SOURCE_FIELD_CONFIG_COMMON_NAME" FromRole="DATA_SOURCE_FIELD" ToRole="CONFIG" />
+          <NavigationProperty Name="DATA_SOURCE" Relationship="Self.FK_CONFIG_DATA_SOURCE_FIELD_DATA_SOURCE" FromRole="DATA_SOURCE_FIELD" ToRole="DATA_SOURCE" />
+        </EntityType>
+        <EntityType Name="FACT_FIELD">
+          <Key>
+            <PropertyRef Name="CONFIG_COMMON_NAME" />
+            <PropertyRef Name="FACT_COMMON_NAME" />
+            <PropertyRef Name="FACT_FIELD_NAME" />
+          </Key>
+          <Property Name="CONFIG_COMMON_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FACT_COMMON_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FACT_FIELD_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OBJECT_TYPE_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DIM_FIELD_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FACT_FIELD_FEATURE" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CONFIG" Relationship="Self.FK_CONFIG_FACT_FIELD_CONFIG_COMMON_NAME" FromRole="FACT_FIELD" ToRole="CONFIG" />
+          <NavigationProperty Name="FACT" Relationship="DataHammerConfigModel.FK_CONFIG_FACT_FIELD_FACT" FromRole="FACT_FIELD" ToRole="FACT" />
+        </EntityType>
+        <EntityType Name="INDX">
+          <Key>
+            <PropertyRef Name="CONFIG_COMMON_NAME" />
+            <PropertyRef Name="INDX_NAME" />
+            <PropertyRef Name="FIELD_NAME" />
+          </Key>
+          <Property Name="CONFIG_COMMON_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="INDX_ORDER" Type="Byte" Nullable="false" />
+          <Property Name="INDX_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TABLE_SCHEMA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TABLE_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FIELD_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="INDX_FEATURE" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ORDINAL_POSITION" Type="Byte" Nullable="false" />
+          <Property Name="IS_INCLUDED" Type="Boolean" Nullable="false" />
+          <Property Name="INDX_WHERE_CLAUSE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CONFIG" Relationship="Self.FK_CONFIG_INDX_TABLE_CONFIG_COMMON_NAME" FromRole="INDX" ToRole="CONFIG" />
+        </EntityType>
+        <EntityType Name="METRIC">
+          <Key>
+            <PropertyRef Name="CONFIG_COMMON_NAME" />
+            <PropertyRef Name="METRIC_NAME" />
+          </Key>
+          <Property Name="CONFIG_COMMON_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="METRIC_TYPE_GUID" Type="Guid" Nullable="false" />
+          <Property Name="METRIC_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="METRIC_OVERRIDE_DATA_TYPE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="METRIC_OVERRIDE_CALCULATION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="METRIC_OVERRIDE_ROLLUP" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="METRIC_OVERRIDE_PRORATE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CONFIG" Relationship="Self.FK_CONFIG_METRIC_CONFIG_COMMON_NAME" FromRole="METRIC" ToRole="CONFIG" />
+        </EntityType>
+        <EntityType Name="SUMMARY">
+          <Key>
+            <PropertyRef Name="CONFIG_COMMON_NAME" />
+            <PropertyRef Name="SUMMARY_COMMON_NAME" />
+          </Key>
+          <Property Name="CONFIG_COMMON_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SUMMARY_COMMON_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FACT_COMMON_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SUMMARY_TABLE_SCHEMA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SUMMARY_TABLE_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SUMMARY_LOAD_PROC_SCHEAMA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SUMMARY_LOAD_PROC_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CONFIG" Relationship="Self.FK_CONFIG_SUMMARY_FACT_CONFIG_COMMON_NAME" FromRole="SUMMARY" ToRole="CONFIG" />
+          <NavigationProperty Name="FACT" Relationship="DataHammerConfigModel.FK_CONFIG_SUMMARY_FACT_FACT_FILED" FromRole="SUMMARY" ToRole="FACT" />
+        </EntityType>
+        <EntityType Name="INDX_FIELD">
+          <Key>
+            <PropertyRef Name="INDX_NAME" />
+            <PropertyRef Name="FIELD_NAME" />
+            <PropertyRef Name="ORDINAL_POSITION" />
+            <PropertyRef Name="IS_INCLUDED" />
+          </Key>
+          <Property Name="CONFIG_COMMON_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="INDX_NAME" Type="Int32" Nullable="false" />
+          <Property Name="FIELD_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ORDINAL_POSITION" Type="Byte" Nullable="false" />
+          <Property Name="IS_INCLUDED" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CONFIG" Relationship="Self.FK_CONFIG_INDX_FIELD_CONFIG_COMMON_NAME" FromRole="INDX_FIELD" ToRole="CONFIG" />
+        </EntityType>
+        <Association Name="FK_CONFIG_DATA_SOURCE_CONFIG_COMMON_NAME">
+          <End Role="CONFIG" Type="Self.CONFIG" Multiplicity="1" />
+          <End Role="DATA_SOURCE" Type="Self.DATA_SOURCE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONFIG">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+            </Principal>
+            <Dependent Role="DATA_SOURCE">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONFIG_DATA_SOURCE_FIELD_CONFIG_COMMON_NAME">
+          <End Role="CONFIG" Type="Self.CONFIG" Multiplicity="1" />
+          <End Role="DATA_SOURCE_FIELD" Type="Self.DATA_SOURCE_FIELD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONFIG">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+            </Principal>
+            <Dependent Role="DATA_SOURCE_FIELD">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONFIG_FACT_FIELD_CONFIG_COMMON_NAME">
+          <End Role="CONFIG" Type="Self.CONFIG" Multiplicity="1" />
+          <End Role="FACT_FIELD" Type="Self.FACT_FIELD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONFIG">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+            </Principal>
+            <Dependent Role="FACT_FIELD">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONFIG_INDX_FIELD_CONFIG_COMMON_NAME">
+          <End Role="CONFIG" Type="Self.CONFIG" Multiplicity="0..1" />
+          <End Role="INDX_FIELD" Type="Self.INDX_FIELD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONFIG">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+            </Principal>
+            <Dependent Role="INDX_FIELD">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONFIG_INDX_TABLE_CONFIG_COMMON_NAME">
+          <End Role="CONFIG" Type="Self.CONFIG" Multiplicity="1" />
+          <End Role="INDX" Type="Self.INDX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONFIG">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+            </Principal>
+            <Dependent Role="INDX">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONFIG_METRIC_CONFIG_COMMON_NAME">
+          <End Role="CONFIG" Type="Self.CONFIG" Multiplicity="1" />
+          <End Role="METRIC" Type="Self.METRIC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONFIG">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+            </Principal>
+            <Dependent Role="METRIC">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONFIG_SUMMARY_FACT_CONFIG_COMMON_NAME">
+          <End Role="CONFIG" Type="Self.CONFIG" Multiplicity="1" />
+          <End Role="SUMMARY" Type="Self.SUMMARY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONFIG">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+            </Principal>
+            <Dependent Role="SUMMARY">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONFIG_DATA_SOURCE_FIELD_DATA_SOURCE">
+          <End Role="DATA_SOURCE" Type="Self.DATA_SOURCE" Multiplicity="1" />
+          <End Role="DATA_SOURCE_FIELD" Type="Self.DATA_SOURCE_FIELD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DATA_SOURCE">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+              <PropertyRef Name="DATA_SOURCE_NAME" />
+            </Principal>
+            <Dependent Role="DATA_SOURCE_FIELD">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+              <PropertyRef Name="DATA_SOURCE_NAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DataHammerConfigEntities" annotation:LazyLoadingEnabled="false">
+          <EntitySet Name="CONFIGs" EntityType="Self.CONFIG" />
+          <EntitySet Name="DATA_SOURCE" EntityType="Self.DATA_SOURCE" />
+          <EntitySet Name="DATA_SOURCE_FIELD" EntityType="Self.DATA_SOURCE_FIELD" />
+          <EntitySet Name="FACT_FIELD" EntityType="Self.FACT_FIELD" />
+          <EntitySet Name="INDXes" EntityType="Self.INDX" />
+          <EntitySet Name="METRICs" EntityType="Self.METRIC" />
+          <EntitySet Name="SUMMARies" EntityType="Self.SUMMARY" />
+          <EntitySet Name="INDX_FIELD" EntityType="Self.INDX_FIELD" />
+          <AssociationSet Name="FK_CONFIG_DATA_SOURCE_CONFIG_COMMON_NAME" Association="Self.FK_CONFIG_DATA_SOURCE_CONFIG_COMMON_NAME">
+            <End Role="CONFIG" EntitySet="CONFIGs" />
+            <End Role="DATA_SOURCE" EntitySet="DATA_SOURCE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONFIG_DATA_SOURCE_FIELD_CONFIG_COMMON_NAME" Association="Self.FK_CONFIG_DATA_SOURCE_FIELD_CONFIG_COMMON_NAME">
+            <End Role="CONFIG" EntitySet="CONFIGs" />
+            <End Role="DATA_SOURCE_FIELD" EntitySet="DATA_SOURCE_FIELD" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONFIG_FACT_FIELD_CONFIG_COMMON_NAME" Association="Self.FK_CONFIG_FACT_FIELD_CONFIG_COMMON_NAME">
+            <End Role="CONFIG" EntitySet="CONFIGs" />
+            <End Role="FACT_FIELD" EntitySet="FACT_FIELD" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONFIG_INDX_FIELD_CONFIG_COMMON_NAME" Association="Self.FK_CONFIG_INDX_FIELD_CONFIG_COMMON_NAME">
+            <End Role="CONFIG" EntitySet="CONFIGs" />
+            <End Role="INDX_FIELD" EntitySet="INDX_FIELD" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONFIG_INDX_TABLE_CONFIG_COMMON_NAME" Association="Self.FK_CONFIG_INDX_TABLE_CONFIG_COMMON_NAME">
+            <End Role="CONFIG" EntitySet="CONFIGs" />
+            <End Role="INDX" EntitySet="INDXes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONFIG_METRIC_CONFIG_COMMON_NAME" Association="Self.FK_CONFIG_METRIC_CONFIG_COMMON_NAME">
+            <End Role="CONFIG" EntitySet="CONFIGs" />
+            <End Role="METRIC" EntitySet="METRICs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONFIG_SUMMARY_FACT_CONFIG_COMMON_NAME" Association="Self.FK_CONFIG_SUMMARY_FACT_CONFIG_COMMON_NAME">
+            <End Role="CONFIG" EntitySet="CONFIGs" />
+            <End Role="SUMMARY" EntitySet="SUMMARies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONFIG_DATA_SOURCE_FIELD_DATA_SOURCE" Association="Self.FK_CONFIG_DATA_SOURCE_FIELD_DATA_SOURCE">
+            <End Role="DATA_SOURCE" EntitySet="DATA_SOURCE" />
+            <End Role="DATA_SOURCE_FIELD" EntitySet="DATA_SOURCE_FIELD" />
+          </AssociationSet>
+          <EntitySet Name="BITWISE_DICTIONARY" EntityType="DataHammerConfigModel.BITWISE_DICTIONARY" />
+          <EntitySet Name="BITWISE_DICTIONARY_VALID_VALUES" EntityType="DataHammerConfigModel.BITWISE_DICTIONARY_VALID_VALUES" />
+          <EntitySet Name="DATA_SOURCE_TYPE" EntityType="DataHammerConfigModel.DATA_SOURCE_TYPE" />
+          <EntitySet Name="DIM_TYPE" EntityType="DataHammerConfigModel.DIM_TYPE" />
+          <EntitySet Name="METRIC_TYPE" EntityType="DataHammerConfigModel.METRIC_TYPE" />
+          <EntitySet Name="BATCHes" EntityType="DataHammerConfigModel.BATCH" />
+          <EntitySet Name="BATCH_STEP" EntityType="DataHammerConfigModel.BATCH_STEP" />
+          <EntitySet Name="EXECUTE_SQL_HISTORY" EntityType="DataHammerConfigModel.EXECUTE_SQL_HISTORY" />
+          <EntitySet Name="MODIFIED_TABLE" EntityType="DataHammerConfigModel.MODIFIED_TABLE" />
+          <EntitySet Name="SERVICE_BROKER_HISTORY" EntityType="DataHammerConfigModel.SERVICE_BROKER_HISTORY" />
+          <EntitySet Name="USER_CHANGE" EntityType="DataHammerConfigModel.USER_CHANGE" />
+          <EntitySet Name="DIM_DATE" EntityType="DataHammerConfigModel.DIM_DATE" />
+          <EntitySet Name="TALLies" EntityType="DataHammerConfigModel.TALLY" />
+          <EntitySet Name="EXCEPTIONs" EntityType="DataHammerConfigModel.EXCEPTION" />
+          <EntitySet Name="IMPORT_XML" EntityType="DataHammerConfigModel.IMPORT_XML" />
+          <EntitySet Name="SYS_PROPERTY" EntityType="DataHammerConfigModel.SYS_PROPERTY" />
+          <AssociationSet Name="FK_CONFIG_DATA_SOURCE_TYPE_GUID" Association="DataHammerConfigModel.FK_CONFIG_DATA_SOURCE_TYPE_GUID">
+            <End Role="DATA_SOURCE_TYPE" EntitySet="DATA_SOURCE_TYPE" />
+            <End Role="DATA_SOURCE" EntitySet="DATA_SOURCE" />
+          </AssociationSet>
+          <EntitySet Name="DIMs" EntityType="DataHammerConfigModel.DIM" />
+          <AssociationSet Name="FK_CONFIG_DIM_CONFIG_COMMON_NAME" Association="DataHammerConfigModel.FK_CONFIG_DIM_CONFIG_COMMON_NAME">
+            <End Role="CONFIG" EntitySet="CONFIGs" />
+            <End Role="DIM" EntitySet="DIMs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONFIG_DIM_CONFIG_DIM_TYPE_GUID" Association="DataHammerConfigModel.FK_CONFIG_DIM_CONFIG_DIM_TYPE_GUID">
+            <End Role="DIM_TYPE" EntitySet="DIM_TYPE" />
+            <End Role="DIM" EntitySet="DIMs" />
+          </AssociationSet>
+          <EntitySet Name="DIM_FIELD" EntityType="DataHammerConfigModel.DIM_FIELD" />
+          <EntitySet Name="FACTs" EntityType="DataHammerConfigModel.FACT" />
+          <AssociationSet Name="FK_CONFIG_DIM_FIELD_CONFIG_COMMON_NAME" Association="DataHammerConfigModel.FK_CONFIG_DIM_FIELD_CONFIG_COMMON_NAME">
+            <End Role="CONFIG" EntitySet="CONFIGs" />
+            <End Role="DIM_FIELD" EntitySet="DIM_FIELD" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONFIG_FACT_FACT_COMMON_NAME" Association="DataHammerConfigModel.FK_CONFIG_FACT_FACT_COMMON_NAME">
+            <End Role="CONFIG" EntitySet="CONFIGs" />
+            <End Role="FACT" EntitySet="FACTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONFIG_FACT_DATA_SOURCE" Association="DataHammerConfigModel.FK_CONFIG_FACT_DATA_SOURCE">
+            <End Role="DATA_SOURCE" EntitySet="DATA_SOURCE" />
+            <End Role="FACT" EntitySet="FACTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONFIG_DIM_FIELD_DIM" Association="DataHammerConfigModel.FK_CONFIG_DIM_FIELD_DIM">
+            <End Role="DIM" EntitySet="DIMs" />
+            <End Role="DIM_FIELD" EntitySet="DIM_FIELD" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONFIG_FACT_FIELD_FACT" Association="DataHammerConfigModel.FK_CONFIG_FACT_FIELD_FACT">
+            <End Role="FACT" EntitySet="FACTs" />
+            <End Role="FACT_FIELD" EntitySet="FACT_FIELD" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONFIG_SUMMARY_FACT_FACT_FILED" Association="DataHammerConfigModel.FK_CONFIG_SUMMARY_FACT_FACT_FILED">
+            <End Role="FACT" EntitySet="FACTs" />
+            <End Role="SUMMARY" EntitySet="SUMMARies" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="BITWISE_DICTIONARY">
+          <Key>
+            <PropertyRef Name="DICTIONARY_GUID" />
+            <PropertyRef Name="BITWISE_GROUP" />
+            <PropertyRef Name="BITWISE_KEY" />
+            <PropertyRef Name="BITWISE_VALUE" />
+            <PropertyRef Name="DESCR" />
+            <PropertyRef Name="CREATE_DATE_UTC" />
+            <PropertyRef Name="MODIFIED_DATE_UTC" />
+            <PropertyRef Name="MODIFIED_BY" />
+          </Key>
+          <Property Name="DICTIONARY_GUID" Type="Guid" Nullable="false" />
+          <Property Name="BITWISE_GROUP" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BITWISE_KEY" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BITWISE_VALUE" Type="Int16" Nullable="false" />
+          <Property Name="DESCR" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="CREATE_DATE_UTC" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MODIFIED_DATE_UTC" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MODIFIED_BY" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="BITWISE_DICTIONARY_VALID_VALUES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BITWISE_GROUP" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BITWISE_KEY_LIST" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="BITWISE_VALUE" Type="Int16" Nullable="false" />
+          <Property Name="CREATE_DATE_UTC" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MODIFIED_DATE_UTC" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MODIFIED_BY" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DATA_SOURCE_TYPE">
+          <Key>
+            <PropertyRef Name="DATA_SOURCE_TYPE_GUID" />
+          </Key>
+          <Property Name="DATA_SOURCE_TYPE_GUID" Type="Guid" Nullable="false" />
+          <Property Name="CREATE_DATE_UTC" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MODIFIED_DATE_UTC" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MODIFIED_BY" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="DATA_SOURCE_TYPE_HID_STRING" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="DATA_SOURCE_TYPE_HID_LEVEL" Type="Int16" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="DATA_SOURCE_TYPE_NAME" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DATA_SOURCE" Relationship="DataHammerConfigModel.FK_CONFIG_DATA_SOURCE_TYPE_GUID" FromRole="DATA_SOURCE_TYPE" ToRole="DATA_SOURCE" />
+        </EntityType>
+        <EntityType Name="DIM_TYPE">
+          <Key>
+            <PropertyRef Name="DIM_TYPE_GUID" />
+          </Key>
+          <Property Name="DIM_TYPE_GUID" Type="Guid" Nullable="false" />
+          <Property Name="DIM_TYPE_NAME" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DIM_TYPE_INCLUDE_DATA_SOURCE" Type="Boolean" Nullable="false" />
+          <Property Name="CREATE_DATE_UTC" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MODIFIED_DATE_UTC" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MODIFIED_BY" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DIMs" Relationship="DataHammerConfigModel.FK_CONFIG_DIM_CONFIG_DIM_TYPE_GUID" FromRole="DIM_TYPE" ToRole="DIM" />
+        </EntityType>
+        <EntityType Name="METRIC_TYPE">
+          <Key>
+            <PropertyRef Name="METRIC_TYPE_GUID" />
+          </Key>
+          <Property Name="METRIC_TYPE_GUID" Type="Guid" Nullable="false" />
+          <Property Name="METRIC_TYPE_NAME" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="METRIC_DATA_TYPE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="METRIC_CALCULATION" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="METRIC_ROLLUP" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="METRIC_PRORATE" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="IS_INTERNAL_AUDIT" Type="Boolean" />
+          <Property Name="CREATE_DATE_UTC" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MODIFIED_DATE_UTC" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MODIFIED_BY" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="BATCH">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BATCH_STATE" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="BATCH_RESULT" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="COMMENT" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="MODIFIED_DATE_UTC" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="BATCH_STEP">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BATCH_ID" Type="Int32" Nullable="false" />
+          <Property Name="CHANGE_ACTION" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DATA_SOURCE_TYPE_GUID" Type="Guid" />
+          <Property Name="DATA_SOURCE_ID" Type="Int32" />
+          <Property Name="MODIFIED_OBJECT_NAME" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FILEPATH" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="COMMENT" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="STEP_STATE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="STEP_RESULT" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ERROR_MESSAGE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="MODIFIED_COUNT" Type="Int32" />
+          <Property Name="MODIFIED_DATE_UTC" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="EXECUTE_SQL_HISTORY">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SQL_SCRIPT" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SCRIPT_TITLE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="START_TIME_UTC" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="STOP_TIME_UTC" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EXCEPTION" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="IS_FAILED" Type="Boolean" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="IS_EXECUTE" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MODIFIED_TABLE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MODIFIED_OBJECT_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CHANGE_ACTION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MODIFIED_DATE_UTC" Type="DateTime" Precision="3" />
+          <Property Name="MODIFIED_COUNT" Type="Int32" />
+          <Property Name="EXECUTING_OBJECT_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SERVICE_BROKER_HISTORY">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MESSAGE_BODY" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MESSAGE_TYPE_NAME" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IS_RECEIVED" Type="Boolean" Nullable="false" />
+          <Property Name="IS_SENT" Type="Boolean" Nullable="false" />
+          <Property Name="CREATED_DATE_UTC" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="USER_CHANGE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TABLE_SCHEMA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TABLE_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DATA_CHANGE_PRE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DATA_CHANGE_POST" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CREATED_DATE_UTC" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MODIFIED_BY" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DIM_DATE">
+          <Key>
+            <PropertyRef Name="DATE_ID" />
+          </Key>
+          <Property Name="DATE_ID" Type="Int16" Nullable="false" />
+          <Property Name="DATE_ID_LONG" Type="Int32" Nullable="false" />
+          <Property Name="DATE_SHORT" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DATE_MONTH" Type="DateTime" Precision="0" />
+          <Property Name="DATE_WEEKEND_SAT" Type="DateTime" Precision="0" />
+          <Property Name="DATE_WEEKEND_SUN" Type="DateTime" Precision="0" />
+          <Property Name="DATE_QUARTER" Type="DateTime" Precision="0" />
+          <Property Name="DATE_WEEK" Type="Byte" />
+          <Property Name="DATE_YEAR_FORMATTED" Type="DateTime" Precision="0" />
+          <Property Name="DATE_YEAR" Type="Int16" />
+          <Property Name="DATE_DAY" Type="Int16" />
+          <Property Name="FISCAL_MONTH" Type="DateTime" Precision="0" />
+          <Property Name="FISCAL_YEAR" Type="DateTime" Precision="0" />
+          <Property Name="FISCAL_QUARTER" Type="DateTime" Precision="0" />
+          <Property Name="FISCAL_WEEK" Type="DateTime" Precision="0" />
+          <Property Name="DATE_MONTH_DAY" Type="Byte" />
+          <Property Name="DATE_WEEKDAY_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BROADCAST_MEDIA_WEEK" Type="Byte" />
+          <Property Name="BROADCAST_MEDIA_MONTH" Type="Byte" />
+          <Property Name="BROADCAST_MEDIA_MONTH_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BROADCAST_MEDIA_QUARTER" Type="Byte" />
+          <Property Name="BROADCAST_MEDIA_YEAR" Type="Int16" />
+        </EntityType>
+        <EntityType Name="TALLY">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EXCEPTION">
+          <Key>
+            <PropertyRef Name="EXCEPTION_ID" />
+          </Key>
+          <Property Name="EXCEPTION_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EXCEPTION_ERROR_NUMBER" Type="Int32" />
+          <Property Name="EXCEPTION_ERROR_SEVERITY" Type="Byte" />
+          <Property Name="EXCEPTION_ERROR_STATE" Type="Byte" />
+          <Property Name="EXCEPTION_ERROR_PROCEDURE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="EXCEPTION_ERROR_LINE" Type="Int32" />
+          <Property Name="EXCEPTION_ERROR_MESSAGE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EXCEPTION_DATE_UTC" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="IMPORT_XML">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IMPORT_XML1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="SYS_PROPERTY">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="ROW_KEY" />
+            <PropertyRef Name="ROW_VALUE" />
+            <PropertyRef Name="CREATED_DATE_UTC" />
+            <PropertyRef Name="MODIFIED_DATE_UTC" />
+            <PropertyRef Name="MODIFIED_BY" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ROW_KEY" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ROW_VALUE" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CREATED_DATE_UTC" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MODIFIED_DATE_UTC" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MODIFIED_BY" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_CONFIG_DATA_SOURCE_TYPE_GUID">
+          <End Type="DataHammerConfigModel.DATA_SOURCE_TYPE" Role="DATA_SOURCE_TYPE" Multiplicity="1" />
+          <End Type="DataHammerConfigModel.DATA_SOURCE" Role="DATA_SOURCE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DATA_SOURCE_TYPE">
+              <PropertyRef Name="DATA_SOURCE_TYPE_GUID" />
+            </Principal>
+            <Dependent Role="DATA_SOURCE">
+              <PropertyRef Name="DATA_SOURCE_TYPE_GUID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DIM">
+          <Key>
+            <PropertyRef Name="CONFIG_COMMON_NAME" />
+            <PropertyRef Name="DIM_COMMON_NAME" />
+          </Key>
+          <Property Name="CONFIG_COMMON_NAME" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DIM_TYPE_GUID" Type="Guid" Nullable="false" />
+          <Property Name="DIM_COMMON_NAME" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DIM_TABLE_SCHEMA" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DIM_TABLE_NAME" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DIM_TABLE_CLEAN_SCHEMA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DIM_TABLE_CLEAN_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DIM_LOAD_PROC_SCHEMA_RAW" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DIM_LOAD_PROC_NAME_RAW" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DIM_PROC_UI_CLEAN_SCHEMA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DIM_PROC_UI_CLEAN_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DIM_LOAD_PROC_CLEAN_SCHEMA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DIM_LOAD_PROC_CLEAN_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DIM_VIEW_RAW_SCHEMA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DIM_VIEW_RAW_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DIM_VIEW_CLEAN_SCHEMA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DIM_VIEW_CLEAN_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DIM_PROC_RAW_TABLE_CLEAN_ID_SCHEMA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DIM_PROC_RAW_TABLE_CLEAN_ID_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DIM_VIEW_WHITELIST_SCHEMA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DIM_VIEW_WHITELIST_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DIM_FEATURE" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DIM_TAXONOMY_PROC_SCHEMA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DIM_TAXONOMY_PROC_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DIM_LOAD_PRE_PROC_SPROC_SCHEMA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DIM_LOAD_PRE_PROC_SPROC_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DIM_LOAD_POST_PROC_SCHEMA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DIM_LOAD_POST_PROC_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DIM_LOAD_PRE_PROC_CLEAN_SCHEMA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DIM_LOAD_PRE_PROC_CLEAN_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DIM_LOAD_POST_PROC_CLEAN_SCHEMA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DIM_LOAD_POST_PROC_CLEAN_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IS_STATIC" Type="Boolean" Nullable="false" />
+          <Property Name="IS_AUTO_GENERATED" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CONFIG" Relationship="DataHammerConfigModel.FK_CONFIG_DIM_CONFIG_COMMON_NAME" FromRole="DIM" ToRole="CONFIG" />
+          <NavigationProperty Name="DIM_TYPE" Relationship="DataHammerConfigModel.FK_CONFIG_DIM_CONFIG_DIM_TYPE_GUID" FromRole="DIM" ToRole="DIM_TYPE" />
+          <NavigationProperty Name="DIM_FIELD" Relationship="DataHammerConfigModel.FK_CONFIG_DIM_FIELD_DIM" FromRole="DIM" ToRole="DIM_FIELD" />
+        </EntityType>
+        <Association Name="FK_CONFIG_DIM_CONFIG_COMMON_NAME">
+          <End Type="DataHammerConfigModel.CONFIG" Role="CONFIG" Multiplicity="1" />
+          <End Type="DataHammerConfigModel.DIM" Role="DIM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONFIG">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+            </Principal>
+            <Dependent Role="DIM">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONFIG_DIM_CONFIG_DIM_TYPE_GUID">
+          <End Type="DataHammerConfigModel.DIM_TYPE" Role="DIM_TYPE" Multiplicity="1" />
+          <End Type="DataHammerConfigModel.DIM" Role="DIM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIM_TYPE">
+              <PropertyRef Name="DIM_TYPE_GUID" />
+            </Principal>
+            <Dependent Role="DIM">
+              <PropertyRef Name="DIM_TYPE_GUID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DIM_FIELD">
+          <Key>
+            <PropertyRef Name="CONFIG_COMMON_NAME" />
+            <PropertyRef Name="DIM_COMMON_NAME" />
+            <PropertyRef Name="DIM_FIELD_NAME" />
+          </Key>
+          <Property Name="CONFIG_COMMON_NAME" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DIM_COMMON_NAME" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DIM_FIELD_NAME" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DIM_FIELD_NAME_CLEAN" Type="String" Nullable="false" MaxLength="106" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="DIM_DATA_TYPE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DIM_FIELD_FEATURE" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DERIVED_CONFIGURATION" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CONFIG" Relationship="DataHammerConfigModel.FK_CONFIG_DIM_FIELD_CONFIG_COMMON_NAME" FromRole="DIM_FIELD" ToRole="CONFIG" />
+          <NavigationProperty Name="DIM" Relationship="DataHammerConfigModel.FK_CONFIG_DIM_FIELD_DIM" FromRole="DIM_FIELD" ToRole="DIM" />
+        </EntityType>
+        <EntityType Name="FACT">
+          <Key>
+            <PropertyRef Name="CONFIG_COMMON_NAME" />
+            <PropertyRef Name="FACT_COMMON_NAME" />
+          </Key>
+          <Property Name="CONFIG_COMMON_NAME" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DATA_SOURCE_NAME" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FACT_COMMON_NAME" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FACT_TABLE_SCHEMA" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FACT_TABLE_NAME" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FACT_FEATURE" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DISTINCT_TABLE_KEY_SCHEMA" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DISTINCT_TABLE_KEY_NAME" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DISTINCT_TABLE_VALUE_SCHEMA" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DISTINCT_TABLE_VALUE_NAME" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DISTINCT_VALUE_PROCEDURE_SCHEMA" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DISTINCT_VALUE_PROCEDURE_NAME" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DISTINCT_KEY_PROCEDURE_SCHEMA" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DISTINCT_KEY_PROCEDURE_NAME" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FACT_LOAD_PROCEDURE_SCHEMA" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FACT_LOAD_PROCEDURE_NAME" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FACT_PRE_EXEC_SPROC_SCHEMA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FACT_PRE_EXEC_SPROC_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FACT_POST_EXEC_SPROC_SCHEMA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FACT_POST_EXEC_SPROC_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IS_AUTO_GENERATED_FACT_TABLE" Type="Boolean" Nullable="false" />
+          <Property Name="IS_AUTO_GENERATED_LOAD_PROCEDURE" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CONFIG" Relationship="DataHammerConfigModel.FK_CONFIG_FACT_FACT_COMMON_NAME" FromRole="FACT" ToRole="CONFIG" />
+          <NavigationProperty Name="DATA_SOURCE" Relationship="DataHammerConfigModel.FK_CONFIG_FACT_DATA_SOURCE" FromRole="FACT" ToRole="DATA_SOURCE" />
+          <NavigationProperty Name="FACT_FIELD" Relationship="DataHammerConfigModel.FK_CONFIG_FACT_FIELD_FACT" FromRole="FACT" ToRole="FACT_FIELD" />
+          <NavigationProperty Name="SUMMARies" Relationship="DataHammerConfigModel.FK_CONFIG_SUMMARY_FACT_FACT_FILED" FromRole="FACT" ToRole="SUMMARY" />
+        </EntityType>
+        <Association Name="FK_CONFIG_DIM_FIELD_CONFIG_COMMON_NAME">
+          <End Type="DataHammerConfigModel.CONFIG" Role="CONFIG" Multiplicity="1" />
+          <End Type="DataHammerConfigModel.DIM_FIELD" Role="DIM_FIELD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONFIG">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+            </Principal>
+            <Dependent Role="DIM_FIELD">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONFIG_FACT_FACT_COMMON_NAME">
+          <End Type="DataHammerConfigModel.CONFIG" Role="CONFIG" Multiplicity="1" />
+          <End Type="DataHammerConfigModel.FACT" Role="FACT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONFIG">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+            </Principal>
+            <Dependent Role="FACT">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONFIG_FACT_DATA_SOURCE">
+          <End Type="DataHammerConfigModel.DATA_SOURCE" Role="DATA_SOURCE" Multiplicity="1" />
+          <End Type="DataHammerConfigModel.FACT" Role="FACT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DATA_SOURCE">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+              <PropertyRef Name="DATA_SOURCE_NAME" />
+            </Principal>
+            <Dependent Role="FACT">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+              <PropertyRef Name="DATA_SOURCE_NAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONFIG_DIM_FIELD_DIM">
+          <End Type="DataHammerConfigModel.DIM" Role="DIM" Multiplicity="1" />
+          <End Type="DataHammerConfigModel.DIM_FIELD" Role="DIM_FIELD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIM">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+              <PropertyRef Name="DIM_COMMON_NAME" />
+            </Principal>
+            <Dependent Role="DIM_FIELD">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+              <PropertyRef Name="DIM_COMMON_NAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONFIG_FACT_FIELD_FACT">
+          <End Type="DataHammerConfigModel.FACT" Role="FACT" Multiplicity="1" />
+          <End Type="DataHammerConfigModel.FACT_FIELD" Role="FACT_FIELD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FACT">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+              <PropertyRef Name="FACT_COMMON_NAME" />
+            </Principal>
+            <Dependent Role="FACT_FIELD">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+              <PropertyRef Name="FACT_COMMON_NAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONFIG_SUMMARY_FACT_FACT_FILED">
+          <End Type="DataHammerConfigModel.FACT" Role="FACT" Multiplicity="1" />
+          <End Type="DataHammerConfigModel.SUMMARY" Role="SUMMARY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FACT">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+              <PropertyRef Name="FACT_COMMON_NAME" />
+            </Principal>
+            <Dependent Role="SUMMARY">
+              <PropertyRef Name="CONFIG_COMMON_NAME" />
+              <PropertyRef Name="FACT_COMMON_NAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DataHammerConfigModelStoreContainer" CdmEntityContainer="DataHammerConfigEntities">
+          <EntitySetMapping Name="CONFIGs">
+            <EntityTypeMapping TypeName="DataHammerConfigModel.CONFIG">
+              <MappingFragment StoreEntitySet="CONFIG">
+                <ScalarProperty Name="CONFIG_COMMON_NAME" ColumnName="CONFIG_COMMON_NAME" />
+                <ScalarProperty Name="CONFIG_DATA_PROCESS_PROC_SCHEMA" ColumnName="CONFIG_DATA_PROCESS_PROC_SCHEMA" />
+                <ScalarProperty Name="CONFIG_DATA_PROCESS_PROC_NAME" ColumnName="CONFIG_DATA_PROCESS_PROC_NAME" />
+                <ScalarProperty Name="CONFIG_DATA_SYNC_PROC_SCHEMA" ColumnName="CONFIG_DATA_SYNC_PROC_SCHEMA" />
+                <ScalarProperty Name="CONFIG_DATA_SYNC_PROC_NAME" ColumnName="CONFIG_DATA_SYNC_PROC_NAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DATA_SOURCE">
+            <EntityTypeMapping TypeName="DataHammerConfigModel.DATA_SOURCE">
+              <MappingFragment StoreEntitySet="DATA_SOURCE">
+                <ScalarProperty Name="CONFIG_COMMON_NAME" ColumnName="CONFIG_COMMON_NAME" />
+                <ScalarProperty Name="DATA_SOURCE_NAME" ColumnName="DATA_SOURCE_NAME" />
+                <ScalarProperty Name="DATA_SOURCE_TYPE_GUID" ColumnName="DATA_SOURCE_TYPE_GUID" />
+                <ScalarProperty Name="DATA_SOURCE_TABLE_SCHEMA" ColumnName="DATA_SOURCE_TABLE_SCHEMA" />
+                <ScalarProperty Name="DATA_SOURCE_TABLE_NAME" ColumnName="DATA_SOURCE_TABLE_NAME" />
+                <ScalarProperty Name="DATA_SOURCE_RAW_VIEW_SCHEMA" ColumnName="DATA_SOURCE_RAW_VIEW_SCHEMA" />
+                <ScalarProperty Name="DATA_SOURCE_RAW_VIEW_NAME" ColumnName="DATA_SOURCE_RAW_VIEW_NAME" />
+                <ScalarProperty Name="DATA_SOURCE_TABLE_PROC_UPDATE_SCHEMA" ColumnName="DATA_SOURCE_TABLE_PROC_UPDATE_SCHEMA" />
+                <ScalarProperty Name="DATA_SOURCE_TABLE_PROC_UPDATE_NAME" ColumnName="DATA_SOURCE_TABLE_PROC_UPDATE_NAME" />
+                <ScalarProperty Name="DATA_SOURCE_TABLE_PROC_INSERT_SCHEMA" ColumnName="DATA_SOURCE_TABLE_PROC_INSERT_SCHEMA" />
+                <ScalarProperty Name="DATA_SOURCE_TABLE_PROC_INSERT_NAME" ColumnName="DATA_SOURCE_TABLE_PROC_INSERT_NAME" />
+                <ScalarProperty Name="DATA_SOURCE_TABLE_PROC_DELETE_SCHEMA" ColumnName="DATA_SOURCE_TABLE_PROC_DELETE_SCHEMA" />
+                <ScalarProperty Name="DATA_SOURCE_TABLE_PROC_DELETE_NAME" ColumnName="DATA_SOURCE_TABLE_PROC_DELETE_NAME" />
+                <ScalarProperty Name="DATA_SOURCE_TABLE_PROC_DDL_PARENT_SCHEMA" ColumnName="DATA_SOURCE_TABLE_PROC_DDL_PARENT_SCHEMA" />
+                <ScalarProperty Name="DATA_SOURCE_TABLE_PROC_DDL_PARENT_NAME" ColumnName="DATA_SOURCE_TABLE_PROC_DDL_PARENT_NAME" />
+                <ScalarProperty Name="DATA_SOURCE_RAW_UI_VIEW_SCHEMA" ColumnName="DATA_SOURCE_RAW_UI_VIEW_SCHEMA" />
+                <ScalarProperty Name="DATA_SOURCE_RAW_UI_VIEW_NAME" ColumnName="DATA_SOURCE_RAW_UI_VIEW_NAME" />
+                <ScalarProperty Name="DATA_SOURCE_FEATURE" ColumnName="DATA_SOURCE_FEATURE" />
+                <ScalarProperty Name="DATA_SOURCE_TEST_DATA_PROC_SCHEMA" ColumnName="DATA_SOURCE_TEST_DATA_PROC_SCHEMA" />
+                <ScalarProperty Name="DATA_SOURCE_TEST_DATA_PROC_NAME" ColumnName="DATA_SOURCE_TEST_DATA_PROC_NAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DATA_SOURCE_FIELD">
+            <EntityTypeMapping TypeName="DataHammerConfigModel.DATA_SOURCE_FIELD">
+              <MappingFragment StoreEntitySet="DATA_SOURCE_FIELD">
+                <ScalarProperty Name="CONFIG_COMMON_NAME" ColumnName="CONFIG_COMMON_NAME" />
+                <ScalarProperty Name="DATA_SOURCE_NAME" ColumnName="DATA_SOURCE_NAME" />
+                <ScalarProperty Name="SOURCE_COLUMN_NAME" ColumnName="SOURCE_COLUMN_NAME" />
+                <ScalarProperty Name="SOURCE_COLUMN_DATA_TYPE" ColumnName="SOURCE_COLUMN_DATA_TYPE" />
+                <ScalarProperty Name="RAW_VIEW_COLUMN_NAME" ColumnName="RAW_VIEW_COLUMN_NAME" />
+                <ScalarProperty Name="RAW_VIEW_COLUMN_DATA_TYPE" ColumnName="RAW_VIEW_COLUMN_DATA_TYPE" />
+                <ScalarProperty Name="IS_DIM_HASH" ColumnName="IS_DIM_HASH" />
+                <ScalarProperty Name="IS_IDENTITY" ColumnName="IS_IDENTITY" />
+                <ScalarProperty Name="DERIVED_CONFIGURATION" ColumnName="DERIVED_CONFIGURATION" />
+                <ScalarProperty Name="COLUMN_NAME" ColumnName="COLUMN_NAME" />
+                <ScalarProperty Name="DATA_SOURCE_FIELD_FEATURE" ColumnName="DATA_SOURCE_FIELD_FEATURE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FACT_FIELD">
+            <EntityTypeMapping TypeName="DataHammerConfigModel.FACT_FIELD">
+              <MappingFragment StoreEntitySet="FACT_FIELD">
+                <ScalarProperty Name="CONFIG_COMMON_NAME" ColumnName="CONFIG_COMMON_NAME" />
+                <ScalarProperty Name="FACT_COMMON_NAME" ColumnName="FACT_COMMON_NAME" />
+                <ScalarProperty Name="FACT_FIELD_NAME" ColumnName="FACT_FIELD_NAME" />
+                <ScalarProperty Name="OBJECT_TYPE_NAME" ColumnName="OBJECT_TYPE_NAME" />
+                <ScalarProperty Name="DIM_FIELD_NAME" ColumnName="DIM_FIELD_NAME" />
+                <ScalarProperty Name="FACT_FIELD_FEATURE" ColumnName="FACT_FIELD_FEATURE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INDXes">
+            <EntityTypeMapping TypeName="DataHammerConfigModel.INDX">
+              <MappingFragment StoreEntitySet="INDX">
+                <ScalarProperty Name="CONFIG_COMMON_NAME" ColumnName="CONFIG_COMMON_NAME" />
+                <ScalarProperty Name="INDX_ORDER" ColumnName="INDX_ORDER" />
+                <ScalarProperty Name="INDX_NAME" ColumnName="INDX_NAME" />
+                <ScalarProperty Name="TABLE_SCHEMA" ColumnName="TABLE_SCHEMA" />
+                <ScalarProperty Name="TABLE_NAME" ColumnName="TABLE_NAME" />
+                <ScalarProperty Name="FIELD_NAME" ColumnName="FIELD_NAME" />
+                <ScalarProperty Name="INDX_FEATURE" ColumnName="INDX_FEATURE" />
+                <ScalarProperty Name="ORDINAL_POSITION" ColumnName="ORDINAL_POSITION" />
+                <ScalarProperty Name="IS_INCLUDED" ColumnName="IS_INCLUDED" />
+                <ScalarProperty Name="INDX_WHERE_CLAUSE" ColumnName="INDX_WHERE_CLAUSE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="METRICs">
+            <EntityTypeMapping TypeName="DataHammerConfigModel.METRIC">
+              <MappingFragment StoreEntitySet="METRIC">
+                <ScalarProperty Name="CONFIG_COMMON_NAME" ColumnName="CONFIG_COMMON_NAME" />
+                <ScalarProperty Name="METRIC_TYPE_GUID" ColumnName="METRIC_TYPE_GUID" />
+                <ScalarProperty Name="METRIC_NAME" ColumnName="METRIC_NAME" />
+                <ScalarProperty Name="METRIC_OVERRIDE_DATA_TYPE" ColumnName="METRIC_OVERRIDE_DATA_TYPE" />
+                <ScalarProperty Name="METRIC_OVERRIDE_CALCULATION" ColumnName="METRIC_OVERRIDE_CALCULATION" />
+                <ScalarProperty Name="METRIC_OVERRIDE_ROLLUP" ColumnName="METRIC_OVERRIDE_ROLLUP" />
+                <ScalarProperty Name="METRIC_OVERRIDE_PRORATE" ColumnName="METRIC_OVERRIDE_PRORATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SUMMARies">
+            <EntityTypeMapping TypeName="DataHammerConfigModel.SUMMARY">
+              <MappingFragment StoreEntitySet="SUMMARY">
+                <ScalarProperty Name="CONFIG_COMMON_NAME" ColumnName="CONFIG_COMMON_NAME" />
+                <ScalarProperty Name="SUMMARY_COMMON_NAME" ColumnName="SUMMARY_COMMON_NAME" />
+                <ScalarProperty Name="FACT_COMMON_NAME" ColumnName="FACT_COMMON_NAME" />
+                <ScalarProperty Name="SUMMARY_TABLE_SCHEMA" ColumnName="SUMMARY_TABLE_SCHEMA" />
+                <ScalarProperty Name="SUMMARY_TABLE_NAME" ColumnName="SUMMARY_TABLE_NAME" />
+                <ScalarProperty Name="SUMMARY_LOAD_PROC_SCHEAMA" ColumnName="SUMMARY_LOAD_PROC_SCHEAMA" />
+                <ScalarProperty Name="SUMMARY_LOAD_PROC_NAME" ColumnName="SUMMARY_LOAD_PROC_NAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INDX_FIELD">
+            <EntityTypeMapping TypeName="DataHammerConfigModel.INDX_FIELD">
+              <MappingFragment StoreEntitySet="INDX_FIELD">
+                <ScalarProperty Name="CONFIG_COMMON_NAME" ColumnName="CONFIG_COMMON_NAME" />
+                <ScalarProperty Name="INDX_NAME" ColumnName="INDX_NAME" />
+                <ScalarProperty Name="FIELD_NAME" ColumnName="FIELD_NAME" />
+                <ScalarProperty Name="ORDINAL_POSITION" ColumnName="ORDINAL_POSITION" />
+                <ScalarProperty Name="IS_INCLUDED" ColumnName="IS_INCLUDED" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BITWISE_DICTIONARY">
+            <EntityTypeMapping TypeName="DataHammerConfigModel.BITWISE_DICTIONARY">
+              <MappingFragment StoreEntitySet="BITWISE_DICTIONARY">
+                <ScalarProperty Name="MODIFIED_BY" ColumnName="MODIFIED_BY" />
+                <ScalarProperty Name="MODIFIED_DATE_UTC" ColumnName="MODIFIED_DATE_UTC" />
+                <ScalarProperty Name="CREATE_DATE_UTC" ColumnName="CREATE_DATE_UTC" />
+                <ScalarProperty Name="DESCR" ColumnName="DESCR" />
+                <ScalarProperty Name="BITWISE_VALUE" ColumnName="BITWISE_VALUE" />
+                <ScalarProperty Name="BITWISE_KEY" ColumnName="BITWISE_KEY" />
+                <ScalarProperty Name="BITWISE_GROUP" ColumnName="BITWISE_GROUP" />
+                <ScalarProperty Name="DICTIONARY_GUID" ColumnName="DICTIONARY_GUID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BITWISE_DICTIONARY_VALID_VALUES">
+            <EntityTypeMapping TypeName="DataHammerConfigModel.BITWISE_DICTIONARY_VALID_VALUES">
+              <MappingFragment StoreEntitySet="BITWISE_DICTIONARY_VALID_VALUES">
+                <ScalarProperty Name="MODIFIED_BY" ColumnName="MODIFIED_BY" />
+                <ScalarProperty Name="MODIFIED_DATE_UTC" ColumnName="MODIFIED_DATE_UTC" />
+                <ScalarProperty Name="CREATE_DATE_UTC" ColumnName="CREATE_DATE_UTC" />
+                <ScalarProperty Name="BITWISE_VALUE" ColumnName="BITWISE_VALUE" />
+                <ScalarProperty Name="BITWISE_KEY_LIST" ColumnName="BITWISE_KEY_LIST" />
+                <ScalarProperty Name="BITWISE_GROUP" ColumnName="BITWISE_GROUP" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DATA_SOURCE_TYPE">
+            <EntityTypeMapping TypeName="DataHammerConfigModel.DATA_SOURCE_TYPE">
+              <MappingFragment StoreEntitySet="DATA_SOURCE_TYPE">
+                <ScalarProperty Name="DATA_SOURCE_TYPE_NAME" ColumnName="DATA_SOURCE_TYPE_NAME" />
+                <ScalarProperty Name="DATA_SOURCE_TYPE_HID_LEVEL" ColumnName="DATA_SOURCE_TYPE_HID_LEVEL" />
+                <ScalarProperty Name="DATA_SOURCE_TYPE_HID_STRING" ColumnName="DATA_SOURCE_TYPE_HID_STRING" />
+                <ScalarProperty Name="MODIFIED_BY" ColumnName="MODIFIED_BY" />
+                <ScalarProperty Name="MODIFIED_DATE_UTC" ColumnName="MODIFIED_DATE_UTC" />
+                <ScalarProperty Name="CREATE_DATE_UTC" ColumnName="CREATE_DATE_UTC" />
+                <ScalarProperty Name="DATA_SOURCE_TYPE_GUID" ColumnName="DATA_SOURCE_TYPE_GUID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DIM_TYPE">
+            <EntityTypeMapping TypeName="DataHammerConfigModel.DIM_TYPE">
+              <MappingFragment StoreEntitySet="DIM_TYPE">
+                <ScalarProperty Name="MODIFIED_BY" ColumnName="MODIFIED_BY" />
+                <ScalarProperty Name="MODIFIED_DATE_UTC" ColumnName="MODIFIED_DATE_UTC" />
+                <ScalarProperty Name="CREATE_DATE_UTC" ColumnName="CREATE_DATE_UTC" />
+                <ScalarProperty Name="DIM_TYPE_INCLUDE_DATA_SOURCE" ColumnName="DIM_TYPE_INCLUDE_DATA_SOURCE" />
+                <ScalarProperty Name="DIM_TYPE_NAME" ColumnName="DIM_TYPE_NAME" />
+                <ScalarProperty Name="DIM_TYPE_GUID" ColumnName="DIM_TYPE_GUID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="METRIC_TYPE">
+            <EntityTypeMapping TypeName="DataHammerConfigModel.METRIC_TYPE">
+              <MappingFragment StoreEntitySet="METRIC_TYPE">
+                <ScalarProperty Name="MODIFIED_BY" ColumnName="MODIFIED_BY" />
+                <ScalarProperty Name="MODIFIED_DATE_UTC" ColumnName="MODIFIED_DATE_UTC" />
+                <ScalarProperty Name="CREATE_DATE_UTC" ColumnName="CREATE_DATE_UTC" />
+                <ScalarProperty Name="IS_INTERNAL_AUDIT" ColumnName="IS_INTERNAL_AUDIT" />
+                <ScalarProperty Name="METRIC_PRORATE" ColumnName="METRIC_PRORATE" />
+                <ScalarProperty Name="METRIC_ROLLUP" ColumnName="METRIC_ROLLUP" />
+                <ScalarProperty Name="METRIC_CALCULATION" ColumnName="METRIC_CALCULATION" />
+                <ScalarProperty Name="METRIC_DATA_TYPE" ColumnName="METRIC_DATA_TYPE" />
+                <ScalarProperty Name="METRIC_TYPE_NAME" ColumnName="METRIC_TYPE_NAME" />
+                <ScalarProperty Name="METRIC_TYPE_GUID" ColumnName="METRIC_TYPE_GUID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BATCHes">
+            <EntityTypeMapping TypeName="DataHammerConfigModel.BATCH">
+              <MappingFragment StoreEntitySet="BATCH">
+                <ScalarProperty Name="MODIFIED_DATE_UTC" ColumnName="MODIFIED_DATE_UTC" />
+                <ScalarProperty Name="COMMENT" ColumnName="COMMENT" />
+                <ScalarProperty Name="BATCH_RESULT" ColumnName="BATCH_RESULT" />
+                <ScalarProperty Name="BATCH_STATE" ColumnName="BATCH_STATE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BATCH_STEP">
+            <EntityTypeMapping TypeName="DataHammerConfigModel.BATCH_STEP">
+              <MappingFragment StoreEntitySet="BATCH_STEP">
+                <ScalarProperty Name="MODIFIED_DATE_UTC" ColumnName="MODIFIED_DATE_UTC" />
+                <ScalarProperty Name="MODIFIED_COUNT" ColumnName="MODIFIED_COUNT" />
+                <ScalarProperty Name="ERROR_MESSAGE" ColumnName="ERROR_MESSAGE" />
+                <ScalarProperty Name="STEP_RESULT" ColumnName="STEP_RESULT" />
+                <ScalarProperty Name="STEP_STATE" ColumnName="STEP_STATE" />
+                <ScalarProperty Name="COMMENT" ColumnName="COMMENT" />
+                <ScalarProperty Name="FILEPATH" ColumnName="FILEPATH" />
+                <ScalarProperty Name="MODIFIED_OBJECT_NAME" ColumnName="MODIFIED_OBJECT_NAME" />
+                <ScalarProperty Name="DATA_SOURCE_ID" ColumnName="DATA_SOURCE_ID" />
+                <ScalarProperty Name="DATA_SOURCE_TYPE_GUID" ColumnName="DATA_SOURCE_TYPE_GUID" />
+                <ScalarProperty Name="CHANGE_ACTION" ColumnName="CHANGE_ACTION" />
+                <ScalarProperty Name="BATCH_ID" ColumnName="BATCH_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EXECUTE_SQL_HISTORY">
+            <EntityTypeMapping TypeName="DataHammerConfigModel.EXECUTE_SQL_HISTORY">
+              <MappingFragment StoreEntitySet="EXECUTE_SQL_HISTORY">
+                <ScalarProperty Name="IS_EXECUTE" ColumnName="IS_EXECUTE" />
+                <ScalarProperty Name="IS_FAILED" ColumnName="IS_FAILED" />
+                <ScalarProperty Name="EXCEPTION" ColumnName="EXCEPTION" />
+                <ScalarProperty Name="STOP_TIME_UTC" ColumnName="STOP_TIME_UTC" />
+                <ScalarProperty Name="START_TIME_UTC" ColumnName="START_TIME_UTC" />
+                <ScalarProperty Name="SCRIPT_TITLE" ColumnName="SCRIPT_TITLE" />
+                <ScalarProperty Name="SQL_SCRIPT" ColumnName="SQL_SCRIPT" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MODIFIED_TABLE">
+            <EntityTypeMapping TypeName="DataHammerConfigModel.MODIFIED_TABLE">
+              <MappingFragment StoreEntitySet="MODIFIED_TABLE">
+                <ScalarProperty Name="EXECUTING_OBJECT_NAME" ColumnName="EXECUTING_OBJECT_NAME" />
+                <ScalarProperty Name="MODIFIED_COUNT" ColumnName="MODIFIED_COUNT" />
+                <ScalarProperty Name="MODIFIED_DATE_UTC" ColumnName="MODIFIED_DATE_UTC" />
+                <ScalarProperty Name="CHANGE_ACTION" ColumnName="CHANGE_ACTION" />
+                <ScalarProperty Name="MODIFIED_OBJECT_NAME" ColumnName="MODIFIED_OBJECT_NAME" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SERVICE_BROKER_HISTORY">
+            <EntityTypeMapping TypeName="DataHammerConfigModel.SERVICE_BROKER_HISTORY">
+              <MappingFragment StoreEntitySet="SERVICE_BROKER_HISTORY">
+                <ScalarProperty Name="CREATED_DATE_UTC" ColumnName="CREATED_DATE_UTC" />
+                <ScalarProperty Name="IS_SENT" ColumnName="IS_SENT" />
+                <ScalarProperty Name="IS_RECEIVED" ColumnName="IS_RECEIVED" />
+                <ScalarProperty Name="MESSAGE_TYPE_NAME" ColumnName="MESSAGE_TYPE_NAME" />
+                <ScalarProperty Name="MESSAGE_BODY" ColumnName="MESSAGE_BODY" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USER_CHANGE">
+            <EntityTypeMapping TypeName="DataHammerConfigModel.USER_CHANGE">
+              <MappingFragment StoreEntitySet="USER_CHANGE">
+                <ScalarProperty Name="MODIFIED_BY" ColumnName="MODIFIED_BY" />
+                <ScalarProperty Name="CREATED_DATE_UTC" ColumnName="CREATED_DATE_UTC" />
+                <ScalarProperty Name="DATA_CHANGE_POST" ColumnName="DATA_CHANGE_POST" />
+                <ScalarProperty Name="DATA_CHANGE_PRE" ColumnName="DATA_CHANGE_PRE" />
+                <ScalarProperty Name="TABLE_NAME" ColumnName="TABLE_NAME" />
+                <ScalarProperty Name="TABLE_SCHEMA" ColumnName="TABLE_SCHEMA" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DIM_DATE">
+            <EntityTypeMapping TypeName="DataHammerConfigModel.DIM_DATE">
+              <MappingFragment StoreEntitySet="DIM_DATE">
+                <ScalarProperty Name="BROADCAST_MEDIA_YEAR" ColumnName="BROADCAST_MEDIA_YEAR" />
+                <ScalarProperty Name="BROADCAST_MEDIA_QUARTER" ColumnName="BROADCAST_MEDIA_QUARTER" />
+                <ScalarProperty Name="BROADCAST_MEDIA_MONTH_NAME" ColumnName="BROADCAST_MEDIA_MONTH_NAME" />
+                <ScalarProperty Name="BROADCAST_MEDIA_MONTH" ColumnName="BROADCAST_MEDIA_MONTH" />
+                <ScalarProperty Name="BROADCAST_MEDIA_WEEK" ColumnName="BROADCAST_MEDIA_WEEK" />
+                <ScalarProperty Name="DATE_WEEKDAY_NAME" ColumnName="DATE_WEEKDAY_NAME" />
+                <ScalarProperty Name="DATE_MONTH_DAY" ColumnName="DATE_MONTH_DAY" />
+                <ScalarProperty Name="FISCAL_WEEK" ColumnName="FISCAL_WEEK" />
+                <ScalarProperty Name="FISCAL_QUARTER" ColumnName="FISCAL_QUARTER" />
+                <ScalarProperty Name="FISCAL_YEAR" ColumnName="FISCAL_YEAR" />
+                <ScalarProperty Name="FISCAL_MONTH" ColumnName="FISCAL_MONTH" />
+                <ScalarProperty Name="DATE_DAY" ColumnName="DATE_DAY" />
+                <ScalarProperty Name="DATE_YEAR" ColumnName="DATE_YEAR" />
+                <ScalarProperty Name="DATE_YEAR_FORMATTED" ColumnName="DATE_YEAR_FORMATTED" />
+                <ScalarProperty Name="DATE_WEEK" ColumnName="DATE_WEEK" />
+                <ScalarProperty Name="DATE_QUARTER" ColumnName="DATE_QUARTER" />
+                <ScalarProperty Name="DATE_WEEKEND_SUN" ColumnName="DATE_WEEKEND_SUN" />
+                <ScalarProperty Name="DATE_WEEKEND_SAT" ColumnName="DATE_WEEKEND_SAT" />
+                <ScalarProperty Name="DATE_MONTH" ColumnName="DATE_MONTH" />
+                <ScalarProperty Name="DATE_SHORT" ColumnName="DATE_SHORT" />
+                <ScalarProperty Name="DATE_ID_LONG" ColumnName="DATE_ID_LONG" />
+                <ScalarProperty Name="DATE_ID" ColumnName="DATE_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TALLies">
+            <EntityTypeMapping TypeName="DataHammerConfigModel.TALLY">
+              <MappingFragment StoreEntitySet="TALLY">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EXCEPTIONs">
+            <EntityTypeMapping TypeName="DataHammerConfigModel.EXCEPTION">
+              <MappingFragment StoreEntitySet="EXCEPTION">
+                <ScalarProperty Name="EXCEPTION_DATE_UTC" ColumnName="EXCEPTION_DATE_UTC" />
+                <ScalarProperty Name="EXCEPTION_ERROR_MESSAGE" ColumnName="EXCEPTION_ERROR_MESSAGE" />
+                <ScalarProperty Name="EXCEPTION_ERROR_LINE" ColumnName="EXCEPTION_ERROR_LINE" />
+                <ScalarProperty Name="EXCEPTION_ERROR_PROCEDURE" ColumnName="EXCEPTION_ERROR_PROCEDURE" />
+                <ScalarProperty Name="EXCEPTION_ERROR_STATE" ColumnName="EXCEPTION_ERROR_STATE" />
+                <ScalarProperty Name="EXCEPTION_ERROR_SEVERITY" ColumnName="EXCEPTION_ERROR_SEVERITY" />
+                <ScalarProperty Name="EXCEPTION_ERROR_NUMBER" ColumnName="EXCEPTION_ERROR_NUMBER" />
+                <ScalarProperty Name="EXCEPTION_ID" ColumnName="EXCEPTION_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IMPORT_XML">
+            <EntityTypeMapping TypeName="DataHammerConfigModel.IMPORT_XML">
+              <MappingFragment StoreEntitySet="IMPORT_XML">
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="IMPORT_XML1" ColumnName="IMPORT_XML" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SYS_PROPERTY">
+            <EntityTypeMapping TypeName="DataHammerConfigModel.SYS_PROPERTY">
+              <MappingFragment StoreEntitySet="SYS_PROPERTY">
+                <ScalarProperty Name="MODIFIED_BY" ColumnName="MODIFIED_BY" />
+                <ScalarProperty Name="MODIFIED_DATE_UTC" ColumnName="MODIFIED_DATE_UTC" />
+                <ScalarProperty Name="CREATED_DATE_UTC" ColumnName="CREATED_DATE_UTC" />
+                <ScalarProperty Name="ROW_VALUE" ColumnName="ROW_VALUE" />
+                <ScalarProperty Name="ROW_KEY" ColumnName="ROW_KEY" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DIMs">
+            <EntityTypeMapping TypeName="DataHammerConfigModel.DIM">
+              <MappingFragment StoreEntitySet="DIM">
+                <ScalarProperty Name="IS_AUTO_GENERATED" ColumnName="IS_AUTO_GENERATED" />
+                <ScalarProperty Name="IS_STATIC" ColumnName="IS_STATIC" />
+                <ScalarProperty Name="DIM_LOAD_POST_PROC_CLEAN_NAME" ColumnName="DIM_LOAD_POST_PROC_CLEAN_NAME" />
+                <ScalarProperty Name="DIM_LOAD_POST_PROC_CLEAN_SCHEMA" ColumnName="DIM_LOAD_POST_PROC_CLEAN_SCHEMA" />
+                <ScalarProperty Name="DIM_LOAD_PRE_PROC_CLEAN_NAME" ColumnName="DIM_LOAD_PRE_PROC_CLEAN_NAME" />
+                <ScalarProperty Name="DIM_LOAD_PRE_PROC_CLEAN_SCHEMA" ColumnName="DIM_LOAD_PRE_PROC_CLEAN_SCHEMA" />
+                <ScalarProperty Name="DIM_LOAD_POST_PROC_NAME" ColumnName="DIM_LOAD_POST_PROC_NAME" />
+                <ScalarProperty Name="DIM_LOAD_POST_PROC_SCHEMA" ColumnName="DIM_LOAD_POST_PROC_SCHEMA" />
+                <ScalarProperty Name="DIM_LOAD_PRE_PROC_SPROC_NAME" ColumnName="DIM_LOAD_PRE_PROC_SPROC_NAME" />
+                <ScalarProperty Name="DIM_LOAD_PRE_PROC_SPROC_SCHEMA" ColumnName="DIM_LOAD_PRE_PROC_SPROC_SCHEMA" />
+                <ScalarProperty Name="DIM_TAXONOMY_PROC_NAME" ColumnName="DIM_TAXONOMY_PROC_NAME" />
+                <ScalarProperty Name="DIM_TAXONOMY_PROC_SCHEMA" ColumnName="DIM_TAXONOMY_PROC_SCHEMA" />
+                <ScalarProperty Name="DIM_FEATURE" ColumnName="DIM_FEATURE" />
+                <ScalarProperty Name="DIM_VIEW_WHITELIST_NAME" ColumnName="DIM_VIEW_WHITELIST_NAME" />
+                <ScalarProperty Name="DIM_VIEW_WHITELIST_SCHEMA" ColumnName="DIM_VIEW_WHITELIST_SCHEMA" />
+                <ScalarProperty Name="DIM_PROC_RAW_TABLE_CLEAN_ID_NAME" ColumnName="DIM_PROC_RAW_TABLE_CLEAN_ID_NAME" />
+                <ScalarProperty Name="DIM_PROC_RAW_TABLE_CLEAN_ID_SCHEMA" ColumnName="DIM_PROC_RAW_TABLE_CLEAN_ID_SCHEMA" />
+                <ScalarProperty Name="DIM_VIEW_CLEAN_NAME" ColumnName="DIM_VIEW_CLEAN_NAME" />
+                <ScalarProperty Name="DIM_VIEW_CLEAN_SCHEMA" ColumnName="DIM_VIEW_CLEAN_SCHEMA" />
+                <ScalarProperty Name="DIM_VIEW_RAW_NAME" ColumnName="DIM_VIEW_RAW_NAME" />
+                <ScalarProperty Name="DIM_VIEW_RAW_SCHEMA" ColumnName="DIM_VIEW_RAW_SCHEMA" />
+                <ScalarProperty Name="DIM_LOAD_PROC_CLEAN_NAME" ColumnName="DIM_LOAD_PROC_CLEAN_NAME" />
+                <ScalarProperty Name="DIM_LOAD_PROC_CLEAN_SCHEMA" ColumnName="DIM_LOAD_PROC_CLEAN_SCHEMA" />
+                <ScalarProperty Name="DIM_PROC_UI_CLEAN_NAME" ColumnName="DIM_PROC_UI_CLEAN_NAME" />
+                <ScalarProperty Name="DIM_PROC_UI_CLEAN_SCHEMA" ColumnName="DIM_PROC_UI_CLEAN_SCHEMA" />
+                <ScalarProperty Name="DIM_LOAD_PROC_NAME_RAW" ColumnName="DIM_LOAD_PROC_NAME_RAW" />
+                <ScalarProperty Name="DIM_LOAD_PROC_SCHEMA_RAW" ColumnName="DIM_LOAD_PROC_SCHEMA_RAW" />
+                <ScalarProperty Name="DIM_TABLE_CLEAN_NAME" ColumnName="DIM_TABLE_CLEAN_NAME" />
+                <ScalarProperty Name="DIM_TABLE_CLEAN_SCHEMA" ColumnName="DIM_TABLE_CLEAN_SCHEMA" />
+                <ScalarProperty Name="DIM_TABLE_NAME" ColumnName="DIM_TABLE_NAME" />
+                <ScalarProperty Name="DIM_TABLE_SCHEMA" ColumnName="DIM_TABLE_SCHEMA" />
+                <ScalarProperty Name="DIM_COMMON_NAME" ColumnName="DIM_COMMON_NAME" />
+                <ScalarProperty Name="DIM_TYPE_GUID" ColumnName="DIM_TYPE_GUID" />
+                <ScalarProperty Name="CONFIG_COMMON_NAME" ColumnName="CONFIG_COMMON_NAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DIM_FIELD">
+            <EntityTypeMapping TypeName="DataHammerConfigModel.DIM_FIELD">
+              <MappingFragment StoreEntitySet="DIM_FIELD">
+                <ScalarProperty Name="DERIVED_CONFIGURATION" ColumnName="DERIVED_CONFIGURATION" />
+                <ScalarProperty Name="DIM_FIELD_FEATURE" ColumnName="DIM_FIELD_FEATURE" />
+                <ScalarProperty Name="DIM_DATA_TYPE" ColumnName="DIM_DATA_TYPE" />
+                <ScalarProperty Name="DIM_FIELD_NAME_CLEAN" ColumnName="DIM_FIELD_NAME_CLEAN" />
+                <ScalarProperty Name="DIM_FIELD_NAME" ColumnName="DIM_FIELD_NAME" />
+                <ScalarProperty Name="DIM_COMMON_NAME" ColumnName="DIM_COMMON_NAME" />
+                <ScalarProperty Name="CONFIG_COMMON_NAME" ColumnName="CONFIG_COMMON_NAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FACTs">
+            <EntityTypeMapping TypeName="DataHammerConfigModel.FACT">
+              <MappingFragment StoreEntitySet="FACT">
+                <ScalarProperty Name="IS_AUTO_GENERATED_LOAD_PROCEDURE" ColumnName="IS_AUTO_GENERATED_LOAD_PROCEDURE" />
+                <ScalarProperty Name="IS_AUTO_GENERATED_FACT_TABLE" ColumnName="IS_AUTO_GENERATED_FACT_TABLE" />
+                <ScalarProperty Name="FACT_POST_EXEC_SPROC_NAME" ColumnName="FACT_POST_EXEC_SPROC_NAME" />
+                <ScalarProperty Name="FACT_POST_EXEC_SPROC_SCHEMA" ColumnName="FACT_POST_EXEC_SPROC_SCHEMA" />
+                <ScalarProperty Name="FACT_PRE_EXEC_SPROC_NAME" ColumnName="FACT_PRE_EXEC_SPROC_NAME" />
+                <ScalarProperty Name="FACT_PRE_EXEC_SPROC_SCHEMA" ColumnName="FACT_PRE_EXEC_SPROC_SCHEMA" />
+                <ScalarProperty Name="FACT_LOAD_PROCEDURE_NAME" ColumnName="FACT_LOAD_PROCEDURE_NAME" />
+                <ScalarProperty Name="FACT_LOAD_PROCEDURE_SCHEMA" ColumnName="FACT_LOAD_PROCEDURE_SCHEMA" />
+                <ScalarProperty Name="DISTINCT_KEY_PROCEDURE_NAME" ColumnName="DISTINCT_KEY_PROCEDURE_NAME" />
+                <ScalarProperty Name="DISTINCT_KEY_PROCEDURE_SCHEMA" ColumnName="DISTINCT_KEY_PROCEDURE_SCHEMA" />
+                <ScalarProperty Name="DISTINCT_VALUE_PROCEDURE_NAME" ColumnName="DISTINCT_VALUE_PROCEDURE_NAME" />
+                <ScalarProperty Name="DISTINCT_VALUE_PROCEDURE_SCHEMA" ColumnName="DISTINCT_VALUE_PROCEDURE_SCHEMA" />
+                <ScalarProperty Name="DISTINCT_TABLE_VALUE_NAME" ColumnName="DISTINCT_TABLE_VALUE_NAME" />
+                <ScalarProperty Name="DISTINCT_TABLE_VALUE_SCHEMA" ColumnName="DISTINCT_TABLE_VALUE_SCHEMA" />
+                <ScalarProperty Name="DISTINCT_TABLE_KEY_NAME" ColumnName="DISTINCT_TABLE_KEY_NAME" />
+                <ScalarProperty Name="DISTINCT_TABLE_KEY_SCHEMA" ColumnName="DISTINCT_TABLE_KEY_SCHEMA" />
+                <ScalarProperty Name="FACT_FEATURE" ColumnName="FACT_FEATURE" />
+                <ScalarProperty Name="FACT_TABLE_NAME" ColumnName="FACT_TABLE_NAME" />
+                <ScalarProperty Name="FACT_TABLE_SCHEMA" ColumnName="FACT_TABLE_SCHEMA" />
+                <ScalarProperty Name="FACT_COMMON_NAME" ColumnName="FACT_COMMON_NAME" />
+                <ScalarProperty Name="DATA_SOURCE_NAME" ColumnName="DATA_SOURCE_NAME" />
+                <ScalarProperty Name="CONFIG_COMMON_NAME" ColumnName="CONFIG_COMMON_NAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

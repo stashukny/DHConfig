@@ -1,0 +1,66 @@
+﻿@model DHConfig.DIM_FIELD
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DIM_FIELD</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DIM_FIELD_NAME_CLEAN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DIM_FIELD_NAME_CLEAN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DIM_DATA_TYPE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DIM_DATA_TYPE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DIM_FIELD_FEATURE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DIM_FIELD_FEATURE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DERIVED_CONFIGURATION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DERIVED_CONFIGURATION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CONFIG.CONFIG_DATA_PROCESS_PROC_SCHEMA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CONFIG.CONFIG_DATA_PROCESS_PROC_SCHEMA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DIM.DIM_TABLE_SCHEMA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DIM.DIM_TABLE_SCHEMA)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { CONFIG_COMMON_NAME = Model.CONFIG_COMMON_NAME, DIM_COMMON_NAME = Model.DIM_COMMON_NAME, DIM_FIELD_NAME = Model.DIM_FIELD_NAME }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
