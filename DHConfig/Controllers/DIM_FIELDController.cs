@@ -21,27 +21,16 @@ namespace DHConfig.Controllers
 
             var Clients = db.CONFIGs.OrderBy(q => q.CONFIG_COMMON_NAME).Distinct().ToList();
 
-            //if (TempData["SelectedClient"] == null)
-            //{
-            //    TempData["SelectedClient"] = new SelectList(Clients, "CONFIG_COMMON_NAME", "CONFIG_COMMON_NAME", SelectedClient);
-            //    ViewBag.SelectedClient = TempData["SelectedClient"];
-            //}
-            //else
-            //{
-            //    SelectedClient = TempData["SelectedClient"].ToString();
-            //    ViewBag.SelectedClient = SelectedClient;
-            //}
-
-
-            
+           
 
             IQueryable<DIM_FIELD> fields = db.DIM_FIELD
             .Where(c => SelectedClient == null || SelectedClient == "" || c.CONFIG_COMMON_NAME == SelectedClient);
 
 
-            SelectList clients = new SelectList(Clients, "CONFIG_COMMON_NAME", "CONFIG_COMMON_NAME", SelectedClient);
+            SelectList clients = new SelectList(Clients, "CONFIG_COMMON_NAME", "CONFIG_COMMON_NAME", SelectedClient);            
             ViewBag.SelectedClient = clients;
-            ViewBag.sClient = clients.SelectedValue;            
+            ViewBag.sClient = clients.SelectedValue;
+            
 
             var sql = fields.ToString();
 
@@ -49,26 +38,36 @@ namespace DHConfig.Controllers
         }
 
         // GET: DIM_FIELD/Details/5
-        public ActionResult Details(string CONFIG_COMMON_NAME, string DIM_COMMON_NAME, string DIM_FIELD_NAME)
+        public ActionResult Details(string CONFIG_COMMON_NAME, string DIM_COMMON_NAME, string DIM_FIELD_NAME, string sClient)
         {
-            //if (id == null)
-            //{
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //}
+
             DIM_FIELD dIM_FIELD = db.DIM_FIELD.Find(CONFIG_COMMON_NAME, DIM_COMMON_NAME, DIM_FIELD_NAME);
             if (dIM_FIELD == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.sClient = sClient;
             return View(dIM_FIELD);
         }
 
         // GET: DIM_FIELD/Create
-        public ActionResult Create()
+        public ActionResult Create(string sClient)
         {
-            ViewBag.CONFIG_COMMON_NAME = new SelectList(db.CONFIGs, "CONFIG_COMMON_NAME", "CONFIG_COMMON_NAME");
-            ViewBag.DIM_COMMON_NAME = new SelectList(db.DIMs, "DIM_COMMON_NAME", "DIM_COMMON_NAME");
-            ViewBag.DIM_FIELD_FEATURE = new SelectList(db.BITWISE_DICTIONARY, "DIM_FIELD_FEATURE", "BITWISE_KEY");            
+
+            var features = db.BITWISE_DICTIONARY
+            .Where(f => f.BITWISE_GROUP == "DIM_FIELDS")
+            .ToList()
+            .Select(c => new
+            {
+                DIM_FIELD_FEATURE = c.BITWISE_KEY,
+                DESCR = string.Format("{0} -- {1}", c.BITWISE_KEY, c.DESCR)
+            });
+
+
+            ViewBag.CONFIG_COMMON_NAME = new SelectList(db.CONFIGs, "CONFIG_COMMON_NAME", "CONFIG_COMMON_NAME", sClient);
+            ViewBag.DIM_COMMON_NAME = new SelectList(db.DIMs, "DIM_COMMON_NAME", "DIM_COMMON_NAME");                    
+            ViewBag.listFeatures = new MultiSelectList(features, "DIM_FIELD_FEATURE", "DESCR");
+
             return View();
         }
 
@@ -77,17 +76,61 @@ namespace DHConfig.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CONFIG_COMMON_NAME,DIM_COMMON_NAME,DIM_FIELD_NAME,DIM_FIELD_NAME_CLEAN,DIM_DATA_TYPE,DIM_FIELD_FEATURE,DERIVED_CONFIGURATION")] DIM_FIELD dIM_FIELD)
+        public ActionResult Create([Bind(Include = "CONFIG_COMMON_NAME,DIM_COMMON_NAME,DIM_FIELD_NAME,DIM_FIELD_NAME_CLEAN,DIM_DATA_TYPE,DIM_FIELD_FEATURE,DERIVED_CONFIGURATION")] DIM_FIELD dIM_FIELD, string[] SelectedItems, string sClient)
         {
+
+            if (SelectedItems != null)
+            {
+
+                if (SelectedItems.Count() > 1)
+                {
+                    dIM_FIELD.DIM_FIELD_FEATURE = String.Join(",", SelectedItems);
+                }
+                else
+                {
+                    dIM_FIELD.DIM_FIELD_FEATURE = SelectedItems[0];
+                }
+            }
+
+            int Total = 0;            
+            var settings = db.BITWISE_DICTIONARY
+            .Where(f => f.BITWISE_GROUP == "DIM_FIELDS" && SelectedItems.Contains(f.BITWISE_KEY))
+            .Sum(x => x.BITWISE_VALUE);
+            Total = (int)settings;
+
+
+
+            //validate sum           
+            bool exists = db.BITWISE_DICTIONARY_VALID_VALUES.Any(a => a.BITWISE_VALUE == Total && a.BITWISE_GROUP == "DIM_FIELDS");
+            if (!exists)
+            {              
+                var features = db.BITWISE_DICTIONARY
+                    .Where(f => f.BITWISE_GROUP == "DIM_FIELDS")
+                    .ToList()
+                    .Select(c => new
+                    {
+                        DIM_FIELD_FEATURE = c.BITWISE_KEY,
+                        DESCR = string.Format("{0} -- {1}", c.BITWISE_KEY, c.DESCR)
+                    });
+
+                ViewBag.listFeatures = new MultiSelectList(features, "DIM_FIELD_FEATURE", "DESCR", dIM_FIELD.SelectedItems);
+
+                TempData["FeaturesInvalid"] = true;
+
+
+                ViewBag.DIM_COMMON_NAME = new SelectList(db.DIMs, "DIM_COMMON_NAME", "DIM_COMMON_NAME", dIM_FIELD.DIM_COMMON_NAME);
+                ViewBag.CONFIG_COMMON_NAME = new SelectList(db.DIMs, "CONFIG_COMMON_NAME", "DIM_TABLE_SCHEMA", dIM_FIELD.CONFIG_COMMON_NAME);            
+                return View(dIM_FIELD);
+
+            }
+            
             if (ModelState.IsValid)
             {
                 db.DIM_FIELD.Add(dIM_FIELD);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { SelectedClient = sClient });
             }
             
-            ViewBag.CONFIG_COMMON_NAME = new SelectList(db.DIMs, "CONFIG_COMMON_NAME", "DIM_TABLE_SCHEMA", dIM_FIELD.CONFIG_COMMON_NAME);
-            ViewBag.DIM_FIELD_FEATURE = new SelectList(db.BITWISE_DICTIONARY, "DIM_FIELD_FEATURE", "BITWISE_KEY", dIM_FIELD.DIM_FIELD_FEATURE);
             return View(dIM_FIELD);
         }
 
@@ -101,7 +144,6 @@ namespace DHConfig.Controllers
                 return HttpNotFound();
             }
 
-
             var features = db.BITWISE_DICTIONARY
                 .Where(f => f.BITWISE_GROUP == "DIM_FIELDS")
                 .ToList()
@@ -112,10 +154,10 @@ namespace DHConfig.Controllers
             });
 
 
-            ViewBag.listFeatures = new MultiSelectList(features, "DIM_FIELD_FEATURE", "DESCR", dIM_FIELD.SelectedItems);
+            
             ViewBag.CONFIG_COMMON_NAME = new SelectList(db.CONFIGs, "CONFIG_COMMON_NAME", "CONFIG_DATA_PROCESS_PROC_SCHEMA", dIM_FIELD.CONFIG_COMMON_NAME);
             ViewBag.DIM_COMMON_NAME = new SelectList(db.DIMs, "DIM_COMMON_NAME", "DIM_COMMON_NAME", dIM_FIELD.DIM_COMMON_NAME);
-            //TempData["SelectedClient"] = SelectedClient;
+            ViewBag.listFeatures = new MultiSelectList(features, "DIM_FIELD_FEATURE", "DESCR", dIM_FIELD.SelectedItems);
 
             return View(dIM_FIELD);
         }
@@ -125,8 +167,9 @@ namespace DHConfig.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CONFIG_COMMON_NAME,DIM_COMMON_NAME,DIM_FIELD_NAME,DIM_FIELD_NAME_CLEAN,DIM_DATA_TYPE,DIM_FIELD_FEATURE,DERIVED_CONFIGURATION")] DIM_FIELD dIM_FIELD, string[] SelectedItems, string SelectedClient, string old_DIM_COMMON_NAME)
-        {
+        public ActionResult Edit([Bind(Include = "CONFIG_COMMON_NAME,DIM_COMMON_NAME,DIM_FIELD_NAME,DIM_FIELD_NAME_CLEAN,DIM_DATA_TYPE,DIM_FIELD_FEATURE,DERIVED_CONFIGURATION")] DIM_FIELD dIM_FIELD, string[] SelectedItems, string sClient)
+        {            
+
             if (SelectedItems != null)
             {
                                 
@@ -153,10 +196,8 @@ namespace DHConfig.Controllers
             bool exists = db.BITWISE_DICTIONARY_VALID_VALUES.Any(a => a.BITWISE_VALUE == Total && a.BITWISE_GROUP == "DIM_FIELDS");
             if (!exists)
             {
-                //throw error
-                //return Json(new { success = false, responseText = "The selected combination of Features is not supported." }, JsonRequestBehavior.AllowGet);
-
-                ViewBag.DIM_COMMON_NAME = new SelectList(db.DIMs, "DIM_COMMON_NAME", "DIM_COMMON_NAME", dIM_FIELD.DIM_COMMON_NAME);
+                
+                
                 
                 var features = db.BITWISE_DICTIONARY
                     .Where(f => f.BITWISE_GROUP == "DIM_FIELDS")
@@ -167,14 +208,15 @@ namespace DHConfig.Controllers
                         DESCR = string.Format("{0} -- {1}", c.BITWISE_KEY, c.DESCR)
                     });
 
+                ViewBag.DIM_COMMON_NAME = new SelectList(db.DIMs, "DIM_COMMON_NAME", "DIM_COMMON_NAME", dIM_FIELD.DIM_COMMON_NAME);
                 ViewBag.listFeatures = new MultiSelectList(features, "DIM_FIELD_FEATURE", "DESCR", dIM_FIELD.SelectedItems);
-                TempData["FeaturesInvalid"] = true;
-                //TempData["SelectedClient"] = SelectedClient;
+                //throw error                
+                TempData["FeaturesInvalid"] = true;                
+
                 return View(dIM_FIELD);
 
             }
-
-            //ViewBag.SelectedClient = SelectedClient;            
+            
 
             if (ModelState.IsValid)
             {
@@ -201,22 +243,18 @@ namespace DHConfig.Controllers
                 {
                     return RedirectToAction("Index");
                 }
-                db.Entry(dIM_FIELD).State = EntityState.Modified;
-                TempData["SelectedClient"] = SelectedClient;
-                return RedirectToAction("Index");
+                db.Entry(dIM_FIELD).State = EntityState.Modified;                
+                return RedirectToAction("Index", new { SelectedClient = sClient });
             }
 
             return View(dIM_FIELD);
         }
 
         // GET: DIM_FIELD/Delete/5
-        public ActionResult Delete(string id)
+        public ActionResult Delete(string CONFIG_COMMON_NAME, string DIM_COMMON_NAME, string DIM_FIELD_NAME, string sClient)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            DIM_FIELD dIM_FIELD = db.DIM_FIELD.Find(id);
+
+            DIM_FIELD dIM_FIELD = db.DIM_FIELD.Find(CONFIG_COMMON_NAME, DIM_COMMON_NAME, DIM_FIELD_NAME);
             if (dIM_FIELD == null)
             {
                 return HttpNotFound();
@@ -227,12 +265,12 @@ namespace DHConfig.Controllers
         // POST: DIM_FIELD/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(string CONFIG_COMMON_NAME, string DIM_COMMON_NAME, string DIM_FIELD_NAME, string sClient)
         {
-            DIM_FIELD dIM_FIELD = db.DIM_FIELD.Find(id);
+            DIM_FIELD dIM_FIELD = db.DIM_FIELD.Find(CONFIG_COMMON_NAME, DIM_COMMON_NAME, DIM_FIELD_NAME);
             db.DIM_FIELD.Remove(dIM_FIELD);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { SelectedClient = sClient });
         }
 
         protected override void Dispose(bool disposing)

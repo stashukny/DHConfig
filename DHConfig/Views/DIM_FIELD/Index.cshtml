@@ -6,17 +6,26 @@
 
 <h2>Index</h2>
 <h4>DIM_FIELD</h4>
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
+<div align="right">
+    @Html.ActionLink("Create New", "Create", new { sClient = @ViewBag.sClient })
+</div>
 
 @using (Html.BeginForm())
 {
     <p>
-        Client: @Html.DropDownList("SelectedClient", "All")
+        @Html.DropDownList("SelectedClient", "All")
         <input type="submit" value="Filter" />
     </p>
 }
+
+        <script>
+            $(function () {
+                $('#SelectedClient').change(function () {
+                    this.form.submit();
+                });
+            });
+        </script>
 
 <table class="table">
     <tr>
@@ -38,7 +47,7 @@
         <th>
             @Html.DisplayNameFor(model => model.DIM_FIELD_FEATURE)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.DERIVED_CONFIGURATION)
         </th>
         <th>
@@ -46,7 +55,9 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.DIM.DIM_TABLE_SCHEMA)
-        </th>
+        </th>*@
+        <th></th>
+        <th></th>
         <th></th>
     </tr>
 
@@ -70,7 +81,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.DIM_FIELD_FEATURE)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.DERIVED_CONFIGURATION)
         </td>
         <td>
@@ -78,12 +89,11 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.DIM.DIM_TABLE_SCHEMA)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { CONFIG_COMMON_NAME = item.CONFIG_COMMON_NAME, DIM_COMMON_NAME = item.DIM_COMMON_NAME, DIM_FIELD_NAME = item.DIM_FIELD_NAME }) |
-            @Html.ActionLink("Details", "Details", new { CONFIG_COMMON_NAME = item.CONFIG_COMMON_NAME, DIM_COMMON_NAME = item.DIM_COMMON_NAME, DIM_FIELD_NAME = item.DIM_FIELD_NAME }) |
-            @Html.ActionLink("Delete", "Delete", new { CONFIG_COMMON_NAME = item.CONFIG_COMMON_NAME, DIM_COMMON_NAME = item.DIM_COMMON_NAME, DIM_FIELD_NAME = item.DIM_FIELD_NAME })
-        </td>
+        </td>*@
+        <td>@Html.ActionLink("Edit", "Edit", new { CONFIG_COMMON_NAME = item.CONFIG_COMMON_NAME, DIM_COMMON_NAME = item.DIM_COMMON_NAME, DIM_FIELD_NAME = item.DIM_FIELD_NAME, sClient = @ViewBag.sClient })</td>
+        <td>@Html.ActionLink("Details", "Details", new { CONFIG_COMMON_NAME = item.CONFIG_COMMON_NAME, DIM_COMMON_NAME = item.DIM_COMMON_NAME, DIM_FIELD_NAME = item.DIM_FIELD_NAME, sClient = @ViewBag.sClient  })</td>
+        <td>@Html.ActionLink("Delete", "Delete", new { CONFIG_COMMON_NAME = item.CONFIG_COMMON_NAME, DIM_COMMON_NAME = item.DIM_COMMON_NAME, DIM_FIELD_NAME = item.DIM_FIELD_NAME, sClient = @ViewBag.sClient })</td>
+        
     </tr>
 }
 

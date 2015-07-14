@@ -204,6 +204,7 @@
     <Compile Include="METRIC_TYPE.cs">
       <DependentUpon>DHModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DIM_FIELD_ViewModel.cs" />
     <Compile Include="MODIFIED_TABLE.cs">
       <DependentUpon>DHModel.tt</DependentUpon>
     </Compile>
@@ -297,7 +298,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

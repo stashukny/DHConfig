@@ -58,8 +58,10 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DIM_FIELD_FEATURE, "DIM_FIELD_FEATURE", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("BITWISE_KEY", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.DIM_FIELD_FEATURE, "", new { @class = "text-danger" })
+                @*@Html.DropDownList("BITWISE_KEY", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DIM_FIELD_FEATURE, "", new { @class = "text-danger" })*@
+                
+                @Html.ListBoxFor(x => x.SelectedItems, (MultiSelectList)ViewBag.listFeatures, new { size = 10, width = 500 })
             </div>
         </div>
 
@@ -71,6 +73,13 @@
             </div>
         </div>
 
+        @if (TempData["FeaturesInvalid"] != null)
+        {
+            <script>
+                alert('This feature combination is invalid.');
+            </script>
+        }
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
@@ -80,7 +89,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", new { SelectedClient = Request.QueryString["sClient"] })
 </div>
 
 @section Scripts {

@@ -4,7 +4,20 @@
     ViewBag.Title = "Edit";
 }
 
+
+<head>
+    <meta charset="utf-8">
+    <title>jQuery UI Dialog - Default functionality</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="/resources/demos/style.css">
+
+</head>
+
 <h2>Edit</h2>
+
 
 
 @using (Html.BeginForm())
@@ -26,8 +39,7 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.DIM_COMMON_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @*@Html.DisplayFor(model => model.DIM_COMMON_NAME)*@
+            <div class="col-md-10">                
                 @Html.DropDownList("DIM_COMMON_NAME", null, htmlAttributes: new { @class = "form-control" })
                 @Html.HiddenFor(model => model.DIM_COMMON_NAME)
             </div>
@@ -35,8 +47,7 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.DIM_FIELD_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @*@Html.DisplayFor(model => model.DIM_FIELD_NAME)*@
+            <div class="col-md-10">                
                 @Html.EditorFor(model => model.DIM_FIELD_NAME, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.HiddenFor(model => model.DIM_FIELD_NAME)
             </div>
@@ -52,59 +63,16 @@
                     $("#DIM_FIELD_NAME_CLEAN").val(clean);
                 }
                 $(document).on("change, keyup", "#DIM_FIELD_NAME", updateClean);
-            });
-
-            //$.ajax({
-            //    type: "POST",
-            //    data: formData,
-            //    url: "/DIM_FIELD/Edit",
-            //    dataType: 'json',
-            //    contentType: false,
-            //    processData: false,
-            //    success: function (response) {
-            //        if (response != null && response.success) {
-            //            alert(response);
-            //        } else {
-            //            alert(response);
-            //        }
-            //    },
-            //    error: function (response) {
-            //        alert("error!");  // 
-            //    }
-
-            //});
-
-            //$.getJSON('ajax/test.json', function (data) {
-            //    alert(JSON.stringify(data));
-            //});
-
-            @*$(function () {
-                $.ajax({
-                    url: '@Url.Action("Edit","DIM_FIELD")',
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function (data) {
-                        //Here you will get the data.
-                        //Display this in your Modal popup
-                    },
-                    error: function (data) {
-                        alert("error");
-                    }
-                });
-            });*@
+            });          
         </script>
         }
-
-
 
 
         <div class="form-group">
             @Html.LabelFor(model => model.DIM_FIELD_NAME_CLEAN, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DIM_FIELD_NAME_CLEAN, new { htmlAttributes = new { @class = "form-control", @readonly="readonly" } })
-                @*@Html.DisplayFor(model => model.DIM_FIELD_NAME_CLEAN)*@
-                @Html.ValidationMessageFor(model => model.DIM_FIELD_NAME_CLEAN, "", new { @class = "text-danger" })
-                @*<input class="form-control" type="text" id="DIM_FIELD_NAME_CLEAN" name="DIM_FIELD_NAME_CLEAN" readonly="readonly" value="" />*@
+                @Html.EditorFor(model => model.DIM_FIELD_NAME_CLEAN, new { htmlAttributes = new { @class = "form-control", @readonly="readonly" } })                
+                @Html.ValidationMessageFor(model => model.DIM_FIELD_NAME_CLEAN, "", new { @class = "text-danger" })                
             </div>
         </div>
 
@@ -113,8 +81,6 @@
         @{
             var input = Html.TextBoxFor(m => m.DIM_FIELD_NAME).ToHtmlString();            
         }
-
-
 
 
             <div class="form-group">
@@ -127,13 +93,6 @@
 
             <div class="form-group">
                 @Html.LabelFor(model => model.DIM_FIELD_FEATURE, htmlAttributes: new { @class = "control-label col-md-2" })
-                @*<div class="col-md-10">
-                        @Html.EditorFor(model => model.DIM_FIELD_FEATURE, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.DIM_FIELD_FEATURE, "", new { @class = "text-danger" })
-                    </div>*@
-
-                @*@Html.DropDownList("DIM_FIELD_FEATURE", (MultiSelectList)ViewBag.AllFeatures, new { multiple = "multiple" })*@
-                @*@Html.ListBox("DIM_FIELD_FEATURE", (MultiSelectList)ViewBag.AllFeatures, new { size = 10 })*@
                 @Html.ListBoxFor(x => x.SelectedItems, (MultiSelectList)ViewBag.listFeatures, new { size = 10, width=500 })
             </div>
 
@@ -141,8 +100,15 @@
         {
             <script>                                
                 alert('This feature combination is invalid.');                
+            $(function () {
+                $("#dialog").dialog();
+            });
             </script>
         }
+        
+        @*<div id="dialog" title="Basic dialog">
+            <p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
+        </div>*@
 
             <div class="form-group">
                 @Html.LabelFor(model => model.DERIVED_CONFIGURATION, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -161,7 +127,7 @@
         }
 
         <div>
-            @Html.ActionLink("Back to List", "Index")
+            @Html.ActionLink("Back to List", "Index", new { SelectedClient = Request.QueryString["sClient"] })
         </div>
 
         @section Scripts {
