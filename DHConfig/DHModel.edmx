@@ -516,6 +516,14 @@ warning 6002: The table/view 'DataHammerConfig.CONFIG.vSTATIC_DIM' does not have
           <Property Name="DIM_FEATURE" Type="varchar" MaxLength="1" Nullable="false" />
           <Property Name="IS_STATIC" Type="int" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DataHammerConfig.UTILITY.vSCHEMAS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vSCHEMAS">
+          <Key>
+            <PropertyRef Name="name" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
         <Association Name="FK_CONFIG_DATA_SOURCE_CONFIG_COMMON_NAME">
           <End Role="CONFIG" Type="Self.CONFIG" Multiplicity="1" />
           <End Role="DATA_SOURCE" Type="Self.DATA_SOURCE" Multiplicity="*" />
@@ -843,6 +851,11 @@ warning 6002: The table/view 'DataHammerConfig.CONFIG.vSTATIC_DIM' does not have
     [vSTATIC_DIM].[DIM_FEATURE] AS [DIM_FEATURE], 
     [vSTATIC_DIM].[IS_STATIC] AS [IS_STATIC]
     FROM [CONFIG].[vSTATIC_DIM] AS [vSTATIC_DIM]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vSCHEMAS" EntityType="Self.vSCHEMAS" store:Type="Views" store:Schema="UTILITY">
+            <DefiningQuery>SELECT 
+    [vSCHEMAS].[name] AS [name]
+    FROM [UTILITY].[vSCHEMAS] AS [vSCHEMAS]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_CONFIG_DATA_SOURCE_CONFIG_COMMON_NAME" Association="Self.FK_CONFIG_DATA_SOURCE_CONFIG_COMMON_NAME">
             <End Role="CONFIG" EntitySet="CONFIG" />
@@ -1257,6 +1270,7 @@ warning 6002: The table/view 'DataHammerConfig.CONFIG.vSTATIC_DIM' does not have
             <End Role="FACT" EntitySet="FACTs" />
             <End Role="SUMMARY" EntitySet="SUMMARies" />
           </AssociationSet>
+          <EntitySet Name="vSCHEMAS" EntityType="DataHammerConfigModel.vSCHEMA" />
         </EntityContainer>
         <EntityType Name="BITWISE_DICTIONARY">
           <Key>
@@ -1682,6 +1696,12 @@ warning 6002: The table/view 'DataHammerConfig.CONFIG.vSTATIC_DIM' does not have
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="vSCHEMA">
+          <Key>
+            <PropertyRef Name="name" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2104,6 +2124,13 @@ warning 6002: The table/view 'DataHammerConfig.CONFIG.vSTATIC_DIM' does not have
                 <ScalarProperty Name="FACT_COMMON_NAME" ColumnName="FACT_COMMON_NAME" />
                 <ScalarProperty Name="DATA_SOURCE_NAME" ColumnName="DATA_SOURCE_NAME" />
                 <ScalarProperty Name="CONFIG_COMMON_NAME" ColumnName="CONFIG_COMMON_NAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vSCHEMAS">
+            <EntityTypeMapping TypeName="DataHammerConfigModel.vSCHEMA">
+              <MappingFragment StoreEntitySet="vSCHEMAS">
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

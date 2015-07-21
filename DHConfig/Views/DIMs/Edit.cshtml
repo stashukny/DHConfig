@@ -7,6 +7,26 @@
 <h2>Edit</h2>
 
 
+@section MyScripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            function updateClean() {
+                var raw = $("#DIM_COMMON_NAME").val();
+                $("#DIM_TABLE_NAME").val("DIM_" + raw);
+                $("#DIM_LOAD_PROC_NAME_RAW").val("DIM_" + raw + "_LOAD_UPSERT_RAW");
+                $("#DIM_TABLE_CLEAN_NAME").val("DIM_" + raw + "_CLEAN");
+                $("#DIM_PROC_UI_CLEAN_NAME").val("DIM_" + raw + "_UPSERT_CLEAN");
+                $("#DIM_LOAD_PROC_CLEAN_NAME").val("DIM_" + raw + "_LOAD_UPSERT_CLEAN");
+                $("#DIM_VIEW_WHITELIST_NAME").val("vDIM_" + raw + "_CLEAN_WHITELIST");
+                $("#DIM_VIEW_RAW_NAME").val("vDIM_" + raw);
+                $("#DIM_VIEW_CLEAN_NAME").val("vDIM_" + raw + "_CLEAN");
+                $("#DIM_PROC_RAW_TABLE_CLEAN_ID_NAME").val("DIM_" + raw + "_UPDATE_RAW_CLEAN_ID");
+            }
+            $(document).on("change, keyup", "#DIM_COMMON_NAME", updateClean);
+        });
+    </script>
+}
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -14,13 +34,38 @@
     <div class="form-horizontal">
         <h4>DIM</h4>
         <hr />
+        @*@if (ViewBag.Error != null)
+        {
+            <script>
+                var ReportError = '@ViewBag.Error';
+                alert(ReportError);
+            </script>
+        }*@
+
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.CONFIG_COMMON_NAME)
 
+
         <div class="form-group">
-            @Html.LabelFor(model => model.DIM_TYPE_GUID, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.CONFIG_COMMON_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DIM_TYPE_GUID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DisplayFor(model => model.CONFIG_COMMON_NAME)
+                @Html.HiddenFor(model => model.CONFIG_COMMON_NAME)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DIM_COMMON_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">                
+                @Html.EditorFor(model => model.DIM_COMMON_NAME, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DIM_COMMON_NAME, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DIM_TYPE, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">                
+                @Html.DropDownListFor(m => m.DIM_TYPE_GUID, (SelectList)ViewBag.listTypes, new { @class = "form-control" })                
                 @Html.ValidationMessageFor(model => model.DIM_TYPE_GUID, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -30,7 +75,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DIM_TABLE_SCHEMA, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DIM_TABLE_SCHEMA, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(m => m.DIM_TABLE_SCHEMA, (SelectList)ViewBag.listSchemas, new { @class = "form-control" })                
                 @Html.ValidationMessageFor(model => model.DIM_TABLE_SCHEMA, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -38,15 +83,15 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DIM_TABLE_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DIM_TABLE_NAME, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.DIM_TABLE_NAME, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.DIM_TABLE_NAME, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.DIM_LOAD_PROC_SCHEMA_RAW, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DIM_LOAD_PROC_SCHEMA_RAW, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="col-md-10">                                
+                @Html.DropDownListFor(m => m.DIM_LOAD_PROC_SCHEMA_RAW, (SelectList)ViewBag.listSchemas, new { @class = "form-control" })                
                 @Html.ValidationMessageFor(model => model.DIM_LOAD_PROC_SCHEMA_RAW, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -54,15 +99,15 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DIM_LOAD_PROC_NAME_RAW, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DIM_LOAD_PROC_NAME_RAW, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.DIM_LOAD_PROC_NAME_RAW, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.DIM_LOAD_PROC_NAME_RAW, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.DIM_TABLE_CLEAN_SCHEMA, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DIM_TABLE_CLEAN_SCHEMA, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="col-md-10">                
+                @Html.DropDownListFor(m => m.DIM_TABLE_CLEAN_SCHEMA, (SelectList)ViewBag.listSchemas, new { @class = "form-control" })          
                 @Html.ValidationMessageFor(model => model.DIM_TABLE_CLEAN_SCHEMA, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -70,15 +115,15 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DIM_TABLE_CLEAN_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DIM_TABLE_CLEAN_NAME, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.DIM_TABLE_CLEAN_NAME, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.DIM_TABLE_CLEAN_NAME, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.DIM_PROC_UI_CLEAN_SCHEMA, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DIM_PROC_UI_CLEAN_SCHEMA, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="col-md-10">                
+                @Html.DropDownListFor(m => m.DIM_PROC_UI_CLEAN_SCHEMA, (SelectList)ViewBag.listSchemas, new { @class = "form-control" })          
                 @Html.ValidationMessageFor(model => model.DIM_PROC_UI_CLEAN_SCHEMA, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -86,15 +131,15 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DIM_PROC_UI_CLEAN_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DIM_PROC_UI_CLEAN_NAME, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.DIM_PROC_UI_CLEAN_NAME, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.DIM_PROC_UI_CLEAN_NAME, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.DIM_LOAD_PROC_CLEAN_SCHEMA, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DIM_LOAD_PROC_CLEAN_SCHEMA, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="col-md-10">                
+                @Html.DropDownListFor(m => m.DIM_LOAD_PROC_CLEAN_SCHEMA, (SelectList)ViewBag.listSchemas, new { @class = "form-control" })                
                 @Html.ValidationMessageFor(model => model.DIM_LOAD_PROC_CLEAN_SCHEMA, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -102,15 +147,15 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DIM_LOAD_PROC_CLEAN_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DIM_LOAD_PROC_CLEAN_NAME, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.DIM_LOAD_PROC_CLEAN_NAME, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.DIM_LOAD_PROC_CLEAN_NAME, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.DIM_VIEW_WHITELIST_SCHEMA, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DIM_VIEW_WHITELIST_SCHEMA, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="col-md-10">                
+                @Html.DropDownListFor(m => m.DIM_VIEW_WHITELIST_SCHEMA, (SelectList)ViewBag.listSchemas, new { @class = "form-control" })                
                 @Html.ValidationMessageFor(model => model.DIM_VIEW_WHITELIST_SCHEMA, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -118,15 +163,15 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DIM_VIEW_WHITELIST_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DIM_VIEW_WHITELIST_NAME, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.DIM_VIEW_WHITELIST_NAME, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.DIM_VIEW_WHITELIST_NAME, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.DIM_VIEW_RAW_SCHEMA, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DIM_VIEW_RAW_SCHEMA, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="col-md-10">                
+                @Html.DropDownListFor(m => m.DIM_VIEW_RAW_SCHEMA, (SelectList)ViewBag.listSchemas, new { @class = "form-control" })                
                 @Html.ValidationMessageFor(model => model.DIM_VIEW_RAW_SCHEMA, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -134,15 +179,15 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DIM_VIEW_RAW_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DIM_VIEW_RAW_NAME, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.DIM_VIEW_RAW_NAME, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.DIM_VIEW_RAW_NAME, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.DIM_VIEW_CLEAN_SCHEMA, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DIM_VIEW_CLEAN_SCHEMA, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="col-md-10">                
+                @Html.DropDownListFor(m => m.DIM_VIEW_CLEAN_SCHEMA, (SelectList)ViewBag.listSchemas, new { @class = "form-control" })                
                 @Html.ValidationMessageFor(model => model.DIM_VIEW_CLEAN_SCHEMA, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -150,15 +195,15 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DIM_VIEW_CLEAN_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DIM_VIEW_CLEAN_NAME, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.DIM_VIEW_CLEAN_NAME, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.DIM_VIEW_CLEAN_NAME, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.DIM_PROC_RAW_TABLE_CLEAN_ID_SCHEMA, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DIM_PROC_RAW_TABLE_CLEAN_ID_SCHEMA, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="col-md-10">                
+                @Html.DropDownListFor(m => m.DIM_PROC_RAW_TABLE_CLEAN_ID_SCHEMA, (SelectList)ViewBag.listSchemas, new { @class = "form-control" })      
                 @Html.ValidationMessageFor(model => model.DIM_PROC_RAW_TABLE_CLEAN_ID_SCHEMA, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -166,7 +211,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DIM_PROC_RAW_TABLE_CLEAN_ID_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DIM_PROC_RAW_TABLE_CLEAN_ID_NAME, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.DIM_PROC_RAW_TABLE_CLEAN_ID_NAME, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.DIM_PROC_RAW_TABLE_CLEAN_ID_NAME, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -174,10 +219,16 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DIM_FEATURE, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DIM_FEATURE, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.DIM_FEATURE, "", new { @class = "text-danger" })
+                @Html.ListBoxFor(x => x.SelectedItems, (MultiSelectList)ViewBag.DIM_FEATURE, new { size = 3, width = 500 })                
             </div>
         </div>
+
+        @*@if (TempData["FeaturesInvalid"] != null)
+        {
+            <script>
+                alert('This feature combination is invalid.');
+            </script>
+        }*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.DIM_TAXONOMY_PROC_SCHEMA, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -296,7 +347,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", new { SelectedClient = Request.QueryString["sClient"] })
 </div>
 
 @section Scripts {

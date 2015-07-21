@@ -38,10 +38,10 @@
         <EntityTypeShape EntityType="DataHammerConfigModel.IMPORT_XML" Width="1.5" PointX="16.75" PointY="4.75" />
         <EntityTypeShape EntityType="DataHammerConfigModel.SYS_PROPERTY" Width="1.5" PointX="16.75" PointY="7.75" />
         <AssociationConnector Association="DataHammerConfigModel.FK_CONFIG_DATA_SOURCE_TYPE_GUID" />
-        <EntityTypeShape EntityType="DataHammerConfigModel.DIM" Width="1.5" PointX="8" PointY="15.875" />
+        <EntityTypeShape EntityType="DataHammerConfigModel.DIM" Width="2.5" PointX="8" PointY="15.875" />
         <AssociationConnector Association="DataHammerConfigModel.FK_CONFIG_DIM_CONFIG_COMMON_NAME" />
         <AssociationConnector Association="DataHammerConfigModel.FK_CONFIG_DIM_CONFIG_DIM_TYPE_GUID" />
-        <EntityTypeShape EntityType="DataHammerConfigModel.DIM_FIELD" Width="1.5" PointX="10.25" PointY="18.125" />
+        <EntityTypeShape EntityType="DataHammerConfigModel.DIM_FIELD" Width="1.5" PointX="10.875" PointY="18.125" />
         <EntityTypeShape EntityType="DataHammerConfigModel.FACT" Width="1.5" PointX="8.25" PointY="8.875" />
         <AssociationConnector Association="DataHammerConfigModel.FK_CONFIG_DIM_FIELD_CONFIG_COMMON_NAME" />
         <AssociationConnector Association="DataHammerConfigModel.FK_CONFIG_FACT_FACT_COMMON_NAME" />
@@ -49,6 +49,7 @@
         <AssociationConnector Association="DataHammerConfigModel.FK_CONFIG_DIM_FIELD_DIM" />
         <AssociationConnector Association="DataHammerConfigModel.FK_CONFIG_FACT_FIELD_FACT" />
         <AssociationConnector Association="DataHammerConfigModel.FK_CONFIG_SUMMARY_FACT_FACT_FILED" />
+        <EntityTypeShape EntityType="DataHammerConfigModel.vSCHEMA" Width="1.5" PointX="11" PointY="16.375" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations;
+
 namespace DHConfig
 {
     using System;
@@ -21,6 +23,7 @@ namespace DHConfig
     
         public string CONFIG_COMMON_NAME { get; set; }
         public System.Guid DIM_TYPE_GUID { get; set; }
+        [Required]
         public string DIM_COMMON_NAME { get; set; }
         public string DIM_TABLE_SCHEMA { get; set; }
         public string DIM_TABLE_NAME { get; set; }
@@ -57,5 +60,16 @@ namespace DHConfig
         public virtual CONFIG CONFIG { get; set; }
         public virtual DIM_TYPE DIM_TYPE { get; set; }
         public virtual ICollection<DIM_FIELD> DIM_FIELD { get; set; }
+
+        public string[] SelectedItems
+        {
+            get
+            {
+                if (DIM_FEATURE != null)
+                    return (DIM_FEATURE.Split(','));
+                else
+                    return null;
+            }
+        }  
     }
 }

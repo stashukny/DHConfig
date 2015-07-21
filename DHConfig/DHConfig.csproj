@@ -204,6 +204,7 @@
     <Compile Include="METRIC_TYPE.cs">
       <DependentUpon>DHModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModelState\ModelStateHelpers.cs" />
     <Compile Include="Models\DIM_FIELD_ViewModel.cs" />
     <Compile Include="MODIFIED_TABLE.cs">
       <DependentUpon>DHModel.tt</DependentUpon>
@@ -222,6 +223,9 @@
       <DependentUpon>DHModel.tt</DependentUpon>
     </Compile>
     <Compile Include="USER_CHANGE.cs">
+      <DependentUpon>DHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vSCHEMA.cs">
       <DependentUpon>DHModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>

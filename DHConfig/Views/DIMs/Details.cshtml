@@ -285,6 +285,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edit", "Edit", new { CONFIG_COMMON_NAME = Model.CONFIG_COMMON_NAME, DIM_COMMON_NAME = Model.DIM_COMMON_NAME, sClient = @ViewBag.sClient }) |
+    @Html.ActionLink("Back to List", "Index", new { SelectedClient = Request.QueryString["sClient"] })
 </p>

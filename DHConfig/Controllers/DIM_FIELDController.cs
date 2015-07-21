@@ -20,18 +20,14 @@ namespace DHConfig.Controllers
         {
 
             var Clients = db.CONFIGs.OrderBy(q => q.CONFIG_COMMON_NAME).Distinct().ToList();
-
            
-
             IQueryable<DIM_FIELD> fields = db.DIM_FIELD
             .Where(c => SelectedClient == null || SelectedClient == "" || c.CONFIG_COMMON_NAME == SelectedClient);
-
 
             SelectList clients = new SelectList(Clients, "CONFIG_COMMON_NAME", "CONFIG_COMMON_NAME", SelectedClient);            
             ViewBag.SelectedClient = clients;
             ViewBag.sClient = clients.SelectedValue;
             
-
             var sql = fields.ToString();
 
             return View(fields.ToList());
@@ -65,7 +61,7 @@ namespace DHConfig.Controllers
 
 
             ViewBag.CONFIG_COMMON_NAME = new SelectList(db.CONFIGs, "CONFIG_COMMON_NAME", "CONFIG_COMMON_NAME", sClient);
-            ViewBag.DIM_COMMON_NAME = new SelectList(db.DIMs, "DIM_COMMON_NAME", "DIM_COMMON_NAME");                    
+            ViewBag.DIM_COMMON_NAME = new SelectList(db.DIMs.OrderBy(x => x.DIM_COMMON_NAME), "DIM_COMMON_NAME", "DIM_COMMON_NAME");                    
             ViewBag.listFeatures = new MultiSelectList(features, "DIM_FIELD_FEATURE", "DESCR");
 
             return View();
@@ -220,30 +216,38 @@ namespace DHConfig.Controllers
 
             if (ModelState.IsValid)
             {
-
+                
                 string DIM_COMMON_NAME = Request["DIM_COMMON_NAME"].ToString();
                 string CONFIG_COMMON_NAME = Request["CONFIG_COMMON_NAME"].ToString();
                 string DIM_FIELD_NAME = Request["DIM_FIELD_NAME"].ToString();
 
-                var fields = db.DIM_FIELD.Where(a => a.DIM_COMMON_NAME == DIM_COMMON_NAME && a.CONFIG_COMMON_NAME == CONFIG_COMMON_NAME && a.DIM_FIELD_NAME == DIM_FIELD_NAME);
+                if (DIM_COMMON_NAME != dIM_FIELD.DIM_COMMON_NAME || CONFIG_COMMON_NAME != dIM_FIELD.CONFIG_COMMON_NAME || DIM_FIELD_NAME != dIM_FIELD.DIM_FIELD_NAME)
+                { 
 
-                foreach (var f in fields)
-                {
-                    db.DIM_FIELD.Remove(f);
+                    var fields = db.DIM_FIELD.Where(a => a.DIM_COMMON_NAME == DIM_COMMON_NAME && a.CONFIG_COMMON_NAME == CONFIG_COMMON_NAME && a.DIM_FIELD_NAME == DIM_FIELD_NAME);
+
+                    foreach (var f in fields)
+                    {
+                        db.DIM_FIELD.Remove(f);
+                    }
+
+                    db.DIM_FIELD.Add(dIM_FIELD);
                 }
-
-                db.DIM_FIELD.Add(dIM_FIELD);
-
-
+                else
+                {
+                    db.Entry(dIM_FIELD).State = EntityState.Modified;                       
+                }
+                                         
                 try
                 {
                     db.SaveChanges();
                 }
                 catch
                 {
-                    return RedirectToAction("Index");
+                    //TODO: error handling
+                    return RedirectToAction("Index", new { SelectedClient = sClient });
                 }
-                db.Entry(dIM_FIELD).State = EntityState.Modified;                
+                
                 return RedirectToAction("Index", new { SelectedClient = sClient });
             }
 
