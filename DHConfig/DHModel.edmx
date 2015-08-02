@@ -517,11 +517,21 @@ warning 6002: The table/view 'DataHammerConfig.CONFIG.vSTATIC_DIM' does not have
           <Property Name="IS_STATIC" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'DataHammerConfig.UTILITY.vDATA_TYPES' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vDATA_TYPES">
+          <Key>
+            <PropertyRef Name="DIM_DATA_TYPE" />
+          </Key>
+          <Property Name="DIM_DATA_TYPE" Type="varchar" MaxLength="13" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'DataHammerConfig.UTILITY.vSCHEMAS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vSCHEMAS">
           <Key>
+            <PropertyRef Name="schema_id" />
             <PropertyRef Name="name" />
           </Key>
+          <Property Name="schema_id" Type="int" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
         <Association Name="FK_CONFIG_DATA_SOURCE_CONFIG_COMMON_NAME">
@@ -852,8 +862,14 @@ warning 6002: The table/view 'DataHammerConfig.UTILITY.vSCHEMAS' does not have a
     [vSTATIC_DIM].[IS_STATIC] AS [IS_STATIC]
     FROM [CONFIG].[vSTATIC_DIM] AS [vSTATIC_DIM]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="vDATA_TYPES" EntityType="Self.vDATA_TYPES" store:Type="Views" store:Schema="UTILITY">
+            <DefiningQuery>SELECT 
+    [vDATA_TYPES].[DIM_DATA_TYPE] AS [DIM_DATA_TYPE]
+    FROM [UTILITY].[vDATA_TYPES] AS [vDATA_TYPES]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vSCHEMAS" EntityType="Self.vSCHEMAS" store:Type="Views" store:Schema="UTILITY">
             <DefiningQuery>SELECT 
+    [vSCHEMAS].[schema_id] AS [schema_id], 
     [vSCHEMAS].[name] AS [name]
     FROM [UTILITY].[vSCHEMAS] AS [vSCHEMAS]</DefiningQuery>
           </EntitySet>
@@ -1271,6 +1287,7 @@ warning 6002: The table/view 'DataHammerConfig.UTILITY.vSCHEMAS' does not have a
             <End Role="SUMMARY" EntitySet="SUMMARies" />
           </AssociationSet>
           <EntitySet Name="vSCHEMAS" EntityType="DataHammerConfigModel.vSCHEMA" />
+          <EntitySet Name="vDATA_TYPES" EntityType="DataHammerConfigModel.vDATA_TYPES" />
         </EntityContainer>
         <EntityType Name="BITWISE_DICTIONARY">
           <Key>
@@ -1699,8 +1716,16 @@ warning 6002: The table/view 'DataHammerConfig.UTILITY.vSCHEMAS' does not have a
         <EntityType Name="vSCHEMA">
           <Key>
             <PropertyRef Name="name" />
+            <PropertyRef Name="schema_id" />
           </Key>
           <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="schema_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vDATA_TYPES">
+          <Key>
+            <PropertyRef Name="DIM_DATA_TYPE" />
+          </Key>
+          <Property Name="DIM_DATA_TYPE" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2130,7 +2155,15 @@ warning 6002: The table/view 'DataHammerConfig.UTILITY.vSCHEMAS' does not have a
           <EntitySetMapping Name="vSCHEMAS">
             <EntityTypeMapping TypeName="DataHammerConfigModel.vSCHEMA">
               <MappingFragment StoreEntitySet="vSCHEMAS">
+                <ScalarProperty Name="schema_id" ColumnName="schema_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vDATA_TYPES">
+            <EntityTypeMapping TypeName="DataHammerConfigModel.vDATA_TYPES">
+              <MappingFragment StoreEntitySet="vDATA_TYPES">
+                <ScalarProperty Name="DIM_DATA_TYPE" ColumnName="DIM_DATA_TYPE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -25,3 +25,11 @@ textarea {
 select{
     max-width: 700px;
 }
+
+.navbar-inverse .navbar-nav > li > a.selected {  
+      color: white;   
+        float: left;
+  padding: 15px 15px;
+  font-size: 18px;
+  line-height: 20px;
+}

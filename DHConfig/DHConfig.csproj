@@ -189,6 +189,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\HtmlHelpers.cs" />
     <Compile Include="IMPORT_XML.cs">
       <DependentUpon>DHModel.tt</DependentUpon>
     </Compile>
@@ -204,7 +205,7 @@
     <Compile Include="METRIC_TYPE.cs">
       <DependentUpon>DHModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ModelState\ModelStateHelpers.cs" />
+    <Compile Include="Helpers\ModelStateHelpers.cs" />
     <Compile Include="Models\DIM_FIELD_ViewModel.cs" />
     <Compile Include="MODIFIED_TABLE.cs">
       <DependentUpon>DHModel.tt</DependentUpon>
@@ -225,6 +226,9 @@
     <Compile Include="USER_CHANGE.cs">
       <DependentUpon>DHModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="vDATA_TYPES.cs">
+      <DependentUpon>DHModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="vSCHEMA.cs">
       <DependentUpon>DHModel.tt</DependentUpon>
     </Compile>
@@ -232,6 +236,8 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\jquery.dataTables.css" />
+    <Content Include="Content\jquery.dataTables.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -261,6 +267,9 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.dataTables.js" />
+    <Content Include="Scripts\jquery.dataTables.min.js" />
+    <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -299,6 +308,7 @@
     <Content Include="Views\DIM_FIELD\Details.cshtml" />
     <Content Include="Views\DIM_FIELD\Edit.cshtml" />
     <Content Include="Views\DIM_FIELD\Index.cshtml" />
+    <Content Include="Views\CurrentClient.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -331,7 +341,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>25079</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:25079/</IISUrl>
+          <IISUrl>http://localhost:25079</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

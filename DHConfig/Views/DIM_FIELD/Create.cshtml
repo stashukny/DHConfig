@@ -18,18 +18,46 @@
         <div class="form-group">
             @Html.LabelFor(model => model.CONFIG_COMMON_NAME, "CONFIG_COMMON_NAME", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("CONFIG_COMMON_NAME", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("CONFIG_COMMON_NAME", null, htmlAttributes: new { @class = "form-control", id =  "CONFIG_COMMON_NAME"})
                 @Html.ValidationMessageFor(model => model.CONFIG_COMMON_NAME, "", new { @class = "text-danger" })
             </div>
         </div>
 
+        
+        <script type="text/jscript">
+
+            var callFunction = function () {
+                $.getJSON('/DIM_FIELD/DIM_COMMON_NAME_List/' + $('#CONFIG_COMMON_NAME').val(), function (data) {
+                    var items;                    
+                    $.each(data, function (i, DIM_COMMON_NAME) {
+                        items += "<option value='" + DIM_COMMON_NAME.Value + "'>" + DIM_COMMON_NAME.Text + "</option>";
+                    });
+                    $('#DIM_COMMON_NAME').html(items);
+                });
+            }
+
+            $(function () {
+                $('#CONFIG_COMMON_NAME')
+                    .ready(callFunction)
+                    .change(callFunction);
+            });
+        </script>
+
         <div class="form-group">
             @Html.LabelFor(model => model.DIM_COMMON_NAME, "DIM_COMMON_NAME", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("DIM_COMMON_NAME", null, htmlAttributes: new { @class = "form-control" })
+                <select class="form-control" id="DIM_COMMON_NAME" name="DIM_COMMON_NAME"></select>
                 @Html.ValidationMessageFor(model => model.DIM_COMMON_NAME, "", new { @class = "text-danger" })
             </div>
         </div>
+
+        @*<div class="form-group">
+            @Html.Label("DIM_COMMON_NAME")
+            <div class="col-md-10">
+                <select id="DIM_COMMON_NAME" name="DIM_COMMON_NAME"></select>
+                @Html.ValidationMessage("DIM_COMMON_NAME", "*")
+            </div>
+        </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.DIM_FIELD_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -42,7 +70,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DIM_DATA_TYPE, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DIM_DATA_TYPE, new { htmlAttributes = new { @class = "form-control" } })
+                @*@Html.EditorFor(model => model.DIM_DATA_TYPE, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.DropDownList("DIM_DATA_TYPE", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.DIM_DATA_TYPE, "", new { @class = "text-danger" })
             </div>
         </div>

@@ -1,0 +1,17 @@
+﻿<p>
+    <div class="form-group">
+        [
+        @if (ViewBag.sClient == null)
+        {
+            <b>All</b>
+        }
+        else
+        {
+            <b>@ViewBag.sClient</b>
+        }
+        ]        
+    @Html.ActionLink("Change Client", "Index", "Home", new { area = "", SelectedClient = ViewBag.sClient }, null)
+    </div>
+    
+</p>
+

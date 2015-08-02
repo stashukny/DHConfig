@@ -12,9 +12,8 @@ namespace DHConfig
     using System;
     using System.Collections.Generic;
     
-    public partial class vSCHEMA
+    public partial class vDATA_TYPES
     {
-        public string name { get; set; }
-        public int schema_id { get; set; }
+        public string DIM_DATA_TYPE { get; set; }
     }
 }

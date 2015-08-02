@@ -4,97 +4,117 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-<h4>DIM_FIELD</h4>
+@section AddToHead{
+    <script type="text/javascript" language="javascript" src="~/Scripts/jquery.js"></script>
+    <script type="text/javascript" language="javascript" src="~/Scripts/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/Content/jquery.dataTables.min.css">
 
+    <script type="text/javascript" language="javascript" class="init">
+        $(document).ready(function () {
+            $('#fields').dataTable();
+        });
+    </script>
+}
+@*<h2>Index</h2>*@
+@*<h4>Dimension Fields</h4>*@
 <div align="right">
     @Html.ActionLink("Create New", "Create", new { sClient = @ViewBag.sClient })
 </div>
 
-@using (Html.BeginForm())
-{
-    <p>
-        @Html.DropDownList("SelectedClient", "All")
-        <input type="submit" value="Filter" />
-    </p>
-}
+<div>
+    @Html.Partial("~/Views/CurrentClient.cshtml")
+</div>
 
-        <script>
-            $(function () {
-                $('#SelectedClient').change(function () {
-                    this.form.submit();
-                });
-            });
-        </script>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.CONFIG_COMMON_NAME)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DIM_COMMON_NAME)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DIM_FIELD_NAME)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DIM_FIELD_NAME_CLEAN)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DIM_DATA_TYPE)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DIM_FIELD_FEATURE)
-        </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.DERIVED_CONFIGURATION)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CONFIG.CONFIG_DATA_PROCESS_PROC_SCHEMA)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DIM.DIM_TABLE_SCHEMA)
-        </th>*@
-        <th></th>
-        <th></th>
-        <th></th>
-    </tr>
+<table class="table" id="fields">
+    <thead>
+        <tr>
+            <th>
+                CONFIG_COMMON_NAME
+            </th>
+            <th>
+                DIM_COMMON_NAME
+            </th>
+            <th>
+                DIM_FIELD_NAME
+            </th>
+            <th>
+                DIM_FIELD_NAME_CLEAN
+            </th>
+            <th>
+                DIM_DATA_TYPE
+            </th>
+            <th>
+                DIM_FIELD_FEATURE
+            </th>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CONFIG_COMMON_NAME)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DIM_COMMON_NAME)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DIM_FIELD_NAME)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DIM_FIELD_NAME_CLEAN)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DIM_DATA_TYPE)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DIM_FIELD_FEATURE)
-        </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.DERIVED_CONFIGURATION)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CONFIG.CONFIG_DATA_PROCESS_PROC_SCHEMA)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DIM.DIM_TABLE_SCHEMA)
-        </td>*@
-        <td>@Html.ActionLink("Edit", "Edit", new { CONFIG_COMMON_NAME = item.CONFIG_COMMON_NAME, DIM_COMMON_NAME = item.DIM_COMMON_NAME, DIM_FIELD_NAME = item.DIM_FIELD_NAME, sClient = @ViewBag.sClient })</td>
-        <td>@Html.ActionLink("Details", "Details", new { CONFIG_COMMON_NAME = item.CONFIG_COMMON_NAME, DIM_COMMON_NAME = item.DIM_COMMON_NAME, DIM_FIELD_NAME = item.DIM_FIELD_NAME, sClient = @ViewBag.sClient  })</td>
-        <td>@Html.ActionLink("Delete", "Delete", new { CONFIG_COMMON_NAME = item.CONFIG_COMMON_NAME, DIM_COMMON_NAME = item.DIM_COMMON_NAME, DIM_FIELD_NAME = item.DIM_FIELD_NAME, sClient = @ViewBag.sClient })</td>
-        
-    </tr>
-}
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>
+                CONFIG_COMMON_NAME
+            </th>
+            <th>
+                DIM_COMMON_NAME
+            </th>
+            <th>
+                DIM_FIELD_NAME
+            </th>
+            <th>
+                DIM_FIELD_NAME_CLEAN
+            </th>
+            <th>
+                DIM_DATA_TYPE
+            </th>
+            <th>
+                DIM_FIELD_FEATURE
+            </th>
 
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </tfoot>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CONFIG_COMMON_NAME)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DIM_COMMON_NAME)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DIM_FIELD_NAME)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DIM_FIELD_NAME_CLEAN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DIM_DATA_TYPE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DIM_FIELD_FEATURE)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.DERIVED_CONFIGURATION)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CONFIG.CONFIG_DATA_PROCESS_PROC_SCHEMA)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DIM.DIM_TABLE_SCHEMA)
+                    </td>*@
+                <td>@Html.ActionLink("Edit", "Edit", new { CONFIG_COMMON_NAME = item.CONFIG_COMMON_NAME, DIM_COMMON_NAME = item.DIM_COMMON_NAME, DIM_FIELD_NAME = item.DIM_FIELD_NAME, sClient = @ViewBag.sClient })</td>
+                <td>@Html.ActionLink("Details", "Details", new { CONFIG_COMMON_NAME = item.CONFIG_COMMON_NAME, DIM_COMMON_NAME = item.DIM_COMMON_NAME, DIM_FIELD_NAME = item.DIM_FIELD_NAME, sClient = @ViewBag.sClient })</td>
+                <td>@Html.ActionLink("Delete", "Delete", new { CONFIG_COMMON_NAME = item.CONFIG_COMMON_NAME, DIM_COMMON_NAME = item.DIM_COMMON_NAME, DIM_FIELD_NAME = item.DIM_FIELD_NAME, sClient = @ViewBag.sClient })</td>
+
+            </tr>
+        }
+    </tbody>
 </table>

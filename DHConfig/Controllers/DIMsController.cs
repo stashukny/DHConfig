@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DHConfig;
+using System.Data.Entity.Validation;
 
 namespace DHConfig.Controllers
 {
@@ -17,22 +18,15 @@ namespace DHConfig.Controllers
         // GET: DIMs
         public ActionResult Index(string SelectedClient)
         {
-            
-            var Clients = db.CONFIGs.OrderBy(q => q.CONFIG_COMMON_NAME).Distinct().ToList();
-
+                        
             IQueryable<DIM> dims = db.DIMs
             .Where(c => SelectedClient == null || SelectedClient == "" || c.CONFIG_COMMON_NAME == SelectedClient)
-            .Include(t => t.DIM_TYPE);
+            .Include(t => t.DIM_TYPE);            
 
-            SelectList clients = new SelectList(Clients, "CONFIG_COMMON_NAME", "CONFIG_COMMON_NAME", SelectedClient);
-
-            ViewBag.SelectedClient = clients;
-            ViewBag.sClient = clients.SelectedValue;
-
-            var sql = dims.ToString();
+            ViewBag.sClient = SelectedClient;
+            ViewBag.SelectedClient = SelectedClient;
 
             return View(dims.ToList());
-
         }
 
         // GET: DIMs/Details/5
@@ -70,14 +64,6 @@ namespace DHConfig.Controllers
 
             ViewBag.listTypes = listTypes;
             ViewBag.DIM_TABLE_SCHEMA = listSchemas;
-            ViewBag.DIM_LOAD_PROC_SCHEMA_RAW = listSchemas;
-            ViewBag.DIM_TABLE_CLEAN_SCHEMA = listSchemas;
-            ViewBag.DIM_PROC_UI_CLEAN_SCHEMA = listSchemas;
-            ViewBag.DIM_LOAD_PROC_CLEAN_SCHEMA = listSchemas;
-            ViewBag.DIM_VIEW_WHITELIST_SCHEMA = listSchemas;
-            ViewBag.DIM_VIEW_RAW_SCHEMA = listSchemas;
-            ViewBag.DIM_VIEW_CLEAN_SCHEMA = listSchemas;
-            ViewBag.DIM_PROC_RAW_TABLE_CLEAN_ID_SCHEMA = listSchemas;
 
             return View();
         }
@@ -103,8 +89,6 @@ namespace DHConfig.Controllers
                     dIM.DIM_FEATURE = SelectedItems[0];
                 }
 
-
-
                 int Total = 0;
                 var settings = db.BITWISE_DICTIONARY
                 .Where(f => f.BITWISE_GROUP == "DIM" && SelectedItems.Contains(f.BITWISE_KEY))
@@ -115,19 +99,9 @@ namespace DHConfig.Controllers
                 bool exists = db.BITWISE_DICTIONARY_VALID_VALUES.Any(a => a.BITWISE_VALUE == Total && a.BITWISE_GROUP == "DIM");
                 if (!exists)
                 {
-                    var features = db.BITWISE_DICTIONARY
-                        .Where(f => f.BITWISE_GROUP == "DIM")
-                        .ToList()
-                        .Select(c => new
-                        {
-                            DIM_FEATURE = c.BITWISE_KEY,
-                            DESCR = string.Format("{0} -- {1}", c.BITWISE_KEY, c.DESCR)
-                        });
-
                     
                     ModelState.AddModelError(String.Empty, "Cannot create due to selection of invalid features.");
-                    return RedirectToAction("Edit", new { sClient, CONFIG_COMMON_NAME = Request["CONFIG_COMMON_NAME"].ToString(), DIM_COMMON_NAME = Request["DIM_COMMON_NAME"].ToString() });
-
+                    return RedirectToAction("Create", new { sClient, CONFIG_COMMON_NAME = Request["CONFIG_COMMON_NAME"].ToString(), DIM_COMMON_NAME = Request["DIM_COMMON_NAME"].ToString() });
                 }
             }
 
@@ -137,16 +111,12 @@ namespace DHConfig.Controllers
                 try
                 {
                     db.DIMs.Add(dIM);
-                    db.SaveChanges();
-                
+                    db.SaveChanges();                
                 }
-                
-                
+
                 catch (Exception ex)
                 {
-                    if (ex.HResult.ToString() == "-2146233087")
-
-                        ModelState.AddModelError(String.Empty, "Cannot Create due to Key violation.");
+                    ModelState.AddModelError(String.Empty, ex.InnerException.InnerException.Message);
                     return RedirectToAction("Create", new { sClient, CONFIG_COMMON_NAME, DIM_COMMON_NAME});
                 }
                 db.SaveChanges();
@@ -187,14 +157,6 @@ namespace DHConfig.Controllers
             ViewBag.DIM_FEATURE = listFeatures;
             ViewBag.DIM_TYPE_GUID = listTypes;           
             ViewBag.DIM_TABLE_SCHEMA = listSchemas;
-            ViewBag.DIM_LOAD_PROC_SCHEMA_RAW = listSchemas;
-            ViewBag.DIM_TABLE_CLEAN_SCHEMA = listSchemas;
-            ViewBag.DIM_PROC_UI_CLEAN_SCHEMA = listSchemas;
-            ViewBag.DIM_LOAD_PROC_CLEAN_SCHEMA = listSchemas;
-            ViewBag.DIM_VIEW_WHITELIST_SCHEMA = listSchemas;
-            ViewBag.DIM_VIEW_RAW_SCHEMA = listSchemas;
-            ViewBag.DIM_VIEW_CLEAN_SCHEMA = listSchemas;
-            ViewBag.DIM_PROC_RAW_TABLE_CLEAN_ID_SCHEMA = listSchemas;
 
             return View(dIM);
         }
@@ -233,21 +195,6 @@ namespace DHConfig.Controllers
                 if (!exists)
                 {
 
-                    var features = db.BITWISE_DICTIONARY
-                        .Where(f => f.BITWISE_GROUP == "DIM")
-                        .ToList()
-                        .Select(c => new
-                        {
-                            DIM_FEATURE = c.BITWISE_KEY,
-                            DESCR = string.Format("{0} -- {1}", c.BITWISE_KEY, c.DESCR)
-                        });
-
-                    ViewBag.DIM_COMMON_NAME = new SelectList(db.DIMs, "DIM_COMMON_NAME", "DIM_COMMON_NAME", dIM.DIM_COMMON_NAME);
-                    ViewBag.listFeatures = new MultiSelectList(features, "DIM_FEATURE", "DESCR", dIM.SelectedItems);
-                    ViewBag.DIM_TYPE_GUID = new SelectList(db.DIM_TYPE, "DIM_TYPE_GUID", "DIM_TYPE_NAME");           
-                    //throw error                
-
-
                     ModelState.AddModelError(String.Empty, "Cannot Edit due to invalid Features.");
                     return RedirectToAction("Edit", new { sClient, CONFIG_COMMON_NAME = Request["CONFIG_COMMON_NAME"].ToString(), DIM_COMMON_NAME = Request["DIM_COMMON_NAME"].ToString() });                    
 
@@ -283,9 +230,7 @@ namespace DHConfig.Controllers
                 }
                 catch (Exception ex)
                 {
-                    if (ex.HResult.ToString() == "-2146233087")
-                        
-                        ModelState.AddModelError(String.Empty, "Cannot Edit due to Key violation.");
+                        ModelState.AddModelError(String.Empty, ex.InnerException.InnerException.Message);
                         return RedirectToAction("Edit", new { sClient, CONFIG_COMMON_NAME = Request["CONFIG_COMMON_NAME"].ToString(), DIM_COMMON_NAME = Request["DIM_COMMON_NAME"].ToString() });
                 }
 
@@ -320,9 +265,8 @@ namespace DHConfig.Controllers
             }
             catch (Exception ex)
             {
-                if (ex.HResult.ToString() == "-2146233087")
-                    ViewBag.Error = "Cannot perform delete due to foreign key constraint";
-                return View();
+                ModelState.AddModelError(String.Empty, ex.InnerException.InnerException.Message);
+                return RedirectToAction("Delete", new { sClient, CONFIG_COMMON_NAME, DIM_COMMON_NAME});                
             }
             
             return RedirectToAction("Index", new { SelectedClient = sClient });

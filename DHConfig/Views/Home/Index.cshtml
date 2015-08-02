@@ -1,9 +1,23 @@
-﻿@{
+﻿
+@model IEnumerable<DHConfig.CONFIG>
+@{
     ViewBag.Title = "Home Page";
 }
+
+
+
+
+
 
 <div class="jumbotron">
     <h1>Tier1</h1>
     <p class="lead">DataHammer Config Editor</p>
    
+
+    <form action="@Url.Action("Index", "DIMs")" method="post">        
+        <p>
+            @Html.DropDownList("SelectedClient", "All")            
+            <input type="submit" value="Select" />
+        </p>        
+    </form>    
 </div>

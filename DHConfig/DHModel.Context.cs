@@ -54,5 +54,6 @@ namespace DHConfig
         public virtual DbSet<DIM_FIELD> DIM_FIELD { get; set; }
         public virtual DbSet<FACT> FACTs { get; set; }
         public virtual DbSet<vSCHEMA> vSCHEMAS { get; set; }
+        public virtual DbSet<vDATA_TYPES> vDATA_TYPES { get; set; }
     }
 }
