@@ -12,19 +12,20 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>DIM_FIELD</h4>
+        <h4>Dimension Field</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.CONFIG_COMMON_NAME, "CONFIG_COMMON_NAME", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.CONFIG_COMMON_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("CONFIG_COMMON_NAME", null, htmlAttributes: new { @class = "form-control", id =  "CONFIG_COMMON_NAME"})
+                @*@Html.DisplayFor(model => model.CONFIG_COMMON_NAME)*@
+                @ViewBag.CONFIG_COMMON_NAME
                 @Html.ValidationMessageFor(model => model.CONFIG_COMMON_NAME, "", new { @class = "text-danger" })
             </div>
         </div>
 
         
-        <script type="text/jscript">
+        @*<script type="text/jscript">
 
             var callFunction = function () {
                 $.getJSON('/DIM_FIELD/DIM_COMMON_NAME_List/' + $('#CONFIG_COMMON_NAME').val(), function (data) {
@@ -41,23 +42,15 @@
                     .ready(callFunction)
                     .change(callFunction);
             });
-        </script>
+        </script>*@
 
         <div class="form-group">
-            @Html.LabelFor(model => model.DIM_COMMON_NAME, "DIM_COMMON_NAME", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <select class="form-control" id="DIM_COMMON_NAME" name="DIM_COMMON_NAME"></select>
-                @Html.ValidationMessageFor(model => model.DIM_COMMON_NAME, "", new { @class = "text-danger" })
+            @Html.LabelFor(model => model.DIM_COMMON_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">                
+                @Html.DropDownListFor(m => m.DIM_COMMON_NAME, (SelectList)ViewBag.listDims, new { @class = "form-control" })     
+                @Html.HiddenFor(model => model.DIM_COMMON_NAME)
             </div>
         </div>
-
-        @*<div class="form-group">
-            @Html.Label("DIM_COMMON_NAME")
-            <div class="col-md-10">
-                <select id="DIM_COMMON_NAME" name="DIM_COMMON_NAME"></select>
-                @Html.ValidationMessage("DIM_COMMON_NAME", "*")
-            </div>
-        </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.DIM_FIELD_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -69,27 +62,15 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.DIM_DATA_TYPE, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @*@Html.EditorFor(model => model.DIM_DATA_TYPE, new { htmlAttributes = new { @class = "form-control" } })*@
+            <div class="col-md-10">                
                 @Html.DropDownList("DIM_DATA_TYPE", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.DIM_DATA_TYPE, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.DIM_FIELD_FEATURE, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DIM_FIELD_FEATURE, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.DIM_FIELD_FEATURE, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-
         <div class="form-group">
             @Html.LabelFor(model => model.DIM_FIELD_FEATURE, "DIM_FIELD_FEATURE", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @*@Html.DropDownList("BITWISE_KEY", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.DIM_FIELD_FEATURE, "", new { @class = "text-danger" })*@
-                
+            <div class="col-md-10">                
                 @Html.ListBoxFor(x => x.SelectedItems, (MultiSelectList)ViewBag.listFeatures, new { size = 10, width = 500 })
             </div>
         </div>
@@ -102,12 +83,6 @@
             </div>
         </div>
 
-        @if (TempData["FeaturesInvalid"] != null)
-        {
-            <script>
-                alert('This feature combination is invalid.');
-            </script>
-        }
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

@@ -44,7 +44,7 @@ namespace DHConfig.Controllers
 
         // GET: DIM_FIELD/Create
         [ImportModelStateFromTempData]
-        public ActionResult Create(string sClient)
+        public ActionResult Create(string sClient, string CONFIG_COMMON_NAME)
         {
 
             var features = db.BITWISE_DICTIONARY
@@ -57,10 +57,21 @@ namespace DHConfig.Controllers
             });
 
 
-            ViewBag.CONFIG_COMMON_NAME = new SelectList(db.CONFIGs, "CONFIG_COMMON_NAME", "CONFIG_COMMON_NAME", sClient);
+            var dims = db.DIMs
+            .Where(f => f.CONFIG_COMMON_NAME == sClient)
+            .ToList()
+            .Select(c => new
+            {
+                DIM_COMMON_NAME = c.DIM_COMMON_NAME,
+                DESCR = c.DIM_COMMON_NAME
+            });
+
+            //ViewBag.CONFIG_COMMON_NAME = new SelectList(db.CONFIGs, "CONFIG_COMMON_NAME", "CONFIG_COMMON_NAME", sClient);
+            ViewBag.CONFIG_COMMON_NAME = sClient;
             ViewBag.DIM_DATA_TYPE = new SelectList(db.vDATA_TYPES, "DIM_DATA_TYPE", "DIM_DATA_TYPE");
-            ViewBag.DIM_COMMON_NAME = new SelectList(db.DIMs.OrderBy(x => x.DIM_COMMON_NAME), "DIM_COMMON_NAME", "DIM_COMMON_NAME");                    
+            ViewBag.listDims = new SelectList(dims, "DIM_COMMON_NAME", "DESCR");            
             ViewBag.listFeatures = new MultiSelectList(features, "DIM_FIELD_FEATURE", "DESCR");
+            ViewBag.sClient = sClient;
 
             return View();
         }
@@ -150,6 +161,7 @@ namespace DHConfig.Controllers
             ViewBag.DIM_COMMON_NAME = new SelectList(dims, "DIM_COMMON_NAME", "DIM_COMMON_NAME", dIM_FIELD.DIM_COMMON_NAME);
             ViewBag.DIM_DATA_TYPE = new SelectList(db.vDATA_TYPES, "DIM_DATA_TYPE", "DIM_DATA_TYPE");            
             ViewBag.listFeatures = new MultiSelectList(features, "DIM_FIELD_FEATURE", "DESCR", dIM_FIELD.SelectedItems);
+            ViewBag.sClient = sClient;
 
             return View(dIM_FIELD);
         }
@@ -252,7 +264,8 @@ namespace DHConfig.Controllers
             return View(dIM_FIELD);
         }
 
-        // GET: DIM_FIELD/Delete/5        
+        // GET: DIM_FIELD/Delete/5      
+        [ImportModelStateFromTempData]
         public ActionResult Delete(string CONFIG_COMMON_NAME, string DIM_COMMON_NAME, string DIM_FIELD_NAME, string sClient)
         {
 
@@ -261,6 +274,7 @@ namespace DHConfig.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.sClient = sClient;
             return View(dIM_FIELD);
         }
 

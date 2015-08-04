@@ -37,6 +37,8 @@ namespace DHConfig.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.sClient = sClient;
+
             return View(dIM);
         }
 
@@ -58,12 +60,13 @@ namespace DHConfig.Controllers
             SelectList listTypes = new SelectList(db.DIM_TYPE, "DIM_TYPE_GUID", "DIM_TYPE_NAME");
             SelectList listClients = new SelectList(db.CONFIGs, "CONFIG_COMMON_NAME", "CONFIG_COMMON_NAME");
 
-            ViewBag.CONFIG_COMMON_NAME = new SelectList(db.CONFIGs, "CONFIG_COMMON_NAME", "CONFIG_COMMON_NAME", sClient ?? listClients.ElementAt(0).Value);
+            ViewBag.CONFIG_COMMON_NAME = sClient;
             ViewBag.DIM_TYPE_GUID = new SelectList(db.DIM_TYPE, "DIM_TYPE_GUID", "DIM_TYPE_NAME");
             ViewBag.listFeatures = new MultiSelectList(features, "DIM_FEATURE", "DESCR");
 
             ViewBag.listTypes = listTypes;
             ViewBag.DIM_TABLE_SCHEMA = listSchemas;
+            ViewBag.sClient = sClient;
 
             return View();
         }
@@ -157,6 +160,7 @@ namespace DHConfig.Controllers
             ViewBag.DIM_FEATURE = listFeatures;
             ViewBag.DIM_TYPE_GUID = listTypes;           
             ViewBag.DIM_TABLE_SCHEMA = listSchemas;
+            ViewBag.sClient = sClient;
 
             return View(dIM);
         }
@@ -241,6 +245,7 @@ namespace DHConfig.Controllers
         }
 
         // GET: DIMs/Delete/5
+        [ImportModelStateFromTempData]
         public ActionResult Delete(string CONFIG_COMMON_NAME, string DIM_COMMON_NAME, string sClient)
         {
 
@@ -249,12 +254,14 @@ namespace DHConfig.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.sClient = sClient;
             return View(dIM);
         }
 
         // POST: DIMs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [ExportModelStateToTempData]
         public ActionResult DeleteConfirmed(string CONFIG_COMMON_NAME, string DIM_COMMON_NAME, string sClient)
         {
             DIM dIM = db.DIMs.Find(CONFIG_COMMON_NAME, DIM_COMMON_NAME);
