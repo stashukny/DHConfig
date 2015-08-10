@@ -11,7 +11,22 @@
 
     <script type="text/javascript" language="javascript" class="init">
         $(document).ready(function () {
-            $('#fields').dataTable();
+            $('#fields').dataTable(                             
+                {
+                "columnDefs": [{
+                    "targets": 0,
+                    "orderable": false
+                },
+                {
+                    "targets": 1,
+                    "orderable": false
+                },
+                {
+                    "targets": 2,
+                    "orderable": false
+                }],
+                "order": [[3, "asc"]]
+            });
         });
     </script>
 }
@@ -26,9 +41,12 @@
 </div>
 
 
-<table class="table" id="fields">
+<table class="table table-striped table-bordered" id="fields">
     <thead>
         <tr>
+            <th></th>
+            <th></th>
+            <th></th>
             <th>
                 CONFIG_COMMON_NAME
             </th>
@@ -48,13 +66,14 @@
                 DIM_FIELD_FEATURE
             </th>
 
-            <th></th>
-            <th></th>
-            <th></th>
+
         </tr>
     </thead>
     <tfoot>
         <tr>
+            <th></th>
+            <th></th>
+            <th></th>
             <th>
                 CONFIG_COMMON_NAME
             </th>
@@ -73,16 +92,15 @@
             <th>
                 DIM_FIELD_FEATURE
             </th>
-
-            <th></th>
-            <th></th>
-            <th></th>
         </tr>
     </tfoot>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
+                <td>@Html.ActionLink("Edit", "Edit", new { CONFIG_COMMON_NAME = item.CONFIG_COMMON_NAME, DIM_COMMON_NAME = item.DIM_COMMON_NAME, DIM_FIELD_NAME = item.DIM_FIELD_NAME, sClient = @ViewBag.sClient })</td>
+                <td>@Html.ActionLink("Details", "Details", new { CONFIG_COMMON_NAME = item.CONFIG_COMMON_NAME, DIM_COMMON_NAME = item.DIM_COMMON_NAME, DIM_FIELD_NAME = item.DIM_FIELD_NAME, sClient = @ViewBag.sClient })</td>
+                <td>@Html.ActionLink("Delete", "Delete", new { CONFIG_COMMON_NAME = item.CONFIG_COMMON_NAME, DIM_COMMON_NAME = item.DIM_COMMON_NAME, DIM_FIELD_NAME = item.DIM_FIELD_NAME, sClient = @ViewBag.sClient })</td>
                 <td>
                     @Html.DisplayFor(modelItem => item.CONFIG_COMMON_NAME)
                 </td>
@@ -110,9 +128,6 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.DIM.DIM_TABLE_SCHEMA)
                     </td>*@
-                <td>@Html.ActionLink("Edit", "Edit", new { CONFIG_COMMON_NAME = item.CONFIG_COMMON_NAME, DIM_COMMON_NAME = item.DIM_COMMON_NAME, DIM_FIELD_NAME = item.DIM_FIELD_NAME, sClient = @ViewBag.sClient })</td>
-                <td>@Html.ActionLink("Details", "Details", new { CONFIG_COMMON_NAME = item.CONFIG_COMMON_NAME, DIM_COMMON_NAME = item.DIM_COMMON_NAME, DIM_FIELD_NAME = item.DIM_FIELD_NAME, sClient = @ViewBag.sClient })</td>
-                <td>@Html.ActionLink("Delete", "Delete", new { CONFIG_COMMON_NAME = item.CONFIG_COMMON_NAME, DIM_COMMON_NAME = item.DIM_COMMON_NAME, DIM_FIELD_NAME = item.DIM_FIELD_NAME, sClient = @ViewBag.sClient })</td>
 
             </tr>
         }

@@ -453,3 +453,6 @@ table.dataTable td {
     margin-top: 0.5em;
   }
 }
+
+/*table.dataTable tr.odd { background-color: #E2E4FF; }
+table.dataTable tr.even { background-color: white; }*/
