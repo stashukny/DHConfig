@@ -1,0 +1,58 @@
+﻿@model DHConfig.FACT_FIELD
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>FACT_FIELD</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.OBJECT_TYPE_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OBJECT_TYPE_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DIM_FIELD_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DIM_FIELD_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FACT_FIELD_FEATURE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FACT_FIELD_FEATURE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CONFIG.CONFIG_DATA_PROCESS_PROC_SCHEMA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CONFIG.CONFIG_DATA_PROCESS_PROC_SCHEMA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FACT.DATA_SOURCE_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FACT.DATA_SOURCE_NAME)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -6,6 +6,7 @@
 //     Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+using System.ComponentModel.DataAnnotations;
 
 namespace DHConfig
 {
@@ -27,7 +28,8 @@ namespace DHConfig
             this.DIM_FIELD = new HashSet<DIM_FIELD>();
             this.FACTs = new HashSet<FACT>();
         }
-    
+
+        [Required]
         public string CONFIG_COMMON_NAME { get; set; }
         public string CONFIG_DATA_PROCESS_PROC_SCHEMA { get; set; }
         public string CONFIG_DATA_PROCESS_PROC_NAME { get; set; }

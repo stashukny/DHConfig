@@ -1,0 +1,192 @@
+﻿@model DHConfig.FACT
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>FACT</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FACT_TABLE_SCHEMA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FACT_TABLE_SCHEMA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FACT_TABLE_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FACT_TABLE_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FACT_FEATURE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FACT_FEATURE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DISTINCT_TABLE_KEY_SCHEMA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DISTINCT_TABLE_KEY_SCHEMA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DISTINCT_TABLE_KEY_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DISTINCT_TABLE_KEY_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DISTINCT_TABLE_VALUE_SCHEMA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DISTINCT_TABLE_VALUE_SCHEMA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DISTINCT_TABLE_VALUE_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DISTINCT_TABLE_VALUE_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DISTINCT_VALUE_PROCEDURE_SCHEMA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DISTINCT_VALUE_PROCEDURE_SCHEMA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DISTINCT_VALUE_PROCEDURE_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DISTINCT_VALUE_PROCEDURE_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DISTINCT_KEY_PROCEDURE_SCHEMA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DISTINCT_KEY_PROCEDURE_SCHEMA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DISTINCT_KEY_PROCEDURE_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DISTINCT_KEY_PROCEDURE_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FACT_LOAD_PROCEDURE_SCHEMA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FACT_LOAD_PROCEDURE_SCHEMA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FACT_LOAD_PROCEDURE_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FACT_LOAD_PROCEDURE_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FACT_PRE_EXEC_SPROC_SCHEMA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FACT_PRE_EXEC_SPROC_SCHEMA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FACT_PRE_EXEC_SPROC_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FACT_PRE_EXEC_SPROC_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FACT_POST_EXEC_SPROC_SCHEMA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FACT_POST_EXEC_SPROC_SCHEMA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FACT_POST_EXEC_SPROC_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FACT_POST_EXEC_SPROC_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IS_AUTO_GENERATED_FACT_TABLE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IS_AUTO_GENERATED_FACT_TABLE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IS_AUTO_GENERATED_LOAD_PROCEDURE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IS_AUTO_GENERATED_LOAD_PROCEDURE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CONFIG.CONFIG_DATA_PROCESS_PROC_SCHEMA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CONFIG.CONFIG_DATA_PROCESS_PROC_SCHEMA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DATA_SOURCE.DATA_SOURCE_TABLE_SCHEMA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATA_SOURCE.DATA_SOURCE_TABLE_SCHEMA)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

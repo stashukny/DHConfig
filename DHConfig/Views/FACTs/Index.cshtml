@@ -1,0 +1,153 @@
+﻿@model IEnumerable<DHConfig.FACT>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FACT_TABLE_SCHEMA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FACT_TABLE_NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FACT_FEATURE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DISTINCT_TABLE_KEY_SCHEMA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DISTINCT_TABLE_KEY_NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DISTINCT_TABLE_VALUE_SCHEMA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DISTINCT_TABLE_VALUE_NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DISTINCT_VALUE_PROCEDURE_SCHEMA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DISTINCT_VALUE_PROCEDURE_NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DISTINCT_KEY_PROCEDURE_SCHEMA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DISTINCT_KEY_PROCEDURE_NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FACT_LOAD_PROCEDURE_SCHEMA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FACT_LOAD_PROCEDURE_NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FACT_PRE_EXEC_SPROC_SCHEMA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FACT_PRE_EXEC_SPROC_NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FACT_POST_EXEC_SPROC_SCHEMA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FACT_POST_EXEC_SPROC_NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IS_AUTO_GENERATED_FACT_TABLE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IS_AUTO_GENERATED_LOAD_PROCEDURE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CONFIG.CONFIG_DATA_PROCESS_PROC_SCHEMA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DATA_SOURCE.DATA_SOURCE_TABLE_SCHEMA)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FACT_TABLE_SCHEMA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FACT_TABLE_NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FACT_FEATURE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DISTINCT_TABLE_KEY_SCHEMA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DISTINCT_TABLE_KEY_NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DISTINCT_TABLE_VALUE_SCHEMA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DISTINCT_TABLE_VALUE_NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DISTINCT_VALUE_PROCEDURE_SCHEMA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DISTINCT_VALUE_PROCEDURE_NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DISTINCT_KEY_PROCEDURE_SCHEMA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DISTINCT_KEY_PROCEDURE_NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FACT_LOAD_PROCEDURE_SCHEMA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FACT_LOAD_PROCEDURE_NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FACT_PRE_EXEC_SPROC_SCHEMA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FACT_PRE_EXEC_SPROC_NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FACT_POST_EXEC_SPROC_SCHEMA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FACT_POST_EXEC_SPROC_NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IS_AUTO_GENERATED_FACT_TABLE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IS_AUTO_GENERATED_LOAD_PROCEDURE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CONFIG.CONFIG_DATA_PROCESS_PROC_SCHEMA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DATA_SOURCE.DATA_SOURCE_TABLE_SCHEMA)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

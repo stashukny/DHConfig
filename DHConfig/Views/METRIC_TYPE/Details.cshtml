@@ -1,0 +1,90 @@
+﻿@model DHConfig.METRIC_TYPE
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>METRIC_TYPE</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.METRIC_TYPE_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.METRIC_TYPE_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.METRIC_DATA_TYPE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.METRIC_DATA_TYPE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.METRIC_CALCULATION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.METRIC_CALCULATION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.METRIC_ROLLUP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.METRIC_ROLLUP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.METRIC_PRORATE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.METRIC_PRORATE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IS_INTERNAL_AUDIT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IS_INTERNAL_AUDIT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CREATE_DATE_UTC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CREATE_DATE_UTC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MODIFIED_DATE_UTC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MODIFIED_DATE_UTC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MODIFIED_BY)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MODIFIED_BY)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.METRIC_TYPE_GUID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

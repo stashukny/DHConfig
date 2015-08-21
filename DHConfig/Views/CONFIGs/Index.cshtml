@@ -12,26 +12,26 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.CONFIG_DATA_PROCESS_PROC_SCHEMA)
+            @Html.DisplayNameFor(model => model.CONFIG_COMMON_NAME)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CONFIG_DATA_PROCESS_PROC_NAME)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CONFIG_DATA_SYNC_PROC_SCHEMA)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CONFIG_DATA_SYNC_PROC_NAME)
-        </th>
+        @*<th>
+        @Html.DisplayNameFor(model => model.CONFIG_DATA_PROCESS_PROC_NAME)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.CONFIG_DATA_SYNC_PROC_SCHEMA)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.CONFIG_DATA_SYNC_PROC_NAME)
+    </th>*@
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.CONFIG_DATA_PROCESS_PROC_SCHEMA)
+            @Html.DisplayFor(modelItem => item.CONFIG_COMMON_NAME)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.CONFIG_DATA_PROCESS_PROC_NAME)
         </td>
         <td>
@@ -39,7 +39,7 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.CONFIG_DATA_SYNC_PROC_NAME)
-        </td>
+        </td>*@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.CONFIG_COMMON_NAME }) |
             @Html.ActionLink("Details", "Details", new { id=item.CONFIG_COMMON_NAME }) |

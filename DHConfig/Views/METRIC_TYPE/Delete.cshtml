@@ -1,0 +1,96 @@
+﻿@model DHConfig.METRIC_TYPE
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>METRIC_TYPE</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.METRIC_TYPE_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.METRIC_TYPE_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.METRIC_DATA_TYPE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.METRIC_DATA_TYPE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.METRIC_CALCULATION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.METRIC_CALCULATION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.METRIC_ROLLUP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.METRIC_ROLLUP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.METRIC_PRORATE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.METRIC_PRORATE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IS_INTERNAL_AUDIT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IS_INTERNAL_AUDIT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CREATE_DATE_UTC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CREATE_DATE_UTC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MODIFIED_DATE_UTC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MODIFIED_DATE_UTC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MODIFIED_BY)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MODIFIED_BY)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

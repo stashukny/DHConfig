@@ -19,5 +19,12 @@
             @Html.DropDownList("SelectedClient")            
             <input type="submit" value="Select" />
         </p>        
+
+        <p>
+            <div align="left">
+                @Html.ActionLink("Create New", "Create", "CONFIGs", new { sClient = @ViewBag.sClient, CONFIG_COMMON_NAME = @ViewBag.sClient }, null)
+            </div>
+
+        </p>
     </form>    
 </div>

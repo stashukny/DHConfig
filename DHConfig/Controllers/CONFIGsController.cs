@@ -36,9 +36,14 @@ namespace DHConfig.Controllers
         }
 
         // GET: CONFIGs/Create
+        [HttpGet]
+        [ImportModelStateFromTempData]
         public ActionResult Create()
         {
-            return View();
+            CONFIG cONFIG = new CONFIG();
+            cONFIG.CONFIG_DATA_PROCESS_PROC_NAME = "EASY_BUTTON_PROCESS";
+            cONFIG.CONFIG_DATA_PROCESS_PROC_SCHEMA = "DBO";
+            return View(cONFIG);
         }
 
         // POST: CONFIGs/Create
@@ -46,16 +51,26 @@ namespace DHConfig.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ExportModelStateToTempData]
         public ActionResult Create([Bind(Include = "CONFIG_COMMON_NAME,CONFIG_DATA_PROCESS_PROC_SCHEMA,CONFIG_DATA_PROCESS_PROC_NAME,CONFIG_DATA_SYNC_PROC_SCHEMA,CONFIG_DATA_SYNC_PROC_NAME")] CONFIG cONFIG)
         {
-            if (ModelState.IsValid)
-            {
-                db.CONFIGs.Add(cONFIG);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                if (ModelState.IsValid)
+                {
+                    db.CONFIGs.Add(cONFIG);
+                    try
+                    {
+                    db.SaveChanges();
+                    }
 
-            return View(cONFIG);
+                    catch (Exception ex)
+                    {
+                        ModelState.AddModelError(String.Empty, ex.InnerException.InnerException.Message);
+                        return RedirectToAction("Create", "CONFIGs");
+                    }
+                }
+
+                return RedirectToAction("Index", "Home", new { SelectedClient = cONFIG.CONFIG_COMMON_NAME });
+            
         }
 
         // GET: CONFIGs/Edit/5
@@ -84,7 +99,7 @@ namespace DHConfig.Controllers
             {
                 db.Entry(cONFIG).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home");
             }
             return View(cONFIG);
         }

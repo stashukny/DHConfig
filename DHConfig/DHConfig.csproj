@@ -137,7 +137,11 @@
     <Compile Include="Controllers\CONFIGsController.cs" />
     <Compile Include="Controllers\DIMsController.cs" />
     <Compile Include="Controllers\DIM_FIELDController.cs" />
+    <Compile Include="Controllers\DIM_TYPEController.cs" />
+    <Compile Include="Controllers\FACTsController.cs" />
+    <Compile Include="Controllers\FACT_FIELDController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\METRIC_TYPEController.cs" />
     <Compile Include="DATA_SOURCE.cs">
       <DependentUpon>DHModel.tt</DependentUpon>
     </Compile>
@@ -309,6 +313,26 @@
     <Content Include="Views\DIM_FIELD\Edit.cshtml" />
     <Content Include="Views\DIM_FIELD\Index.cshtml" />
     <Content Include="Views\CurrentClient.cshtml" />
+    <Content Include="Views\DIM_TYPE\Create.cshtml" />
+    <Content Include="Views\DIM_TYPE\Delete.cshtml" />
+    <Content Include="Views\DIM_TYPE\Details.cshtml" />
+    <Content Include="Views\DIM_TYPE\Edit.cshtml" />
+    <Content Include="Views\DIM_TYPE\Index.cshtml" />
+    <Content Include="Views\METRIC_TYPE\Create.cshtml" />
+    <Content Include="Views\METRIC_TYPE\Delete.cshtml" />
+    <Content Include="Views\METRIC_TYPE\Details.cshtml" />
+    <Content Include="Views\METRIC_TYPE\Edit.cshtml" />
+    <Content Include="Views\METRIC_TYPE\Index.cshtml" />
+    <Content Include="Views\FACTs\Create.cshtml" />
+    <Content Include="Views\FACTs\Delete.cshtml" />
+    <Content Include="Views\FACTs\Details.cshtml" />
+    <Content Include="Views\FACTs\Edit.cshtml" />
+    <Content Include="Views\FACTs\Index.cshtml" />
+    <Content Include="Views\FACT_FIELD\Create.cshtml" />
+    <Content Include="Views\FACT_FIELD\Delete.cshtml" />
+    <Content Include="Views\FACT_FIELD\Details.cshtml" />
+    <Content Include="Views\FACT_FIELD\Edit.cshtml" />
+    <Content Include="Views\FACT_FIELD\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
