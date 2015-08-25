@@ -135,6 +135,9 @@
       <DependentUpon>DHModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\CONFIGsController.cs" />
+    <Compile Include="Controllers\DATA_SOURCEController.cs" />
+    <Compile Include="Controllers\DATA_SOURCE_FIELDController.cs" />
+    <Compile Include="Controllers\DATA_SOURCE_TYPEController.cs" />
     <Compile Include="Controllers\DIMsController.cs" />
     <Compile Include="Controllers\DIM_FIELDController.cs" />
     <Compile Include="Controllers\DIM_TYPEController.cs" />
@@ -230,6 +233,9 @@
     <Compile Include="USER_CHANGE.cs">
       <DependentUpon>DHModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="vDATA_SOURCE_TYPE_WITH_PARENT.cs">
+      <DependentUpon>DHModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="vDATA_TYPES.cs">
       <DependentUpon>DHModel.tt</DependentUpon>
     </Compile>
@@ -313,15 +319,9 @@
     <Content Include="Views\DIM_FIELD\Edit.cshtml" />
     <Content Include="Views\DIM_FIELD\Index.cshtml" />
     <Content Include="Views\CurrentClient.cshtml" />
-    <Content Include="Views\DIM_TYPE\Create.cshtml" />
-    <Content Include="Views\DIM_TYPE\Delete.cshtml" />
     <Content Include="Views\DIM_TYPE\Details.cshtml" />
-    <Content Include="Views\DIM_TYPE\Edit.cshtml" />
     <Content Include="Views\DIM_TYPE\Index.cshtml" />
-    <Content Include="Views\METRIC_TYPE\Create.cshtml" />
-    <Content Include="Views\METRIC_TYPE\Delete.cshtml" />
     <Content Include="Views\METRIC_TYPE\Details.cshtml" />
-    <Content Include="Views\METRIC_TYPE\Edit.cshtml" />
     <Content Include="Views\METRIC_TYPE\Index.cshtml" />
     <Content Include="Views\FACTs\Create.cshtml" />
     <Content Include="Views\FACTs\Delete.cshtml" />
@@ -333,6 +333,18 @@
     <Content Include="Views\FACT_FIELD\Details.cshtml" />
     <Content Include="Views\FACT_FIELD\Edit.cshtml" />
     <Content Include="Views\FACT_FIELD\Index.cshtml" />
+    <Content Include="Views\DATA_SOURCE\Create.cshtml" />
+    <Content Include="Views\DATA_SOURCE\Delete.cshtml" />
+    <Content Include="Views\DATA_SOURCE\Details.cshtml" />
+    <Content Include="Views\DATA_SOURCE\Edit.cshtml" />
+    <Content Include="Views\DATA_SOURCE\Index.cshtml" />
+    <Content Include="Views\DATA_SOURCE_TYPE\Details.cshtml" />
+    <Content Include="Views\DATA_SOURCE_TYPE\Index.cshtml" />
+    <Content Include="Views\DATA_SOURCE_FIELD\Create.cshtml" />
+    <Content Include="Views\DATA_SOURCE_FIELD\Delete.cshtml" />
+    <Content Include="Views\DATA_SOURCE_FIELD\Details.cshtml" />
+    <Content Include="Views\DATA_SOURCE_FIELD\Edit.cshtml" />
+    <Content Include="Views\DATA_SOURCE_FIELD\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

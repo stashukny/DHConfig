@@ -15,10 +15,15 @@ namespace DHConfig.Controllers
         private DataHammerConfigEntities db = new DataHammerConfigEntities();
 
         // GET: FACTs
-        public ActionResult Index()
+        public ActionResult Index(string SelectedClient)
         {
             var fACTs = db.FACTs.Include(f => f.CONFIG).Include(f => f.DATA_SOURCE);
+
+            ViewBag.sClient = SelectedClient;
+
             return View(fACTs.ToList());
+
+            
         }
 
         // GET: FACTs/Details/5
@@ -39,13 +44,18 @@ namespace DHConfig.Controllers
         // GET: FACTs/Create
         public ActionResult Create(string sClient)
         {
+            FACT fact = new FACT();
+            fact.CONFIG_COMMON_NAME = sClient;
+
             ViewBag.CONFIG_COMMON_NAME = sClient;
-            var factCommonNames = db.DATA_SOURCE
+            var datasources = db.DATA_SOURCE
             .Where(f => f.CONFIG_COMMON_NAME == sClient)
             .ToList();
 
-            ViewBag.listDataSources = new SelectList(factCommonNames, "DATA_SORUCE_NAME", "DATA_SORUCE_NAME");
-            return View();
+            ViewBag.listDataSources = new SelectList(datasources, "DATA_SOURCE_NAME", "DATA_SOURCE_NAME");
+            ViewBag.sClient = sClient;
+
+            return View(fact);
         }
 
         // POST: FACTs/Create

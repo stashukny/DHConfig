@@ -4,54 +4,69 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+@section AddToHead{
+    <script type="text/javascript" language="javascript" src="~/Scripts/jquery.js"></script>
+    <script type="text/javascript" language="javascript" src="~/Scripts/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/Content/jquery.dataTables.min.css">
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.DIM_TYPE_NAME)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DIM_TYPE_INCLUDE_DATA_SOURCE)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CREATE_DATE_UTC)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MODIFIED_DATE_UTC)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MODIFIED_BY)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.DIM_TYPE_NAME)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DIM_TYPE_INCLUDE_DATA_SOURCE)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CREATE_DATE_UTC)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MODIFIED_DATE_UTC)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MODIFIED_BY)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.DIM_TYPE_GUID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.DIM_TYPE_GUID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.DIM_TYPE_GUID })
-        </td>
-    </tr>
+    <script type="text/javascript" language="javascript" class="init">
+        $(document).ready(function () {
+            $('#dimtypes').dataTable();
+        });
+    </script>
 }
+
+<div>
+    @Html.Partial("~/Views/CurrentClient.cshtml")
+</div>
+
+<table class="table table-striped table-bordered" id="dimtypes">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DIM_TYPE_NAME)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DIM_TYPE_INCLUDE_DATA_SOURCE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CREATE_DATE_UTC)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MODIFIED_DATE_UTC)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MODIFIED_BY)
+            </th>
+            @*<th></th>*@
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DIM_TYPE_NAME)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DIM_TYPE_INCLUDE_DATA_SOURCE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CREATE_DATE_UTC)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MODIFIED_DATE_UTC)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MODIFIED_BY)
+                </td>
+                @*<td>
+                        @Html.ActionLink("Edit", "Edit", new { id=item.DIM_TYPE_GUID }) |
+                        @Html.ActionLink("Details", "Details", new { id=item.DIM_TYPE_GUID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id=item.DIM_TYPE_GUID })
+                    </td>*@
+            </tr>
+        }
+    </tbody>
 
 </table>

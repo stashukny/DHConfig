@@ -4,78 +4,98 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+@section AddToHead{
+    <script type="text/javascript" language="javascript" src="~/Scripts/jquery.js"></script>
+    <script type="text/javascript" language="javascript" src="~/Scripts/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/Content/jquery.dataTables.min.css">
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.METRIC_TYPE_NAME)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.METRIC_DATA_TYPE)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.METRIC_CALCULATION)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.METRIC_ROLLUP)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.METRIC_PRORATE)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IS_INTERNAL_AUDIT)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CREATE_DATE_UTC)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MODIFIED_DATE_UTC)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MODIFIED_BY)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.METRIC_TYPE_NAME)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.METRIC_DATA_TYPE)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.METRIC_CALCULATION)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.METRIC_ROLLUP)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.METRIC_PRORATE)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IS_INTERNAL_AUDIT)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CREATE_DATE_UTC)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MODIFIED_DATE_UTC)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MODIFIED_BY)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.METRIC_TYPE_GUID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.METRIC_TYPE_GUID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.METRIC_TYPE_GUID })
-        </td>
-    </tr>
+    <script type="text/javascript" language="javascript" class="init">
+        $(document).ready(function () {
+            $('#metrictypes').dataTable();
+        });
+    </script>
 }
+
+
+
+
+
+<div>
+    @Html.Partial("~/Views/CurrentClient.cshtml")
+</div>
+
+<table class="table table-striped table-bordered" id="metrictypes">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.METRIC_TYPE_NAME)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.METRIC_DATA_TYPE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.METRIC_CALCULATION)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.METRIC_ROLLUP)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.METRIC_PRORATE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IS_INTERNAL_AUDIT)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CREATE_DATE_UTC)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MODIFIED_DATE_UTC)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MODIFIED_BY)
+            </th>
+            @*<th></th>*@
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.METRIC_TYPE_NAME)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.METRIC_DATA_TYPE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.METRIC_CALCULATION)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.METRIC_ROLLUP)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.METRIC_PRORATE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IS_INTERNAL_AUDIT)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CREATE_DATE_UTC)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MODIFIED_DATE_UTC)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MODIFIED_BY)
+                </td>
+                @*<td>
+                        @Html.ActionLink("Edit", "Edit", new { id=item.METRIC_TYPE_GUID }) |
+                        @Html.ActionLink("Details", "Details", new { id=item.METRIC_TYPE_GUID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id=item.METRIC_TYPE_GUID })
+                    </td>*@
+            </tr>
+        }
+    </tbody>
 
 </table>

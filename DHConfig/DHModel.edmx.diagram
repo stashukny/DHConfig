@@ -51,6 +51,7 @@
         <AssociationConnector Association="DataHammerConfigModel.FK_CONFIG_SUMMARY_FACT_FACT_FILED" />
         <EntityTypeShape EntityType="DataHammerConfigModel.vSCHEMA" Width="1.5" PointX="11" PointY="16.375" />
         <EntityTypeShape EntityType="DataHammerConfigModel.vDATA_TYPES" Width="1.5" PointX="0.75" PointY="11.75" />
+        <EntityTypeShape EntityType="DataHammerConfigModel.vDATA_SOURCE_TYPE_WITH_PARENT" Width="1.5" PointX="3.375" PointY="14.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

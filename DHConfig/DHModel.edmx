@@ -517,6 +517,20 @@ warning 6002: The table/view 'DataHammerConfig.CONFIG.vSTATIC_DIM' does not have
           <Property Name="IS_STATIC" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6005: The data type 'hierarchyid' is currently not supported for the target Entity Framework version; the column 'DATA_SOURCE_TYPE_HID' in the table 'DataHammerConfig.META_CORE.vDATA_SOURCE_TYPE_WITH_PARENT' was excluded.
+warning 6002: The table/view 'DataHammerConfig.META_CORE.vDATA_SOURCE_TYPE_WITH_PARENT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vDATA_SOURCE_TYPE_WITH_PARENT">
+          <Key>
+            <PropertyRef Name="DATA_SOURCE_TYPE_GUID" />
+            <PropertyRef Name="DATA_SOURCE_TYPE_NAME" />
+          </Key>
+          <Property Name="DATA_SOURCE_TYPE_GUID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DATA_SOURCE_TYPE_HID_STRING" Type="nvarchar" MaxLength="4000" />
+          <Property Name="DATA_SOURCE_TYPE_HID_LEVEL" Type="smallint" />
+          <Property Name="DATA_SOURCE_TYPE_NAME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DATA_SOURCE_TYPE_NAME_WITH_PARENT" Type="varchar" MaxLength="103" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'DataHammerConfig.UTILITY.vDATA_TYPES' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vDATA_TYPES">
           <Key>
@@ -861,6 +875,15 @@ warning 6002: The table/view 'DataHammerConfig.UTILITY.vSCHEMAS' does not have a
     [vSTATIC_DIM].[DIM_FEATURE] AS [DIM_FEATURE], 
     [vSTATIC_DIM].[IS_STATIC] AS [IS_STATIC]
     FROM [CONFIG].[vSTATIC_DIM] AS [vSTATIC_DIM]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vDATA_SOURCE_TYPE_WITH_PARENT" EntityType="Self.vDATA_SOURCE_TYPE_WITH_PARENT" store:Type="Views" store:Schema="META_CORE">
+            <DefiningQuery>SELECT 
+    [vDATA_SOURCE_TYPE_WITH_PARENT].[DATA_SOURCE_TYPE_GUID] AS [DATA_SOURCE_TYPE_GUID], 
+    [vDATA_SOURCE_TYPE_WITH_PARENT].[DATA_SOURCE_TYPE_HID_STRING] AS [DATA_SOURCE_TYPE_HID_STRING], 
+    [vDATA_SOURCE_TYPE_WITH_PARENT].[DATA_SOURCE_TYPE_HID_LEVEL] AS [DATA_SOURCE_TYPE_HID_LEVEL], 
+    [vDATA_SOURCE_TYPE_WITH_PARENT].[DATA_SOURCE_TYPE_NAME] AS [DATA_SOURCE_TYPE_NAME], 
+    [vDATA_SOURCE_TYPE_WITH_PARENT].[DATA_SOURCE_TYPE_NAME_WITH_PARENT] AS [DATA_SOURCE_TYPE_NAME_WITH_PARENT]
+    FROM [META_CORE].[vDATA_SOURCE_TYPE_WITH_PARENT] AS [vDATA_SOURCE_TYPE_WITH_PARENT]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vDATA_TYPES" EntityType="Self.vDATA_TYPES" store:Type="Views" store:Schema="UTILITY">
             <DefiningQuery>SELECT 
@@ -1288,6 +1311,7 @@ warning 6002: The table/view 'DataHammerConfig.UTILITY.vSCHEMAS' does not have a
           </AssociationSet>
           <EntitySet Name="vSCHEMAS" EntityType="DataHammerConfigModel.vSCHEMA" />
           <EntitySet Name="vDATA_TYPES" EntityType="DataHammerConfigModel.vDATA_TYPES" />
+          <EntitySet Name="vDATA_SOURCE_TYPE_WITH_PARENT" EntityType="DataHammerConfigModel.vDATA_SOURCE_TYPE_WITH_PARENT" />
         </EntityContainer>
         <EntityType Name="BITWISE_DICTIONARY">
           <Key>
@@ -1727,6 +1751,17 @@ warning 6002: The table/view 'DataHammerConfig.UTILITY.vSCHEMAS' does not have a
           </Key>
           <Property Name="DIM_DATA_TYPE" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="vDATA_SOURCE_TYPE_WITH_PARENT">
+          <Key>
+            <PropertyRef Name="DATA_SOURCE_TYPE_GUID" />
+            <PropertyRef Name="DATA_SOURCE_TYPE_NAME" />
+          </Key>
+          <Property Name="DATA_SOURCE_TYPE_GUID" Type="Guid" Nullable="false" />
+          <Property Name="DATA_SOURCE_TYPE_HID_STRING" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="DATA_SOURCE_TYPE_HID_LEVEL" Type="Int16" />
+          <Property Name="DATA_SOURCE_TYPE_NAME" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DATA_SOURCE_TYPE_NAME_WITH_PARENT" Type="String" MaxLength="103" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2164,6 +2199,17 @@ warning 6002: The table/view 'DataHammerConfig.UTILITY.vSCHEMAS' does not have a
             <EntityTypeMapping TypeName="DataHammerConfigModel.vDATA_TYPES">
               <MappingFragment StoreEntitySet="vDATA_TYPES">
                 <ScalarProperty Name="DIM_DATA_TYPE" ColumnName="DIM_DATA_TYPE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vDATA_SOURCE_TYPE_WITH_PARENT">
+            <EntityTypeMapping TypeName="DataHammerConfigModel.vDATA_SOURCE_TYPE_WITH_PARENT">
+              <MappingFragment StoreEntitySet="vDATA_SOURCE_TYPE_WITH_PARENT">
+                <ScalarProperty Name="DATA_SOURCE_TYPE_NAME_WITH_PARENT" ColumnName="DATA_SOURCE_TYPE_NAME_WITH_PARENT" />
+                <ScalarProperty Name="DATA_SOURCE_TYPE_NAME" ColumnName="DATA_SOURCE_TYPE_NAME" />
+                <ScalarProperty Name="DATA_SOURCE_TYPE_HID_LEVEL" ColumnName="DATA_SOURCE_TYPE_HID_LEVEL" />
+                <ScalarProperty Name="DATA_SOURCE_TYPE_HID_STRING" ColumnName="DATA_SOURCE_TYPE_HID_STRING" />
+                <ScalarProperty Name="DATA_SOURCE_TYPE_GUID" ColumnName="DATA_SOURCE_TYPE_GUID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

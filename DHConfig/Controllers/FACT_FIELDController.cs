@@ -45,6 +45,8 @@ namespace DHConfig.Controllers
             .ToList();
 
             ViewBag.listFactCommonName = new SelectList(factCommonNames, "FACT_COMMON_NAME", "FACT_COMMON_NAME");
+            ViewBag.sClient = sClient;
+
             return View();
         }
 

@@ -55,5 +55,6 @@ namespace DHConfig
         public virtual DbSet<FACT> FACTs { get; set; }
         public virtual DbSet<vSCHEMA> vSCHEMAS { get; set; }
         public virtual DbSet<vDATA_TYPES> vDATA_TYPES { get; set; }
+        public virtual DbSet<vDATA_SOURCE_TYPE_WITH_PARENT> vDATA_SOURCE_TYPE_WITH_PARENT { get; set; }
     }
 }

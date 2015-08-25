@@ -1,0 +1,66 @@
+﻿@model DHConfig.DATA_SOURCE_TYPE
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DATA_SOURCE_TYPE</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CREATE_DATE_UTC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CREATE_DATE_UTC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MODIFIED_DATE_UTC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MODIFIED_DATE_UTC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MODIFIED_BY)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MODIFIED_BY)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DATA_SOURCE_TYPE_HID_STRING)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATA_SOURCE_TYPE_HID_STRING)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DATA_SOURCE_TYPE_HID_LEVEL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATA_SOURCE_TYPE_HID_LEVEL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DATA_SOURCE_TYPE_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATA_SOURCE_TYPE_NAME)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.DATA_SOURCE_TYPE_GUID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

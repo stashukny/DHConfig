@@ -4,54 +4,90 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+@section AddToHead{
+    <script type="text/javascript" language="javascript" src="~/Scripts/jquery.js"></script>
+    <script type="text/javascript" language="javascript" src="~/Scripts/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/Content/jquery.dataTables.min.css">
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.OBJECT_TYPE_NAME)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DIM_FIELD_NAME)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FACT_FIELD_FEATURE)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CONFIG.CONFIG_DATA_PROCESS_PROC_SCHEMA)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FACT.DATA_SOURCE_NAME)
-        </th>
-        <th></th>
-    </tr>
+    <script type="text/javascript" language="javascript" class="init">
+    $(document).ready(function () {
+        $('#factfields').dataTable(
+            {
+                "columnDefs": [{
+                    "targets": 0,
+                    "orderable": false
+                },
+                {
+                    "targets": 1,
+                    "orderable": false
+                },
+                {
+                    "targets": 2,
+                    "orderable": false
+                }],
+                "order": [[3, "asc"]]
+            });
+    });
+    </script>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.OBJECT_TYPE_NAME)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DIM_FIELD_NAME)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FACT_FIELD_FEATURE)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CONFIG.CONFIG_DATA_PROCESS_PROC_SCHEMA)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FACT.DATA_SOURCE_NAME)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
 }
 
+
+
+<div align="right">
+    @Html.ActionLink("Create New", "Create", new { sClient = @ViewBag.sClient })
+</div>
+
+<div>
+    @Html.Partial("~/Views/CurrentClient.cshtml")
+</div>
+
+<table class="table table-striped table-bordered" id="factfields">
+    <thead>
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.OBJECT_TYPE_NAME)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DIM_FIELD_NAME)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FACT_FIELD_FEATURE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CONFIG.CONFIG_DATA_PROCESS_PROC_SCHEMA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FACT.DATA_SOURCE_NAME)
+            </th>            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.ActionLink("Edit", "Edit", new { CONFIG_COMMON_NAME = item.CONFIG_COMMON_NAME, FACT_COMMON_NAME = item.FACT_COMMON_NAME, FACT_FIELD_NAME = item.FACT_FIELD_NAME, sClient = @ViewBag.sClient })</td>
+                <td>@Html.ActionLink("Details", "Details", new { CONFIG_COMMON_NAME = item.CONFIG_COMMON_NAME, FACT_COMMON_NAME = item.FACT_COMMON_NAME, FACT_FIELD_NAME = item.FACT_FIELD_NAME, sClient = @ViewBag.sClient })</td>
+                <td>@Html.ActionLink("Delete", "Delete", new { CONFIG_COMMON_NAME = item.CONFIG_COMMON_NAME, FACT_COMMON_NAME = item.FACT_COMMON_NAME, FACT_FIELD_NAME = item.FACT_FIELD_NAME, sClient = @ViewBag.sClient })</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OBJECT_TYPE_NAME)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DIM_FIELD_NAME)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FACT_FIELD_FEATURE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CONFIG.CONFIG_DATA_PROCESS_PROC_SCHEMA)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FACT.DATA_SOURCE_NAME)
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>

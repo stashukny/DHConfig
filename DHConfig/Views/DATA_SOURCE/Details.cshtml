@@ -1,0 +1,170 @@
+﻿@model DHConfig.DATA_SOURCE
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DATA_SOURCE</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DATA_SOURCE_TABLE_SCHEMA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATA_SOURCE_TABLE_SCHEMA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DATA_SOURCE_TABLE_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATA_SOURCE_TABLE_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DATA_SOURCE_RAW_VIEW_SCHEMA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATA_SOURCE_RAW_VIEW_SCHEMA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DATA_SOURCE_RAW_VIEW_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATA_SOURCE_RAW_VIEW_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DATA_SOURCE_TABLE_PROC_UPDATE_SCHEMA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATA_SOURCE_TABLE_PROC_UPDATE_SCHEMA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DATA_SOURCE_TABLE_PROC_UPDATE_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATA_SOURCE_TABLE_PROC_UPDATE_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DATA_SOURCE_TABLE_PROC_INSERT_SCHEMA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATA_SOURCE_TABLE_PROC_INSERT_SCHEMA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DATA_SOURCE_TABLE_PROC_INSERT_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATA_SOURCE_TABLE_PROC_INSERT_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DATA_SOURCE_TABLE_PROC_DELETE_SCHEMA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATA_SOURCE_TABLE_PROC_DELETE_SCHEMA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DATA_SOURCE_TABLE_PROC_DELETE_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATA_SOURCE_TABLE_PROC_DELETE_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DATA_SOURCE_TABLE_PROC_DDL_PARENT_SCHEMA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATA_SOURCE_TABLE_PROC_DDL_PARENT_SCHEMA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DATA_SOURCE_TABLE_PROC_DDL_PARENT_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATA_SOURCE_TABLE_PROC_DDL_PARENT_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DATA_SOURCE_RAW_UI_VIEW_SCHEMA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATA_SOURCE_RAW_UI_VIEW_SCHEMA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DATA_SOURCE_RAW_UI_VIEW_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATA_SOURCE_RAW_UI_VIEW_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DATA_SOURCE_FEATURE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATA_SOURCE_FEATURE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DATA_SOURCE_TEST_DATA_PROC_SCHEMA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATA_SOURCE_TEST_DATA_PROC_SCHEMA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DATA_SOURCE_TEST_DATA_PROC_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATA_SOURCE_TEST_DATA_PROC_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CONFIG.CONFIG_DATA_PROCESS_PROC_SCHEMA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CONFIG.CONFIG_DATA_PROCESS_PROC_SCHEMA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DATA_SOURCE_TYPE.MODIFIED_BY)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATA_SOURCE_TYPE.MODIFIED_BY)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

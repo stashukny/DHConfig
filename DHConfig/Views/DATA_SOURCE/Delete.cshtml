@@ -1,0 +1,176 @@
+﻿@model DHConfig.DATA_SOURCE
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>DATA_SOURCE</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DATA_SOURCE_TABLE_SCHEMA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATA_SOURCE_TABLE_SCHEMA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DATA_SOURCE_TABLE_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATA_SOURCE_TABLE_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DATA_SOURCE_RAW_VIEW_SCHEMA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATA_SOURCE_RAW_VIEW_SCHEMA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DATA_SOURCE_RAW_VIEW_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATA_SOURCE_RAW_VIEW_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DATA_SOURCE_TABLE_PROC_UPDATE_SCHEMA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATA_SOURCE_TABLE_PROC_UPDATE_SCHEMA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DATA_SOURCE_TABLE_PROC_UPDATE_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATA_SOURCE_TABLE_PROC_UPDATE_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DATA_SOURCE_TABLE_PROC_INSERT_SCHEMA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATA_SOURCE_TABLE_PROC_INSERT_SCHEMA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DATA_SOURCE_TABLE_PROC_INSERT_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATA_SOURCE_TABLE_PROC_INSERT_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DATA_SOURCE_TABLE_PROC_DELETE_SCHEMA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATA_SOURCE_TABLE_PROC_DELETE_SCHEMA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DATA_SOURCE_TABLE_PROC_DELETE_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATA_SOURCE_TABLE_PROC_DELETE_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DATA_SOURCE_TABLE_PROC_DDL_PARENT_SCHEMA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATA_SOURCE_TABLE_PROC_DDL_PARENT_SCHEMA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DATA_SOURCE_TABLE_PROC_DDL_PARENT_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATA_SOURCE_TABLE_PROC_DDL_PARENT_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DATA_SOURCE_RAW_UI_VIEW_SCHEMA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATA_SOURCE_RAW_UI_VIEW_SCHEMA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DATA_SOURCE_RAW_UI_VIEW_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATA_SOURCE_RAW_UI_VIEW_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DATA_SOURCE_FEATURE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATA_SOURCE_FEATURE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DATA_SOURCE_TEST_DATA_PROC_SCHEMA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATA_SOURCE_TEST_DATA_PROC_SCHEMA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DATA_SOURCE_TEST_DATA_PROC_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATA_SOURCE_TEST_DATA_PROC_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CONFIG.CONFIG_DATA_PROCESS_PROC_SCHEMA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CONFIG.CONFIG_DATA_PROCESS_PROC_SCHEMA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DATA_SOURCE_TYPE.MODIFIED_BY)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATA_SOURCE_TYPE.MODIFIED_BY)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -60,6 +60,8 @@ namespace DHConfig.Controllers
             SelectList listTypes = new SelectList(db.DIM_TYPE, "DIM_TYPE_GUID", "DIM_TYPE_NAME");
             SelectList listClients = new SelectList(db.CONFIGs, "CONFIG_COMMON_NAME", "CONFIG_COMMON_NAME");
 
+            //revisit
+
             ViewBag.CONFIG_COMMON_NAME = sClient;
             ViewBag.DIM_TYPE_GUID = new SelectList(db.DIM_TYPE, "DIM_TYPE_GUID", "DIM_TYPE_NAME");
             ViewBag.listFeatures = new MultiSelectList(features, "DIM_FEATURE", "DESCR");

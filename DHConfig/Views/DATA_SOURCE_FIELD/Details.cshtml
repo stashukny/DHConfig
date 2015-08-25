@@ -1,0 +1,98 @@
+﻿@model DHConfig.DATA_SOURCE_FIELD
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DATA_SOURCE_FIELD</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SOURCE_COLUMN_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SOURCE_COLUMN_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SOURCE_COLUMN_DATA_TYPE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SOURCE_COLUMN_DATA_TYPE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RAW_VIEW_COLUMN_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RAW_VIEW_COLUMN_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RAW_VIEW_COLUMN_DATA_TYPE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RAW_VIEW_COLUMN_DATA_TYPE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IS_DIM_HASH)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IS_DIM_HASH)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IS_IDENTITY)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IS_IDENTITY)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DERIVED_CONFIGURATION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DERIVED_CONFIGURATION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DATA_SOURCE_FIELD_FEATURE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATA_SOURCE_FIELD_FEATURE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CONFIG.CONFIG_DATA_PROCESS_PROC_SCHEMA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CONFIG.CONFIG_DATA_PROCESS_PROC_SCHEMA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DATA_SOURCE.DATA_SOURCE_TABLE_SCHEMA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATA_SOURCE.DATA_SOURCE_TABLE_SCHEMA)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
