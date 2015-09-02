@@ -13,11 +13,17 @@ namespace DHConfig.Controllers
 
         public ActionResult Index(string SelectedClient)
         {
+
+            if (SelectedClient == null && Session["sClient"] != null)
+            {
+                SelectedClient = Session["sClient"].ToString();
+            }
+
             var Clients = db.CONFIGs.OrderBy(q => q.CONFIG_COMMON_NAME).Distinct().ToList();
             SelectList clients = new SelectList(Clients, "CONFIG_COMMON_NAME", "CONFIG_COMMON_NAME", SelectedClient);
             
             ViewBag.SelectedClient = clients;
-            ViewBag.sClient = clients.SelectedValue;
+            
             return View(db.CONFIGs.ToList());
         }
 

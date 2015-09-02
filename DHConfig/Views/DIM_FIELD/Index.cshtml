@@ -30,11 +30,10 @@
         });
     </script>
 }
-@*<h2>Index</h2>*@
-@*<h4>Dimension Fields</h4>*@
 <div align="right">
-    @Html.ActionLink("Create New", "Create", new { sClient = @ViewBag.sClient, CONFIG_COMMON_NAME = @ViewBag.sClient })
+    @Html.Partial("~/Views/CreateNew.cshtml")
 </div>
+
 
 <div>
     @Html.Partial("~/Views/CurrentClient.cshtml")
@@ -69,31 +68,6 @@
 
         </tr>
     </thead>
-    <tfoot>
-        <tr>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th>
-                CONFIG_COMMON_NAME
-            </th>
-            <th>
-                DIM_COMMON_NAME
-            </th>
-            <th>
-                DIM_FIELD_NAME
-            </th>
-            <th>
-                DIM_FIELD_NAME_CLEAN
-            </th>
-            <th>
-                DIM_DATA_TYPE
-            </th>
-            <th>
-                DIM_FIELD_FEATURE
-            </th>
-        </tr>
-    </tfoot>
     <tbody>
         @foreach (var item in Model)
         {

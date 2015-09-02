@@ -15,25 +15,19 @@ namespace DHConfig.Controllers
         private DataHammerConfigEntities db = new DataHammerConfigEntities();
 
         // GET: FACTs
-        public ActionResult Index(string SelectedClient)
+        public ActionResult Index()
         {
-            var fACTs = db.FACTs.Include(f => f.CONFIG).Include(f => f.DATA_SOURCE);
-
-            ViewBag.sClient = SelectedClient;
-
+            var fACTs = db.FACTs.Include(f => f.CONFIG).Include(f => f.DATA_SOURCE);            
             return View(fACTs.ToList());
 
             
         }
 
         // GET: FACTs/Details/5
-        public ActionResult Details(string id)
+        public ActionResult Details(string CONFIG_COMMON_NAME, string FACT_COMMON_NAME)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            FACT fACT = db.FACTs.Find(id);
+
+            FACT fACT = db.FACTs.Find(CONFIG_COMMON_NAME, FACT_COMMON_NAME);
             if (fACT == null)
             {
                 return HttpNotFound();
@@ -42,8 +36,10 @@ namespace DHConfig.Controllers
         }
 
         // GET: FACTs/Create
-        public ActionResult Create(string sClient)
+        public ActionResult Create()
         {
+            string sClient = Session["sClient"].ToString();
+            
             FACT fact = new FACT();
             fact.CONFIG_COMMON_NAME = sClient;
 
@@ -52,8 +48,7 @@ namespace DHConfig.Controllers
             .Where(f => f.CONFIG_COMMON_NAME == sClient)
             .ToList();
 
-            ViewBag.listDataSources = new SelectList(datasources, "DATA_SOURCE_NAME", "DATA_SOURCE_NAME");
-            ViewBag.sClient = sClient;
+            ViewBag.listDataSources = new SelectList(datasources, "DATA_SOURCE_NAME", "DATA_SOURCE_NAME");            
 
             return View(fact);
         }
@@ -78,13 +73,10 @@ namespace DHConfig.Controllers
         }
 
         // GET: FACTs/Edit/5
-        public ActionResult Edit(string id)
+        public ActionResult Edit(string CONFIG_COMMON_NAME, string FACT_COMMON_NAME)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            FACT fACT = db.FACTs.Find(id);
+
+            FACT fACT = db.FACTs.Find(CONFIG_COMMON_NAME, FACT_COMMON_NAME);
             if (fACT == null)
             {
                 return HttpNotFound();
@@ -113,13 +105,9 @@ namespace DHConfig.Controllers
         }
 
         // GET: FACTs/Delete/5
-        public ActionResult Delete(string id)
+        public ActionResult Delete(string CONFIG_COMMON_NAME, string FACT_COMMON_NAME)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            FACT fACT = db.FACTs.Find(id);
+            FACT fACT = db.FACTs.Find(CONFIG_COMMON_NAME, FACT_COMMON_NAME);
             if (fACT == null)
             {
                 return HttpNotFound();
@@ -130,9 +118,9 @@ namespace DHConfig.Controllers
         // POST: FACTs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(string CONFIG_COMMON_NAME, string FACT_COMMON_NAME)
         {
-            FACT fACT = db.FACTs.Find(id);
+            FACT fACT = db.FACTs.Find(CONFIG_COMMON_NAME, FACT_COMMON_NAME);
             db.FACTs.Remove(fACT);
             db.SaveChanges();
             return RedirectToAction("Index");

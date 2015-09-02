@@ -16,36 +16,36 @@ namespace DHConfig.Controllers
         private DataHammerConfigEntities db = new DataHammerConfigEntities();
 
         // GET: DIM_FIELD
-        public ActionResult Index(string SelectedClient)
+        public ActionResult Index()
         {
-           
-            IQueryable<DIM_FIELD> fields = db.DIM_FIELD
-            .Where(c => SelectedClient == null || SelectedClient == "" || c.CONFIG_COMMON_NAME == SelectedClient);
 
-            ViewBag.sClient = SelectedClient;
-            
+            string sClient = Session["sClient"].ToString();
+
+            IQueryable<DIM_FIELD> fields = db.DIM_FIELD
+            .Where(c => sClient == null || sClient == "" || c.CONFIG_COMMON_NAME == sClient);
+                        
             var sql = fields.ToString();
 
             return View(fields.ToList());
         }
 
         // GET: DIM_FIELD/Details/5
-        public ActionResult Details(string CONFIG_COMMON_NAME, string DIM_COMMON_NAME, string DIM_FIELD_NAME, string sClient)
+        public ActionResult Details(string CONFIG_COMMON_NAME, string DIM_COMMON_NAME, string DIM_FIELD_NAME)
         {
 
             DIM_FIELD dIM_FIELD = db.DIM_FIELD.Find(CONFIG_COMMON_NAME, DIM_COMMON_NAME, DIM_FIELD_NAME);
             if (dIM_FIELD == null)
             {
                 return HttpNotFound();
-            }
-            ViewBag.sClient = sClient;
+            }            
             return View(dIM_FIELD);
         }
 
         // GET: DIM_FIELD/Create
         [ImportModelStateFromTempData]
-        public ActionResult Create(string sClient, string CONFIG_COMMON_NAME)
+        public ActionResult Create(string CONFIG_COMMON_NAME)
         {
+            string sClient = Session["sClient"].ToString();
 
             var features = db.BITWISE_DICTIONARY
             .Where(f => f.BITWISE_GROUP == "DIM_FIELDS")
@@ -65,13 +65,10 @@ namespace DHConfig.Controllers
                 DIM_COMMON_NAME = c.DIM_COMMON_NAME,
                 DESCR = c.DIM_COMMON_NAME
             });
-
-            //ViewBag.CONFIG_COMMON_NAME = new SelectList(db.CONFIGs, "CONFIG_COMMON_NAME", "CONFIG_COMMON_NAME", sClient);
-            ViewBag.CONFIG_COMMON_NAME = sClient;
+                        
             ViewBag.DIM_DATA_TYPE = new SelectList(db.vDATA_TYPES, "DIM_DATA_TYPE", "DIM_DATA_TYPE");
             ViewBag.listDims = new SelectList(dims, "DIM_COMMON_NAME", "DESCR");            
-            ViewBag.listFeatures = new MultiSelectList(features, "DIM_FIELD_FEATURE", "DESCR");
-            ViewBag.sClient = sClient;
+            ViewBag.listFeatures = new MultiSelectList(features, "DIM_FIELD_FEATURE", "DESCR");            
 
             return View();
         }
@@ -82,7 +79,7 @@ namespace DHConfig.Controllers
         [HttpPost]
         [ExportModelStateToTempData]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CONFIG_COMMON_NAME,DIM_COMMON_NAME,DIM_FIELD_NAME,DIM_FIELD_NAME_CLEAN,DIM_DATA_TYPE,DIM_FIELD_FEATURE,DERIVED_CONFIGURATION")] DIM_FIELD dIM_FIELD, string[] SelectedItems, string sClient, string CONFIG_COMMON_NAME, string DIM_COMMON_NAME, string DIM_FIELD_NAME)
+        public ActionResult Create([Bind(Include = "CONFIG_COMMON_NAME,DIM_COMMON_NAME,DIM_FIELD_NAME,DIM_FIELD_NAME_CLEAN,DIM_DATA_TYPE,DIM_FIELD_FEATURE,DERIVED_CONFIGURATION")] DIM_FIELD dIM_FIELD, string[] SelectedItems, string CONFIG_COMMON_NAME, string DIM_COMMON_NAME, string DIM_FIELD_NAME)
         {
 
             if (SelectedItems != null)
@@ -109,7 +106,7 @@ namespace DHConfig.Controllers
             if (!exists)
             {
                 ModelState.AddModelError(String.Empty, "Cannot create due to selection of invalid features.");
-                return RedirectToAction("Create", new { sClient, CONFIG_COMMON_NAME = Request["CONFIG_COMMON_NAME"].ToString(), DIM_COMMON_NAME = Request["DIM_COMMON_NAME"].ToString(), DIM_FIELD_NAME = Request["DIM_FIELD_NAME"].ToString() });
+                return RedirectToAction("Create", new { CONFIG_COMMON_NAME = Request["CONFIG_COMMON_NAME"].ToString(), DIM_COMMON_NAME = Request["DIM_COMMON_NAME"].ToString(), DIM_FIELD_NAME = Request["DIM_FIELD_NAME"].ToString() });
             }
             
             if (ModelState.IsValid)
@@ -123,10 +120,10 @@ namespace DHConfig.Controllers
                 catch (Exception ex)
                 {
                     ModelState.AddModelError(String.Empty, ex.InnerException.InnerException.Message);
-                    return RedirectToAction("Create", new { sClient, CONFIG_COMMON_NAME, DIM_COMMON_NAME, DIM_FIELD_NAME });
+                    return RedirectToAction("Create", new { CONFIG_COMMON_NAME, DIM_COMMON_NAME, DIM_FIELD_NAME });
                 }
                 //db.SaveChanges();
-                return RedirectToAction("Index", new { SelectedClient = sClient });
+                return RedirectToAction("Index");
             }
 
             return View(dIM_FIELD);
@@ -134,7 +131,7 @@ namespace DHConfig.Controllers
 
         // GET: DIM_FIELD/Edit/5
         [ImportModelStateFromTempData]
-        public ActionResult Edit(string CONFIG_COMMON_NAME, string DIM_COMMON_NAME, string DIM_FIELD_NAME, string DIM_FIELD_FEATURE, string sClient)
+        public ActionResult Edit(string CONFIG_COMMON_NAME, string DIM_COMMON_NAME, string DIM_FIELD_NAME, string DIM_FIELD_FEATURE)
         {
 
             DIM_FIELD dIM_FIELD = db.DIM_FIELD.Find(CONFIG_COMMON_NAME, DIM_COMMON_NAME, DIM_FIELD_NAME);
@@ -160,8 +157,7 @@ namespace DHConfig.Controllers
 
             ViewBag.DIM_COMMON_NAME = new SelectList(dims, "DIM_COMMON_NAME", "DIM_COMMON_NAME", dIM_FIELD.DIM_COMMON_NAME);
             ViewBag.DIM_DATA_TYPE = new SelectList(db.vDATA_TYPES, "DIM_DATA_TYPE", "DIM_DATA_TYPE");            
-            ViewBag.listFeatures = new MultiSelectList(features, "DIM_FIELD_FEATURE", "DESCR", dIM_FIELD.SelectedItems);
-            ViewBag.sClient = sClient;
+            ViewBag.listFeatures = new MultiSelectList(features, "DIM_FIELD_FEATURE", "DESCR", dIM_FIELD.SelectedItems);            
 
             return View(dIM_FIELD);
         }
@@ -172,7 +168,7 @@ namespace DHConfig.Controllers
         [HttpPost]
         [ExportModelStateToTempData]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CONFIG_COMMON_NAME,DIM_COMMON_NAME,DIM_FIELD_NAME,DIM_FIELD_NAME_CLEAN,DIM_DATA_TYPE,DIM_FIELD_FEATURE,DERIVED_CONFIGURATION")] DIM_FIELD dIM_FIELD, string[] SelectedItems, string sClient)
+        public ActionResult Edit([Bind(Include = "CONFIG_COMMON_NAME,DIM_COMMON_NAME,DIM_FIELD_NAME,DIM_FIELD_NAME_CLEAN,DIM_DATA_TYPE,DIM_FIELD_FEATURE,DERIVED_CONFIGURATION")] DIM_FIELD dIM_FIELD, string[] SelectedItems)
         {            
 
             if (SelectedItems != null)
@@ -219,7 +215,7 @@ namespace DHConfig.Controllers
                 
                 //throw error                
                 ModelState.AddModelError(String.Empty, "Cannot create due to selection of invalid features.");
-                return RedirectToAction("Edit", new { sClient, CONFIG_COMMON_NAME = Request["CONFIG_COMMON_NAME"].ToString(), DIM_COMMON_NAME = Request["DIM_COMMON_NAME"].ToString(), DIM_FIELD_NAME = Request["DIM_FIELD_NAME"].ToString() });
+                return RedirectToAction("Edit", new { CONFIG_COMMON_NAME = Request["CONFIG_COMMON_NAME"].ToString(), DIM_COMMON_NAME = Request["DIM_COMMON_NAME"].ToString(), DIM_FIELD_NAME = Request["DIM_FIELD_NAME"].ToString() });
 
             }
             
@@ -255,10 +251,10 @@ namespace DHConfig.Controllers
                 catch (Exception ex)
                 {
                     ModelState.AddModelError(String.Empty, ex.InnerException.InnerException.Message);
-                    return RedirectToAction("Edit", new { sClient, CONFIG_COMMON_NAME, DIM_COMMON_NAME, DIM_FIELD_NAME });
+                    return RedirectToAction("Edit", new { CONFIG_COMMON_NAME, DIM_COMMON_NAME, DIM_FIELD_NAME });
                 }
                 
-                return RedirectToAction("Index", new { SelectedClient = sClient });
+                return RedirectToAction("Index");
             }
 
             return View(dIM_FIELD);
@@ -266,15 +262,14 @@ namespace DHConfig.Controllers
 
         // GET: DIM_FIELD/Delete/5      
         [ImportModelStateFromTempData]
-        public ActionResult Delete(string CONFIG_COMMON_NAME, string DIM_COMMON_NAME, string DIM_FIELD_NAME, string sClient)
+        public ActionResult Delete(string CONFIG_COMMON_NAME, string DIM_COMMON_NAME, string DIM_FIELD_NAME)
         {
 
             DIM_FIELD dIM_FIELD = db.DIM_FIELD.Find(CONFIG_COMMON_NAME, DIM_COMMON_NAME, DIM_FIELD_NAME);
             if (dIM_FIELD == null)
             {
                 return HttpNotFound();
-            }
-            ViewBag.sClient = sClient;
+            }            
             return View(dIM_FIELD);
         }
 
@@ -282,12 +277,12 @@ namespace DHConfig.Controllers
         [HttpPost, ActionName("Delete")]
         [ExportModelStateToTempData]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string CONFIG_COMMON_NAME, string DIM_COMMON_NAME, string DIM_FIELD_NAME, string sClient)
+        public ActionResult DeleteConfirmed(string CONFIG_COMMON_NAME, string DIM_COMMON_NAME, string DIM_FIELD_NAME)
         {
             DIM_FIELD dIM_FIELD = db.DIM_FIELD.Find(CONFIG_COMMON_NAME, DIM_COMMON_NAME, DIM_FIELD_NAME);
             db.DIM_FIELD.Remove(dIM_FIELD);
             db.SaveChanges();
-            return RedirectToAction("Index", new { SelectedClient = sClient });
+            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
