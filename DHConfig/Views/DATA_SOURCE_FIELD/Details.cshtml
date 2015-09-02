@@ -93,6 +93,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { CONFIG_COMMON_NAME = Model.CONFIG_COMMON_NAME, DATA_SOURCE_NAME = Model.DATA_SOURCE_NAME, COLUMN_NAME = (!String.IsNullOrEmpty(Model.SOURCE_COLUMN_NAME) ? Model.SOURCE_COLUMN_NAME : Model.RAW_VIEW_COLUMN_NAME) }) |
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

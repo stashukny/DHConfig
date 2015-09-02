@@ -49,62 +49,59 @@
             <th></th>
             <th></th>
             <th>
-                DATA_SOURCE_TYPE
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.DATA_SOURCE_TABLE_SCHEMA)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.DATA_SOURCE_TABLE_NAME)
             </th>
-            @*<th>
+            <th>
                 @Html.DisplayNameFor(model => model.DATA_SOURCE_RAW_VIEW_SCHEMA)
-            </th>*@
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.DATA_SOURCE_RAW_VIEW_NAME)
             </th>
-            @*<th>
+            <th>
                 @Html.DisplayNameFor(model => model.DATA_SOURCE_TABLE_PROC_UPDATE_SCHEMA)
-            </th>*@
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.DATA_SOURCE_TABLE_PROC_UPDATE_NAME)
             </th>
-            @*<th>
+            <th>
                 @Html.DisplayNameFor(model => model.DATA_SOURCE_TABLE_PROC_INSERT_SCHEMA)
-            </th>*@
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.DATA_SOURCE_TABLE_PROC_INSERT_NAME)
             </th>
-            @*<th>
+            <th>
                 @Html.DisplayNameFor(model => model.DATA_SOURCE_TABLE_PROC_DELETE_SCHEMA)
-            </th>*@
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.DATA_SOURCE_TABLE_PROC_DELETE_NAME)
             </th>
-            @*<th>
+            <th>
                 @Html.DisplayNameFor(model => model.DATA_SOURCE_TABLE_PROC_DDL_PARENT_SCHEMA)
-            </th>*@
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.DATA_SOURCE_TABLE_PROC_DDL_PARENT_NAME)
             </th>
-            @*<th>
+            <th>
                 @Html.DisplayNameFor(model => model.DATA_SOURCE_RAW_UI_VIEW_SCHEMA)
-            </th>*@
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.DATA_SOURCE_RAW_UI_VIEW_NAME)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.DATA_SOURCE_FEATURE)
             </th>
-            @*<th>
+            <th>
                 @Html.DisplayNameFor(model => model.DATA_SOURCE_TEST_DATA_PROC_SCHEMA)
-            </th>*@
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.DATA_SOURCE_TEST_DATA_PROC_NAME)
             </th>
-            @*<th>
+            <th>
                 @Html.DisplayNameFor(model => model.CONFIG.CONFIG_DATA_PROCESS_PROC_SCHEMA)
-            </th>*@
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.DATA_SOURCE_TYPE.MODIFIED_BY)
             </th>
@@ -115,66 +112,63 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>@Html.ActionLink("Edit", "Edit", new { CONFIG_COMMON_NAME = item.CONFIG_COMMON_NAME, DATA_SOURCE_NAME = item.DATA_SOURCE_NAME })</td>
-                <td>@Html.ActionLink("Details", "Details", new { CONFIG_COMMON_NAME = item.CONFIG_COMMON_NAME, DATA_SOURCE_NAME = item.DATA_SOURCE_NAME })</td>
-                <td>@Html.ActionLink("Delete", "Delete", new { CONFIG_COMMON_NAME = item.CONFIG_COMMON_NAME, DATA_SOURCE_NAME = item.DATA_SOURCE_NAME })</td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.vDATA_SOURCE_TYPE_WITH_PARENT.DATA_SOURCE_TYPE_NAME_WITH_PARENT)
-                </td>
+                <td>@Html.ActionLink("Edit", "Edit", new { CONFIG_COMMON_NAME = item.CONFIG_COMMON_NAME, DATA_SOURCE_NAME = item.DATA_SOURCE_NAME, sClient = @ViewBag.sClient })</td>
+                <td>@Html.ActionLink("Details", "Details", new { CONFIG_COMMON_NAME = item.CONFIG_COMMON_NAME, DATA_SOURCE_NAME = item.DATA_SOURCE_NAME, sClient = @ViewBag.sClient })</td>
+                <td>@Html.ActionLink("Delete", "Delete", new { CONFIG_COMMON_NAME = item.CONFIG_COMMON_NAME, DATA_SOURCE_NAME = item.DATA_SOURCE_NAME, sClient = @ViewBag.sClient })</td>
                 <td>
                     @Html.DisplayFor(modelItem => item.DATA_SOURCE_TABLE_SCHEMA)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.DATA_SOURCE_TABLE_NAME)
                 </td>
-                @*<td>
+                <td>
                     @Html.DisplayFor(modelItem => item.DATA_SOURCE_RAW_VIEW_SCHEMA)
-                </td>*@
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.DATA_SOURCE_RAW_VIEW_NAME)
                 </td>
-                @*<td>
+                <td>
                     @Html.DisplayFor(modelItem => item.DATA_SOURCE_TABLE_PROC_UPDATE_SCHEMA)
-                </td>*@
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.DATA_SOURCE_TABLE_PROC_UPDATE_NAME)
                 </td>
-                @*<td>
+                <td>
                     @Html.DisplayFor(modelItem => item.DATA_SOURCE_TABLE_PROC_INSERT_SCHEMA)
-                </td>*@
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.DATA_SOURCE_TABLE_PROC_INSERT_NAME)
                 </td>
-                @*<td>
+                <td>
                     @Html.DisplayFor(modelItem => item.DATA_SOURCE_TABLE_PROC_DELETE_SCHEMA)
-                </td>*@
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.DATA_SOURCE_TABLE_PROC_DELETE_NAME)
                 </td>
-                @*<td>
+                <td>
                     @Html.DisplayFor(modelItem => item.DATA_SOURCE_TABLE_PROC_DDL_PARENT_SCHEMA)
-                </td>*@
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.DATA_SOURCE_TABLE_PROC_DDL_PARENT_NAME)
                 </td>
-                @*<td>
+                <td>
                     @Html.DisplayFor(modelItem => item.DATA_SOURCE_RAW_UI_VIEW_SCHEMA)
-                </td>*@
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.DATA_SOURCE_RAW_UI_VIEW_NAME)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.DATA_SOURCE_FEATURE)
                 </td>
-                @*<td>
+                <td>
                     @Html.DisplayFor(modelItem => item.DATA_SOURCE_TEST_DATA_PROC_SCHEMA)
-                </td>*@
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.DATA_SOURCE_TEST_DATA_PROC_NAME)
                 </td>
-                @*<td>
+                <td>
                     @Html.DisplayFor(modelItem => item.CONFIG.CONFIG_DATA_PROCESS_PROC_SCHEMA)
-                </td>*@
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.DATA_SOURCE_TYPE.MODIFIED_BY)
                 </td>

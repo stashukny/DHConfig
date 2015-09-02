@@ -1,16 +1,16 @@
 ﻿<p>
     <div class="form-group">
         [
-        @if (Session["sClient"] == null)
+        @if (ViewBag.sClient == null)
         {
             <b>All</b>
         }
         else
         {
-            <b>@Session["sClient"]</b>
+            <b>@ViewBag.sClient</b>
         }
         ]        
-    @Html.ActionLink("Change Client", "Index", "Home", new { area = ""}, null)
+    @Html.ActionLink("Change Client", "Index", "Home", new { area = "", SelectedClient = ViewBag.sClient }, null)
     </div>
     
 </p>

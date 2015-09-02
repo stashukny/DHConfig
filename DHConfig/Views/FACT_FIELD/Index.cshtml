@@ -69,9 +69,9 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>@Html.ActionLink("Edit", "Edit", new { CONFIG_COMMON_NAME = item.CONFIG_COMMON_NAME, FACT_COMMON_NAME = item.FACT_COMMON_NAME, FACT_FIELD_NAME = item.FACT_FIELD_NAME })</td>
-                <td>@Html.ActionLink("Details", "Details", new { CONFIG_COMMON_NAME = item.CONFIG_COMMON_NAME, FACT_COMMON_NAME = item.FACT_COMMON_NAME, FACT_FIELD_NAME = item.FACT_FIELD_NAME })</td>
-                <td>@Html.ActionLink("Delete", "Delete", new { CONFIG_COMMON_NAME = item.CONFIG_COMMON_NAME, FACT_COMMON_NAME = item.FACT_COMMON_NAME, FACT_FIELD_NAME = item.FACT_FIELD_NAME })</td>
+                <td>@Html.ActionLink("Edit", "Edit", new { CONFIG_COMMON_NAME = item.CONFIG_COMMON_NAME, FACT_COMMON_NAME = item.FACT_COMMON_NAME, FACT_FIELD_NAME = item.FACT_FIELD_NAME, sClient = @ViewBag.sClient })</td>
+                <td>@Html.ActionLink("Details", "Details", new { CONFIG_COMMON_NAME = item.CONFIG_COMMON_NAME, FACT_COMMON_NAME = item.FACT_COMMON_NAME, FACT_FIELD_NAME = item.FACT_FIELD_NAME, sClient = @ViewBag.sClient })</td>
+                <td>@Html.ActionLink("Delete", "Delete", new { CONFIG_COMMON_NAME = item.CONFIG_COMMON_NAME, FACT_COMMON_NAME = item.FACT_COMMON_NAME, FACT_FIELD_NAME = item.FACT_FIELD_NAME, sClient = @ViewBag.sClient })</td>
                 <td>
                     @Html.DisplayFor(modelItem => item.OBJECT_TYPE_NAME)
                 </td>

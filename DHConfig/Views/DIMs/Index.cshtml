@@ -34,7 +34,7 @@
 @*<h2>Index</h2>*@
 @*<h4>Dimensions</h4>*@
 <div align="right">
-    @Html.Partial("~/Views/CreateNew.cshtml")
+    @Html.ActionLink("Create New", "Create", new { sClient = @ViewBag.sClient, CONFIG_COMMON_NAME = @ViewBag.sClient })
 </div>
 
 
@@ -133,7 +133,91 @@
         </tr>
     </thead>
 
-   
+    <tfoot>
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th>
+                CONFIG_COMMON_NAME
+            </th>
+            <th>
+                DIM_COMMON_NAME
+            </th>
+            <th>
+                DIM_TYPE
+            </th>
+            <th>
+                DIM_TABLE_SCHEMA
+            </th>
+            <th>
+                DIM_TABLE_NAME
+            </th>
+            @*<th>
+                    DIM_LOAD_PROC_SCHEMA_RAW
+                </th>*@
+            <th>
+                DIM_LOAD_PROC_NAME_RAW
+            </th>
+            @*<th>
+                    DIM_TABLE_CLEAN_SCHEMA
+                </th>*@
+            <th>
+                DIM_TABLE_CLEAN_NAME
+            </th>
+            @*<th>
+                    DIM_PROC_UI_CLEAN_SCHEMA
+                </th>*@
+            <th>
+                DIM_PROC_UI_CLEAN_NAME
+            </th>
+            @*<th>
+                    DIM_LOAD_PROC_CLEAN_SCHEMA
+                </th>*@
+            <th>
+                DIM_LOAD_PROC_CLEAN_NAME
+            </th>
+            @*<th>
+                    DIM_VIEW_WHITELIST_SCHEMA
+                </th>*@
+            <th>
+                DIM_VIEW_WHITELIST_NAME
+            </th>
+            @*<th>
+                    DIM_VIEW_RAW_SCHEMA
+                </th>*@
+            <th>
+                DIM_VIEW_RAW_NAME
+            </th>
+            @*<th>
+                    DIM_VIEW_CLEAN_SCHEMA
+                </th>*@
+            <th>
+                DIM_VIEW_CLEAN_NAME
+            </th>
+            @*<th>
+                    DIM_PROC_RAW_TABLE_CLEAN_ID_SCHEMA
+                </th>*@
+            <th>
+                DIM_PROC_RAW_TABLE_CLEAN_ID_NAME
+            </th>
+            <th>
+                DIM_FEATURE
+            </th>
+
+            <th>
+                IS_STATIC
+            </th>
+            <th>
+                IS_AUTO_GENERATED
+            </th>
+
+            @*<th>
+                    CONFIG_DATA_PROCESS_PROC_SCHEMA
+                </th>*@
+
+        </tr>
+    </tfoot>
     <tbody>
 
 

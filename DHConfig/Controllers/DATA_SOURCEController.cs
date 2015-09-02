@@ -15,17 +15,21 @@ namespace DHConfig.Controllers
         private DataHammerConfigEntities db = new DataHammerConfigEntities();
 
         // GET: DATA_SOURCE
-        public ActionResult Index()
+        public ActionResult Index(string SelectedClient)
         {
-            var dATA_SOURCE = db.DATA_SOURCE.Include(d => d.CONFIG).Include(d => d.DATA_SOURCE_TYPE);   
+            var dATA_SOURCE = db.DATA_SOURCE.Include(d => d.CONFIG).Include(d => d.DATA_SOURCE_TYPE);
+            ViewBag.sClient = SelectedClient;
             return View(dATA_SOURCE.ToList());
         }
 
         // GET: DATA_SOURCE/Details/5
-        public ActionResult Details(string CONFIG_COMMON_NAME, string DATA_SOURCE_NAME)
+        public ActionResult Details(string id)
         {
-
-            DATA_SOURCE dATA_SOURCE = db.DATA_SOURCE.Find(CONFIG_COMMON_NAME, DATA_SOURCE_NAME);
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            DATA_SOURCE dATA_SOURCE = db.DATA_SOURCE.Find(id);
             if (dATA_SOURCE == null)
             {
                 return HttpNotFound();
@@ -34,21 +38,15 @@ namespace DHConfig.Controllers
         }
 
         // GET: DATA_SOURCE/Create
-        [ImportModelStateFromTempData]
-        public ActionResult Create()
+        public ActionResult Create(string sClient)
         {
-            var features = db.BITWISE_DICTIONARY
-                        .Where(f => f.BITWISE_GROUP == "DATASOURCE_ATTRIBUTES")
-                        .ToList()
-                        .Select(c => new
-                        {
-                            DIM_FEATURE = c.BITWISE_KEY,
-                            DESCR = string.Format("{0} -- {1}", c.BITWISE_KEY, c.DESCR)
-                        });
+            //DATA_SOURCE ds = new DATA_SOURCE();
+            //ds.CONFIG_COMMON_NAME = sClient;
 
-            ViewBag.listFeatures = new MultiSelectList(features, "DIM_FEATURE", "DESCR");
-            ViewBag.DATA_SOURCE_TABLE_SCHEMA = new SelectList(db.vSCHEMAS, "name", "name");
-            ViewBag.DATA_SOURCE_TYPE_GUID = new SelectList(db.vDATA_SOURCE_TYPE_WITH_PARENT, "DATA_SOURCE_TYPE_GUID", "DATA_SOURCE_TYPE_NAME_WITH_PARENT");                        
+            ViewBag.DATA_SOURCE_TYPE_GUID = new SelectList(db.vDATA_SOURCE_TYPE_WITH_PARENT, "DATA_SOURCE_TYPE_GUID", "DATA_SOURCE_TYPE_NAME_WITH_PARENT");            
+            ViewBag.sClient = sClient;
+            ViewBag.CONFIG_COMMON_NAME = sClient;            
+
             return View();
         }
 
@@ -57,7 +55,6 @@ namespace DHConfig.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [ExportModelStateToTempData]
         public ActionResult Create([Bind(Include = "CONFIG_COMMON_NAME,DATA_SOURCE_NAME,DATA_SOURCE_TYPE_GUID,DATA_SOURCE_TABLE_SCHEMA,DATA_SOURCE_TABLE_NAME,DATA_SOURCE_RAW_VIEW_SCHEMA,DATA_SOURCE_RAW_VIEW_NAME,DATA_SOURCE_TABLE_PROC_UPDATE_SCHEMA,DATA_SOURCE_TABLE_PROC_UPDATE_NAME,DATA_SOURCE_TABLE_PROC_INSERT_SCHEMA,DATA_SOURCE_TABLE_PROC_INSERT_NAME,DATA_SOURCE_TABLE_PROC_DELETE_SCHEMA,DATA_SOURCE_TABLE_PROC_DELETE_NAME,DATA_SOURCE_TABLE_PROC_DDL_PARENT_SCHEMA,DATA_SOURCE_TABLE_PROC_DDL_PARENT_NAME,DATA_SOURCE_RAW_UI_VIEW_SCHEMA,DATA_SOURCE_RAW_UI_VIEW_NAME,DATA_SOURCE_FEATURE,DATA_SOURCE_TEST_DATA_PROC_SCHEMA,DATA_SOURCE_TEST_DATA_PROC_NAME")] DATA_SOURCE dATA_SOURCE)
         {
             if (ModelState.IsValid)
@@ -65,34 +62,29 @@ namespace DHConfig.Controllers
                 db.DATA_SOURCE.Add(dATA_SOURCE);
                 db.SaveChanges();
                 return RedirectToAction("Index");
-            }            
-            
+            }
+
+
+
+            ViewBag.CONFIG_COMMON_NAME = new SelectList(db.CONFIGs, "CONFIG_COMMON_NAME", "CONFIG_DATA_PROCESS_PROC_SCHEMA", dATA_SOURCE.CONFIG_COMMON_NAME);
+            ViewBag.DATA_SOURCE_TYPE_GUID = new SelectList(db.DATA_SOURCE_TYPE, "DATA_SOURCE_TYPE_GUID", "DATA_SOURCE_TYPE_NAME_WITH_PARENT", dATA_SOURCE.DATA_SOURCE_TYPE_GUID);
             return View(dATA_SOURCE);
         }
 
         // GET: DATA_SOURCE/Edit/5
-        [ImportModelStateFromTempData]
-        public ActionResult Edit(string CONFIG_COMMON_NAME, string DATA_SOURCE_NAME)
+        public ActionResult Edit(string id)
         {
-
-            DATA_SOURCE dATA_SOURCE = db.DATA_SOURCE.Find(CONFIG_COMMON_NAME, DATA_SOURCE_NAME);
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            DATA_SOURCE dATA_SOURCE = db.DATA_SOURCE.Find(id);
             if (dATA_SOURCE == null)
             {
                 return HttpNotFound();
             }
-
-            var features = db.BITWISE_DICTIONARY
-            .Where(f => f.BITWISE_GROUP == "DATASOURCE_ATTRIBUTES")
-            .ToList()
-            .Select(c => new
-            {
-                DIM_FEATURE = c.BITWISE_KEY,
-                DESCR = string.Format("{0} -- {1}", c.BITWISE_KEY, c.DESCR)
-            });
-
-            ViewBag.listFeatures = new MultiSelectList(features, "DIM_FEATURE", "DESCR");            
-            ViewBag.DATA_SOURCE_TABLE_SCHEMA = new SelectList(db.vSCHEMAS, "name", "name");
-            ViewBag.DATA_SOURCE_TYPE_GUID = new SelectList(db.vDATA_SOURCE_TYPE_WITH_PARENT, "DATA_SOURCE_TYPE_GUID", "DATA_SOURCE_TYPE_NAME_WITH_PARENT");      
+            ViewBag.CONFIG_COMMON_NAME = new SelectList(db.CONFIGs, "CONFIG_COMMON_NAME", "CONFIG_DATA_PROCESS_PROC_SCHEMA", dATA_SOURCE.CONFIG_COMMON_NAME);
+            ViewBag.DATA_SOURCE_TYPE_GUID = new SelectList(db.DATA_SOURCE_TYPE, "DATA_SOURCE_TYPE_GUID", "MODIFIED_BY", dATA_SOURCE.DATA_SOURCE_TYPE_GUID);
             return View(dATA_SOURCE);
         }
 
@@ -101,7 +93,6 @@ namespace DHConfig.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [ExportModelStateToTempData]
         public ActionResult Edit([Bind(Include = "CONFIG_COMMON_NAME,DATA_SOURCE_NAME,DATA_SOURCE_TYPE_GUID,DATA_SOURCE_TABLE_SCHEMA,DATA_SOURCE_TABLE_NAME,DATA_SOURCE_RAW_VIEW_SCHEMA,DATA_SOURCE_RAW_VIEW_NAME,DATA_SOURCE_TABLE_PROC_UPDATE_SCHEMA,DATA_SOURCE_TABLE_PROC_UPDATE_NAME,DATA_SOURCE_TABLE_PROC_INSERT_SCHEMA,DATA_SOURCE_TABLE_PROC_INSERT_NAME,DATA_SOURCE_TABLE_PROC_DELETE_SCHEMA,DATA_SOURCE_TABLE_PROC_DELETE_NAME,DATA_SOURCE_TABLE_PROC_DDL_PARENT_SCHEMA,DATA_SOURCE_TABLE_PROC_DDL_PARENT_NAME,DATA_SOURCE_RAW_UI_VIEW_SCHEMA,DATA_SOURCE_RAW_UI_VIEW_NAME,DATA_SOURCE_FEATURE,DATA_SOURCE_TEST_DATA_PROC_SCHEMA,DATA_SOURCE_TEST_DATA_PROC_NAME")] DATA_SOURCE dATA_SOURCE)
         {
             if (ModelState.IsValid)
@@ -116,11 +107,13 @@ namespace DHConfig.Controllers
         }
 
         // GET: DATA_SOURCE/Delete/5
-        [ImportModelStateFromTempData]
-        public ActionResult Delete(string CONFIG_COMMON_NAME, string DATA_SOURCE_NAME)
+        public ActionResult Delete(string id)
         {
-
-            DATA_SOURCE dATA_SOURCE = db.DATA_SOURCE.Find(CONFIG_COMMON_NAME, DATA_SOURCE_NAME);
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            DATA_SOURCE dATA_SOURCE = db.DATA_SOURCE.Find(id);
             if (dATA_SOURCE == null)
             {
                 return HttpNotFound();
@@ -131,10 +124,9 @@ namespace DHConfig.Controllers
         // POST: DATA_SOURCE/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [ExportModelStateToTempData]
-        public ActionResult DeleteConfirmed(string CONFIG_COMMON_NAME, string DATA_SOURCE_NAME)
+        public ActionResult DeleteConfirmed(string id)
         {
-            DATA_SOURCE dATA_SOURCE = db.DATA_SOURCE.Find(CONFIG_COMMON_NAME, DATA_SOURCE_NAME);
+            DATA_SOURCE dATA_SOURCE = db.DATA_SOURCE.Find(id);
             db.DATA_SOURCE.Remove(dATA_SOURCE);
             db.SaveChanges();
             return RedirectToAction("Index");

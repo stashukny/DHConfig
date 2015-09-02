@@ -29,17 +29,18 @@
                 
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">                                                          
-                @if (Session["sClient"] != null)
-                {
-                    <li>@Html.MenuLink("Home", "Index", "Home", new { SelectedClient = ViewBag.sClient }, new { area = "", @class = "navbar-brand" })</li>
+                <ul class="nav navbar-nav">                   
+                    <li>@Html.MenuLink("Home", "Index", "Home", new {SelectedClient = ViewBag.sClient}, new { area = "", @class = "navbar-brand" })</li>
+                    @*<li>@Html.MenuLink("Clients", "Index", "CONFIGs", new { SelectedClient = ViewBag.sClient }, new { @class = "navbar-brand" })</li>*@
                     <li>@Html.MenuLink("Dimensions", "Index", "DIMs", new {SelectedClient = ViewBag.sClient}, new {@class = "navbar-brand" })</li>
-                    <li>@Html.MenuLink("Dimension Fields", "Index", "DIM_FIELD", new {SelectedClient = ViewBag.sClient},  new {@class = "navbar-brand" })</li>         
+                    <li>@Html.MenuLink("Dimension Fields", "Index", "DIM_FIELD", new {SelectedClient = ViewBag.sClient},  new {@class = "navbar-brand" })</li>        
+                    @*<li>@Html.MenuLink("Dimension Types", "Index", "DIM_TYPE", new { SelectedClient = ViewBag.sClient }, new { @class = "navbar-brand" })</li>        
+                    <li>@Html.MenuLink("Metric Types", "Index", "METRIC_TYPE", new { SelectedClient = ViewBag.sClient }, new { @class = "navbar-brand" })</li>   
+                    <li>@Html.MenuLink("Data Source Type", "Index", "DATA_SOURCE_TYPE", new { SelectedClient = ViewBag.sClient }, new { @class = "navbar-brand" })</li>*@   
                     <li>@Html.MenuLink("Data Source", "Index", "DATA_SOURCE", new { SelectedClient = ViewBag.sClient }, new { @class = "navbar-brand" })</li>
                     <li>@Html.MenuLink("Data Source Fields", "Index", "DATA_SOURCE_FIELD", new { SelectedClient = ViewBag.sClient }, new { @class = "navbar-brand" })</li>
                     <li>@Html.MenuLink("Fact", "Index", "FACTs", new { SelectedClient = ViewBag.sClient }, new { @class = "navbar-brand" })</li>   
                     <li>@Html.MenuLink("Fact Field", "Index", "FACT_FIELD", new { SelectedClient = ViewBag.sClient }, new { @class = "navbar-brand" })</li>   
-                }
                     
                 </ul>
             </div>

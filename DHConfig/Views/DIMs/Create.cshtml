@@ -35,12 +35,15 @@
     <div class="form-horizontal">
         <h4>Dimension</h4>
         <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })        
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @*@Html.HiddenFor(model => model.CONFIG_COMMON_NAME)*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.CONFIG_COMMON_NAME, "CONFIG_COMMON_NAME", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Session["sClient"].ToString()
+                @*@Html.DropDownList("CONFIG_COMMON_NAME", null, htmlAttributes: new { @class = "form-control" })*@
+                @*@Html.DisplayFor(model => model.CONFIG_COMMON_NAME)*@
+                @ViewBag.sClient
                 @Html.ValidationMessageFor(model => model.CONFIG_COMMON_NAME, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -77,6 +80,14 @@
             </div>
         </div>
 
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.DIM_LOAD_PROC_SCHEMA_RAW, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.DIM_LOAD_PROC_SCHEMA_RAW, (SelectList)ViewBag.listSchemas, new { @class = "form-control" })                
+                @Html.ValidationMessageFor(model => model.DIM_LOAD_PROC_SCHEMA_RAW, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
         <div class="form-group">
             @Html.LabelFor(model => model.DIM_LOAD_PROC_NAME_RAW, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -84,6 +95,14 @@
                 @Html.ValidationMessageFor(model => model.DIM_LOAD_PROC_NAME_RAW, "", new { @class = "text-danger" })
             </div>
         </div>
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.DIM_TABLE_CLEAN_SCHEMA, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.DIM_TABLE_CLEAN_SCHEMA, (SelectList)ViewBag.listSchemas, new { @class = "form-control" })                
+                @Html.ValidationMessageFor(model => model.DIM_TABLE_CLEAN_SCHEMA, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.DIM_TABLE_CLEAN_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -93,6 +112,14 @@
             </div>
         </div>
 
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.DIM_PROC_UI_CLEAN_SCHEMA, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.DIM_PROC_UI_CLEAN_SCHEMA, (SelectList)ViewBag.listSchemas, new { @class = "form-control" })                
+                @Html.ValidationMessageFor(model => model.DIM_PROC_UI_CLEAN_SCHEMA, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
         <div class="form-group">
             @Html.LabelFor(model => model.DIM_PROC_UI_CLEAN_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -100,6 +127,14 @@
                 @Html.ValidationMessageFor(model => model.DIM_PROC_UI_CLEAN_NAME, "", new { @class = "text-danger" })
             </div>
         </div>
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.DIM_LOAD_PROC_CLEAN_SCHEMA, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.DIM_LOAD_PROC_CLEAN_SCHEMA, (SelectList)ViewBag.listSchemas, new { @class = "form-control" })                
+                @Html.ValidationMessageFor(model => model.DIM_LOAD_PROC_CLEAN_SCHEMA, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.DIM_LOAD_PROC_CLEAN_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -109,6 +144,13 @@
             </div>
         </div>
 
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.DIM_VIEW_WHITELIST_SCHEMA, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.DIM_VIEW_WHITELIST_SCHEMA, (SelectList)ViewBag.listSchemas, new { @class = "form-control" })                
+                @Html.ValidationMessageFor(model => model.DIM_VIEW_WHITELIST_SCHEMA, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.DIM_VIEW_WHITELIST_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -118,6 +160,13 @@
             </div>
         </div>
 
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.DIM_VIEW_RAW_SCHEMA, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.DIM_VIEW_RAW_SCHEMA, (SelectList)ViewBag.listSchemas, new { @class = "form-control" })                
+                @Html.ValidationMessageFor(model => model.DIM_VIEW_RAW_SCHEMA, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.DIM_VIEW_RAW_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -127,6 +176,14 @@
             </div>
         </div>
 
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.DIM_VIEW_CLEAN_SCHEMA, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.DIM_VIEW_CLEAN_SCHEMA, (SelectList)ViewBag.listSchemas, new { @class = "form-control" })                
+                @Html.ValidationMessageFor(model => model.DIM_VIEW_CLEAN_SCHEMA, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
         <div class="form-group">
             @Html.LabelFor(model => model.DIM_VIEW_CLEAN_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -135,6 +192,13 @@
             </div>
         </div>
 
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.DIM_PROC_RAW_TABLE_CLEAN_ID_SCHEMA, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.DIM_PROC_RAW_TABLE_CLEAN_ID_SCHEMA, (SelectList)ViewBag.listSchemas, new { @class = "form-control" })                
+                @Html.ValidationMessageFor(model => model.DIM_PROC_RAW_TABLE_CLEAN_ID_SCHEMA, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.DIM_PROC_RAW_TABLE_CLEAN_ID_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -147,9 +211,26 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DIM_FEATURE, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
+                @*@Html.EditorFor(model => model.DIM_FEATURE, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DIM_FEATURE, "", new { @class = "text-danger" })*@
                 @Html.ListBoxFor(x => x.SelectedItems, (MultiSelectList)ViewBag.listFeatures, new { size = 3, width = 500 })
             </div>
         </div>
+
+        @*@if (TempData["FeaturesInvalid"] != null)
+        {
+            <script>
+                alert('This feature combination is invalid.');
+            </script>
+        }*@
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.DIM_TAXONOMY_PROC_SCHEMA, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DIM_TAXONOMY_PROC_SCHEMA, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DIM_TAXONOMY_PROC_SCHEMA, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.DIM_TAXONOMY_PROC_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -159,6 +240,13 @@
             </div>
         </div>
 
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.DIM_LOAD_PRE_PROC_SPROC_SCHEMA, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DIM_LOAD_PRE_PROC_SPROC_SCHEMA, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DIM_LOAD_PRE_PROC_SPROC_SCHEMA, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.DIM_LOAD_PRE_PROC_SPROC_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -168,6 +256,13 @@
             </div>
         </div>
 
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.DIM_LOAD_POST_PROC_SCHEMA, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DIM_LOAD_POST_PROC_SCHEMA, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DIM_LOAD_POST_PROC_SCHEMA, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.DIM_LOAD_POST_PROC_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -177,6 +272,13 @@
             </div>
         </div>
 
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.DIM_LOAD_PRE_PROC_CLEAN_SCHEMA, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DIM_LOAD_PRE_PROC_CLEAN_SCHEMA, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DIM_LOAD_PRE_PROC_CLEAN_SCHEMA, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.DIM_LOAD_PRE_PROC_CLEAN_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -186,6 +288,13 @@
             </div>
         </div>
 
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.DIM_LOAD_POST_PROC_CLEAN_SCHEMA, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DIM_LOAD_POST_PROC_CLEAN_SCHEMA, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DIM_LOAD_POST_PROC_CLEAN_SCHEMA, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.DIM_LOAD_POST_PROC_CLEAN_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -215,6 +324,13 @@
             </div>
         </div>
 
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.INDX_WHERE_CLAUSE, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.INDX_WHERE_CLAUSE, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.INDX_WHERE_CLAUSE, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -225,7 +341,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", new { SelectedClient = Request.QueryString["sClient"] })
 </div>
 
 @section Scripts {
