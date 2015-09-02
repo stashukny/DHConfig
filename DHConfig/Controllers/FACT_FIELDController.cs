@@ -22,13 +22,10 @@ namespace DHConfig.Controllers
         }
 
         // GET: FACT_FIELD/Details/5
-        public ActionResult Details(string id)
+        public ActionResult Details(string CONFIG_COMMON_NAME, string FACT_COMMON_NAME, string FACT_FIELD_NAME)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            FACT_FIELD fACT_FIELD = db.FACT_FIELD.Find(id);
+
+            FACT_FIELD fACT_FIELD = db.FACT_FIELD.Find(CONFIG_COMMON_NAME, FACT_COMMON_NAME, FACT_FIELD_NAME);
             if (fACT_FIELD == null)
             {
                 return HttpNotFound();
@@ -37,15 +34,15 @@ namespace DHConfig.Controllers
         }
 
         // GET: FACT_FIELD/Create
-        public ActionResult Create(string sClient)
+        public ActionResult Create()
         {
+            string sClient = Session["sClient"].ToString();
             ViewBag.CONFIG_COMMON_NAME = sClient;            
             var factCommonNames = db.FACTs
             .Where(f => f.CONFIG_COMMON_NAME == sClient)
             .ToList();
 
-            ViewBag.listFactCommonName = new SelectList(factCommonNames, "FACT_COMMON_NAME", "FACT_COMMON_NAME");
-            ViewBag.sClient = sClient;
+            ViewBag.listFactCommonName = new SelectList(factCommonNames, "FACT_COMMON_NAME", "FACT_COMMON_NAME");            
 
             return View();
         }
@@ -70,13 +67,10 @@ namespace DHConfig.Controllers
         }
 
         // GET: FACT_FIELD/Edit/5
-        public ActionResult Edit(string id)
+        public ActionResult Edit(string CONFIG_COMMON_NAME, string FACT_COMMON_NAME, string FACT_FIELD_NAME)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            FACT_FIELD fACT_FIELD = db.FACT_FIELD.Find(id);
+
+            FACT_FIELD fACT_FIELD = db.FACT_FIELD.Find(CONFIG_COMMON_NAME, FACT_COMMON_NAME, FACT_FIELD_NAME);
             if (fACT_FIELD == null)
             {
                 return HttpNotFound();
@@ -105,13 +99,10 @@ namespace DHConfig.Controllers
         }
 
         // GET: FACT_FIELD/Delete/5
-        public ActionResult Delete(string id)
+        public ActionResult Delete(string CONFIG_COMMON_NAME, string FACT_COMMON_NAME, string FACT_FIELD_NAME)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            FACT_FIELD fACT_FIELD = db.FACT_FIELD.Find(id);
+
+            FACT_FIELD fACT_FIELD = db.FACT_FIELD.Find(CONFIG_COMMON_NAME, FACT_COMMON_NAME, FACT_FIELD_NAME);
             if (fACT_FIELD == null)
             {
                 return HttpNotFound();
@@ -122,9 +113,9 @@ namespace DHConfig.Controllers
         // POST: FACT_FIELD/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(string CONFIG_COMMON_NAME, string FACT_COMMON_NAME, string FACT_FIELD_NAME)
         {
-            FACT_FIELD fACT_FIELD = db.FACT_FIELD.Find(id);
+            FACT_FIELD fACT_FIELD = db.FACT_FIELD.Find(CONFIG_COMMON_NAME, FACT_COMMON_NAME, FACT_FIELD_NAME);
             db.FACT_FIELD.Remove(fACT_FIELD);
             db.SaveChanges();
             return RedirectToAction("Index");
