@@ -119,6 +119,21 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="BATCH.cs">
+      <DependentUpon>DHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BATCH_STEP.cs">
+      <DependentUpon>DHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BITWISE_DICTIONARY.cs">
+      <DependentUpon>DHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BITWISE_DICTIONARY_VALID_VALUES.cs">
+      <DependentUpon>DHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CONFIG.cs">
+      <DependentUpon>DHModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\CONFIGsController.cs" />
     <Compile Include="Controllers\DATA_SOURCEController.cs" />
     <Compile Include="Controllers\DATA_SOURCE_FIELDController.cs" />
@@ -130,6 +145,15 @@
     <Compile Include="Controllers\FACT_FIELDController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\METRIC_TYPEController.cs" />
+    <Compile Include="DATA_SOURCE.cs">
+      <DependentUpon>DHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DATA_SOURCE_FIELD.cs">
+      <DependentUpon>DHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DATA_SOURCE_TYPE.cs">
+      <DependentUpon>DHModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DHModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -145,13 +169,79 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DHModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DIM.cs">
+      <DependentUpon>DHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIM_DATE.cs">
+      <DependentUpon>DHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIM_FIELD.cs">
+      <DependentUpon>DHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIM_TYPE.cs">
+      <DependentUpon>DHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EXCEPTION.cs">
+      <DependentUpon>DHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EXECUTE_SQL_HISTORY.cs">
+      <DependentUpon>DHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FACT.cs">
+      <DependentUpon>DHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FACT_FIELD.cs">
+      <DependentUpon>DHModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HtmlHelpers.cs" />
     <Compile Include="Helpers\ModelStateHelpers.cs" />
+    <Compile Include="IMPORT_XML.cs">
+      <DependentUpon>DHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="INDX.cs">
+      <DependentUpon>DHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="INDX_FIELD.cs">
+      <DependentUpon>DHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="METRIC.cs">
+      <DependentUpon>DHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="METRIC_TYPE.cs">
+      <DependentUpon>DHModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DIM_FIELD_ViewModel.cs" />
+    <Compile Include="MODIFIED_TABLE.cs">
+      <DependentUpon>DHModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SERVICE_BROKER_HISTORY.cs">
+      <DependentUpon>DHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SUMMARY.cs">
+      <DependentUpon>DHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SYS_PROPERTY.cs">
+      <DependentUpon>DHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TALLY.cs">
+      <DependentUpon>DHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="USER_CHANGE.cs">
+      <DependentUpon>DHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vDATA_SOURCE_TYPE_WITH_PARENT.cs">
+      <DependentUpon>DHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vDATA_TYPES.cs">
+      <DependentUpon>DHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vSCHEMA.cs">
+      <DependentUpon>DHModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
