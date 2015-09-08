@@ -41,7 +41,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.SOURCE_COLUMN_DATA_TYPE, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.SOURCE_COLUMN_DATA_TYPE, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownList("SOURCE_COLUMN_DATA_TYPE", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.SOURCE_COLUMN_DATA_TYPE, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -57,7 +57,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.RAW_VIEW_COLUMN_DATA_TYPE, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.RAW_VIEW_COLUMN_DATA_TYPE, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownList("RAW_VIEW_COLUMN_DATA_TYPE", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.RAW_VIEW_COLUMN_DATA_TYPE, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -93,8 +93,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DATA_SOURCE_FIELD_FEATURE, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DATA_SOURCE_FIELD_FEATURE, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.DATA_SOURCE_FIELD_FEATURE, "", new { @class = "text-danger" })
+                @Html.ListBoxFor(x => x.SelectedItems, (MultiSelectList)ViewBag.listFeatures, new { size = 6, width = 500 })
             </div>
         </div>
 

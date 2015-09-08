@@ -49,6 +49,12 @@
             <th></th>
             <th></th>
             <th>
+                @Html.DisplayNameFor(model => model.CONFIG_COMMON_NAME)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DATA_SOURCE_NAME)
+            </th>
+            <th>
                 DATA_SOURCE_TYPE
             </th>
             <th>
@@ -119,7 +125,13 @@
                 <td>@Html.ActionLink("Details", "Details", new { CONFIG_COMMON_NAME = item.CONFIG_COMMON_NAME, DATA_SOURCE_NAME = item.DATA_SOURCE_NAME })</td>
                 <td>@Html.ActionLink("Delete", "Delete", new { CONFIG_COMMON_NAME = item.CONFIG_COMMON_NAME, DATA_SOURCE_NAME = item.DATA_SOURCE_NAME })</td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.vDATA_SOURCE_TYPE_WITH_PARENT.DATA_SOURCE_TYPE_NAME_WITH_PARENT)
+                    @Html.DisplayFor(modelItem => item.CONFIG_COMMON_NAME)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DATA_SOURCE_NAME)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DATA_SOURCE_TYPE.vDATA_SOURCE_TYPE_WITH_PARENT.First().DATA_SOURCE_TYPE_NAME_WITH_PARENT)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.DATA_SOURCE_TABLE_SCHEMA)

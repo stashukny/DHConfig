@@ -154,9 +154,10 @@ namespace DHConfig.Controllers
             .Where(f => f.CONFIG_COMMON_NAME == CONFIG_COMMON_NAME)
             .ToList();
 
+            SelectList datatypes = new SelectList(db.vDATA_TYPES, "DIM_DATA_TYPE", "DIM_DATA_TYPE", dIM_FIELD.DIM_DATA_TYPE);            
 
             ViewBag.DIM_COMMON_NAME = new SelectList(dims, "DIM_COMMON_NAME", "DIM_COMMON_NAME", dIM_FIELD.DIM_COMMON_NAME);
-            ViewBag.DIM_DATA_TYPE = new SelectList(db.vDATA_TYPES, "DIM_DATA_TYPE", "DIM_DATA_TYPE");            
+            ViewBag.DIM_DATA_TYPE = datatypes;
             ViewBag.listFeatures = new MultiSelectList(features, "DIM_FIELD_FEATURE", "DESCR", dIM_FIELD.SelectedItems);            
 
             return View(dIM_FIELD);

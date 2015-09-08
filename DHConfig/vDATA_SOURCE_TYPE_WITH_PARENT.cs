@@ -19,5 +19,7 @@ namespace DHConfig
         public Nullable<short> DATA_SOURCE_TYPE_HID_LEVEL { get; set; }
         public string DATA_SOURCE_TYPE_NAME { get; set; }
         public string DATA_SOURCE_TYPE_NAME_WITH_PARENT { get; set; }
+    
+        public virtual DATA_SOURCE_TYPE DATA_SOURCE_TYPE { get; set; }
     }
 }

@@ -14,11 +14,35 @@
         <h4>FACT_FIELD</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.CONFIG_COMMON_NAME)
+        @*@Html.HiddenFor(model => model.CONFIG_COMMON_NAME)*@
 
         @Html.HiddenFor(model => model.FACT_COMMON_NAME)
 
         @Html.HiddenFor(model => model.FACT_FIELD_NAME)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CONFIG_COMMON_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Session["sClient"].ToString()
+                @Html.ValidationMessageFor(model => model.CONFIG_COMMON_NAME, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FACT_COMMON_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FACT_COMMON_NAME, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FACT_COMMON_NAME, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FACT_FIELD_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FACT_FIELD_NAME, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FACT_FIELD_NAME, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.OBJECT_TYPE_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -39,8 +63,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.FACT_FIELD_FEATURE, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.FACT_FIELD_FEATURE, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FACT_FIELD_FEATURE, "", new { @class = "text-danger" })
+                @Html.ListBoxFor(x => x.SelectedItems, (MultiSelectList)ViewBag.listFeatures, new { size = 6, width = 500 })
             </div>
         </div>
 

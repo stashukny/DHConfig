@@ -29,7 +29,7 @@ select{
 .navbar-inverse .navbar-nav > li > a.selected {  
       color: white;   
         float: left;
-  padding: 15px 15px;
-  font-size: 18px;
+  padding: 12px 12px;
+  font-size: 15px;
   line-height: 20px;
 }

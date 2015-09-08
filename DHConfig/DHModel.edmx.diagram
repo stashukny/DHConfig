@@ -23,7 +23,7 @@
         <AssociationConnector Association="DataHammerConfigModel.FK_CONFIG_DATA_SOURCE_FIELD_DATA_SOURCE" ManuallyRouted="false" />
         <EntityTypeShape EntityType="DataHammerConfigModel.BITWISE_DICTIONARY" Width="1.5" PointX="9.5" PointY="2.625" />
         <EntityTypeShape EntityType="DataHammerConfigModel.BITWISE_DICTIONARY_VALID_VALUES" Width="1.5" PointX="4.75" PointY="0.75" />
-        <EntityTypeShape EntityType="DataHammerConfigModel.DATA_SOURCE_TYPE" Width="1.5" PointX="2.75" PointY="1" />
+        <EntityTypeShape EntityType="DataHammerConfigModel.DATA_SOURCE_TYPE" Width="1.875" PointX="2.75" PointY="1" />
         <EntityTypeShape EntityType="DataHammerConfigModel.DIM_TYPE" Width="1.5" PointX="0.75" PointY="1" />
         <EntityTypeShape EntityType="DataHammerConfigModel.METRIC_TYPE" Width="1.5" PointX="5.75" PointY="4.75" />
         <EntityTypeShape EntityType="DataHammerConfigModel.BATCH" Width="1.5" PointX="6.75" PointY="0.75" />
@@ -52,6 +52,7 @@
         <EntityTypeShape EntityType="DataHammerConfigModel.vSCHEMA" Width="1.5" PointX="11" PointY="16.375" />
         <EntityTypeShape EntityType="DataHammerConfigModel.vDATA_TYPES" Width="1.5" PointX="0.75" PointY="11.75" />
         <EntityTypeShape EntityType="DataHammerConfigModel.vDATA_SOURCE_TYPE_WITH_PARENT" Width="1.5" PointX="3.375" PointY="14.75" />
+        <AssociationConnector Association="DataHammerConfigModel.DATA_SOURCE_TYPEvDATA_SOURCE_TYPE_WITH_PARENT" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

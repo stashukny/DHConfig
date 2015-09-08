@@ -17,6 +17,7 @@ namespace DHConfig
         public DATA_SOURCE_TYPE()
         {
             this.DATA_SOURCE = new HashSet<DATA_SOURCE>();
+            this.vDATA_SOURCE_TYPE_WITH_PARENT = new HashSet<vDATA_SOURCE_TYPE_WITH_PARENT>();
         }
     
         public System.Guid DATA_SOURCE_TYPE_GUID { get; set; }
@@ -28,5 +29,6 @@ namespace DHConfig
         public string DATA_SOURCE_TYPE_NAME { get; set; }
     
         public virtual ICollection<DATA_SOURCE> DATA_SOURCE { get; set; }
+        public virtual ICollection<vDATA_SOURCE_TYPE_WITH_PARENT> vDATA_SOURCE_TYPE_WITH_PARENT { get; set; }
     }
 }

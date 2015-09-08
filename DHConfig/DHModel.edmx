@@ -1312,6 +1312,10 @@ warning 6002: The table/view 'DataHammerConfig.UTILITY.vSCHEMAS' does not have a
           <EntitySet Name="vSCHEMAS" EntityType="DataHammerConfigModel.vSCHEMA" />
           <EntitySet Name="vDATA_TYPES" EntityType="DataHammerConfigModel.vDATA_TYPES" />
           <EntitySet Name="vDATA_SOURCE_TYPE_WITH_PARENT" EntityType="DataHammerConfigModel.vDATA_SOURCE_TYPE_WITH_PARENT" />
+          <AssociationSet Name="DATA_SOURCE_TYPEvDATA_SOURCE_TYPE_WITH_PARENT" Association="DataHammerConfigModel.DATA_SOURCE_TYPEvDATA_SOURCE_TYPE_WITH_PARENT">
+            <End Role="DATA_SOURCE_TYPE" EntitySet="DATA_SOURCE_TYPE" />
+            <End Role="vDATA_SOURCE_TYPE_WITH_PARENT" EntitySet="vDATA_SOURCE_TYPE_WITH_PARENT" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="BITWISE_DICTIONARY">
           <Key>
@@ -1357,6 +1361,7 @@ warning 6002: The table/view 'DataHammerConfig.UTILITY.vSCHEMAS' does not have a
           <Property Name="DATA_SOURCE_TYPE_HID_LEVEL" Type="Int16" annotation:StoreGeneratedPattern="Computed" />
           <Property Name="DATA_SOURCE_TYPE_NAME" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="DATA_SOURCE" Relationship="DataHammerConfigModel.FK_CONFIG_DATA_SOURCE_TYPE_GUID" FromRole="DATA_SOURCE_TYPE" ToRole="DATA_SOURCE" />
+          <NavigationProperty Name="vDATA_SOURCE_TYPE_WITH_PARENT" Relationship="DataHammerConfigModel.DATA_SOURCE_TYPEvDATA_SOURCE_TYPE_WITH_PARENT" FromRole="DATA_SOURCE_TYPE" ToRole="vDATA_SOURCE_TYPE_WITH_PARENT" />
         </EntityType>
         <EntityType Name="DIM_TYPE">
           <Key>
@@ -1761,7 +1766,20 @@ warning 6002: The table/view 'DataHammerConfig.UTILITY.vSCHEMAS' does not have a
           <Property Name="DATA_SOURCE_TYPE_HID_LEVEL" Type="Int16" />
           <Property Name="DATA_SOURCE_TYPE_NAME" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DATA_SOURCE_TYPE_NAME_WITH_PARENT" Type="String" MaxLength="103" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DATA_SOURCE_TYPE" Relationship="DataHammerConfigModel.DATA_SOURCE_TYPEvDATA_SOURCE_TYPE_WITH_PARENT" FromRole="vDATA_SOURCE_TYPE_WITH_PARENT" ToRole="DATA_SOURCE_TYPE" />
         </EntityType>
+        <Association Name="DATA_SOURCE_TYPEvDATA_SOURCE_TYPE_WITH_PARENT">
+          <End Type="DataHammerConfigModel.DATA_SOURCE_TYPE" Role="DATA_SOURCE_TYPE" Multiplicity="1" />
+          <End Type="DataHammerConfigModel.vDATA_SOURCE_TYPE_WITH_PARENT" Role="vDATA_SOURCE_TYPE_WITH_PARENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DATA_SOURCE_TYPE">
+              <PropertyRef Name="DATA_SOURCE_TYPE_GUID" />
+            </Principal>
+            <Dependent Role="vDATA_SOURCE_TYPE_WITH_PARENT">
+              <PropertyRef Name="DATA_SOURCE_TYPE_GUID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

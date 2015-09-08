@@ -45,5 +45,16 @@ namespace DHConfig
         public virtual ICollection<DATA_SOURCE_FIELD> DATA_SOURCE_FIELD { get; set; }
         public virtual DATA_SOURCE_TYPE DATA_SOURCE_TYPE { get; set; }
         public virtual ICollection<FACT> FACTs { get; set; }
+
+        public string[] SelectedItems
+        {
+            get
+            {
+                if (DATA_SOURCE_FEATURE != null)
+                    return (DATA_SOURCE_FEATURE.Split(','));
+                else
+                    return null;
+            }
+        }  
     }
 }

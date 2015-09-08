@@ -17,7 +17,11 @@ namespace DHConfig.Controllers
         // GET: FACT_FIELD
         public ActionResult Index()
         {
-            var fACT_FIELD = db.FACT_FIELD.Include(f => f.CONFIG).Include(f => f.FACT);
+            string sClient = Session["sClient"].ToString();
+            var fACT_FIELD = db.FACT_FIELD
+                .Where(w => w.CONFIG_COMMON_NAME == sClient)
+                .Include(f => f.CONFIG)
+                .Include(f => f.FACT);
             return View(fACT_FIELD.ToList());
         }
 
@@ -41,6 +45,17 @@ namespace DHConfig.Controllers
             var factCommonNames = db.FACTs
             .Where(f => f.CONFIG_COMMON_NAME == sClient)
             .ToList();
+
+            var features = db.BITWISE_DICTIONARY
+            .Where(f => f.BITWISE_GROUP == "FACT_FIELDS")
+            .ToList()
+            .Select(c => new
+            {
+                DIM_FEATURE = c.BITWISE_KEY,
+                DESCR = string.Format("{0} -- {1}", c.BITWISE_KEY, c.DESCR)
+            });
+
+            ViewBag.listFeatures = new MultiSelectList(features, "DIM_FEATURE", "DESCR");
 
             ViewBag.listFactCommonName = new SelectList(factCommonNames, "FACT_COMMON_NAME", "FACT_COMMON_NAME");            
 
@@ -75,6 +90,17 @@ namespace DHConfig.Controllers
             {
                 return HttpNotFound();
             }
+
+            var features = db.BITWISE_DICTIONARY
+            .Where(f => f.BITWISE_GROUP == "FACT_FIELDS")
+            .ToList()
+            .Select(c => new
+            {
+                DIM_FEATURE = c.BITWISE_KEY,
+                DESCR = string.Format("{0} -- {1}", c.BITWISE_KEY, c.DESCR)
+            });
+
+            ViewBag.listFeatures = new MultiSelectList(features, "DIM_FEATURE", "DESCR");
             ViewBag.CONFIG_COMMON_NAME = new SelectList(db.CONFIGs, "CONFIG_COMMON_NAME", "CONFIG_DATA_PROCESS_PROC_SCHEMA", fACT_FIELD.CONFIG_COMMON_NAME);
             ViewBag.CONFIG_COMMON_NAME = new SelectList(db.FACTs, "CONFIG_COMMON_NAME", "DATA_SOURCE_NAME", fACT_FIELD.CONFIG_COMMON_NAME);
             return View(fACT_FIELD);

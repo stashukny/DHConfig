@@ -21,7 +21,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DATA_SOURCE_TYPE_GUID, "DATA_SOURCE_TYPE_GUID", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(m => m.DATA_SOURCE_TYPE_GUID, (SelectList)ViewBag.DATA_SOURCE_TYPE_GUID, new { @class = "form-control" }) 
+                @Html.DropDownListFor(m => m.DATA_SOURCE_TYPE_GUID, (SelectList)ViewBag.listTypes, new { @class = "form-control" }) 
                 @Html.ValidationMessageFor(model => model.DATA_SOURCE_TYPE_GUID, "", new { @class = "text-danger" })
             </div>
         </div>

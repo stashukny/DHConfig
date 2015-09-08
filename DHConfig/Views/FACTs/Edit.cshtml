@@ -14,22 +14,39 @@
         <h4>FACT</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.CONFIG_COMMON_NAME)
+        @*@Html.HiddenFor(model => model.CONFIG_COMMON_NAME)*@
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CONFIG_COMMON_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Session["sClient"].ToString()
+                @Html.ValidationMessageFor(model => model.CONFIG_COMMON_NAME, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.DATA_SOURCE_NAME, "DATA_SOURCE_NAME", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("DATA_SOURCE_NAME", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownListFor(m => m.DATA_SOURCE_NAME, (SelectList)ViewBag.listDataSources, new { @class = "form-control" })   
                 @Html.ValidationMessageFor(model => model.DATA_SOURCE_NAME, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        @Html.HiddenFor(model => model.FACT_COMMON_NAME)
+        @*@Html.HiddenFor(model => model.FACT_COMMON_NAME)*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FACT_COMMON_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FACT_COMMON_NAME, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FACT_COMMON_NAME, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.FACT_TABLE_SCHEMA, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.FACT_TABLE_SCHEMA, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(m => m.FACT_TABLE_SCHEMA, (SelectList)ViewBag.FACT_TABLE_SCHEMA, new { @class = "form-control" })   
                 @Html.ValidationMessageFor(model => model.FACT_TABLE_SCHEMA, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -50,13 +67,6 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.DISTINCT_TABLE_KEY_SCHEMA, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DISTINCT_TABLE_KEY_SCHEMA, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.DISTINCT_TABLE_KEY_SCHEMA, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.DISTINCT_TABLE_KEY_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -66,13 +76,6 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.DISTINCT_TABLE_VALUE_SCHEMA, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DISTINCT_TABLE_VALUE_SCHEMA, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.DISTINCT_TABLE_VALUE_SCHEMA, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.DISTINCT_TABLE_VALUE_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -82,13 +85,6 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.DISTINCT_VALUE_PROCEDURE_SCHEMA, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DISTINCT_VALUE_PROCEDURE_SCHEMA, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.DISTINCT_VALUE_PROCEDURE_SCHEMA, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.DISTINCT_VALUE_PROCEDURE_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -98,13 +94,6 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.DISTINCT_KEY_PROCEDURE_SCHEMA, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DISTINCT_KEY_PROCEDURE_SCHEMA, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.DISTINCT_KEY_PROCEDURE_SCHEMA, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.DISTINCT_KEY_PROCEDURE_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -114,13 +103,6 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.FACT_LOAD_PROCEDURE_SCHEMA, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FACT_LOAD_PROCEDURE_SCHEMA, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FACT_LOAD_PROCEDURE_SCHEMA, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.FACT_LOAD_PROCEDURE_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -130,13 +112,6 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.FACT_PRE_EXEC_SPROC_SCHEMA, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FACT_PRE_EXEC_SPROC_SCHEMA, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FACT_PRE_EXEC_SPROC_SCHEMA, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.FACT_PRE_EXEC_SPROC_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -146,13 +121,6 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.FACT_POST_EXEC_SPROC_SCHEMA, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FACT_POST_EXEC_SPROC_SCHEMA, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FACT_POST_EXEC_SPROC_SCHEMA, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.FACT_POST_EXEC_SPROC_NAME, htmlAttributes: new { @class = "control-label col-md-2" })

@@ -17,7 +17,11 @@ namespace DHConfig.Controllers
         // GET: FACTs
         public ActionResult Index()
         {
-            var fACTs = db.FACTs.Include(f => f.CONFIG).Include(f => f.DATA_SOURCE);            
+            string sClient = Session["sClient"].ToString();
+            var fACTs = db.FACTs
+                .Where(w => w.CONFIG_COMMON_NAME == sClient)
+                .Include(f => f.CONFIG)
+                .Include(f => f.DATA_SOURCE);            
             return View(fACTs.ToList());
 
             
@@ -40,17 +44,17 @@ namespace DHConfig.Controllers
         {
             string sClient = Session["sClient"].ToString();
             
-            FACT fact = new FACT();
-            fact.CONFIG_COMMON_NAME = sClient;
+            //FACT fact = new FACT();
+            //fact.CONFIG_COMMON_NAME = sClient;
 
-            ViewBag.CONFIG_COMMON_NAME = sClient;
+            //ViewBag.CONFIG_COMMON_NAME = sClient;
             var datasources = db.DATA_SOURCE
             .Where(f => f.CONFIG_COMMON_NAME == sClient)
             .ToList();
 
-            ViewBag.listDataSources = new SelectList(datasources, "DATA_SOURCE_NAME", "DATA_SOURCE_NAME");            
-
-            return View(fact);
+            ViewBag.listDataSources = new SelectList(datasources, "DATA_SOURCE_NAME", "DATA_SOURCE_NAME");
+            ViewBag.FACT_TABLE_SCHEMA = new SelectList(db.vSCHEMAS, "name", "name");
+            return View();
         }
 
         // POST: FACTs/Create
@@ -81,8 +85,16 @@ namespace DHConfig.Controllers
             {
                 return HttpNotFound();
             }
+
+            var datasources = db.DATA_SOURCE
+            .Where(f => f.CONFIG_COMMON_NAME == CONFIG_COMMON_NAME)
+            .ToList();
+
+            ViewBag.listDataSources = new SelectList(datasources, "DATA_SOURCE_NAME", "DATA_SOURCE_NAME");       
+
             ViewBag.CONFIG_COMMON_NAME = new SelectList(db.CONFIGs, "CONFIG_COMMON_NAME", "CONFIG_DATA_PROCESS_PROC_SCHEMA", fACT.CONFIG_COMMON_NAME);
             ViewBag.CONFIG_COMMON_NAME = new SelectList(db.DATA_SOURCE, "CONFIG_COMMON_NAME", "DATA_SOURCE_TABLE_SCHEMA", fACT.CONFIG_COMMON_NAME);
+            ViewBag.FACT_TABLE_SCHEMA = new SelectList(db.vSCHEMAS, "name", "name");
             return View(fACT);
         }
 

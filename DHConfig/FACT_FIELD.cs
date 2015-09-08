@@ -23,5 +23,16 @@ namespace DHConfig
     
         public virtual CONFIG CONFIG { get; set; }
         public virtual FACT FACT { get; set; }
+
+        public string[] SelectedItems
+        {
+            get
+            {
+                if (FACT_FIELD_FEATURE != null)
+                    return (FACT_FIELD_FEATURE.Split(','));
+                else
+                    return null;
+            }
+        }  
     }
 }

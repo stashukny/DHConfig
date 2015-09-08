@@ -17,7 +17,13 @@ namespace DHConfig.Controllers
         // GET: DATA_SOURCE
         public ActionResult Index()
         {
-            var dATA_SOURCE = db.DATA_SOURCE.Include(d => d.CONFIG).Include(d => d.DATA_SOURCE_TYPE);   
+            string sClient = Session["sClient"].ToString();
+            var dATA_SOURCE = db.DATA_SOURCE
+                .Where(w => w.CONFIG_COMMON_NAME == sClient)
+                .Include(d => d.CONFIG)
+                .Include(d => d.DATA_SOURCE_TYPE)
+                .Include(p => p.DATA_SOURCE_TYPE.vDATA_SOURCE_TYPE_WITH_PARENT);          
+     
             return View(dATA_SOURCE.ToList());
         }
 
@@ -90,9 +96,11 @@ namespace DHConfig.Controllers
                 DESCR = string.Format("{0} -- {1}", c.BITWISE_KEY, c.DESCR)
             });
 
+            SelectList listTypes = new SelectList(db.vDATA_SOURCE_TYPE_WITH_PARENT, "DATA_SOURCE_TYPE_GUID", "DATA_SOURCE_TYPE_NAME_WITH_PARENT");
+
             ViewBag.listFeatures = new MultiSelectList(features, "DIM_FEATURE", "DESCR");            
             ViewBag.DATA_SOURCE_TABLE_SCHEMA = new SelectList(db.vSCHEMAS, "name", "name");
-            ViewBag.DATA_SOURCE_TYPE_GUID = new SelectList(db.vDATA_SOURCE_TYPE_WITH_PARENT, "DATA_SOURCE_TYPE_GUID", "DATA_SOURCE_TYPE_NAME_WITH_PARENT");      
+            ViewBag.DATA_SOURCE_TYPE_GUID = listTypes;      
             return View(dATA_SOURCE);
         }
 
