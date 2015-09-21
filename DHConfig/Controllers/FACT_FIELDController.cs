@@ -26,6 +26,7 @@ namespace DHConfig.Controllers
         }
 
         // GET: FACT_FIELD/Details/5
+        [SessionExpireFilterAttribute]
         public ActionResult Details(string CONFIG_COMMON_NAME, string FACT_COMMON_NAME, string FACT_FIELD_NAME)
         {
 
@@ -38,6 +39,7 @@ namespace DHConfig.Controllers
         }
 
         // GET: FACT_FIELD/Create
+        [SessionExpireFilterAttribute]
         public ActionResult Create()
         {
             string sClient = Session["sClient"].ToString();
@@ -67,6 +69,7 @@ namespace DHConfig.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [SessionExpireFilterAttribute]
         public ActionResult Create([Bind(Include = "CONFIG_COMMON_NAME,FACT_COMMON_NAME,FACT_FIELD_NAME,OBJECT_TYPE_NAME,DIM_FIELD_NAME,FACT_FIELD_FEATURE")] FACT_FIELD fACT_FIELD)
         {
             if (ModelState.IsValid)
@@ -82,6 +85,7 @@ namespace DHConfig.Controllers
         }
 
         // GET: FACT_FIELD/Edit/5
+        [SessionExpireFilterAttribute]
         public ActionResult Edit(string CONFIG_COMMON_NAME, string FACT_COMMON_NAME, string FACT_FIELD_NAME)
         {
 
@@ -111,6 +115,7 @@ namespace DHConfig.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [SessionExpireFilterAttribute]
         public ActionResult Edit([Bind(Include = "CONFIG_COMMON_NAME,FACT_COMMON_NAME,FACT_FIELD_NAME,OBJECT_TYPE_NAME,DIM_FIELD_NAME,FACT_FIELD_FEATURE")] FACT_FIELD fACT_FIELD)
         {
             if (ModelState.IsValid)
@@ -125,6 +130,7 @@ namespace DHConfig.Controllers
         }
 
         // GET: FACT_FIELD/Delete/5
+        [SessionExpireFilterAttribute]
         public ActionResult Delete(string CONFIG_COMMON_NAME, string FACT_COMMON_NAME, string FACT_FIELD_NAME)
         {
 
@@ -139,6 +145,7 @@ namespace DHConfig.Controllers
         // POST: FACT_FIELD/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [SessionExpireFilterAttribute]
         public ActionResult DeleteConfirmed(string CONFIG_COMMON_NAME, string FACT_COMMON_NAME, string FACT_FIELD_NAME)
         {
             FACT_FIELD fACT_FIELD = db.FACT_FIELD.Find(CONFIG_COMMON_NAME, FACT_COMMON_NAME, FACT_FIELD_NAME);

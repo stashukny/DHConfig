@@ -15,12 +15,14 @@ namespace DHConfig.Controllers
         private DataHammerConfigEntities db = new DataHammerConfigEntities();
 
         // GET: METRIC_TYPE
+        [SessionExpireFilterAttribute]
         public ActionResult Index()
         {
             return View(db.METRIC_TYPE.ToList());
         }
 
         // GET: METRIC_TYPE/Details/5
+        [SessionExpireFilterAttribute]
         public ActionResult Details(Guid? id)
         {
             if (id == null)
@@ -36,6 +38,7 @@ namespace DHConfig.Controllers
         }
 
         // GET: METRIC_TYPE/Create
+        [SessionExpireFilterAttribute]
         public ActionResult Create()
         {
             return View();
@@ -46,6 +49,7 @@ namespace DHConfig.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [SessionExpireFilterAttribute]
         public ActionResult Create([Bind(Include = "METRIC_TYPE_GUID,METRIC_TYPE_NAME,METRIC_DATA_TYPE,METRIC_CALCULATION,METRIC_ROLLUP,METRIC_PRORATE,IS_INTERNAL_AUDIT,CREATE_DATE_UTC,MODIFIED_DATE_UTC,MODIFIED_BY")] METRIC_TYPE mETRIC_TYPE)
         {
             if (ModelState.IsValid)
@@ -60,6 +64,7 @@ namespace DHConfig.Controllers
         }
 
         // GET: METRIC_TYPE/Edit/5
+        [SessionExpireFilterAttribute]
         public ActionResult Edit(Guid? id)
         {
             if (id == null)
@@ -79,6 +84,7 @@ namespace DHConfig.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [SessionExpireFilterAttribute]
         public ActionResult Edit([Bind(Include = "METRIC_TYPE_GUID,METRIC_TYPE_NAME,METRIC_DATA_TYPE,METRIC_CALCULATION,METRIC_ROLLUP,METRIC_PRORATE,IS_INTERNAL_AUDIT,CREATE_DATE_UTC,MODIFIED_DATE_UTC,MODIFIED_BY")] METRIC_TYPE mETRIC_TYPE)
         {
             if (ModelState.IsValid)
@@ -91,6 +97,7 @@ namespace DHConfig.Controllers
         }
 
         // GET: METRIC_TYPE/Delete/5
+        [SessionExpireFilterAttribute]
         public ActionResult Delete(Guid? id)
         {
             if (id == null)
@@ -108,6 +115,7 @@ namespace DHConfig.Controllers
         // POST: METRIC_TYPE/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [SessionExpireFilterAttribute]
         public ActionResult DeleteConfirmed(Guid id)
         {
             METRIC_TYPE mETRIC_TYPE = db.METRIC_TYPE.Find(id);

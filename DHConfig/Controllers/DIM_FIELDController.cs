@@ -16,6 +16,7 @@ namespace DHConfig.Controllers
         private DataHammerConfigEntities db = new DataHammerConfigEntities();
 
         // GET: DIM_FIELD
+        [SessionExpireFilterAttribute]
         public ActionResult Index()
         {
 
@@ -30,6 +31,7 @@ namespace DHConfig.Controllers
         }
 
         // GET: DIM_FIELD/Details/5
+        [SessionExpireFilterAttribute]
         public ActionResult Details(string CONFIG_COMMON_NAME, string DIM_COMMON_NAME, string DIM_FIELD_NAME)
         {
 
@@ -43,6 +45,7 @@ namespace DHConfig.Controllers
 
         // GET: DIM_FIELD/Create
         [ImportModelStateFromTempData]
+        [SessionExpireFilterAttribute]
         public ActionResult Create(string CONFIG_COMMON_NAME)
         {
             string sClient = Session["sClient"].ToString();
@@ -79,6 +82,7 @@ namespace DHConfig.Controllers
         [HttpPost]
         [ExportModelStateToTempData]
         [ValidateAntiForgeryToken]
+        [SessionExpireFilterAttribute]
         public ActionResult Create([Bind(Include = "CONFIG_COMMON_NAME,DIM_COMMON_NAME,DIM_FIELD_NAME,DIM_FIELD_NAME_CLEAN,DIM_DATA_TYPE,DIM_FIELD_FEATURE,DERIVED_CONFIGURATION")] DIM_FIELD dIM_FIELD, string[] SelectedItems, string CONFIG_COMMON_NAME, string DIM_COMMON_NAME, string DIM_FIELD_NAME)
         {
 
@@ -131,6 +135,7 @@ namespace DHConfig.Controllers
 
         // GET: DIM_FIELD/Edit/5
         [ImportModelStateFromTempData]
+        [SessionExpireFilterAttribute]
         public ActionResult Edit(string CONFIG_COMMON_NAME, string DIM_COMMON_NAME, string DIM_FIELD_NAME, string DIM_FIELD_FEATURE)
         {
 
@@ -169,6 +174,7 @@ namespace DHConfig.Controllers
         [HttpPost]
         [ExportModelStateToTempData]
         [ValidateAntiForgeryToken]
+        [SessionExpireFilterAttribute]
         public ActionResult Edit([Bind(Include = "CONFIG_COMMON_NAME,DIM_COMMON_NAME,DIM_FIELD_NAME,DIM_FIELD_NAME_CLEAN,DIM_DATA_TYPE,DIM_FIELD_FEATURE,DERIVED_CONFIGURATION")] DIM_FIELD dIM_FIELD, string[] SelectedItems)
         {            
 
@@ -263,6 +269,7 @@ namespace DHConfig.Controllers
 
         // GET: DIM_FIELD/Delete/5      
         [ImportModelStateFromTempData]
+        [SessionExpireFilterAttribute]
         public ActionResult Delete(string CONFIG_COMMON_NAME, string DIM_COMMON_NAME, string DIM_FIELD_NAME)
         {
 
@@ -278,6 +285,7 @@ namespace DHConfig.Controllers
         [HttpPost, ActionName("Delete")]
         [ExportModelStateToTempData]
         [ValidateAntiForgeryToken]
+        [SessionExpireFilterAttribute]
         public ActionResult DeleteConfirmed(string CONFIG_COMMON_NAME, string DIM_COMMON_NAME, string DIM_FIELD_NAME)
         {
             DIM_FIELD dIM_FIELD = db.DIM_FIELD.Find(CONFIG_COMMON_NAME, DIM_COMMON_NAME, DIM_FIELD_NAME);

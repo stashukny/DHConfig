@@ -15,6 +15,7 @@ namespace DHConfig.Controllers
         private DataHammerConfigEntities db = new DataHammerConfigEntities();
 
         // GET: DATA_SOURCE_FIELD
+        [SessionExpireFilterAttribute]
         public ActionResult Index()
         {
             string sClient = Session["sClient"].ToString();
@@ -26,6 +27,7 @@ namespace DHConfig.Controllers
         }
 
         // GET: DATA_SOURCE_FIELD/Details/5
+        [SessionExpireFilterAttribute]
         public ActionResult Details(string CONFIG_COMMON_NAME, string DATA_SOURCE_NAME, string COLUMN_NAME)
         {
 
@@ -38,6 +40,7 @@ namespace DHConfig.Controllers
         }
 
         // GET: DATA_SOURCE_FIELD/Create
+        [SessionExpireFilterAttribute]
         public ActionResult Create()
         {
             string sClient = Session["sClient"].ToString();
@@ -73,6 +76,7 @@ namespace DHConfig.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [SessionExpireFilterAttribute]
         public ActionResult Create([Bind(Include = "CONFIG_COMMON_NAME,DATA_SOURCE_NAME,SOURCE_COLUMN_NAME,SOURCE_COLUMN_DATA_TYPE,RAW_VIEW_COLUMN_NAME,RAW_VIEW_COLUMN_DATA_TYPE,IS_DIM_HASH,IS_IDENTITY,DERIVED_CONFIGURATION,COLUMN_NAME,DATA_SOURCE_FIELD_FEATURE")] DATA_SOURCE_FIELD dATA_SOURCE_FIELD)
         {
             if (ModelState.IsValid)
@@ -88,6 +92,7 @@ namespace DHConfig.Controllers
         }
 
         // GET: DATA_SOURCE_FIELD/Edit/5
+        [SessionExpireFilterAttribute]
         public ActionResult Edit(string CONFIG_COMMON_NAME, string DATA_SOURCE_NAME, string COLUMN_NAME)
         {
             
@@ -126,6 +131,7 @@ namespace DHConfig.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [SessionExpireFilterAttribute]
         public ActionResult Edit([Bind(Include = "CONFIG_COMMON_NAME,DATA_SOURCE_NAME,SOURCE_COLUMN_NAME,SOURCE_COLUMN_DATA_TYPE,RAW_VIEW_COLUMN_NAME,RAW_VIEW_COLUMN_DATA_TYPE,IS_DIM_HASH,IS_IDENTITY,DERIVED_CONFIGURATION,COLUMN_NAME,DATA_SOURCE_FIELD_FEATURE")] DATA_SOURCE_FIELD dATA_SOURCE_FIELD)
         {
             if (ModelState.IsValid)
@@ -140,6 +146,7 @@ namespace DHConfig.Controllers
         }
 
         // GET: DATA_SOURCE_FIELD/Delete/5
+        [SessionExpireFilterAttribute]
         public ActionResult Delete(string CONFIG_COMMON_NAME, string DATA_SOURCE_NAME, string COLUMN_NAME)
         {
             DATA_SOURCE_FIELD dATA_SOURCE_FIELD = db.DATA_SOURCE_FIELD.Find(CONFIG_COMMON_NAME, DATA_SOURCE_NAME, COLUMN_NAME);
@@ -153,6 +160,7 @@ namespace DHConfig.Controllers
         // POST: DATA_SOURCE_FIELD/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [SessionExpireFilterAttribute]
         public ActionResult DeleteConfirmed(string CONFIG_COMMON_NAME, string DATA_SOURCE_NAME, string COLUMN_NAME)
         {
             DATA_SOURCE_FIELD dATA_SOURCE_FIELD = db.DATA_SOURCE_FIELD.Find(CONFIG_COMMON_NAME, DATA_SOURCE_NAME, COLUMN_NAME);

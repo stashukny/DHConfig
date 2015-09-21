@@ -15,12 +15,14 @@ namespace DHConfig.Controllers
         private DataHammerConfigEntities db = new DataHammerConfigEntities();
 
         // GET: DATA_SOURCE_TYPE
+        [SessionExpireFilterAttribute]
         public ActionResult Index()
         {
             return View(db.DATA_SOURCE_TYPE.ToList());
         }
 
         // GET: DATA_SOURCE_TYPE/Details/5
+        [SessionExpireFilterAttribute]
         public ActionResult Details(Guid? id)
         {
             if (id == null)
@@ -36,6 +38,7 @@ namespace DHConfig.Controllers
         }
 
         // GET: DATA_SOURCE_TYPE/Create
+        [SessionExpireFilterAttribute]
         public ActionResult Create()
         {
             return View();
@@ -46,6 +49,7 @@ namespace DHConfig.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [SessionExpireFilterAttribute]
         public ActionResult Create([Bind(Include = "DATA_SOURCE_TYPE_GUID,CREATE_DATE_UTC,MODIFIED_DATE_UTC,MODIFIED_BY,DATA_SOURCE_TYPE_HID_STRING,DATA_SOURCE_TYPE_HID_LEVEL,DATA_SOURCE_TYPE_NAME")] DATA_SOURCE_TYPE dATA_SOURCE_TYPE)
         {
             if (ModelState.IsValid)
@@ -60,7 +64,9 @@ namespace DHConfig.Controllers
         }
 
         // GET: DATA_SOURCE_TYPE/Edit/5
+        [SessionExpireFilterAttribute]
         public ActionResult Edit(Guid? id)
+
         {
             if (id == null)
             {
@@ -79,6 +85,7 @@ namespace DHConfig.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [SessionExpireFilterAttribute]
         public ActionResult Edit([Bind(Include = "DATA_SOURCE_TYPE_GUID,CREATE_DATE_UTC,MODIFIED_DATE_UTC,MODIFIED_BY,DATA_SOURCE_TYPE_HID_STRING,DATA_SOURCE_TYPE_HID_LEVEL,DATA_SOURCE_TYPE_NAME")] DATA_SOURCE_TYPE dATA_SOURCE_TYPE)
         {
             if (ModelState.IsValid)
@@ -91,6 +98,7 @@ namespace DHConfig.Controllers
         }
 
         // GET: DATA_SOURCE_TYPE/Delete/5
+        [SessionExpireFilterAttribute]
         public ActionResult Delete(Guid? id)
         {
             if (id == null)
@@ -108,6 +116,7 @@ namespace DHConfig.Controllers
         // POST: DATA_SOURCE_TYPE/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [SessionExpireFilterAttribute]
         public ActionResult DeleteConfirmed(Guid id)
         {
             DATA_SOURCE_TYPE dATA_SOURCE_TYPE = db.DATA_SOURCE_TYPE.Find(id);

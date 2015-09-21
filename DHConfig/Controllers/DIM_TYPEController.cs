@@ -15,12 +15,14 @@ namespace DHConfig.Controllers
         private DataHammerConfigEntities db = new DataHammerConfigEntities();
 
         // GET: DIM_TYPE
+        [SessionExpireFilterAttribute]
         public ActionResult Index()
         {
             return View(db.DIM_TYPE.ToList());
         }
 
         // GET: DIM_TYPE/Details/5
+        [SessionExpireFilterAttribute]
         public ActionResult Details(Guid? id)
         {
             if (id == null)
@@ -36,6 +38,7 @@ namespace DHConfig.Controllers
         }
 
         // GET: DIM_TYPE/Create
+        [SessionExpireFilterAttribute]
         public ActionResult Create()
         {
             return View();
@@ -46,6 +49,7 @@ namespace DHConfig.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [SessionExpireFilterAttribute]
         public ActionResult Create([Bind(Include = "DIM_TYPE_GUID,DIM_TYPE_NAME,DIM_TYPE_INCLUDE_DATA_SOURCE,CREATE_DATE_UTC,MODIFIED_DATE_UTC,MODIFIED_BY")] DIM_TYPE dIM_TYPE)
         {
             if (ModelState.IsValid)
@@ -60,6 +64,7 @@ namespace DHConfig.Controllers
         }
 
         // GET: DIM_TYPE/Edit/5
+        [SessionExpireFilterAttribute]
         public ActionResult Edit(Guid? id)
         {
             if (id == null)
@@ -79,6 +84,7 @@ namespace DHConfig.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [SessionExpireFilterAttribute]
         public ActionResult Edit([Bind(Include = "DIM_TYPE_GUID,DIM_TYPE_NAME,DIM_TYPE_INCLUDE_DATA_SOURCE,CREATE_DATE_UTC,MODIFIED_DATE_UTC,MODIFIED_BY")] DIM_TYPE dIM_TYPE)
         {
             if (ModelState.IsValid)
@@ -91,6 +97,7 @@ namespace DHConfig.Controllers
         }
 
         // GET: DIM_TYPE/Delete/5
+        [SessionExpireFilterAttribute]
         public ActionResult Delete(Guid? id)
         {
             if (id == null)
@@ -108,6 +115,7 @@ namespace DHConfig.Controllers
         // POST: DIM_TYPE/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [SessionExpireFilterAttribute]
         public ActionResult DeleteConfirmed(Guid id)
         {
             DIM_TYPE dIM_TYPE = db.DIM_TYPE.Find(id);

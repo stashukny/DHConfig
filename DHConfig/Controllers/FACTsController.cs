@@ -15,6 +15,7 @@ namespace DHConfig.Controllers
         private DataHammerConfigEntities db = new DataHammerConfigEntities();
 
         // GET: FACTs
+        [SessionExpireFilterAttribute]
         public ActionResult Index()
         {
             string sClient = Session["sClient"].ToString();
@@ -28,6 +29,7 @@ namespace DHConfig.Controllers
         }
 
         // GET: FACTs/Details/5
+        [SessionExpireFilterAttribute]
         public ActionResult Details(string CONFIG_COMMON_NAME, string FACT_COMMON_NAME)
         {
 
@@ -40,6 +42,7 @@ namespace DHConfig.Controllers
         }
 
         // GET: FACTs/Create
+        [SessionExpireFilterAttribute]
         public ActionResult Create()
         {
             string sClient = Session["sClient"].ToString();
@@ -62,6 +65,7 @@ namespace DHConfig.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [SessionExpireFilterAttribute]
         public ActionResult Create([Bind(Include = "CONFIG_COMMON_NAME,DATA_SOURCE_NAME,FACT_COMMON_NAME,FACT_TABLE_SCHEMA,FACT_TABLE_NAME,FACT_FEATURE,DISTINCT_TABLE_KEY_SCHEMA,DISTINCT_TABLE_KEY_NAME,DISTINCT_TABLE_VALUE_SCHEMA,DISTINCT_TABLE_VALUE_NAME,DISTINCT_VALUE_PROCEDURE_SCHEMA,DISTINCT_VALUE_PROCEDURE_NAME,DISTINCT_KEY_PROCEDURE_SCHEMA,DISTINCT_KEY_PROCEDURE_NAME,FACT_LOAD_PROCEDURE_SCHEMA,FACT_LOAD_PROCEDURE_NAME,FACT_PRE_EXEC_SPROC_SCHEMA,FACT_PRE_EXEC_SPROC_NAME,FACT_POST_EXEC_SPROC_SCHEMA,FACT_POST_EXEC_SPROC_NAME,IS_AUTO_GENERATED_FACT_TABLE,IS_AUTO_GENERATED_LOAD_PROCEDURE")] FACT fACT)
         {
             if (ModelState.IsValid)
@@ -77,6 +81,7 @@ namespace DHConfig.Controllers
         }
 
         // GET: FACTs/Edit/5
+        [SessionExpireFilterAttribute]
         public ActionResult Edit(string CONFIG_COMMON_NAME, string FACT_COMMON_NAME)
         {
 
@@ -103,6 +108,7 @@ namespace DHConfig.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [SessionExpireFilterAttribute]
         public ActionResult Edit([Bind(Include = "CONFIG_COMMON_NAME,DATA_SOURCE_NAME,FACT_COMMON_NAME,FACT_TABLE_SCHEMA,FACT_TABLE_NAME,FACT_FEATURE,DISTINCT_TABLE_KEY_SCHEMA,DISTINCT_TABLE_KEY_NAME,DISTINCT_TABLE_VALUE_SCHEMA,DISTINCT_TABLE_VALUE_NAME,DISTINCT_VALUE_PROCEDURE_SCHEMA,DISTINCT_VALUE_PROCEDURE_NAME,DISTINCT_KEY_PROCEDURE_SCHEMA,DISTINCT_KEY_PROCEDURE_NAME,FACT_LOAD_PROCEDURE_SCHEMA,FACT_LOAD_PROCEDURE_NAME,FACT_PRE_EXEC_SPROC_SCHEMA,FACT_PRE_EXEC_SPROC_NAME,FACT_POST_EXEC_SPROC_SCHEMA,FACT_POST_EXEC_SPROC_NAME,IS_AUTO_GENERATED_FACT_TABLE,IS_AUTO_GENERATED_LOAD_PROCEDURE")] FACT fACT)
         {
             if (ModelState.IsValid)
@@ -117,6 +123,7 @@ namespace DHConfig.Controllers
         }
 
         // GET: FACTs/Delete/5
+        [SessionExpireFilterAttribute]
         public ActionResult Delete(string CONFIG_COMMON_NAME, string FACT_COMMON_NAME)
         {
             FACT fACT = db.FACTs.Find(CONFIG_COMMON_NAME, FACT_COMMON_NAME);
@@ -130,6 +137,7 @@ namespace DHConfig.Controllers
         // POST: FACTs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [SessionExpireFilterAttribute]
         public ActionResult DeleteConfirmed(string CONFIG_COMMON_NAME, string FACT_COMMON_NAME)
         {
             FACT fACT = db.FACTs.Find(CONFIG_COMMON_NAME, FACT_COMMON_NAME);

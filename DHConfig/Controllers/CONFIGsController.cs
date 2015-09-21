@@ -38,6 +38,7 @@ namespace DHConfig.Controllers
         // GET: CONFIGs/Create
         [HttpGet]
         [ImportModelStateFromTempData]
+        [SessionExpireFilterAttribute]
         public ActionResult Create()
         {
             CONFIG cONFIG = new CONFIG();
@@ -52,6 +53,7 @@ namespace DHConfig.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ExportModelStateToTempData]
+        [SessionExpireFilterAttribute]
         public ActionResult Create([Bind(Include = "CONFIG_COMMON_NAME,CONFIG_DATA_PROCESS_PROC_SCHEMA,CONFIG_DATA_PROCESS_PROC_NAME,CONFIG_DATA_SYNC_PROC_SCHEMA,CONFIG_DATA_SYNC_PROC_NAME")] CONFIG cONFIG)
         {
                 if (ModelState.IsValid)

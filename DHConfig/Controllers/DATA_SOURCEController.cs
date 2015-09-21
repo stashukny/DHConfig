@@ -15,6 +15,7 @@ namespace DHConfig.Controllers
         private DataHammerConfigEntities db = new DataHammerConfigEntities();
 
         // GET: DATA_SOURCE
+        [SessionExpireFilterAttribute]
         public ActionResult Index()
         {
             string sClient = Session["sClient"].ToString();
@@ -28,6 +29,7 @@ namespace DHConfig.Controllers
         }
 
         // GET: DATA_SOURCE/Details/5
+        [SessionExpireFilterAttribute]
         public ActionResult Details(string CONFIG_COMMON_NAME, string DATA_SOURCE_NAME)
         {
 
@@ -41,6 +43,7 @@ namespace DHConfig.Controllers
 
         // GET: DATA_SOURCE/Create
         [ImportModelStateFromTempData]
+        [SessionExpireFilterAttribute]
         public ActionResult Create()
         {
             var features = db.BITWISE_DICTIONARY
@@ -64,6 +67,7 @@ namespace DHConfig.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ExportModelStateToTempData]
+        [SessionExpireFilterAttribute]
         public ActionResult Create([Bind(Include = "CONFIG_COMMON_NAME,DATA_SOURCE_NAME,DATA_SOURCE_TYPE_GUID,DATA_SOURCE_TABLE_SCHEMA,DATA_SOURCE_TABLE_NAME,DATA_SOURCE_RAW_VIEW_SCHEMA,DATA_SOURCE_RAW_VIEW_NAME,DATA_SOURCE_TABLE_PROC_UPDATE_SCHEMA,DATA_SOURCE_TABLE_PROC_UPDATE_NAME,DATA_SOURCE_TABLE_PROC_INSERT_SCHEMA,DATA_SOURCE_TABLE_PROC_INSERT_NAME,DATA_SOURCE_TABLE_PROC_DELETE_SCHEMA,DATA_SOURCE_TABLE_PROC_DELETE_NAME,DATA_SOURCE_TABLE_PROC_DDL_PARENT_SCHEMA,DATA_SOURCE_TABLE_PROC_DDL_PARENT_NAME,DATA_SOURCE_RAW_UI_VIEW_SCHEMA,DATA_SOURCE_RAW_UI_VIEW_NAME,DATA_SOURCE_FEATURE,DATA_SOURCE_TEST_DATA_PROC_SCHEMA,DATA_SOURCE_TEST_DATA_PROC_NAME")] DATA_SOURCE dATA_SOURCE)
         {
             if (ModelState.IsValid)
@@ -78,6 +82,7 @@ namespace DHConfig.Controllers
 
         // GET: DATA_SOURCE/Edit/5
         [ImportModelStateFromTempData]
+        [SessionExpireFilterAttribute]
         public ActionResult Edit(string CONFIG_COMMON_NAME, string DATA_SOURCE_NAME)
         {
 
@@ -110,6 +115,7 @@ namespace DHConfig.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ExportModelStateToTempData]
+        [SessionExpireFilterAttribute]
         public ActionResult Edit([Bind(Include = "CONFIG_COMMON_NAME,DATA_SOURCE_NAME,DATA_SOURCE_TYPE_GUID,DATA_SOURCE_TABLE_SCHEMA,DATA_SOURCE_TABLE_NAME,DATA_SOURCE_RAW_VIEW_SCHEMA,DATA_SOURCE_RAW_VIEW_NAME,DATA_SOURCE_TABLE_PROC_UPDATE_SCHEMA,DATA_SOURCE_TABLE_PROC_UPDATE_NAME,DATA_SOURCE_TABLE_PROC_INSERT_SCHEMA,DATA_SOURCE_TABLE_PROC_INSERT_NAME,DATA_SOURCE_TABLE_PROC_DELETE_SCHEMA,DATA_SOURCE_TABLE_PROC_DELETE_NAME,DATA_SOURCE_TABLE_PROC_DDL_PARENT_SCHEMA,DATA_SOURCE_TABLE_PROC_DDL_PARENT_NAME,DATA_SOURCE_RAW_UI_VIEW_SCHEMA,DATA_SOURCE_RAW_UI_VIEW_NAME,DATA_SOURCE_FEATURE,DATA_SOURCE_TEST_DATA_PROC_SCHEMA,DATA_SOURCE_TEST_DATA_PROC_NAME")] DATA_SOURCE dATA_SOURCE)
         {
             if (ModelState.IsValid)
@@ -125,6 +131,7 @@ namespace DHConfig.Controllers
 
         // GET: DATA_SOURCE/Delete/5
         [ImportModelStateFromTempData]
+        [SessionExpireFilterAttribute]
         public ActionResult Delete(string CONFIG_COMMON_NAME, string DATA_SOURCE_NAME)
         {
 
@@ -140,6 +147,7 @@ namespace DHConfig.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [ExportModelStateToTempData]
+        [SessionExpireFilterAttribute]
         public ActionResult DeleteConfirmed(string CONFIG_COMMON_NAME, string DATA_SOURCE_NAME)
         {
             DATA_SOURCE dATA_SOURCE = db.DATA_SOURCE.Find(CONFIG_COMMON_NAME, DATA_SOURCE_NAME);

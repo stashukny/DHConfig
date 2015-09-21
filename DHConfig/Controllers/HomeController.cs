@@ -10,7 +10,7 @@ namespace DHConfig.Controllers
     {
 
         private DataHammerConfigEntities db = new DataHammerConfigEntities();
-
+        
         public ActionResult Index(string SelectedClient)
         {
 
@@ -25,7 +25,7 @@ namespace DHConfig.Controllers
             ViewBag.SelectedClient = clients;
             
             return View(db.CONFIGs.ToList());
-        }
+        }        
 
         public ActionResult About()
         {

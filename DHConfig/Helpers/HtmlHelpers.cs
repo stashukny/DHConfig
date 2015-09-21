@@ -18,7 +18,6 @@ namespace DHConfig
                                             object htmlAttributes
                                             )
         {
-
             string currentAction = htmlHelper.ViewContext.RouteData.GetRequiredString("action");
             string currentController = htmlHelper.ViewContext.RouteData.GetRequiredString("controller");
 
