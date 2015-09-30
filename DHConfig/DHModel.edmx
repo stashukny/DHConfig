@@ -25,20 +25,20 @@
           <Property Name="DATA_SOURCE_TYPE_GUID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="DATA_SOURCE_TABLE_SCHEMA" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="DATA_SOURCE_TABLE_NAME" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="DATA_SOURCE_RAW_VIEW_SCHEMA" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DATA_SOURCE_RAW_VIEW_SCHEMA" Type="varchar" MaxLength="50" StoreGeneratedPattern="Computed" />
           <Property Name="DATA_SOURCE_RAW_VIEW_NAME" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="DATA_SOURCE_TABLE_PROC_UPDATE_SCHEMA" Type="varchar" MaxLength="50" />
+          <Property Name="DATA_SOURCE_TABLE_PROC_UPDATE_SCHEMA" Type="varchar" MaxLength="50" StoreGeneratedPattern="Computed" />
           <Property Name="DATA_SOURCE_TABLE_PROC_UPDATE_NAME" Type="varchar" MaxLength="100" />
-          <Property Name="DATA_SOURCE_TABLE_PROC_INSERT_SCHEMA" Type="varchar" MaxLength="50" />
+          <Property Name="DATA_SOURCE_TABLE_PROC_INSERT_SCHEMA" Type="varchar" MaxLength="50" StoreGeneratedPattern="Computed" />
           <Property Name="DATA_SOURCE_TABLE_PROC_INSERT_NAME" Type="varchar" MaxLength="100" />
-          <Property Name="DATA_SOURCE_TABLE_PROC_DELETE_SCHEMA" Type="varchar" MaxLength="50" />
+          <Property Name="DATA_SOURCE_TABLE_PROC_DELETE_SCHEMA" Type="varchar" MaxLength="50" StoreGeneratedPattern="Computed" />
           <Property Name="DATA_SOURCE_TABLE_PROC_DELETE_NAME" Type="varchar" MaxLength="100" />
-          <Property Name="DATA_SOURCE_TABLE_PROC_DDL_PARENT_SCHEMA" Type="varchar" MaxLength="50" />
+          <Property Name="DATA_SOURCE_TABLE_PROC_DDL_PARENT_SCHEMA" Type="varchar" MaxLength="50" StoreGeneratedPattern="Computed" />
           <Property Name="DATA_SOURCE_TABLE_PROC_DDL_PARENT_NAME" Type="varchar" MaxLength="100" />
-          <Property Name="DATA_SOURCE_RAW_UI_VIEW_SCHEMA" Type="varchar" MaxLength="50" />
+          <Property Name="DATA_SOURCE_RAW_UI_VIEW_SCHEMA" Type="varchar" MaxLength="50" StoreGeneratedPattern="Computed" />
           <Property Name="DATA_SOURCE_RAW_UI_VIEW_NAME" Type="varchar" MaxLength="100" />
           <Property Name="DATA_SOURCE_FEATURE" Type="varchar" MaxLength="500" />
-          <Property Name="DATA_SOURCE_TEST_DATA_PROC_SCHEMA" Type="varchar" MaxLength="50" />
+          <Property Name="DATA_SOURCE_TEST_DATA_PROC_SCHEMA" Type="varchar" MaxLength="50" StoreGeneratedPattern="Computed" />
           <Property Name="DATA_SOURCE_TEST_DATA_PROC_NAME" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="DATA_SOURCE_FIELD">
@@ -56,7 +56,7 @@
           <Property Name="IS_DIM_HASH" Type="bit" Nullable="false" />
           <Property Name="IS_IDENTITY" Type="bit" Nullable="false" />
           <Property Name="DERIVED_CONFIGURATION" Type="varchar" MaxLength="800" />
-          <Property Name="COLUMN_NAME" Type="varchar" MaxLength="100" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="COLUMN_NAME" Type="varchar" MaxLength="100" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DATA_SOURCE_FIELD_FEATURE" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="DIM">
@@ -69,32 +69,32 @@
           <Property Name="DIM_COMMON_NAME" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="DIM_TABLE_SCHEMA" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="DIM_TABLE_NAME" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="DIM_TABLE_CLEAN_SCHEMA" Type="varchar" MaxLength="50" />
+          <Property Name="DIM_TABLE_CLEAN_SCHEMA" Type="varchar" MaxLength="50" StoreGeneratedPattern="Computed" />
           <Property Name="DIM_TABLE_CLEAN_NAME" Type="varchar" MaxLength="100" />
-          <Property Name="DIM_LOAD_PROC_SCHEMA_RAW" Type="varchar" MaxLength="50" />
+          <Property Name="DIM_LOAD_PROC_SCHEMA_RAW" Type="varchar" MaxLength="50" StoreGeneratedPattern="Computed" />
           <Property Name="DIM_LOAD_PROC_NAME_RAW" Type="varchar" MaxLength="100" />
-          <Property Name="DIM_PROC_UI_CLEAN_SCHEMA" Type="varchar" MaxLength="50" />
+          <Property Name="DIM_PROC_UI_CLEAN_SCHEMA" Type="varchar" MaxLength="50" StoreGeneratedPattern="Computed" />
           <Property Name="DIM_PROC_UI_CLEAN_NAME" Type="varchar" MaxLength="100" />
-          <Property Name="DIM_LOAD_PROC_CLEAN_SCHEMA" Type="varchar" MaxLength="50" />
+          <Property Name="DIM_LOAD_PROC_CLEAN_SCHEMA" Type="varchar" MaxLength="50" StoreGeneratedPattern="Computed" />
           <Property Name="DIM_LOAD_PROC_CLEAN_NAME" Type="varchar" MaxLength="100" />
-          <Property Name="DIM_VIEW_RAW_SCHEMA" Type="varchar" MaxLength="50" />
+          <Property Name="DIM_VIEW_RAW_SCHEMA" Type="varchar" MaxLength="50" StoreGeneratedPattern="Computed" />
           <Property Name="DIM_VIEW_RAW_NAME" Type="varchar" MaxLength="100" />
-          <Property Name="DIM_VIEW_CLEAN_SCHEMA" Type="varchar" MaxLength="50" />
+          <Property Name="DIM_VIEW_CLEAN_SCHEMA" Type="varchar" MaxLength="50" StoreGeneratedPattern="Computed" />
           <Property Name="DIM_VIEW_CLEAN_NAME" Type="varchar" MaxLength="100" />
-          <Property Name="DIM_PROC_RAW_TABLE_CLEAN_ID_SCHEMA" Type="varchar" MaxLength="50" />
+          <Property Name="DIM_PROC_RAW_TABLE_CLEAN_ID_SCHEMA" Type="varchar" MaxLength="50" StoreGeneratedPattern="Computed" />
           <Property Name="DIM_PROC_RAW_TABLE_CLEAN_ID_NAME" Type="varchar" MaxLength="100" />
-          <Property Name="DIM_VIEW_WHITELIST_SCHEMA" Type="varchar" MaxLength="50" />
+          <Property Name="DIM_VIEW_WHITELIST_SCHEMA" Type="varchar" MaxLength="50" StoreGeneratedPattern="Computed" />
           <Property Name="DIM_VIEW_WHITELIST_NAME" Type="varchar" MaxLength="100" />
           <Property Name="DIM_FEATURE" Type="varchar" MaxLength="500" />
-          <Property Name="DIM_TAXONOMY_PROC_SCHEMA" Type="varchar" MaxLength="50" />
+          <Property Name="DIM_TAXONOMY_PROC_SCHEMA" Type="varchar" MaxLength="50" StoreGeneratedPattern="Computed" />
           <Property Name="DIM_TAXONOMY_PROC_NAME" Type="varchar" MaxLength="100" />
-          <Property Name="DIM_LOAD_PRE_PROC_SPROC_SCHEMA" Type="varchar" MaxLength="50" />
+          <Property Name="DIM_LOAD_PRE_PROC_SPROC_SCHEMA" Type="varchar" MaxLength="50" StoreGeneratedPattern="Computed" />
           <Property Name="DIM_LOAD_PRE_PROC_SPROC_NAME" Type="varchar" MaxLength="100" />
-          <Property Name="DIM_LOAD_POST_PROC_SCHEMA" Type="varchar" MaxLength="50" />
+          <Property Name="DIM_LOAD_POST_PROC_SCHEMA" Type="varchar" MaxLength="50" StoreGeneratedPattern="Computed" />
           <Property Name="DIM_LOAD_POST_PROC_NAME" Type="varchar" MaxLength="100" />
-          <Property Name="DIM_LOAD_PRE_PROC_CLEAN_SCHEMA" Type="varchar" MaxLength="50" />
+          <Property Name="DIM_LOAD_PRE_PROC_CLEAN_SCHEMA" Type="varchar" MaxLength="50" StoreGeneratedPattern="Computed" />
           <Property Name="DIM_LOAD_PRE_PROC_CLEAN_NAME" Type="varchar" MaxLength="100" />
-          <Property Name="DIM_LOAD_POST_PROC_CLEAN_SCHEMA" Type="varchar" MaxLength="50" />
+          <Property Name="DIM_LOAD_POST_PROC_CLEAN_SCHEMA" Type="varchar" MaxLength="50" StoreGeneratedPattern="Computed" />
           <Property Name="DIM_LOAD_POST_PROC_CLEAN_NAME" Type="varchar" MaxLength="100" />
           <Property Name="IS_STATIC" Type="bit" Nullable="false" />
           <Property Name="IS_AUTO_GENERATED" Type="bit" Nullable="false" />
@@ -124,19 +124,19 @@
           <Property Name="FACT_TABLE_SCHEMA" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="FACT_TABLE_NAME" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="FACT_FEATURE" Type="varchar" MaxLength="500" />
-          <Property Name="DISTINCT_TABLE_KEY_SCHEMA" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DISTINCT_TABLE_KEY_SCHEMA" Type="varchar" MaxLength="50" StoreGeneratedPattern="Computed" />
           <Property Name="DISTINCT_TABLE_KEY_NAME" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="DISTINCT_TABLE_VALUE_SCHEMA" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DISTINCT_TABLE_VALUE_SCHEMA" Type="varchar" MaxLength="50" StoreGeneratedPattern="Computed" />
           <Property Name="DISTINCT_TABLE_VALUE_NAME" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="DISTINCT_VALUE_PROCEDURE_SCHEMA" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DISTINCT_VALUE_PROCEDURE_SCHEMA" Type="varchar" MaxLength="50" StoreGeneratedPattern="Computed" />
           <Property Name="DISTINCT_VALUE_PROCEDURE_NAME" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="DISTINCT_KEY_PROCEDURE_SCHEMA" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DISTINCT_KEY_PROCEDURE_SCHEMA" Type="varchar" MaxLength="50" StoreGeneratedPattern="Computed" />
           <Property Name="DISTINCT_KEY_PROCEDURE_NAME" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="FACT_LOAD_PROCEDURE_SCHEMA" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FACT_LOAD_PROCEDURE_SCHEMA" Type="varchar" MaxLength="50" StoreGeneratedPattern="Computed" />
           <Property Name="FACT_LOAD_PROCEDURE_NAME" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="FACT_PRE_EXEC_SPROC_SCHEMA" Type="varchar" MaxLength="50" />
+          <Property Name="FACT_PRE_EXEC_SPROC_SCHEMA" Type="varchar" MaxLength="50" StoreGeneratedPattern="Computed" />
           <Property Name="FACT_PRE_EXEC_SPROC_NAME" Type="varchar" MaxLength="100" />
-          <Property Name="FACT_POST_EXEC_SPROC_SCHEMA" Type="varchar" MaxLength="50" />
+          <Property Name="FACT_POST_EXEC_SPROC_SCHEMA" Type="varchar" MaxLength="50" StoreGeneratedPattern="Computed" />
           <Property Name="FACT_POST_EXEC_SPROC_NAME" Type="varchar" MaxLength="100" />
           <Property Name="IS_AUTO_GENERATED_FACT_TABLE" Type="bit" Nullable="false" />
           <Property Name="IS_AUTO_GENERATED_LOAD_PROCEDURE" Type="bit" Nullable="false" />
@@ -209,7 +209,7 @@ warning 6002: The table/view 'DataHammerConfig.CONFIG.INDX_FIELD' does not have 
           <Property Name="FACT_COMMON_NAME" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="SUMMARY_TABLE_SCHEMA" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="SUMMARY_TABLE_NAME" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="SUMMARY_LOAD_PROC_SCHEAMA" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SUMMARY_LOAD_PROC_SCHEAMA" Type="varchar" MaxLength="50" StoreGeneratedPattern="Computed" />
           <Property Name="SUMMARY_LOAD_PROC_NAME" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
         <EntityType Name="SUMMARY_FIELD">
@@ -999,7 +999,7 @@ warning 6002: The table/view 'DataHammerConfig.UTILITY.vSCHEMAS' does not have a
           <Property Name="DATA_SOURCE_TYPE_GUID" Type="Guid" Nullable="false" />
           <Property Name="DATA_SOURCE_TABLE_SCHEMA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="DATA_SOURCE_TABLE_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="DATA_SOURCE_RAW_VIEW_SCHEMA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DATA_SOURCE_RAW_VIEW_SCHEMA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DATA_SOURCE_RAW_VIEW_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="DATA_SOURCE_TABLE_PROC_UPDATE_SCHEMA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DATA_SOURCE_TABLE_PROC_UPDATE_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
@@ -1034,7 +1034,7 @@ warning 6002: The table/view 'DataHammerConfig.UTILITY.vSCHEMAS' does not have a
           <Property Name="IS_DIM_HASH" Type="Boolean" Nullable="false" />
           <Property Name="IS_IDENTITY" Type="Boolean" Nullable="false" />
           <Property Name="DERIVED_CONFIGURATION" Type="String" MaxLength="800" FixedLength="false" Unicode="false" />
-          <Property Name="COLUMN_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="COLUMN_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DATA_SOURCE_FIELD_FEATURE" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="CONFIG" Relationship="Self.FK_CONFIG_DATA_SOURCE_FIELD_CONFIG_COMMON_NAME" FromRole="DATA_SOURCE_FIELD" ToRole="CONFIG" />
           <NavigationProperty Name="DATA_SOURCE" Relationship="Self.FK_CONFIG_DATA_SOURCE_FIELD_DATA_SOURCE" FromRole="DATA_SOURCE_FIELD" ToRole="DATA_SOURCE" />
@@ -1096,7 +1096,7 @@ warning 6002: The table/view 'DataHammerConfig.UTILITY.vSCHEMAS' does not have a
           <Property Name="FACT_COMMON_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="SUMMARY_TABLE_SCHEMA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="SUMMARY_TABLE_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="SUMMARY_LOAD_PROC_SCHEAMA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SUMMARY_LOAD_PROC_SCHEAMA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="SUMMARY_LOAD_PROC_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="CONFIG" Relationship="Self.FK_CONFIG_SUMMARY_FACT_CONFIG_COMMON_NAME" FromRole="SUMMARY" ToRole="CONFIG" />
           <NavigationProperty Name="FACT" Relationship="DataHammerConfigModel.FK_CONFIG_SUMMARY_FACT_FACT_FILED" FromRole="SUMMARY" ToRole="FACT" />
@@ -1641,15 +1641,15 @@ warning 6002: The table/view 'DataHammerConfig.UTILITY.vSCHEMAS' does not have a
           <Property Name="FACT_TABLE_SCHEMA" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="FACT_TABLE_NAME" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="FACT_FEATURE" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="DISTINCT_TABLE_KEY_SCHEMA" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DISTINCT_TABLE_KEY_SCHEMA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DISTINCT_TABLE_KEY_NAME" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="DISTINCT_TABLE_VALUE_SCHEMA" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DISTINCT_TABLE_VALUE_SCHEMA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DISTINCT_TABLE_VALUE_NAME" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="DISTINCT_VALUE_PROCEDURE_SCHEMA" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DISTINCT_VALUE_PROCEDURE_SCHEMA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DISTINCT_VALUE_PROCEDURE_NAME" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="DISTINCT_KEY_PROCEDURE_SCHEMA" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DISTINCT_KEY_PROCEDURE_SCHEMA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DISTINCT_KEY_PROCEDURE_NAME" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="FACT_LOAD_PROCEDURE_SCHEMA" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FACT_LOAD_PROCEDURE_SCHEMA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="FACT_LOAD_PROCEDURE_NAME" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="FACT_PRE_EXEC_SPROC_SCHEMA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="FACT_PRE_EXEC_SPROC_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />

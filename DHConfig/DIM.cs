@@ -11,7 +11,6 @@ namespace DHConfig
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class DIM
     {
@@ -21,7 +20,7 @@ namespace DHConfig
         }
     
         public string CONFIG_COMMON_NAME { get; set; }
-        public System.Guid DIM_TYPE_GUID { get; set; }        
+        public System.Guid DIM_TYPE_GUID { get; set; }
         public string DIM_COMMON_NAME { get; set; }
         public string DIM_TABLE_SCHEMA { get; set; }
         public string DIM_TABLE_NAME { get; set; }
@@ -58,6 +57,5 @@ namespace DHConfig
         public virtual CONFIG CONFIG { get; set; }
         public virtual DIM_TYPE DIM_TYPE { get; set; }
         public virtual ICollection<DIM_FIELD> DIM_FIELD { get; set; }
-        
     }
 }

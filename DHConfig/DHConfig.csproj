@@ -208,7 +208,11 @@
     <Compile Include="INDX_FIELD.cs">
       <DependentUpon>DHModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="MetaData\DataSourceFieldPartial.cs" />
+    <Compile Include="MetaData\DataSourcePartial.cs" />
+    <Compile Include="MetaData\DimFieldPartial.cs" />
     <Compile Include="MetaData\DimPartial.cs" />
+    <Compile Include="MetaData\FactFieldPartial.cs" />
     <Compile Include="MetaData\FactPartial.cs" />
     <Compile Include="METRIC.cs">
       <DependentUpon>DHModel.tt</DependentUpon>

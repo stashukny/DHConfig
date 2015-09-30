@@ -96,11 +96,11 @@ namespace DHConfig.Controllers
         [SessionExpireFilterAttribute]
         public ActionResult Create([Bind(Include = "CONFIG_COMMON_NAME,DIM_TYPE_GUID,DIM_COMMON_NAME,DIM_TABLE_SCHEMA,DIM_TABLE_NAME,DIM_LOAD_PROC_SCHEMA_RAW,DIM_LOAD_PROC_NAME_RAW,DIM_TABLE_CLEAN_SCHEMA,DIM_TABLE_CLEAN_NAME,DIM_PROC_UI_CLEAN_SCHEMA,DIM_PROC_UI_CLEAN_NAME,DIM_LOAD_PROC_CLEAN_SCHEMA,DIM_LOAD_PROC_CLEAN_NAME,DIM_VIEW_WHITELIST_SCHEMA,DIM_VIEW_WHITELIST_NAME,DIM_VIEW_RAW_SCHEMA,DIM_VIEW_RAW_NAME,DIM_VIEW_CLEAN_SCHEMA,DIM_VIEW_CLEAN_NAME,DIM_PROC_RAW_TABLE_CLEAN_ID_SCHEMA,DIM_PROC_RAW_TABLE_CLEAN_ID_NAME,DIM_FEATURE,DIM_TAXONOMY_PROC_SCHEMA,DIM_TAXONOMY_PROC_NAME,DIM_LOAD_PRE_PROC_SPROC_SCHEMA,DIM_LOAD_PRE_PROC_SPROC_NAME,DIM_LOAD_POST_PROC_SCHEMA,DIM_LOAD_POST_PROC_NAME,DIM_LOAD_PRE_PROC_CLEAN_SCHEMA,DIM_LOAD_PRE_PROC_CLEAN_NAME,DIM_LOAD_POST_PROC_CLEAN_SCHEMA,DIM_LOAD_POST_PROC_CLEAN_NAME,IS_STATIC,IS_AUTO_GENERATED")] string CONFIG_COMMON_NAME, string DIM_COMMON_NAME, DIM dIM, string[] SelectedItems)
         {
-
+            dIM.CONFIG_COMMON_NAME = Session["sClient"].ToString();
             if (SelectedItems != null)
             {
                 string feature = dIM.DIM_FEATURE;
-                bool exists = BitwiseDictionaryChecker.IsExists(ref feature, SelectedItems,"DATA_SOURCE_ATTRIBUTES", db);
+                bool exists = BitwiseDictionaryChecker.IsExists(ref feature, SelectedItems,"DIM", db);
                 dIM.DIM_FEATURE = feature;                      
                 if (!exists)
                 {                    

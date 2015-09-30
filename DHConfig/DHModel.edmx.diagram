@@ -42,7 +42,7 @@
         <AssociationConnector Association="DataHammerConfigModel.FK_CONFIG_DIM_CONFIG_COMMON_NAME" />
         <AssociationConnector Association="DataHammerConfigModel.FK_CONFIG_DIM_CONFIG_DIM_TYPE_GUID" />
         <EntityTypeShape EntityType="DataHammerConfigModel.DIM_FIELD" Width="1.5" PointX="10.875" PointY="18.125" />
-        <EntityTypeShape EntityType="DataHammerConfigModel.FACT" Width="1.5" PointX="8.25" PointY="8.875" />
+        <EntityTypeShape EntityType="DataHammerConfigModel.FACT" Width="2.25" PointX="8.25" PointY="8.875" />
         <AssociationConnector Association="DataHammerConfigModel.FK_CONFIG_DIM_FIELD_CONFIG_COMMON_NAME" />
         <AssociationConnector Association="DataHammerConfigModel.FK_CONFIG_FACT_FACT_COMMON_NAME" />
         <AssociationConnector Association="DataHammerConfigModel.FK_CONFIG_FACT_DATA_SOURCE" />

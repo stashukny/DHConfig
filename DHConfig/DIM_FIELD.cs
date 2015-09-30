@@ -24,16 +24,5 @@ namespace DHConfig
     
         public virtual CONFIG CONFIG { get; set; }
         public virtual DIM DIM { get; set; }
-
-        public string[] SelectedItems
-        {
-            get
-            {
-                if (DIM_FIELD_FEATURE != null)
-                    return (DIM_FIELD_FEATURE.Split(','));
-                else
-                    return null;
-            }
-        } 
     }
 }
