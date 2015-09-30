@@ -40,6 +40,7 @@ namespace DHConfig.Controllers
 
         // GET: FACT_FIELD/Create
         [SessionExpireFilterAttribute]
+        [ImportModelStateFromTempData]
         public ActionResult Create()
         {
             string sClient = Session["sClient"].ToString();
@@ -70,22 +71,46 @@ namespace DHConfig.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [SessionExpireFilterAttribute]
-        public ActionResult Create([Bind(Include = "CONFIG_COMMON_NAME,FACT_COMMON_NAME,FACT_FIELD_NAME,OBJECT_TYPE_NAME,DIM_FIELD_NAME,FACT_FIELD_FEATURE")] FACT_FIELD fACT_FIELD)
+        [ExportModelStateToTempData]
+        public ActionResult Create([Bind(Include = "CONFIG_COMMON_NAME,FACT_COMMON_NAME,FACT_FIELD_NAME,OBJECT_TYPE_NAME,DIM_FIELD_NAME,FACT_FIELD_FEATURE")] FACT_FIELD fACT_FIELD, string[] SelectedItems, string CONFIG_COMMON_NAME, string FACT_COMMON_NAME, string FACT_FIELD_NAME)
         {
+            fACT_FIELD.CONFIG_COMMON_NAME = Session["sClient"].ToString();
+            if (SelectedItems != null)
+            {
+                string feature = fACT_FIELD.FACT_FIELD_FEATURE;
+                bool exists = BitwiseDictionaryChecker.IsExists(ref feature, SelectedItems, "FACT_FIELDS", db);
+                fACT_FIELD.FACT_FIELD_FEATURE = feature;
+                if (!exists)
+                {
+                    ModelState.AddModelError(String.Empty, "Cannot create due to selection of invalid features.");
+                    return RedirectToAction("Create", new { CONFIG_COMMON_NAME = Request["CONFIG_COMMON_NAME"].ToString(), FACT_COMMON_NAME = Request["FACT_COMMON_NAME"].ToString(), FACT_FIELD_NAME = Request["FACT_FIELD_NAME"].ToString() });
+                }
+            }
+
             if (ModelState.IsValid)
             {
-                db.FACT_FIELD.Add(fACT_FIELD);
+                try
+                {
+                    db.FACT_FIELD.Add(fACT_FIELD);
+                    db.SaveChanges();
+                }
+
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError(String.Empty, ex.InnerException.InnerException.Message);
+                    return RedirectToAction("Create", new { CONFIG_COMMON_NAME, FACT_COMMON_NAME, FACT_FIELD_NAME });
+                }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CONFIG_COMMON_NAME = new SelectList(db.CONFIGs, "CONFIG_COMMON_NAME", "CONFIG_DATA_PROCESS_PROC_SCHEMA", fACT_FIELD.CONFIG_COMMON_NAME);
-            ViewBag.CONFIG_COMMON_NAME = new SelectList(db.FACTs, "CONFIG_COMMON_NAME", "DATA_SOURCE_NAME", fACT_FIELD.CONFIG_COMMON_NAME);
+
             return View(fACT_FIELD);
         }
 
         // GET: FACT_FIELD/Edit/5
         [SessionExpireFilterAttribute]
+        [ImportModelStateFromTempData]
         public ActionResult Edit(string CONFIG_COMMON_NAME, string FACT_COMMON_NAME, string FACT_FIELD_NAME)
         {
 
@@ -116,21 +141,66 @@ namespace DHConfig.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [SessionExpireFilterAttribute]
-        public ActionResult Edit([Bind(Include = "CONFIG_COMMON_NAME,FACT_COMMON_NAME,FACT_FIELD_NAME,OBJECT_TYPE_NAME,DIM_FIELD_NAME,FACT_FIELD_FEATURE")] FACT_FIELD fACT_FIELD)
+        [ExportModelStateToTempData]
+        public ActionResult Edit([Bind(Include = "CONFIG_COMMON_NAME,FACT_COMMON_NAME,FACT_FIELD_NAME,OBJECT_TYPE_NAME,DIM_FIELD_NAME,FACT_FIELD_FEATURE")] FACT_FIELD fACT_FIELD, string[] SelectedItems, string CONFIG_COMMON_NAME, string FACT_COMMON_NAME, string FACT_FIELD_NAME)
         {
+            if (SelectedItems != null)
+            {
+                string feature = fACT_FIELD.FACT_FIELD_FEATURE;
+                bool exists = BitwiseDictionaryChecker.IsExists(ref feature, SelectedItems, "FACT_FIELDS", db);
+                fACT_FIELD.FACT_FIELD_FEATURE = feature;
+
+                if (!exists)
+                {
+                    ModelState.AddModelError(String.Empty, "Cannot select due to invalid Features.");
+                    return RedirectToAction("Edit", new { CONFIG_COMMON_NAME = Request["CONFIG_COMMON_NAME"].ToString(), FACT_COMMON_NAME = Request["FACT_COMMON_NAME"].ToString(), FACT_FIELD_NAME = Request["FACT_FIELD_NAME"].ToString() });
+                }                
+            }
+
             if (ModelState.IsValid)
             {
-                db.Entry(fACT_FIELD).State = EntityState.Modified;
-                db.SaveChanges();
+                //TODO: come back here
+                string oldFACT_COMMON_NAME = Request["FACT_COMMON_NAME"].ToString();
+                string oldCONFIG_COMMON_NAME = Request["CONFIG_COMMON_NAME"].ToString();
+                string oldFACT_FIELD_NAME = Request["FACT_FIELD_NAME"].ToString();
+
+
+                if (oldFACT_COMMON_NAME != fACT_FIELD.FACT_COMMON_NAME || oldCONFIG_COMMON_NAME != fACT_FIELD.CONFIG_COMMON_NAME || oldFACT_FIELD_NAME != fACT_FIELD.FACT_FIELD_NAME)
+                {
+
+                    var fact_fields = db.FACT_FIELD.Where(a => a.FACT_COMMON_NAME == oldFACT_COMMON_NAME && a.CONFIG_COMMON_NAME == oldCONFIG_COMMON_NAME && a.FACT_FIELD_NAME == oldFACT_FIELD_NAME);
+
+                    foreach (var f in fact_fields)
+                    {
+                        db.FACT_FIELD.Remove(f);
+                    }
+
+                    db.FACT_FIELD.Add(fACT_FIELD);
+                }
+                else
+                {
+                    db.Entry(fACT_FIELD).State = EntityState.Modified;
+                }
+
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError(String.Empty, ex.InnerException.InnerException.Message);
+                    return RedirectToAction("Edit", new { CONFIG_COMMON_NAME = Request["CONFIG_COMMON_NAME"].ToString(), FACT_COMMON_NAME = Request["FACT_COMMON_NAME"].ToString(), FACT_FIELD_NAME = Request["FACT_FIELD_NAME"].ToString() });
+                }
+
                 return RedirectToAction("Index");
             }
-            ViewBag.CONFIG_COMMON_NAME = new SelectList(db.CONFIGs, "CONFIG_COMMON_NAME", "CONFIG_DATA_PROCESS_PROC_SCHEMA", fACT_FIELD.CONFIG_COMMON_NAME);
-            ViewBag.CONFIG_COMMON_NAME = new SelectList(db.FACTs, "CONFIG_COMMON_NAME", "DATA_SOURCE_NAME", fACT_FIELD.CONFIG_COMMON_NAME);
+
             return View(fACT_FIELD);
         }
 
         // GET: FACT_FIELD/Delete/5
         [SessionExpireFilterAttribute]
+        [ImportModelStateFromTempData]
         public ActionResult Delete(string CONFIG_COMMON_NAME, string FACT_COMMON_NAME, string FACT_FIELD_NAME)
         {
 
@@ -146,6 +216,7 @@ namespace DHConfig.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [SessionExpireFilterAttribute]
+        [ExportModelStateToTempData]
         public ActionResult DeleteConfirmed(string CONFIG_COMMON_NAME, string FACT_COMMON_NAME, string FACT_FIELD_NAME)
         {
             FACT_FIELD fACT_FIELD = db.FACT_FIELD.Find(CONFIG_COMMON_NAME, FACT_COMMON_NAME, FACT_FIELD_NAME);

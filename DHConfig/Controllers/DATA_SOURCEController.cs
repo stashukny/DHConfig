@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DHConfig;
+using System.Data.Entity.Validation;
 
 namespace DHConfig.Controllers
 {
@@ -68,15 +69,39 @@ namespace DHConfig.Controllers
         [ValidateAntiForgeryToken]
         [ExportModelStateToTempData]
         [SessionExpireFilterAttribute]
-        public ActionResult Create([Bind(Include = "CONFIG_COMMON_NAME,DATA_SOURCE_NAME,DATA_SOURCE_TYPE_GUID,DATA_SOURCE_TABLE_SCHEMA,DATA_SOURCE_TABLE_NAME,DATA_SOURCE_RAW_VIEW_SCHEMA,DATA_SOURCE_RAW_VIEW_NAME,DATA_SOURCE_TABLE_PROC_UPDATE_SCHEMA,DATA_SOURCE_TABLE_PROC_UPDATE_NAME,DATA_SOURCE_TABLE_PROC_INSERT_SCHEMA,DATA_SOURCE_TABLE_PROC_INSERT_NAME,DATA_SOURCE_TABLE_PROC_DELETE_SCHEMA,DATA_SOURCE_TABLE_PROC_DELETE_NAME,DATA_SOURCE_TABLE_PROC_DDL_PARENT_SCHEMA,DATA_SOURCE_TABLE_PROC_DDL_PARENT_NAME,DATA_SOURCE_RAW_UI_VIEW_SCHEMA,DATA_SOURCE_RAW_UI_VIEW_NAME,DATA_SOURCE_FEATURE,DATA_SOURCE_TEST_DATA_PROC_SCHEMA,DATA_SOURCE_TEST_DATA_PROC_NAME")] DATA_SOURCE dATA_SOURCE)
+        public ActionResult Create([Bind(Include = "CONFIG_COMMON_NAME,DATA_SOURCE_NAME,DATA_SOURCE_TYPE_GUID,DATA_SOURCE_TABLE_SCHEMA,DATA_SOURCE_TABLE_NAME,DATA_SOURCE_RAW_VIEW_SCHEMA,DATA_SOURCE_RAW_VIEW_NAME,DATA_SOURCE_TABLE_PROC_UPDATE_SCHEMA,DATA_SOURCE_TABLE_PROC_UPDATE_NAME,DATA_SOURCE_TABLE_PROC_INSERT_SCHEMA,DATA_SOURCE_TABLE_PROC_INSERT_NAME,DATA_SOURCE_TABLE_PROC_DELETE_SCHEMA,DATA_SOURCE_TABLE_PROC_DELETE_NAME,DATA_SOURCE_TABLE_PROC_DDL_PARENT_SCHEMA,DATA_SOURCE_TABLE_PROC_DDL_PARENT_NAME,DATA_SOURCE_RAW_UI_VIEW_SCHEMA,DATA_SOURCE_RAW_UI_VIEW_NAME,DATA_SOURCE_FEATURE,DATA_SOURCE_TEST_DATA_PROC_SCHEMA,DATA_SOURCE_TEST_DATA_PROC_NAME")] DATA_SOURCE dATA_SOURCE, string[] SelectedItems, string CONFIG_COMMON_NAME, string DATA_SOURCE_NAME)
         {
+            dATA_SOURCE.CONFIG_COMMON_NAME = Session["sClient"].ToString();
+            if (SelectedItems != null)
+            {
+                string feature = dATA_SOURCE.DATA_SOURCE_FEATURE;
+                bool exists = BitwiseDictionaryChecker.IsExists(ref feature, SelectedItems, "DATASOURCE_ATTRIBUTES", db);
+                dATA_SOURCE.DATA_SOURCE_FEATURE = feature;
+                if (!exists)
+                {
+                    ModelState.AddModelError(String.Empty, "Cannot create due to selection of invalid features.");
+                    return RedirectToAction("Create");
+                }
+            }
+
             if (ModelState.IsValid)
             {
-                db.DATA_SOURCE.Add(dATA_SOURCE);
+                try
+                {
+                    db.DATA_SOURCE.Add(dATA_SOURCE);
+                    db.SaveChanges();
+                }
+
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError(String.Empty, ex.InnerException.InnerException.Message);
+                    return RedirectToAction("Create", new { CONFIG_COMMON_NAME, DATA_SOURCE_NAME});
+                }
                 db.SaveChanges();
                 return RedirectToAction("Index");
-            }            
-            
+            }
+
+
             return View(dATA_SOURCE);
         }
 
@@ -116,16 +141,71 @@ namespace DHConfig.Controllers
         [ValidateAntiForgeryToken]
         [ExportModelStateToTempData]
         [SessionExpireFilterAttribute]
-        public ActionResult Edit([Bind(Include = "CONFIG_COMMON_NAME,DATA_SOURCE_NAME,DATA_SOURCE_TYPE_GUID,DATA_SOURCE_TABLE_SCHEMA,DATA_SOURCE_TABLE_NAME,DATA_SOURCE_RAW_VIEW_SCHEMA,DATA_SOURCE_RAW_VIEW_NAME,DATA_SOURCE_TABLE_PROC_UPDATE_SCHEMA,DATA_SOURCE_TABLE_PROC_UPDATE_NAME,DATA_SOURCE_TABLE_PROC_INSERT_SCHEMA,DATA_SOURCE_TABLE_PROC_INSERT_NAME,DATA_SOURCE_TABLE_PROC_DELETE_SCHEMA,DATA_SOURCE_TABLE_PROC_DELETE_NAME,DATA_SOURCE_TABLE_PROC_DDL_PARENT_SCHEMA,DATA_SOURCE_TABLE_PROC_DDL_PARENT_NAME,DATA_SOURCE_RAW_UI_VIEW_SCHEMA,DATA_SOURCE_RAW_UI_VIEW_NAME,DATA_SOURCE_FEATURE,DATA_SOURCE_TEST_DATA_PROC_SCHEMA,DATA_SOURCE_TEST_DATA_PROC_NAME")] DATA_SOURCE dATA_SOURCE)
+        public ActionResult Edit([Bind(Include = "CONFIG_COMMON_NAME,DATA_SOURCE_NAME,DATA_SOURCE_TYPE_GUID,DATA_SOURCE_TABLE_SCHEMA,DATA_SOURCE_TABLE_NAME,DATA_SOURCE_RAW_VIEW_SCHEMA,DATA_SOURCE_RAW_VIEW_NAME,DATA_SOURCE_TABLE_PROC_UPDATE_SCHEMA,DATA_SOURCE_TABLE_PROC_UPDATE_NAME,DATA_SOURCE_TABLE_PROC_INSERT_SCHEMA,DATA_SOURCE_TABLE_PROC_INSERT_NAME,DATA_SOURCE_TABLE_PROC_DELETE_SCHEMA,DATA_SOURCE_TABLE_PROC_DELETE_NAME,DATA_SOURCE_TABLE_PROC_DDL_PARENT_SCHEMA,DATA_SOURCE_TABLE_PROC_DDL_PARENT_NAME,DATA_SOURCE_RAW_UI_VIEW_SCHEMA,DATA_SOURCE_RAW_UI_VIEW_NAME,DATA_SOURCE_FEATURE,DATA_SOURCE_TEST_DATA_PROC_SCHEMA,DATA_SOURCE_TEST_DATA_PROC_NAME")] DATA_SOURCE dATA_SOURCE, string[] SelectedItems, string CONFIG_COMMON_NAME, string DATA_SOURCE_NAME)
         {
+            if (SelectedItems != null)
+            {
+                string feature = dATA_SOURCE.DATA_SOURCE_FEATURE;
+                bool exists = BitwiseDictionaryChecker.IsExists(ref feature, SelectedItems, "DATASOURCE_ATTRIBUTES", db);
+                dATA_SOURCE.DATA_SOURCE_FEATURE = feature;
+                if (!exists)
+                {
+                    ModelState.AddModelError(String.Empty, "Cannot Edit due to invalid Features.");
+                    return RedirectToAction("Edit", new { CONFIG_COMMON_NAME = Request["CONFIG_COMMON_NAME"].ToString(), DATA_SOURCE_NAME = Request["DATA_SOURCE_NAME"].ToString() });
+                }
+            }
+
             if (ModelState.IsValid)
             {
-                db.Entry(dATA_SOURCE).State = EntityState.Modified;
-                db.SaveChanges();
+                //TODO: come back here                
+                string oldCONFIG_COMMON_NAME = Request["CONFIG_COMMON_NAME"].ToString();
+                string oldDATA_SOURCE_NAME = Request["DATA_SOURCE_NAME"].ToString();
+
+                if (oldDATA_SOURCE_NAME != dATA_SOURCE.DATA_SOURCE_NAME || oldCONFIG_COMMON_NAME != dATA_SOURCE.CONFIG_COMMON_NAME)
+                {
+
+                    var dATA_SOURCEs = db.DATA_SOURCE.Where(a => a.DATA_SOURCE_NAME == oldDATA_SOURCE_NAME && a.CONFIG_COMMON_NAME == oldCONFIG_COMMON_NAME);
+
+                    foreach (var f in dATA_SOURCEs)
+                    {
+                        db.DATA_SOURCE.Remove(f);
+                    }
+
+                    db.DATA_SOURCE.Add(dATA_SOURCE);
+                }
+                else
+                {
+                    db.Entry(dATA_SOURCE).State = EntityState.Modified;
+                }
+
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (DbEntityValidationException e)
+                {
+                    foreach (var eve in e.EntityValidationErrors)
+                    {
+                        Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                            eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                        foreach (var ve in eve.ValidationErrors)
+                        {
+                            Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                                ve.PropertyName, ve.ErrorMessage);
+                        }
+                    }
+                    throw;
+                }
+
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError(String.Empty, ex.InnerException.InnerException.Message);
+                    return RedirectToAction("Edit", new { CONFIG_COMMON_NAME = Request["CONFIG_COMMON_NAME"].ToString(), DATA_SOURCE_NAME = Request["DATA_SOURCE_NAME"].ToString() });
+                }
+
                 return RedirectToAction("Index");
             }
-            ViewBag.CONFIG_COMMON_NAME = new SelectList(db.CONFIGs, "CONFIG_COMMON_NAME", "CONFIG_DATA_PROCESS_PROC_SCHEMA", dATA_SOURCE.CONFIG_COMMON_NAME);
-            ViewBag.DATA_SOURCE_TYPE_GUID = new SelectList(db.DATA_SOURCE_TYPE, "DATA_SOURCE_TYPE_GUID", "MODIFIED_BY", dATA_SOURCE.DATA_SOURCE_TYPE_GUID);
+
             return View(dATA_SOURCE);
         }
 

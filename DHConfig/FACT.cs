@@ -11,6 +11,7 @@ namespace DHConfig
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations.Schema;
     
     public partial class FACT
     {
@@ -25,19 +26,19 @@ namespace DHConfig
         public string FACT_COMMON_NAME { get; set; }
         public string FACT_TABLE_SCHEMA { get; set; }
         public string FACT_TABLE_NAME { get; set; }
-        public string FACT_FEATURE { get; set; }
+        public string FACT_FEATURE { get; set; }        
         public string DISTINCT_TABLE_KEY_SCHEMA { get; set; }
-        public string DISTINCT_TABLE_KEY_NAME { get; set; }
+        public string DISTINCT_TABLE_KEY_NAME { get; set; }        
         public string DISTINCT_TABLE_VALUE_SCHEMA { get; set; }
-        public string DISTINCT_TABLE_VALUE_NAME { get; set; }
+        public string DISTINCT_TABLE_VALUE_NAME { get; set; }        
         public string DISTINCT_VALUE_PROCEDURE_SCHEMA { get; set; }
-        public string DISTINCT_VALUE_PROCEDURE_NAME { get; set; }
+        public string DISTINCT_VALUE_PROCEDURE_NAME { get; set; }        
         public string DISTINCT_KEY_PROCEDURE_SCHEMA { get; set; }
-        public string DISTINCT_KEY_PROCEDURE_NAME { get; set; }
+        public string DISTINCT_KEY_PROCEDURE_NAME { get; set; }        
         public string FACT_LOAD_PROCEDURE_SCHEMA { get; set; }
-        public string FACT_LOAD_PROCEDURE_NAME { get; set; }
+        public string FACT_LOAD_PROCEDURE_NAME { get; set; }        
         public string FACT_PRE_EXEC_SPROC_SCHEMA { get; set; }
-        public string FACT_PRE_EXEC_SPROC_NAME { get; set; }
+        public string FACT_PRE_EXEC_SPROC_NAME { get; set; }        
         public string FACT_POST_EXEC_SPROC_SCHEMA { get; set; }
         public string FACT_POST_EXEC_SPROC_NAME { get; set; }
         public bool IS_AUTO_GENERATED_FACT_TABLE { get; set; }
@@ -48,15 +49,6 @@ namespace DHConfig
         public virtual ICollection<FACT_FIELD> FACT_FIELD { get; set; }
         public virtual ICollection<SUMMARY> SUMMARies { get; set; }
 
-        public string[] SelectedItems
-        {
-            get
-            {
-                if (FACT_FEATURE != null)
-                    return (FACT_FEATURE.Split(','));
-                else
-                    return null;
-            }
-        }  
+ 
     }
 }

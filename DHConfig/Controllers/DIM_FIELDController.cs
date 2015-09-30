@@ -85,7 +85,7 @@ namespace DHConfig.Controllers
         [SessionExpireFilterAttribute]
         public ActionResult Create([Bind(Include = "CONFIG_COMMON_NAME,DIM_COMMON_NAME,DIM_FIELD_NAME,DIM_FIELD_NAME_CLEAN,DIM_DATA_TYPE,DIM_FIELD_FEATURE,DERIVED_CONFIGURATION")] DIM_FIELD dIM_FIELD, string[] SelectedItems, string CONFIG_COMMON_NAME, string DIM_COMMON_NAME, string DIM_FIELD_NAME)
         {
-
+            dIM_FIELD.CONFIG_COMMON_NAME = Session["sClient"].ToString();
             if (SelectedItems != null)
             {
 
@@ -99,18 +99,22 @@ namespace DHConfig.Controllers
                 }
             }
 
-            int Total = 0;            
-            var settings = db.BITWISE_DICTIONARY
-            .Where(f => f.BITWISE_GROUP == "DIM_FIELDS" && SelectedItems.Contains(f.BITWISE_KEY))
-            .Sum(x => x.BITWISE_VALUE);
-            Total = (int)settings;
+            if (dIM_FIELD.DIM_FIELD_FEATURE != null)
+            { 
 
-            //validate sum           
-            bool exists = db.BITWISE_DICTIONARY_VALID_VALUES.Any(a => a.BITWISE_VALUE == Total && a.BITWISE_GROUP == "DIM_FIELDS");
-            if (!exists)
-            {
-                ModelState.AddModelError(String.Empty, "Cannot create due to selection of invalid features.");
-                return RedirectToAction("Create", new { CONFIG_COMMON_NAME = Request["CONFIG_COMMON_NAME"].ToString(), DIM_COMMON_NAME = Request["DIM_COMMON_NAME"].ToString(), DIM_FIELD_NAME = Request["DIM_FIELD_NAME"].ToString() });
+                int Total = 0;            
+                var settings = db.BITWISE_DICTIONARY
+                .Where(f => f.BITWISE_GROUP == "DIM_FIELDS" && SelectedItems.Contains(f.BITWISE_KEY))
+                .Sum(x => x.BITWISE_VALUE);
+                Total = (int)settings;
+
+                //validate sum           
+                bool exists = db.BITWISE_DICTIONARY_VALID_VALUES.Any(a => a.BITWISE_VALUE == Total && a.BITWISE_GROUP == "DIM_FIELDS");
+                if (!exists)
+                {
+                    ModelState.AddModelError(String.Empty, "Cannot create due to selection of invalid features.");
+                    return RedirectToAction("Create", new { CONFIG_COMMON_NAME = Request["CONFIG_COMMON_NAME"].ToString(), DIM_COMMON_NAME = Request["DIM_COMMON_NAME"].ToString(), DIM_FIELD_NAME = Request["DIM_FIELD_NAME"].ToString() });
+                }
             }
             
             if (ModelState.IsValid)

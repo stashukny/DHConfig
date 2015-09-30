@@ -99,27 +99,11 @@ namespace DHConfig.Controllers
 
             if (SelectedItems != null)
             {
-
-                if (SelectedItems.Count() > 1)
-                {
-                    dIM.DIM_FEATURE = String.Join(",", SelectedItems);
-                }
-                else
-                {
-                    dIM.DIM_FEATURE = SelectedItems[0];
-                }
-
-                int Total = 0;
-                var settings = db.BITWISE_DICTIONARY
-                .Where(f => f.BITWISE_GROUP == "DIM" && SelectedItems.Contains(f.BITWISE_KEY))
-                .Sum(x => x.BITWISE_VALUE);
-                Total = (int)settings;
-
-                //validate sum           
-                bool exists = db.BITWISE_DICTIONARY_VALID_VALUES.Any(a => a.BITWISE_VALUE == Total && a.BITWISE_GROUP == "DIM");
+                string feature = dIM.DIM_FEATURE;
+                bool exists = BitwiseDictionaryChecker.IsExists(ref feature, SelectedItems,"DATA_SOURCE_ATTRIBUTES", db);
+                dIM.DIM_FEATURE = feature;                      
                 if (!exists)
-                {
-                    
+                {                    
                     ModelState.AddModelError(String.Empty, "Cannot create due to selection of invalid features.");
                     return RedirectToAction("Create", new { CONFIG_COMMON_NAME = Request["CONFIG_COMMON_NAME"].ToString(), DIM_COMMON_NAME = Request["DIM_COMMON_NAME"].ToString() });
                 }
@@ -127,7 +111,6 @@ namespace DHConfig.Controllers
 
             if (ModelState.IsValid)
             {
-
                 try
                 {
                     db.DIMs.Add(dIM);
@@ -193,34 +176,14 @@ namespace DHConfig.Controllers
         {
             if (SelectedItems != null)
             {
-
-                if (SelectedItems.Count() > 1)
-                {
-                    dIM.DIM_FEATURE = String.Join(",", SelectedItems);
-                }
-                else
-                {
-                    dIM.DIM_FEATURE = SelectedItems[0];
-                }
-            
-
-                int Total = 0;
-            
-                var settings = db.BITWISE_DICTIONARY
-                .Where(f => f.BITWISE_GROUP == "DIM" && SelectedItems.Contains(f.BITWISE_KEY))
-                .Sum(x => x.BITWISE_VALUE);
-
-                Total = (int)settings;
-
-                //validate sum           
-                bool exists = db.BITWISE_DICTIONARY_VALID_VALUES.Any(a => a.BITWISE_VALUE == Total && a.BITWISE_GROUP == "DIM");
+                string feature = dIM.DIM_FEATURE;
+                bool exists = BitwiseDictionaryChecker.IsExists(ref feature, SelectedItems, "DIM", db);
+                dIM.DIM_FEATURE = feature;
                 if (!exists)
                 {
-
                     ModelState.AddModelError(String.Empty, "Cannot Edit due to invalid Features.");
-                    return RedirectToAction("Edit", new { CONFIG_COMMON_NAME = Request["CONFIG_COMMON_NAME"].ToString(), DIM_COMMON_NAME = Request["DIM_COMMON_NAME"].ToString() });                    
-
-                }
+                    return RedirectToAction("Edit", new { CONFIG_COMMON_NAME = Request["CONFIG_COMMON_NAME"].ToString(), DIM_COMMON_NAME = Request["DIM_COMMON_NAME"].ToString() });
+                }                
             }
 
             if (ModelState.IsValid)

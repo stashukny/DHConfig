@@ -58,7 +58,9 @@
         <div class="form-group">
             @Html.LabelFor(model => model.FACT_FEATURE, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.FACT_FEATURE, new { htmlAttributes = new { @class = "form-control" } })
+                <div class="col-md-10">
+                    @Html.ListBoxFor(x => x.SelectedItems, (MultiSelectList)ViewBag.listFeatures, new { size = 6, width = 500 })
+                </div>
                 @Html.ValidationMessageFor(model => model.FACT_FEATURE, "", new { @class = "text-danger" })
             </div>
         </div>

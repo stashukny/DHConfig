@@ -196,6 +196,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\BitwiseDictionaryChecker.cs" />
     <Compile Include="Helpers\HtmlHelpers.cs" />
     <Compile Include="Helpers\ModelStateHelpers.cs" />
     <Compile Include="IMPORT_XML.cs">
@@ -207,6 +208,8 @@
     <Compile Include="INDX_FIELD.cs">
       <DependentUpon>DHModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="MetaData\DimPartial.cs" />
+    <Compile Include="MetaData\FactPartial.cs" />
     <Compile Include="METRIC.cs">
       <DependentUpon>DHModel.tt</DependentUpon>
     </Compile>
