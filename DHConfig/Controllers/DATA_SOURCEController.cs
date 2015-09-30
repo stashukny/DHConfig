@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using DHConfig;
 using System.Data.Entity.Validation;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace DHConfig.Controllers
 {
@@ -24,8 +19,8 @@ namespace DHConfig.Controllers
                 .Where(w => w.CONFIG_COMMON_NAME == sClient)
                 .Include(d => d.CONFIG)
                 .Include(d => d.DATA_SOURCE_TYPE)
-                .Include(p => p.DATA_SOURCE_TYPE.vDATA_SOURCE_TYPE_WITH_PARENT);          
-     
+                .Include(p => p.DATA_SOURCE_TYPE.vDATA_SOURCE_TYPE_WITH_PARENT);
+
             return View(dATA_SOURCE.ToList());
         }
 
@@ -33,7 +28,6 @@ namespace DHConfig.Controllers
         [SessionExpireFilterAttribute]
         public ActionResult Details(string CONFIG_COMMON_NAME, string DATA_SOURCE_NAME)
         {
-
             DATA_SOURCE dATA_SOURCE = db.DATA_SOURCE.Find(CONFIG_COMMON_NAME, DATA_SOURCE_NAME);
             if (dATA_SOURCE == null)
             {
@@ -58,12 +52,12 @@ namespace DHConfig.Controllers
 
             ViewBag.listFeatures = new MultiSelectList(features, "DIM_FEATURE", "DESCR");
             ViewBag.DATA_SOURCE_TABLE_SCHEMA = new SelectList(db.vSCHEMAS, "name", "name");
-            ViewBag.DATA_SOURCE_TYPE_GUID = new SelectList(db.vDATA_SOURCE_TYPE_WITH_PARENT, "DATA_SOURCE_TYPE_GUID", "DATA_SOURCE_TYPE_NAME_WITH_PARENT");                        
+            ViewBag.DATA_SOURCE_TYPE_GUID = new SelectList(db.vDATA_SOURCE_TYPE_WITH_PARENT, "DATA_SOURCE_TYPE_GUID", "DATA_SOURCE_TYPE_NAME_WITH_PARENT");
             return View();
         }
 
         // POST: DATA_SOURCE/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -91,16 +85,14 @@ namespace DHConfig.Controllers
                     db.DATA_SOURCE.Add(dATA_SOURCE);
                     db.SaveChanges();
                 }
-
                 catch (Exception ex)
                 {
                     ModelState.AddModelError(String.Empty, ex.InnerException.InnerException.Message);
-                    return RedirectToAction("Create", new { CONFIG_COMMON_NAME, DATA_SOURCE_NAME});
+                    return RedirectToAction("Create", new { CONFIG_COMMON_NAME, DATA_SOURCE_NAME });
                 }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
 
             return View(dATA_SOURCE);
         }
@@ -110,7 +102,6 @@ namespace DHConfig.Controllers
         [SessionExpireFilterAttribute]
         public ActionResult Edit(string CONFIG_COMMON_NAME, string DATA_SOURCE_NAME)
         {
-
             DATA_SOURCE dATA_SOURCE = db.DATA_SOURCE.Find(CONFIG_COMMON_NAME, DATA_SOURCE_NAME);
             if (dATA_SOURCE == null)
             {
@@ -128,14 +119,14 @@ namespace DHConfig.Controllers
 
             SelectList listTypes = new SelectList(db.vDATA_SOURCE_TYPE_WITH_PARENT, "DATA_SOURCE_TYPE_GUID", "DATA_SOURCE_TYPE_NAME_WITH_PARENT");
 
-            ViewBag.listFeatures = new MultiSelectList(features, "DIM_FEATURE", "DESCR");            
+            ViewBag.listFeatures = new MultiSelectList(features, "DIM_FEATURE", "DESCR");
             ViewBag.DATA_SOURCE_TABLE_SCHEMA = new SelectList(db.vSCHEMAS, "name", "name");
-            ViewBag.DATA_SOURCE_TYPE_GUID = listTypes;      
+            ViewBag.DATA_SOURCE_TYPE_GUID = listTypes;
             return View(dATA_SOURCE);
         }
 
         // POST: DATA_SOURCE/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -157,13 +148,12 @@ namespace DHConfig.Controllers
 
             if (ModelState.IsValid)
             {
-                //TODO: come back here                
+                //TODO: come back here
                 string oldCONFIG_COMMON_NAME = Request["CONFIG_COMMON_NAME"].ToString();
                 string oldDATA_SOURCE_NAME = Request["DATA_SOURCE_NAME"].ToString();
 
                 if (oldDATA_SOURCE_NAME != dATA_SOURCE.DATA_SOURCE_NAME || oldCONFIG_COMMON_NAME != dATA_SOURCE.CONFIG_COMMON_NAME)
                 {
-
                     var dATA_SOURCEs = db.DATA_SOURCE.Where(a => a.DATA_SOURCE_NAME == oldDATA_SOURCE_NAME && a.CONFIG_COMMON_NAME == oldCONFIG_COMMON_NAME);
 
                     foreach (var f in dATA_SOURCEs)
@@ -196,7 +186,6 @@ namespace DHConfig.Controllers
                     }
                     throw;
                 }
-
                 catch (Exception ex)
                 {
                     ModelState.AddModelError(String.Empty, ex.InnerException.InnerException.Message);
@@ -214,7 +203,6 @@ namespace DHConfig.Controllers
         [SessionExpireFilterAttribute]
         public ActionResult Delete(string CONFIG_COMMON_NAME, string DATA_SOURCE_NAME)
         {
-
             DATA_SOURCE dATA_SOURCE = db.DATA_SOURCE.Find(CONFIG_COMMON_NAME, DATA_SOURCE_NAME);
             if (dATA_SOURCE == null)
             {

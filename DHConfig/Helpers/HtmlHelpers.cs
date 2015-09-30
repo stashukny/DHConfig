@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Mvc.Html;
 
 namespace DHConfig
 {
     public static class HtmlHelpers
     {
-
         public static MvcHtmlString MenuLink(this HtmlHelper htmlHelper,
                                             string linkText,
                                             string actionName,
@@ -27,7 +22,6 @@ namespace DHConfig
             }
 
             return htmlHelper.ActionLink(linkText, actionName, controllerName, routeValues, htmlAttributes);
-
         }
-    } 
+    }
 }

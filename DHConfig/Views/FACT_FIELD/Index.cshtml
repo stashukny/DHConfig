@@ -10,29 +10,27 @@
     <link rel="stylesheet" type="text/css" href="~/Content/jquery.dataTables.min.css">
 
     <script type="text/javascript" language="javascript" class="init">
-    $(document).ready(function () {
-        $('#factfields').dataTable(
-            {
-                "columnDefs": [{
-                    "targets": 0,
-                    "orderable": false
-                },
+        $(document).ready(function () {
+            $('#factfields').dataTable(
                 {
-                    "targets": 1,
-                    "orderable": false
-                },
-                {
-                    "targets": 2,
-                    "orderable": false
-                }],
-                "order": [[3, "asc"]]
-            });
-    });
+                    "columnDefs": [{
+                        "targets": 0,
+                        "orderable": false
+                    },
+                    {
+                        "targets": 1,
+                        "orderable": false
+                    },
+                    {
+                        "targets": 2,
+                        "orderable": false
+                    }],
+                    "order": [[3, "asc"]]
+                });
+        });
     </script>
 
 }
-
-
 
 <div align="right">
     @Html.ActionLink("Create New", "Create", new { sClient = @ViewBag.sClient })
@@ -71,7 +69,7 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.FACT.DATA_SOURCE_NAME)
-            </th>            
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -81,7 +79,7 @@
                 <td>@Html.ActionLink("Edit", "Edit", new { CONFIG_COMMON_NAME = item.CONFIG_COMMON_NAME, FACT_COMMON_NAME = item.FACT_COMMON_NAME, FACT_FIELD_NAME = item.FACT_FIELD_NAME })</td>
                 <td>@Html.ActionLink("Details", "Details", new { CONFIG_COMMON_NAME = item.CONFIG_COMMON_NAME, FACT_COMMON_NAME = item.FACT_COMMON_NAME, FACT_FIELD_NAME = item.FACT_FIELD_NAME })</td>
                 <td>@Html.ActionLink("Delete", "Delete", new { CONFIG_COMMON_NAME = item.CONFIG_COMMON_NAME, FACT_COMMON_NAME = item.FACT_COMMON_NAME, FACT_FIELD_NAME = item.FACT_FIELD_NAME })</td>
-                
+
                 <td>
                     @Html.DisplayFor(modelItem => item.CONFIG_COMMON_NAME)
                 </td>

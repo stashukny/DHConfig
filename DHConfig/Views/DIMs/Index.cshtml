@@ -30,21 +30,15 @@
     </script>
 }
 
-
 @*<h2>Index</h2>*@
 @*<h4>Dimensions</h4>*@
 <div align="right">
     @Html.Partial("~/Views/CreateNew.cshtml")
 </div>
 
-
-
 <div>
     @Html.Partial("~/Views/CurrentClient.cshtml")
 </div>
-
-
-
 
     <table class="table table-striped table-bordered" id="dims">
     <thead>
@@ -129,13 +123,10 @@
             @*<th>
                     CONFIG_DATA_PROCESS_PROC_SCHEMA
                 </th>*@
-
         </tr>
     </thead>
 
-   
     <tbody>
-
 
         @foreach (var item in Model)
         {
@@ -218,11 +209,7 @@
                 @*<td>
                         @Html.DisplayFor(modelItem => item.CONFIG.CONFIG_DATA_PROCESS_PROC_SCHEMA)
                     </td>*@
-
             </tr>
         }
     </tbody>
 </table>
-
-
-

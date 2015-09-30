@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DHConfig
 {
-    static class BitwiseDictionaryChecker
+    internal static class BitwiseDictionaryChecker
     {
         public static bool IsExists(ref string DIM_FEATURE, string[] SelectedItems, string BITWISE_GROUP, DataHammerConfigEntities db)
         {
@@ -21,7 +18,6 @@ namespace DHConfig
                 DIM_FEATURE = SelectedItems[0];
             }
 
-
             int Total = 0;
 
             var settings = db.BITWISE_DICTIONARY
@@ -30,9 +26,9 @@ namespace DHConfig
 
             Total = (int)settings;
 
-            //validate sum           
-            exists = db.BITWISE_DICTIONARY_VALID_VALUES.Any(a => a.BITWISE_VALUE == Total && a.BITWISE_GROUP == BITWISE_GROUP);                                
-            
+            //validate sum
+            exists = db.BITWISE_DICTIONARY_VALID_VALUES.Any(a => a.BITWISE_VALUE == Total && a.BITWISE_GROUP == BITWISE_GROUP);
+
             return exists;
         }
     }

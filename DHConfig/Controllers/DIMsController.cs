@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using DHConfig;
-using System.Data.Entity.Validation;
 
 namespace DHConfig.Controllers
 {
@@ -19,7 +13,6 @@ namespace DHConfig.Controllers
         [SessionExpireFilterAttribute]
         public ActionResult Index(string SelectedClient)
         {
-
             if (SelectedClient != null)
             {
                 Session["sClient"] = SelectedClient;
@@ -27,19 +20,18 @@ namespace DHConfig.Controllers
             else
             {
                 if (Session["sClient"] != null)
-                { 
+                {
                     SelectedClient = Session["sClient"].ToString();
                 }
                 else
                 {
                     SelectedClient = "";
                 }
-
             }
 
             IQueryable<DIM> dims = db.DIMs
             .Where(c => SelectedClient == null || SelectedClient == "" || c.CONFIG_COMMON_NAME == SelectedClient)
-            .Include(t => t.DIM_TYPE);                        
+            .Include(t => t.DIM_TYPE);
 
             return View(dims.ToList());
         }
@@ -63,7 +55,6 @@ namespace DHConfig.Controllers
         [SessionExpireFilterAttribute]
         public ActionResult Create()
         {
-
             var features = db.BITWISE_DICTIONARY
                         .Where(f => f.BITWISE_GROUP == "DIM")
                         .ToList()
@@ -78,17 +69,17 @@ namespace DHConfig.Controllers
             SelectList listClients = new SelectList(db.CONFIGs, "CONFIG_COMMON_NAME", "CONFIG_COMMON_NAME");
 
             //revisit duplication of listTypes and DIM_TYPE_GUID
-            
+
             ViewBag.DIM_TYPE_GUID = new SelectList(db.DIM_TYPE, "DIM_TYPE_GUID", "DIM_TYPE_NAME");
             ViewBag.listFeatures = new MultiSelectList(features, "DIM_FEATURE", "DESCR");
             ViewBag.listTypes = listTypes;
-            ViewBag.DIM_TABLE_SCHEMA = listSchemas;            
+            ViewBag.DIM_TABLE_SCHEMA = listSchemas;
 
             return View();
         }
 
         // POST: DIMs/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -100,10 +91,10 @@ namespace DHConfig.Controllers
             if (SelectedItems != null)
             {
                 string feature = dIM.DIM_FEATURE;
-                bool exists = BitwiseDictionaryChecker.IsExists(ref feature, SelectedItems,"DIM", db);
-                dIM.DIM_FEATURE = feature;                      
+                bool exists = BitwiseDictionaryChecker.IsExists(ref feature, SelectedItems, "DIM", db);
+                dIM.DIM_FEATURE = feature;
                 if (!exists)
-                {                    
+                {
                     ModelState.AddModelError(String.Empty, "Cannot create due to selection of invalid features.");
                     return RedirectToAction("Create", new { CONFIG_COMMON_NAME = Request["CONFIG_COMMON_NAME"].ToString(), DIM_COMMON_NAME = Request["DIM_COMMON_NAME"].ToString() });
                 }
@@ -114,18 +105,16 @@ namespace DHConfig.Controllers
                 try
                 {
                     db.DIMs.Add(dIM);
-                    db.SaveChanges();                
+                    db.SaveChanges();
                 }
-
                 catch (Exception ex)
                 {
                     ModelState.AddModelError(String.Empty, ex.InnerException.InnerException.Message);
-                    return RedirectToAction("Create", new { CONFIG_COMMON_NAME, DIM_COMMON_NAME});
+                    return RedirectToAction("Create", new { CONFIG_COMMON_NAME, DIM_COMMON_NAME });
                 }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
 
             return View(dIM);
         }
@@ -135,7 +124,6 @@ namespace DHConfig.Controllers
         [SessionExpireFilterAttribute]
         public ActionResult Edit(string CONFIG_COMMON_NAME, string DIM_COMMON_NAME)
         {
-
             DIM dIM = db.DIMs.Find(CONFIG_COMMON_NAME, DIM_COMMON_NAME);
             if (dIM == null)
             {
@@ -151,22 +139,21 @@ namespace DHConfig.Controllers
                 DESCR = string.Format("{0} -- {1}", c.BITWISE_KEY, c.DESCR)
             });
 
-            
             SelectList listSchemas = new SelectList(db.vSCHEMAS, "name", "name");
             SelectList listTypes = new SelectList(db.DIM_TYPE, "DIM_TYPE_GUID", "DIM_TYPE_NAME");
             MultiSelectList listFeatures = new MultiSelectList(features, "DIM_FEATURE", "DESCR", dIM.SelectedItems);
-            
-            ViewBag.CONFIG_COMMON_NAME = new SelectList(db.CONFIGs, "CONFIG_COMMON_NAME", "CONFIG_COMMON_NAME", dIM.CONFIG_COMMON_NAME);            
+
+            ViewBag.CONFIG_COMMON_NAME = new SelectList(db.CONFIGs, "CONFIG_COMMON_NAME", "CONFIG_COMMON_NAME", dIM.CONFIG_COMMON_NAME);
             ViewBag.DIM_COMMON_NAME = new SelectList(db.DIMs, "DIM_COMMON_NAME", "DIM_COMMON_NAME", dIM.DIM_COMMON_NAME);
             ViewBag.DIM_FEATURE = listFeatures;
-            ViewBag.DIM_TYPE_GUID = listTypes;           
-            ViewBag.DIM_TABLE_SCHEMA = listSchemas;            
+            ViewBag.DIM_TYPE_GUID = listTypes;
+            ViewBag.DIM_TABLE_SCHEMA = listSchemas;
 
             return View(dIM);
         }
 
         // POST: DIMs/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ExportModelStateToTempData]
@@ -183,7 +170,7 @@ namespace DHConfig.Controllers
                 {
                     ModelState.AddModelError(String.Empty, "Cannot Edit due to invalid Features.");
                     return RedirectToAction("Edit", new { CONFIG_COMMON_NAME = Request["CONFIG_COMMON_NAME"].ToString(), DIM_COMMON_NAME = Request["DIM_COMMON_NAME"].ToString() });
-                }                
+                }
             }
 
             if (ModelState.IsValid)
@@ -194,7 +181,6 @@ namespace DHConfig.Controllers
 
                 if (oldDIM_COMMON_NAME != dIM.DIM_COMMON_NAME || oldCONFIG_COMMON_NAME != dIM.CONFIG_COMMON_NAME)
                 {
-
                     var dims = db.DIMs.Where(a => a.DIM_COMMON_NAME == oldDIM_COMMON_NAME && a.CONFIG_COMMON_NAME == oldCONFIG_COMMON_NAME);
 
                     foreach (var f in dims)
@@ -215,8 +201,8 @@ namespace DHConfig.Controllers
                 }
                 catch (Exception ex)
                 {
-                        ModelState.AddModelError(String.Empty, ex.InnerException.InnerException.Message);
-                        return RedirectToAction("Edit", new { CONFIG_COMMON_NAME = Request["CONFIG_COMMON_NAME"].ToString(), DIM_COMMON_NAME = Request["DIM_COMMON_NAME"].ToString() });
+                    ModelState.AddModelError(String.Empty, ex.InnerException.InnerException.Message);
+                    return RedirectToAction("Edit", new { CONFIG_COMMON_NAME = Request["CONFIG_COMMON_NAME"].ToString(), DIM_COMMON_NAME = Request["DIM_COMMON_NAME"].ToString() });
                 }
 
                 return RedirectToAction("Index");
@@ -230,12 +216,11 @@ namespace DHConfig.Controllers
         [SessionExpireFilterAttribute]
         public ActionResult Delete(string CONFIG_COMMON_NAME, string DIM_COMMON_NAME)
         {
-
             DIM dIM = db.DIMs.Find(CONFIG_COMMON_NAME, DIM_COMMON_NAME);
             if (dIM == null)
             {
                 return HttpNotFound();
-            }            
+            }
             return View(dIM);
         }
 
@@ -255,9 +240,9 @@ namespace DHConfig.Controllers
             catch (Exception ex)
             {
                 ModelState.AddModelError(String.Empty, ex.InnerException.InnerException.Message);
-                return RedirectToAction("Delete", new { CONFIG_COMMON_NAME, DIM_COMMON_NAME});                
+                return RedirectToAction("Delete", new { CONFIG_COMMON_NAME, DIM_COMMON_NAME });
             }
-            
+
             return RedirectToAction("Index");
         }
 
@@ -269,6 +254,5 @@ namespace DHConfig.Controllers
             }
             base.Dispose(disposing);
         }
-
     }
 }

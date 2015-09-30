@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using DHConfig;
 using System.Data.Entity.Validation;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace DHConfig.Controllers
 {
@@ -23,17 +18,14 @@ namespace DHConfig.Controllers
             var fACTs = db.FACTs
                 .Where(w => w.CONFIG_COMMON_NAME == sClient)
                 .Include(f => f.CONFIG)
-                .Include(f => f.DATA_SOURCE);            
+                .Include(f => f.DATA_SOURCE);
             return View(fACTs.ToList());
-
-            
         }
 
         // GET: FACTs/Details/5
         [SessionExpireFilterAttribute]
         public ActionResult Details(string CONFIG_COMMON_NAME, string FACT_COMMON_NAME)
         {
-
             FACT fACT = db.FACTs.Find(CONFIG_COMMON_NAME, FACT_COMMON_NAME);
             if (fACT == null)
             {
@@ -48,7 +40,7 @@ namespace DHConfig.Controllers
         public ActionResult Create()
         {
             string sClient = Session["sClient"].ToString();
-            
+
             //FACT fact = new FACT();
             //fact.CONFIG_COMMON_NAME = sClient;
 
@@ -74,7 +66,7 @@ namespace DHConfig.Controllers
         }
 
         // POST: FACTs/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -102,7 +94,6 @@ namespace DHConfig.Controllers
                     db.FACTs.Add(fACT);
                     db.SaveChanges();
                 }
-
                 catch (DbEntityValidationException e)
                 {
                     foreach (var eve in e.EntityValidationErrors)
@@ -126,16 +117,14 @@ namespace DHConfig.Controllers
                 return RedirectToAction("Index");
             }
 
-
             return View(fACT);
         }
 
         // GET: FACTs/Edit/5
         [ImportModelStateFromTempData]
-        [SessionExpireFilterAttribute]        
+        [SessionExpireFilterAttribute]
         public ActionResult Edit(string CONFIG_COMMON_NAME, string FACT_COMMON_NAME)
         {
-
             FACT fACT = db.FACTs.Find(CONFIG_COMMON_NAME, FACT_COMMON_NAME);
             if (fACT == null)
             {
@@ -156,7 +145,7 @@ namespace DHConfig.Controllers
             });
 
             ViewBag.listFeatures = new MultiSelectList(features, "FACT_FEATURE", "DESCR");
-            ViewBag.listDataSources = new SelectList(datasources, "DATA_SOURCE_NAME", "DATA_SOURCE_NAME");       
+            ViewBag.listDataSources = new SelectList(datasources, "DATA_SOURCE_NAME", "DATA_SOURCE_NAME");
 
             ViewBag.CONFIG_COMMON_NAME = new SelectList(db.CONFIGs, "CONFIG_COMMON_NAME", "CONFIG_DATA_PROCESS_PROC_SCHEMA", fACT.CONFIG_COMMON_NAME);
             ViewBag.CONFIG_COMMON_NAME = new SelectList(db.DATA_SOURCE, "CONFIG_COMMON_NAME", "DATA_SOURCE_TABLE_SCHEMA", fACT.CONFIG_COMMON_NAME);
@@ -165,12 +154,12 @@ namespace DHConfig.Controllers
         }
 
         // POST: FACTs/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ExportModelStateToTempData]
         [ValidateAntiForgeryToken]
-        [SessionExpireFilterAttribute]        
+        [SessionExpireFilterAttribute]
         public ActionResult Edit([Bind(Include = "CONFIG_COMMON_NAME,DATA_SOURCE_NAME,FACT_COMMON_NAME,FACT_TABLE_SCHEMA,FACT_TABLE_NAME,FACT_FEATURE,DISTINCT_TABLE_KEY_SCHEMA,DISTINCT_TABLE_KEY_NAME,DISTINCT_TABLE_VALUE_SCHEMA,DISTINCT_TABLE_VALUE_NAME,DISTINCT_VALUE_PROCEDURE_SCHEMA,DISTINCT_VALUE_PROCEDURE_NAME,DISTINCT_KEY_PROCEDURE_SCHEMA,DISTINCT_KEY_PROCEDURE_NAME,FACT_LOAD_PROCEDURE_SCHEMA,FACT_LOAD_PROCEDURE_NAME,FACT_PRE_EXEC_SPROC_SCHEMA,FACT_PRE_EXEC_SPROC_NAME,FACT_POST_EXEC_SPROC_SCHEMA,FACT_POST_EXEC_SPROC_NAME,IS_AUTO_GENERATED_FACT_TABLE,IS_AUTO_GENERATED_LOAD_PROCEDURE")] FACT fACT, string[] SelectedItems, string CONFIG_COMMON_NAME, string FACT_COMMON_NAME)
         {
             if (SelectedItems != null)
@@ -182,7 +171,7 @@ namespace DHConfig.Controllers
                 {
                     ModelState.AddModelError(String.Empty, "Cannot Edit due to invalid Features.");
                     return RedirectToAction("Edit", new { CONFIG_COMMON_NAME = Request["CONFIG_COMMON_NAME"].ToString(), FACT_COMMON_NAME = Request["FACT_COMMON_NAME"].ToString() });
-                }             
+                }
             }
 
             if (ModelState.IsValid)
@@ -191,10 +180,8 @@ namespace DHConfig.Controllers
                 string oldFACT_COMMON_NAME = Request["FACT_COMMON_NAME"].ToString();
                 string oldCONFIG_COMMON_NAME = Request["CONFIG_COMMON_NAME"].ToString();
 
-
                 if (oldFACT_COMMON_NAME != fACT.FACT_COMMON_NAME || oldCONFIG_COMMON_NAME != fACT.CONFIG_COMMON_NAME)
                 {
-
                     var facts = db.FACTs.Where(a => a.FACT_COMMON_NAME == oldFACT_COMMON_NAME && a.CONFIG_COMMON_NAME == oldCONFIG_COMMON_NAME);
 
                     foreach (var f in facts)
@@ -235,7 +222,7 @@ namespace DHConfig.Controllers
 
                 return RedirectToAction("Index");
             }
-            
+
             return View(fACT);
         }
 

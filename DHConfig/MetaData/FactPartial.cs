@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace DHConfig
 {
@@ -20,39 +14,39 @@ namespace DHConfig
                 else
                     return null;
             }
-        } 
+        }
     }
 
     public class FACTMetaData
     {
-        //[DatabaseGenerated(DatabaseGeneratedOption.Computed)]        
-        //public string DISTINCT_TABLE_KEY_SCHEMA { get; set; }        
         //[DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        //public string DISTINCT_TABLE_VALUE_SCHEMA { get; set; }        
+        //public string DISTINCT_TABLE_KEY_SCHEMA { get; set; }
         //[DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        //public string DISTINCT_VALUE_PROCEDURE_SCHEMA { get; set; }        
+        //public string DISTINCT_TABLE_VALUE_SCHEMA { get; set; }
         //[DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        //public string DISTINCT_KEY_PROCEDURE_SCHEMA { get; set; }        
+        //public string DISTINCT_VALUE_PROCEDURE_SCHEMA { get; set; }
         //[DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        //public string FACT_LOAD_PROCEDURE_SCHEMA { get; set; }        
+        //public string DISTINCT_KEY_PROCEDURE_SCHEMA { get; set; }
         //[DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        //public string FACT_PRE_EXEC_SPROC_SCHEMA { get; set; }        
+        //public string FACT_LOAD_PROCEDURE_SCHEMA { get; set; }
+        //[DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        //public string FACT_PRE_EXEC_SPROC_SCHEMA { get; set; }
         //[DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         //public string FACT_POST_EXEC_SPROC_SCHEMA { get; set; }
-        
-        [Required]
-        public string DISTINCT_TABLE_KEY_NAME { get; set; }        
-        [Required]
-        public string DISTINCT_TABLE_VALUE_NAME { get; set; }        
-        [Required]
-        public string DISTINCT_VALUE_PROCEDURE_NAME { get; set; }                
-        [Required]
-        public string DISTINCT_KEY_PROCEDURE_NAME { get; set; }        
-        [Required]
-        public string FACT_LOAD_PROCEDURE_NAME { get; set; }        
 
+        [Required]
+        public string DISTINCT_TABLE_KEY_NAME { get; set; }
 
+        [Required]
+        public string DISTINCT_TABLE_VALUE_NAME { get; set; }
 
+        [Required]
+        public string DISTINCT_VALUE_PROCEDURE_NAME { get; set; }
+
+        [Required]
+        public string DISTINCT_KEY_PROCEDURE_NAME { get; set; }
+
+        [Required]
+        public string FACT_LOAD_PROCEDURE_NAME { get; set; }
     }
-
 }

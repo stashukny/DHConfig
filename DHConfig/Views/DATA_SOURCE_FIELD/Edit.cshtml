@@ -9,12 +9,11 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>DATA_SOURCE_FIELD</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
 
         <div class="form-group">
             @Html.LabelFor(model => model.SOURCE_COLUMN_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -27,7 +26,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.SOURCE_COLUMN_DATA_TYPE, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(m => m.SOURCE_COLUMN_DATA_TYPE, (SelectList)ViewBag.datatypes, new { @class = "form-control" })    
+                @Html.DropDownListFor(m => m.SOURCE_COLUMN_DATA_TYPE, (SelectList)ViewBag.datatypes, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.SOURCE_COLUMN_DATA_TYPE, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -43,7 +42,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.RAW_VIEW_COLUMN_DATA_TYPE, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(m => m.RAW_VIEW_COLUMN_DATA_TYPE, (SelectList)ViewBag.datatypes, new { @class = "form-control" })    
+                @Html.DropDownListFor(m => m.RAW_VIEW_COLUMN_DATA_TYPE, (SelectList)ViewBag.datatypes, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.RAW_VIEW_COLUMN_DATA_TYPE, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -76,7 +75,6 @@
             </div>
         </div>
 
-
         <div class="form-group">
             @Html.LabelFor(model => model.COLUMN_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -89,7 +87,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DATA_SOURCE_FIELD_FEATURE, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.ListBoxFor(x => x.SelectedItems, (MultiSelectList)ViewBag.listFeatures, new { size = 6, width = 500 })            
+                @Html.ListBoxFor(x => x.SelectedItems, (MultiSelectList)ViewBag.listFeatures, new { size = 6, width = 500 })
             </div>
         </div>
 

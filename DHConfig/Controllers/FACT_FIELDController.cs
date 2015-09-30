@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using DHConfig;
 
 namespace DHConfig.Controllers
 {
@@ -29,7 +24,6 @@ namespace DHConfig.Controllers
         [SessionExpireFilterAttribute]
         public ActionResult Details(string CONFIG_COMMON_NAME, string FACT_COMMON_NAME, string FACT_FIELD_NAME)
         {
-
             FACT_FIELD fACT_FIELD = db.FACT_FIELD.Find(CONFIG_COMMON_NAME, FACT_COMMON_NAME, FACT_FIELD_NAME);
             if (fACT_FIELD == null)
             {
@@ -44,7 +38,7 @@ namespace DHConfig.Controllers
         public ActionResult Create()
         {
             string sClient = Session["sClient"].ToString();
-            ViewBag.CONFIG_COMMON_NAME = sClient;            
+            ViewBag.CONFIG_COMMON_NAME = sClient;
             var factCommonNames = db.FACTs
             .Where(f => f.CONFIG_COMMON_NAME == sClient)
             .ToList();
@@ -60,13 +54,13 @@ namespace DHConfig.Controllers
 
             ViewBag.listFeatures = new MultiSelectList(features, "DIM_FEATURE", "DESCR");
 
-            ViewBag.listFactCommonName = new SelectList(factCommonNames, "FACT_COMMON_NAME", "FACT_COMMON_NAME");            
+            ViewBag.listFactCommonName = new SelectList(factCommonNames, "FACT_COMMON_NAME", "FACT_COMMON_NAME");
 
             return View();
         }
 
         // POST: FACT_FIELD/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -94,7 +88,6 @@ namespace DHConfig.Controllers
                     db.FACT_FIELD.Add(fACT_FIELD);
                     db.SaveChanges();
                 }
-
                 catch (Exception ex)
                 {
                     ModelState.AddModelError(String.Empty, ex.InnerException.InnerException.Message);
@@ -104,7 +97,6 @@ namespace DHConfig.Controllers
                 return RedirectToAction("Index");
             }
 
-
             return View(fACT_FIELD);
         }
 
@@ -113,7 +105,6 @@ namespace DHConfig.Controllers
         [ImportModelStateFromTempData]
         public ActionResult Edit(string CONFIG_COMMON_NAME, string FACT_COMMON_NAME, string FACT_FIELD_NAME)
         {
-
             FACT_FIELD fACT_FIELD = db.FACT_FIELD.Find(CONFIG_COMMON_NAME, FACT_COMMON_NAME, FACT_FIELD_NAME);
             if (fACT_FIELD == null)
             {
@@ -136,7 +127,7 @@ namespace DHConfig.Controllers
         }
 
         // POST: FACT_FIELD/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -154,7 +145,7 @@ namespace DHConfig.Controllers
                 {
                     ModelState.AddModelError(String.Empty, "Cannot select due to invalid Features.");
                     return RedirectToAction("Edit", new { CONFIG_COMMON_NAME = Request["CONFIG_COMMON_NAME"].ToString(), FACT_COMMON_NAME = Request["FACT_COMMON_NAME"].ToString(), FACT_FIELD_NAME = Request["FACT_FIELD_NAME"].ToString() });
-                }                
+                }
             }
 
             if (ModelState.IsValid)
@@ -164,10 +155,8 @@ namespace DHConfig.Controllers
                 string oldCONFIG_COMMON_NAME = Request["CONFIG_COMMON_NAME"].ToString();
                 string oldFACT_FIELD_NAME = Request["FACT_FIELD_NAME"].ToString();
 
-
                 if (oldFACT_COMMON_NAME != fACT_FIELD.FACT_COMMON_NAME || oldCONFIG_COMMON_NAME != fACT_FIELD.CONFIG_COMMON_NAME || oldFACT_FIELD_NAME != fACT_FIELD.FACT_FIELD_NAME)
                 {
-
                     var fact_fields = db.FACT_FIELD.Where(a => a.FACT_COMMON_NAME == oldFACT_COMMON_NAME && a.CONFIG_COMMON_NAME == oldCONFIG_COMMON_NAME && a.FACT_FIELD_NAME == oldFACT_FIELD_NAME);
 
                     foreach (var f in fact_fields)
@@ -203,7 +192,6 @@ namespace DHConfig.Controllers
         [ImportModelStateFromTempData]
         public ActionResult Delete(string CONFIG_COMMON_NAME, string FACT_COMMON_NAME, string FACT_FIELD_NAME)
         {
-
             FACT_FIELD fACT_FIELD = db.FACT_FIELD.Find(CONFIG_COMMON_NAME, FACT_COMMON_NAME, FACT_FIELD_NAME);
             if (fACT_FIELD == null)
             {

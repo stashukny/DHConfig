@@ -30,9 +30,6 @@
     </script>
 }
 
-
-
-
 <div align="right">
     @Html.ActionLink("Create New", "Create", new { sClient = @ViewBag.sClient })
 </div>
@@ -90,7 +87,7 @@
                     @Html.DisplayNameFor(model => model.IS_AUTO_GENERATED_LOAD_PROCEDURE)
                 </th>
             </tr>
-        </thead>       
+        </thead>
         <tbody>
             @foreach (var item in Model)
             {
@@ -143,6 +140,4 @@
                 </tr>
             }
         </tbody>
-
 </table>
-

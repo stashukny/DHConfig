@@ -6,10 +6,10 @@
 
 <h2>Create</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>DATA_SOURCE_FIELD</h4>
         <hr />
@@ -25,7 +25,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DATA_SOURCE_NAME, "DATA_SOURCE_NAME", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(m => m.DATA_SOURCE_NAME, (SelectList)ViewBag.listDataSources, new { @class = "form-control" })         
+                @Html.DropDownListFor(m => m.DATA_SOURCE_NAME, (SelectList)ViewBag.listDataSources, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.DATA_SOURCE_NAME, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -91,12 +91,12 @@
         </div>
 
         @*<div class="form-group">
-            @Html.LabelFor(model => model.COLUMN_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.COLUMN_NAME, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.COLUMN_NAME, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
+                @Html.LabelFor(model => model.COLUMN_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.COLUMN_NAME, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.COLUMN_NAME, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.DATA_SOURCE_FIELD_FEATURE, htmlAttributes: new { @class = "control-label col-md-2" })

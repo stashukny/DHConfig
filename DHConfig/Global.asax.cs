@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
@@ -19,7 +16,7 @@ namespace DHConfig
         }
     }
 
-    class SessionExpireFilterAttribute : ActionFilterAttribute
+    internal class SessionExpireFilterAttribute : ActionFilterAttribute
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
@@ -36,5 +33,3 @@ namespace DHConfig
         }
     }
 }
-
-

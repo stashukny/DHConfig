@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-//using System.Threading.Tasks;
+﻿//using System.Threading.Tasks;
 
 namespace DHConfig.Models
 {
-    class DIM_FIELD_ViewModel
+    internal class DIM_FIELD_ViewModel
     {
         public string CONFIG_COMMON_NAME { get; set; }
         public string DIM_COMMON_NAME { get; set; }
@@ -25,7 +21,6 @@ namespace DHConfig.Models
                 else
                     return null;
             }
-        }  
-
+        }
     }
 }

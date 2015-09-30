@@ -9,8 +9,8 @@
     padding-right: 15px;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
+/* Override the default bootstrap behavior where horizontal description lists
+   will truncate terms that are too long to fit in the left column
 */
 .dl-horizontal dt {
     white-space: normal;
@@ -26,8 +26,8 @@ select{
     max-width: 500px;
 }
 
-.navbar-inverse .navbar-nav > li > a.selected {  
-      color: white;   
+.navbar-inverse .navbar-nav > li > a.selected {
+      color: white;
         float: left;
   padding: 12px 12px;
   font-size: 15px;

@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using DHConfig;
 using System.Data.Entity.Validation;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace DHConfig.Controllers
 {
@@ -23,7 +18,7 @@ namespace DHConfig.Controllers
             var dATA_SOURCE_FIELD = db.DATA_SOURCE_FIELD
                 .Where(w => w.CONFIG_COMMON_NAME == sClient)
                 .Include(d => d.CONFIG)
-                .Include(d => d.DATA_SOURCE);            
+                .Include(d => d.DATA_SOURCE);
             return View(dATA_SOURCE_FIELD.ToList());
         }
 
@@ -31,7 +26,6 @@ namespace DHConfig.Controllers
         [SessionExpireFilterAttribute]
         public ActionResult Details(string CONFIG_COMMON_NAME, string DATA_SOURCE_NAME, string COLUMN_NAME)
         {
-
             DATA_SOURCE_FIELD dATA_SOURCE_FIELD = db.DATA_SOURCE_FIELD.Find(CONFIG_COMMON_NAME, DATA_SOURCE_NAME, COLUMN_NAME);
             if (dATA_SOURCE_FIELD == null)
             {
@@ -74,7 +68,7 @@ namespace DHConfig.Controllers
         }
 
         // POST: DATA_SOURCE_FIELD/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -102,7 +96,6 @@ namespace DHConfig.Controllers
                     db.DATA_SOURCE_FIELD.Add(dATA_SOURCE_FIELD);
                     db.SaveChanges();
                 }
-
                 catch (Exception ex)
                 {
                     ModelState.AddModelError(String.Empty, ex.InnerException.InnerException.Message);
@@ -112,7 +105,6 @@ namespace DHConfig.Controllers
                 return RedirectToAction("Index");
             }
 
-
             return View(dATA_SOURCE_FIELD);
         }
 
@@ -121,7 +113,6 @@ namespace DHConfig.Controllers
         [ImportModelStateFromTempData]
         public ActionResult Edit(string CONFIG_COMMON_NAME, string DATA_SOURCE_NAME, string COLUMN_NAME)
         {
-            
             //string COLUMN_NAME = !String.IsNullOrEmpty(SOURCE_COLUMN_NAME) ? SOURCE_COLUMN_NAME: RAW_VIEW_COLUMN_NAME;
 
             DATA_SOURCE_FIELD dATA_SOURCE_FIELD = db.DATA_SOURCE_FIELD.Find(CONFIG_COMMON_NAME, DATA_SOURCE_NAME, COLUMN_NAME);
@@ -153,7 +144,7 @@ namespace DHConfig.Controllers
         }
 
         // POST: DATA_SOURCE_FIELD/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -170,7 +161,7 @@ namespace DHConfig.Controllers
                 {
                     ModelState.AddModelError(String.Empty, "Cannot  due to invalid Features.");
                     return RedirectToAction("Edit", new { CONFIG_COMMON_NAME = Request["CONFIG_COMMON_NAME"].ToString(), DATA_SOURCE_NAME = Request["DATA_SOURCE_NAME"].ToString(), COLUMN_NAME = Request["COLUMN_NAME"].ToString() });
-                }            
+                }
             }
 
             if (ModelState.IsValid)
@@ -180,10 +171,8 @@ namespace DHConfig.Controllers
                 string oldCONFIG_COMMON_NAME = Request["CONFIG_COMMON_NAME"].ToString();
                 string oldCOLUMN_NAME = Request["COLUMN_NAME"].ToString();
 
-
                 if (oldDATA_SOURCE_NAME != dATA_SOURCE_FIELD.DATA_SOURCE_NAME || oldCONFIG_COMMON_NAME != dATA_SOURCE_FIELD.CONFIG_COMMON_NAME || oldCOLUMN_NAME != dATA_SOURCE_FIELD.COLUMN_NAME)
                 {
-
                     var fact_fields = db.DATA_SOURCE_FIELD.Where(a => a.DATA_SOURCE_NAME == oldDATA_SOURCE_NAME && a.CONFIG_COMMON_NAME == oldCONFIG_COMMON_NAME && a.COLUMN_NAME == oldCOLUMN_NAME);
 
                     foreach (var f in fact_fields)
@@ -202,7 +191,6 @@ namespace DHConfig.Controllers
                 {
                     db.SaveChanges();
                 }
-
                 catch (DbEntityValidationException e)
                 {
                     foreach (var eve in e.EntityValidationErrors)

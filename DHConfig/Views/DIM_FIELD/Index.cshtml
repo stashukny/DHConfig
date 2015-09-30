@@ -11,7 +11,7 @@
 
     <script type="text/javascript" language="javascript" class="init">
         $(document).ready(function () {
-            $('#fields').dataTable(                             
+            $('#fields').dataTable(
                 {
                 "columnDefs": [{
                     "targets": 0,
@@ -34,11 +34,9 @@
     @Html.Partial("~/Views/CreateNew.cshtml")
 </div>
 
-
 <div>
     @Html.Partial("~/Views/CurrentClient.cshtml")
 </div>
-
 
 <table class="table table-striped table-bordered" id="fields">
     <thead>
@@ -64,8 +62,6 @@
             <th>
                 DIM_FIELD_FEATURE
             </th>
-
-
         </tr>
     </thead>
     <tbody>
@@ -102,7 +98,6 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.DIM.DIM_TABLE_SCHEMA)
                     </td>*@
-
             </tr>
         }
     </tbody>
