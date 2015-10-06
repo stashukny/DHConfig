@@ -19,5 +19,7 @@ namespace DHConfig
 
     public class DIM_FIELDMetaData
     {
+        [Required]
+        public string DIM_FIELD_NAME { get; set; }
     }
 }

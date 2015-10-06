@@ -27,7 +27,8 @@
             <div class="col-md-10">
                 @*@Html.DropDownList("FACT_COMMON_NAME", null, htmlAttributes: new { @class = "form-control" })*@
                 @Html.DropDownListFor(m => m.FACT_COMMON_NAME, (SelectList)ViewBag.listFactCommonName, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.FACT_COMMON_NAME, "", new { @class = "text-danger" })
+                @*@Html.ValidationMessageFor(model => model.FACT_COMMON_NAME, "", new { @class = "text-danger" })*@
+                @Html.HiddenFor(model => model.FACT_COMMON_NAME)
             </div>
         </div>
 
@@ -73,3 +74,7 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

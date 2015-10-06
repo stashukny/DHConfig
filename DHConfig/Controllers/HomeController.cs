@@ -7,6 +7,7 @@ namespace DHConfig.Controllers
     {
         private DataHammerConfigEntities db = new DataHammerConfigEntities();
 
+
         public ActionResult Index(string SelectedClient)
         {
             if (SelectedClient == null && Session["sClient"] != null)

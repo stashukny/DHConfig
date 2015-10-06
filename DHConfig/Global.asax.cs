@@ -22,7 +22,9 @@ namespace DHConfig
         {
             HttpContext ctx = HttpContext.Current;
 
-            if ((ctx.Session["sClient"] == null) && (ctx.Request.UrlReferrer.AbsolutePath != "/") && (ctx.Request.UrlReferrer.AbsolutePath != "/Home/Index"))
+
+
+            if ((ctx.Session["sClient"] == null) && (ctx.Request.UrlReferrer.AbsolutePath != "/") && (ctx.Request.UrlReferrer.AbsolutePath != "/Home/Index") && (ctx.Request.UrlReferrer.AbsolutePath != "/CONFIGs/Create"))
             {
                 // check if a new session id was generated
                 filterContext.Result = new RedirectResult("~/Home/Index");

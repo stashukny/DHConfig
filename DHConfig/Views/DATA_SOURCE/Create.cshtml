@@ -6,6 +6,26 @@
 
 <h2>Create</h2>
 
+@section MyScripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            function updateClean() {
+                var raw = $("#DATA_SOURCE_NAME").val();
+                $("#DATA_SOURCE_TABLE_NAME").val(raw);
+                $("#DATA_SOURCE_RAW_VIEW_NAME").val("v" + raw);
+                $("#DATA_SOURCE_TABLE_PROC_UPDATE_NAME").val("RAW_" + raw + "_UPDATE");
+                $("#DATA_SOURCE_TABLE_PROC_INSERT_NAME").val("RAW_" + raw + "_INSERT");
+                $("#DATA_SOURCE_TABLE_PROC_DELETE_NAME").val("RAW_" + raw + "_DELETE");
+                $("#DATA_SOURCE_RAW_UI_VIEW_NAME").val("v" + raw + "_DISPLAY");
+            }
+            $(document).on("change, keyup", "#DATA_SOURCE_NAME", updateClean);
+        });
+    </script>
+}
+
+
+
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -49,7 +69,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DATA_SOURCE_TABLE_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DATA_SOURCE_TABLE_NAME, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.DATA_SOURCE_TABLE_NAME, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.DATA_SOURCE_TABLE_NAME, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -65,7 +85,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DATA_SOURCE_RAW_VIEW_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DATA_SOURCE_RAW_VIEW_NAME, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.DATA_SOURCE_RAW_VIEW_NAME, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.DATA_SOURCE_RAW_VIEW_NAME, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -81,7 +101,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DATA_SOURCE_TABLE_PROC_UPDATE_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DATA_SOURCE_TABLE_PROC_UPDATE_NAME, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.DATA_SOURCE_TABLE_PROC_UPDATE_NAME, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.DATA_SOURCE_TABLE_PROC_UPDATE_NAME, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -97,7 +117,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DATA_SOURCE_TABLE_PROC_INSERT_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DATA_SOURCE_TABLE_PROC_INSERT_NAME, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.DATA_SOURCE_TABLE_PROC_INSERT_NAME, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.DATA_SOURCE_TABLE_PROC_INSERT_NAME, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -113,7 +133,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DATA_SOURCE_TABLE_PROC_DELETE_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DATA_SOURCE_TABLE_PROC_DELETE_NAME, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.DATA_SOURCE_TABLE_PROC_DELETE_NAME, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.DATA_SOURCE_TABLE_PROC_DELETE_NAME, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -129,7 +149,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DATA_SOURCE_RAW_UI_VIEW_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DATA_SOURCE_RAW_UI_VIEW_NAME, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.DATA_SOURCE_RAW_UI_VIEW_NAME, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.DATA_SOURCE_RAW_UI_VIEW_NAME, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -160,3 +180,7 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

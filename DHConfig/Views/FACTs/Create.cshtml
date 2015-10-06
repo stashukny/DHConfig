@@ -6,6 +6,26 @@
 
 <h2>Create</h2>
 
+@section MyScripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            function updateClean() {
+                var raw = $("#FACT_COMMON_NAME").val();
+                $("#FACT_TABLE_NAME").val("FACT_" + raw);
+                $("#DISTINCT_TABLE_KEY_NAME").val("FACT_" + raw + "_DISTINCT_KEY");
+                $("#DISTINCT_TABLE_VALUE_NAME").val("FACT_" + raw + "_DISTINCT_VALUE");
+                $("#DISTINCT_VALUE_PROCEDURE_NAME").val("FACT_" + raw + "_LOAD_DISTINCT_VALUE");
+                $("#DISTINCT_KEY_PROCEDURE_NAME").val("FACT_" + raw + "_LOAD_DISTINCT_KEY");
+                $("#FACT_LOAD_PROCEDURE_NAME").val("FACT_" + raw + "_LOAD");
+            }
+            $(document).on("change, keyup", "#FACT_COMMON_NAME", updateClean);
+        });
+    </script>
+}
+
+
+
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -50,7 +70,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.FACT_TABLE_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.FACT_TABLE_NAME, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.FACT_TABLE_NAME, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.FACT_TABLE_NAME, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -68,7 +88,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DISTINCT_TABLE_KEY_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DISTINCT_TABLE_KEY_NAME, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.DISTINCT_TABLE_KEY_NAME, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.DISTINCT_TABLE_KEY_NAME, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -76,7 +96,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DISTINCT_TABLE_VALUE_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DISTINCT_TABLE_VALUE_NAME, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.DISTINCT_TABLE_VALUE_NAME, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.DISTINCT_TABLE_VALUE_NAME, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -84,7 +104,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DISTINCT_VALUE_PROCEDURE_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DISTINCT_VALUE_PROCEDURE_NAME, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.DISTINCT_VALUE_PROCEDURE_NAME, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.DISTINCT_VALUE_PROCEDURE_NAME, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -92,7 +112,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DISTINCT_KEY_PROCEDURE_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DISTINCT_KEY_PROCEDURE_NAME, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.DISTINCT_KEY_PROCEDURE_NAME, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.DISTINCT_KEY_PROCEDURE_NAME, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -100,7 +120,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.FACT_LOAD_PROCEDURE_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.FACT_LOAD_PROCEDURE_NAME, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.FACT_LOAD_PROCEDURE_NAME, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.FACT_LOAD_PROCEDURE_NAME, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -152,3 +172,7 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

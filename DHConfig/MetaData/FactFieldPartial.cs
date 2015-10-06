@@ -19,5 +19,9 @@ namespace DHConfig
 
     public class FACT_FIELDMetaData
     {
+        [Required]
+        public string FACT_FIELD_NAME { get; set; }
+        [Required]
+        public string OBJECT_TYPE_NAME { get; set; }
     }
 }
