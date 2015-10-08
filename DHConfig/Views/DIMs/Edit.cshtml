@@ -21,7 +21,7 @@
                 $("#DIM_VIEW_CLEAN_NAME").val("vDIM_" + raw + "_CLEAN");
                 $("#DIM_PROC_RAW_TABLE_CLEAN_ID_NAME").val("DIM_" + raw + "_UPDATE_RAW_CLEAN_ID");
             }
-            $(document).on("change, keyup", "#DIM_COMMON_NAME", updateClean);
+            $(document).on("change, keyup, input", "#DIM_COMMON_NAME", updateClean);
         });
     </script>
 }

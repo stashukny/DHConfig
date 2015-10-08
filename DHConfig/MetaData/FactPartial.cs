@@ -35,18 +35,7 @@ namespace DHConfig
         //public string FACT_POST_EXEC_SPROC_SCHEMA { get; set; }
 
         [Required]
-        public string DISTINCT_TABLE_KEY_NAME { get; set; }
-
-        [Required]
-        public string DISTINCT_TABLE_VALUE_NAME { get; set; }
-
-        [Required]
-        public string DISTINCT_VALUE_PROCEDURE_NAME { get; set; }
-
-        [Required]
-        public string DISTINCT_KEY_PROCEDURE_NAME { get; set; }
-
-        [Required]
-        public string FACT_LOAD_PROCEDURE_NAME { get; set; }
+        public string FACT_COMMON_NAME { get; set; }
+        
     }
 }

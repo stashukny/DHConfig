@@ -22,5 +22,9 @@ namespace DHConfig
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string COLUMN_NAME { get; set; }
+        [Required]
+        public string SOURCE_COLUMN_NAME { get; set; }
+        [Required]
+        public string RAW_VIEW_COLUMN_NAME { get; set; }
     }
 }

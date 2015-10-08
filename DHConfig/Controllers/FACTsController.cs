@@ -9,6 +9,7 @@ namespace DHConfig.Controllers
     public class FACTsController : Controller
     {
         private DataHammerConfigEntities db = new DataHammerConfigEntities();
+        private string feature;
 
         // GET: FACTs
         [SessionExpireFilterAttribute]
@@ -76,14 +77,13 @@ namespace DHConfig.Controllers
         {
             fACT.CONFIG_COMMON_NAME = Session["sClient"].ToString();
             if (SelectedItems != null)
-            {
-                string feature = fACT.FACT_FEATURE;
+            {                
                 bool exists = BitwiseDictionaryChecker.IsExists(ref feature, SelectedItems, "FACT", db);
                 fACT.FACT_FEATURE = feature;
                 if (!exists)
                 {
                     ModelState.AddModelError(String.Empty, "Cannot create due to selection of invalid features.");
-                    return RedirectToAction("Create", new { CONFIG_COMMON_NAME = Request["CONFIG_COMMON_NAME"].ToString(), FACT_COMMON_NAME = Request["FACT_COMMON_NAME"].ToString() });
+                    return RedirectToAction("Create");
                 }
             }
 
@@ -163,8 +163,7 @@ namespace DHConfig.Controllers
         public ActionResult Edit([Bind(Include = "CONFIG_COMMON_NAME,DATA_SOURCE_NAME,FACT_COMMON_NAME,FACT_TABLE_SCHEMA,FACT_TABLE_NAME,FACT_FEATURE,DISTINCT_TABLE_KEY_SCHEMA,DISTINCT_TABLE_KEY_NAME,DISTINCT_TABLE_VALUE_SCHEMA,DISTINCT_TABLE_VALUE_NAME,DISTINCT_VALUE_PROCEDURE_SCHEMA,DISTINCT_VALUE_PROCEDURE_NAME,DISTINCT_KEY_PROCEDURE_SCHEMA,DISTINCT_KEY_PROCEDURE_NAME,FACT_LOAD_PROCEDURE_SCHEMA,FACT_LOAD_PROCEDURE_NAME,FACT_PRE_EXEC_SPROC_SCHEMA,FACT_PRE_EXEC_SPROC_NAME,FACT_POST_EXEC_SPROC_SCHEMA,FACT_POST_EXEC_SPROC_NAME,IS_AUTO_GENERATED_FACT_TABLE,IS_AUTO_GENERATED_LOAD_PROCEDURE")] FACT fACT, string[] SelectedItems, string CONFIG_COMMON_NAME, string FACT_COMMON_NAME)
         {
             if (SelectedItems != null)
-            {
-                string feature = fACT.FACT_FEATURE;
+            {                
                 bool exists = BitwiseDictionaryChecker.IsExists(ref feature, SelectedItems, "FACT", db);
                 fACT.FACT_FEATURE = feature;
                 if (!exists)

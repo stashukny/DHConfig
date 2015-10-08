@@ -9,6 +9,7 @@ namespace DHConfig.Controllers
     public class FACT_FIELDController : Controller
     {
         private DataHammerConfigEntities db = new DataHammerConfigEntities();
+        private string feature;
 
         // GET: FACT_FIELD
         [SessionExpireFilterAttribute]
@@ -72,14 +73,13 @@ namespace DHConfig.Controllers
         {
             fACT_FIELD.CONFIG_COMMON_NAME = Session["sClient"].ToString();
             if (SelectedItems != null)
-            {
-                string feature = fACT_FIELD.FACT_FIELD_FEATURE;
+            {                
                 bool exists = BitwiseDictionaryChecker.IsExists(ref feature, SelectedItems, "FACT_FIELDS", db);
                 fACT_FIELD.FACT_FIELD_FEATURE = feature;
                 if (!exists)
                 {
                     ModelState.AddModelError(String.Empty, "Cannot create due to selection of invalid features.");
-                    return RedirectToAction("Create", new { CONFIG_COMMON_NAME = Request["CONFIG_COMMON_NAME"].ToString(), FACT_COMMON_NAME = Request["FACT_COMMON_NAME"].ToString(), FACT_FIELD_NAME = Request["FACT_FIELD_NAME"].ToString() });
+                    return RedirectToAction("Create");
                 }
             }
 
@@ -152,8 +152,7 @@ namespace DHConfig.Controllers
         public ActionResult Edit([Bind(Include = "CONFIG_COMMON_NAME,FACT_COMMON_NAME,FACT_FIELD_NAME,OBJECT_TYPE_NAME,DIM_FIELD_NAME,FACT_FIELD_FEATURE")] FACT_FIELD fACT_FIELD, string[] SelectedItems, string CONFIG_COMMON_NAME, string FACT_COMMON_NAME, string FACT_FIELD_NAME)
         {
             if (SelectedItems != null)
-            {
-                string feature = fACT_FIELD.FACT_FIELD_FEATURE;
+            {                
                 bool exists = BitwiseDictionaryChecker.IsExists(ref feature, SelectedItems, "FACT_FIELDS", db);
                 fACT_FIELD.FACT_FIELD_FEATURE = feature;
 

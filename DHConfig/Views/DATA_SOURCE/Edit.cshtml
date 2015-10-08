@@ -18,7 +18,7 @@
                 $("#DATA_SOURCE_TABLE_PROC_DELETE_NAME").val("RAW_" + raw + "_DELETE");
                 $("#DATA_SOURCE_RAW_UI_VIEW_NAME").val("v" + raw + "_DISPLAY");
             }
-            $(document).on("change, keyup", "#DATA_SOURCE_NAME", updateClean);
+            $(document).on("change, keyup, input", "#DATA_SOURCE_NAME", updateClean);
         });
     </script>
 }

@@ -9,6 +9,7 @@ namespace DHConfig.Controllers
     public class DATA_SOURCEController : Controller
     {
         private DataHammerConfigEntities db = new DataHammerConfigEntities();
+        private string feature;
 
         // GET: DATA_SOURCE
         [SessionExpireFilterAttribute]
@@ -67,8 +68,7 @@ namespace DHConfig.Controllers
         {
             dATA_SOURCE.CONFIG_COMMON_NAME = Session["sClient"].ToString();
             if (SelectedItems != null)
-            {
-                string feature = dATA_SOURCE.DATA_SOURCE_FEATURE;
+            {                
                 bool exists = BitwiseDictionaryChecker.IsExists(ref feature, SelectedItems, "DATASOURCE_ATTRIBUTES", db);
                 dATA_SOURCE.DATA_SOURCE_FEATURE = feature;
                 if (!exists)
@@ -135,8 +135,7 @@ namespace DHConfig.Controllers
         public ActionResult Edit([Bind(Include = "CONFIG_COMMON_NAME,DATA_SOURCE_NAME,DATA_SOURCE_TYPE_GUID,DATA_SOURCE_TABLE_SCHEMA,DATA_SOURCE_TABLE_NAME,DATA_SOURCE_RAW_VIEW_SCHEMA,DATA_SOURCE_RAW_VIEW_NAME,DATA_SOURCE_TABLE_PROC_UPDATE_SCHEMA,DATA_SOURCE_TABLE_PROC_UPDATE_NAME,DATA_SOURCE_TABLE_PROC_INSERT_SCHEMA,DATA_SOURCE_TABLE_PROC_INSERT_NAME,DATA_SOURCE_TABLE_PROC_DELETE_SCHEMA,DATA_SOURCE_TABLE_PROC_DELETE_NAME,DATA_SOURCE_TABLE_PROC_DDL_PARENT_SCHEMA,DATA_SOURCE_TABLE_PROC_DDL_PARENT_NAME,DATA_SOURCE_RAW_UI_VIEW_SCHEMA,DATA_SOURCE_RAW_UI_VIEW_NAME,DATA_SOURCE_FEATURE,DATA_SOURCE_TEST_DATA_PROC_SCHEMA,DATA_SOURCE_TEST_DATA_PROC_NAME")] DATA_SOURCE dATA_SOURCE, string[] SelectedItems, string CONFIG_COMMON_NAME, string DATA_SOURCE_NAME)
         {
             if (SelectedItems != null)
-            {
-                string feature = dATA_SOURCE.DATA_SOURCE_FEATURE;
+            {                
                 bool exists = BitwiseDictionaryChecker.IsExists(ref feature, SelectedItems, "DATASOURCE_ATTRIBUTES", db);
                 dATA_SOURCE.DATA_SOURCE_FEATURE = feature;
                 if (!exists)

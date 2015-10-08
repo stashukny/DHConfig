@@ -18,7 +18,7 @@
                 $("#DISTINCT_KEY_PROCEDURE_NAME").val("FACT_" + raw + "_LOAD_DISTINCT_KEY");
                 $("#FACT_LOAD_PROCEDURE_NAME").val("FACT_" + raw + "_LOAD");
             }
-            $(document).on("change, keyup", "#FACT_COMMON_NAME", updateClean);
+            $(document).on("change, keyup, input", "#FACT_COMMON_NAME", updateClean);
         });
     </script>
 }

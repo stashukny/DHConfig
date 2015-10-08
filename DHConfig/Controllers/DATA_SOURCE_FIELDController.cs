@@ -9,6 +9,7 @@ namespace DHConfig.Controllers
     public class DATA_SOURCE_FIELDController : Controller
     {
         private DataHammerConfigEntities db = new DataHammerConfigEntities();
+        private string feature;
 
         // GET: DATA_SOURCE_FIELD
         [SessionExpireFilterAttribute]
@@ -78,14 +79,13 @@ namespace DHConfig.Controllers
         {
             dATA_SOURCE_FIELD.CONFIG_COMMON_NAME = Session["sClient"].ToString();
             if (SelectedItems != null)
-            {
-                string feature = dATA_SOURCE_FIELD.DATA_SOURCE_FIELD_FEATURE;
+            {                
                 bool exists = BitwiseDictionaryChecker.IsExists(ref feature, SelectedItems, "DATA_SOURCE_FIELDS", db);
                 dATA_SOURCE_FIELD.DATA_SOURCE_FIELD_FEATURE = feature;
                 if (!exists)
                 {
                     ModelState.AddModelError(String.Empty, "Cannot create due to selection of invalid features.");
-                    return RedirectToAction("Create", new { CONFIG_COMMON_NAME = Request["CONFIG_COMMON_NAME"].ToString(), DATA_SOURCE_NAME = Request["DATA_SOURCE_NAME"].ToString(), COLUMN_NAME = Request["COLUMN_NAME"].ToString() });
+                    return RedirectToAction("Create");
                 }
             }
 
@@ -153,8 +153,7 @@ namespace DHConfig.Controllers
         public ActionResult Edit([Bind(Include = "CONFIG_COMMON_NAME,DATA_SOURCE_NAME,SOURCE_COLUMN_NAME,SOURCE_COLUMN_DATA_TYPE,RAW_VIEW_COLUMN_NAME,RAW_VIEW_COLUMN_DATA_TYPE,IS_DIM_HASH,IS_IDENTITY,DERIVED_CONFIGURATION,COLUMN_NAME,DATA_SOURCE_FIELD_FEATURE")] DATA_SOURCE_FIELD dATA_SOURCE_FIELD, string[] SelectedItems, string CONFIG_COMMON_NAME, string DATA_SOURCE_NAME, string COLUMN_NAME)
         {
             if (SelectedItems != null)
-            {
-                string feature = dATA_SOURCE_FIELD.DATA_SOURCE_FIELD_FEATURE;
+            {                
                 bool exists = BitwiseDictionaryChecker.IsExists(ref feature, SelectedItems, "DATA_SOURCE_FIELDS", db);
                 dATA_SOURCE_FIELD.DATA_SOURCE_FIELD_FEATURE = feature;
                 if (!exists)
