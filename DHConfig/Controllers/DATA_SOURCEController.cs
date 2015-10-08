@@ -220,7 +220,16 @@ namespace DHConfig.Controllers
         {
             DATA_SOURCE dATA_SOURCE = db.DATA_SOURCE.Find(CONFIG_COMMON_NAME, DATA_SOURCE_NAME);
             db.DATA_SOURCE.Remove(dATA_SOURCE);
-            db.SaveChanges();
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(String.Empty, ex.InnerException.InnerException.Message);
+                return RedirectToAction("Delete", new { CONFIG_COMMON_NAME, DATA_SOURCE_NAME });
+            }
+
             return RedirectToAction("Index");
         }
 

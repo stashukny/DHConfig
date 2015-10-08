@@ -239,8 +239,18 @@ namespace DHConfig.Controllers
         {
             DATA_SOURCE_FIELD dATA_SOURCE_FIELD = db.DATA_SOURCE_FIELD.Find(CONFIG_COMMON_NAME, DATA_SOURCE_NAME, COLUMN_NAME);
             db.DATA_SOURCE_FIELD.Remove(dATA_SOURCE_FIELD);
-            db.SaveChanges();
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(String.Empty, ex.InnerException.InnerException.Message);
+                return RedirectToAction("Delete", new { CONFIG_COMMON_NAME, DATA_SOURCE_NAME, COLUMN_NAME });
+            }
+            
             return RedirectToAction("Index");
+
         }
 
         protected override void Dispose(bool disposing)

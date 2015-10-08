@@ -102,7 +102,7 @@ namespace DHConfig.Controllers
                 if (!exists)
                 {
                     ModelState.AddModelError(String.Empty, "Cannot create due to selection of invalid features.");
-                    return RedirectToAction("Create", new { CONFIG_COMMON_NAME = Request["CONFIG_COMMON_NAME"].ToString(), DIM_COMMON_NAME = Request["DIM_COMMON_NAME"].ToString(), DIM_FIELD_NAME = Request["DIM_FIELD_NAME"].ToString() });
+                    return RedirectToAction("Create");
                 }
             }
 

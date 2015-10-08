@@ -19,5 +19,7 @@ namespace DHConfig
 
     public class DATA_SOURCEMetaData
     {
+        [Required]
+        public string DATA_SOURCE_NAME { get; set; }
     }
 }

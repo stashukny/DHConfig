@@ -225,7 +225,16 @@ namespace DHConfig.Controllers
         {
             FACT_FIELD fACT_FIELD = db.FACT_FIELD.Find(CONFIG_COMMON_NAME, FACT_COMMON_NAME, FACT_FIELD_NAME);
             db.FACT_FIELD.Remove(fACT_FIELD);
-            db.SaveChanges();
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(String.Empty, ex.InnerException.InnerException.Message);
+                return RedirectToAction("Delete", new { CONFIG_COMMON_NAME, FACT_COMMON_NAME, FACT_FIELD_NAME });
+            }
+
             return RedirectToAction("Index");
         }
 
